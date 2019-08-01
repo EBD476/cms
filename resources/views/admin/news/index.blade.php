@@ -76,340 +76,81 @@
                             <a href="{{route('news.create')}}" class="btn btn-primary">{{__('Add New News')}}</a>
                             <h4 class="card-title"></h4>
                             <h6 class="card-subtitle"></h6>
-                            <div class="table-responsive m-t-40">
-                                <div id="myTable_wrapper"
-                                     class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
-                                    <div class="row">
-                                        <div class="col-sm-12 col-md-6">
-                                            <div class="dataTables_length" id="myTable_length"><label>{{__('Show')}}<select
-                                                            name="myTable_length" aria-controls="myTable"
-                                                            class="form-control form-control-sm">
-                                                        <option value="10">10</option>
-                                                        <option value="25">25</option>
-                                                        <option value="50">50</option>
-                                                        <option value="100">100</option>
-                                                    </select>{{__('entries')}}</label></div>
-                                        </div>
-                                        <div class="col-sm-12 col-md-6">
-                                            <div id="myTable_filter" class="dataTables_filter"><label>{{__('Search')}}:<input
-                                                            type="search" class="form-control form-control-sm"
-                                                            placeholder="" aria-controls="myTable"></label></div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <table id="myTable"
-                                                   class="table table-bordered table-striped dataTable no-footer"
-                                                   role="grid" aria-describedby="myTable_info">
-                                                <thead>
-                                                <tr role="row">
-                                                    <th class="sorting_asc" tabindex="0" aria-controls="myTable"
-                                                        rowspan="1" colspan="1" aria-sort="ascending"
-                                                        aria-label="Name: activate to sort column descending"
-                                                        style="width: 146px;"> {{__('ID')}}
-                                                    </th>
-                                                    <th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1"
-                                                        colspan="1"
-                                                        aria-label="Position: activate to sort column ascending"
-                                                        style="width: 242px;">  {{__('Title')}}
-                                                    </th>
-                                                    <th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1"
-                                                        colspan="1"
-                                                        aria-label="Office: activate to sort column ascending"
-                                                        style="width: 106px;">{{__('Action')}}
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table id="table"
+                                           class="table table-bordered table-striped dataTable no-footer"
+                                           role="grid" aria-describedby="myTable_info">
+                                        <thead>
+                                        <tr role="row">
+                                            <th class="sorting_asc" tabindex="0" aria-controls="myTable"
+                                                rowspan="1" colspan="1" aria-sort="ascending"
+                                                aria-label="Name: activate to sort column descending"
+                                                style="width: 146px;"> {{__('ID')}}
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1"
+                                                colspan="1"
+                                                aria-label="Position: activate to sort column ascending"
+                                                style="width: 242px;">  {{__('Title')}}
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1"
+                                                colspan="1"
+                                                aria-label="Office: activate to sort column ascending"
+                                                style="width: 106px;">{{__('Action')}}
 
-                                                    </th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                @foreach($news as $key => $news)
-                                                    <tr>
-                                                        <td>
-                                                            {{$key + 1}}
-                                                        </td>
-                                                        <td>
-                                                            {{$news ->hn_title}}
-                                                        </td>
-                                                        <td>
-                                                            <a href="{{route('news.edit',$news->id)}}"
-                                                               data-toggle="tooltip" data-original-title="Edit">edit <i
-                                                                        class="fa fa-times text-inverse m-r-10"></i>
-                                                            </a>
-                                                            <form id="-form-delete{{$news->id}}"
-                                                                  style="display: none;" method="POST"
-                                                                  action="{{route('news.destroy',$news->id)}}">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                            </form>
-                                                            <button type="button" class="btn btn-danger btn-sm"
-                                                                    onclick="if(confirm('آیا از حذف این محصول اطمینان دارید؟')){
-                                                                            event.preventDefault();
-                                                                            document.getElementById('-form-delete{{$news->id}}').submit();
-                                                                            }else {
-                                                                            event.preventDefault();
-                                                                            }"><i class="fa fa-fw fa-times"></i>
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-12 col-md-5">
-                                            <div class="dataTables_info" id="myTable_info" role="status"
-                                                 aria-live="polite">Showing 1 to 10 of 57 entries
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-12 col-md-7">
-                                            <div class="dataTables_paginate paging_simple_numbers"
-                                                 id="myTable_paginate">
-                                                <ul class="pagination">
-                                                    <li class="paginate_button page-item previous disabled"
-                                                        id="myTable_previous"><a href="#" aria-controls="myTable"
-                                                                                 data-dt-idx="0" tabindex="0"
-                                                                                 class="page-link">Previous</a></li>
-                                                    <li class="paginate_button page-item active"><a href="#"
-                                                                                                    aria-controls="myTable"
-                                                                                                    data-dt-idx="1"
-                                                                                                    tabindex="0"
-                                                                                                    class="page-link">1</a>
-                                                    </li>
-                                                    <li class="paginate_button page-item "><a href="#"
-                                                                                              aria-controls="myTable"
-                                                                                              data-dt-idx="2"
-                                                                                              tabindex="0"
-                                                                                              class="page-link">2</a>
-                                                    </li>
-                                                    <li class="paginate_button page-item "><a href="#"
-                                                                                              aria-controls="myTable"
-                                                                                              data-dt-idx="3"
-                                                                                              tabindex="0"
-                                                                                              class="page-link">3</a>
-                                                    </li>
-                                                    <li class="paginate_button page-item "><a href="#"
-                                                                                              aria-controls="myTable"
-                                                                                              data-dt-idx="4"
-                                                                                              tabindex="0"
-                                                                                              class="page-link">4</a>
-                                                    </li>
-                                                    <li class="paginate_button page-item "><a href="#"
-                                                                                              aria-controls="myTable"
-                                                                                              data-dt-idx="5"
-                                                                                              tabindex="0"
-                                                                                              class="page-link">5</a>
-                                                    </li>
-                                                    <li class="paginate_button page-item "><a href="#"
-                                                                                              aria-controls="myTable"
-                                                                                              data-dt-idx="6"
-                                                                                              tabindex="0"
-                                                                                              class="page-link">6</a>
-                                                    </li>
-                                                    <li class="paginate_button page-item next" id="myTable_next"><a
-                                                                href="#" aria-controls="myTable" data-dt-idx="7"
-                                                                tabindex="0" class="page-link">Next</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($news as $key => $news)
+                                            <tr>
+                                                <td>
+                                                    {{$key + 1}}
+                                                </td>
+                                                <td>
+                                                    {{$news ->hn_title}}
+                                                </td>
+                                                <td>
+                                                    <a href="{{route('news.edit',$news->id)}}"
+                                                       data-toggle="tooltip" data-original-title="Edit">edit <i
+                                                                class="fa fa-times text-inverse m-r-10"></i>
+                                                    </a>
+                                                    <form id="-form-delete{{$news->id}}"
+                                                          style="display: none;" method="POST"
+                                                          action="{{route('news.destroy',$news->id)}}">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                    </form>
+                                                    <button type="button" class="btn btn-danger btn-sm"
+                                                            onclick="if(confirm('آیا از حذف این محصول اطمینان دارید؟')){
+                                                                    event.preventDefault();
+                                                                    document.getElementById('-form-delete{{$news->id}}').submit();
+                                                                    }else {
+                                                                    event.preventDefault();
+                                                                    }"><i class="fa fa-fw fa-times"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12 col-md-5">
-                            <div class="dataTables_info" id="example_info" role="status" aria-live="polite">Showing 1 to
-                                17 of 17 entries
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-7">
-                            <div class="dataTables_paginate paging_simple_numbers" id="example_paginate">
-                                <ul class="pagination">
-                                    <li class="paginate_button page-item previous disabled" id="example_previous"><a
-                                                href="#" aria-controls="example" data-dt-idx="0" tabindex="0"
-                                                class="page-link">Previous</a></li>
-                                    <li class="paginate_button page-item active"><a href="#" aria-controls="example"
-                                                                                    data-dt-idx="1" tabindex="0"
-                                                                                    class="page-link">1</a></li>
-                                    <li class="paginate_button page-item next disabled" id="example_next"><a href="#"
-                                                                                                             aria-controls="example"
-                                                                                                             data-dt-idx="2"
-                                                                                                             tabindex="0"
-                                                                                                             class="page-link">Next</a>
-                                    </li>
-                                </ul>
-                            </div>
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    </div>
-    </div>
-    <!-- ============================================================== -->
-    <!-- End PAge Content -->
-    <!-- ============================================================== -->
-    <!-- ============================================================== -->
-    <!-- Right sidebar -->
-    <!-- ============================================================== -->
-    <!-- .right-sidebar -->
-    <div class="right-sidebar">
-        <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 100%;">
-            <div class="slimscrollright" style="overflow: hidden; width: auto; height: 100%;">
-                <div class="rpanel-title"> Service Panel
-                    <span>
-                                            <i class="ti-close right-side-toggle"></i>
-                                        </span>
-                </div>
-                <div class="r-panel-body">
-                    <ul id="themecolors" class="m-t-20">
-                        <li>
-                            <b>With Light sidebar</b>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)" data-theme="default" class="default-theme">1</a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)" data-theme="green" class="green-theme">2</a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)" data-theme="red" class="red-theme">3</a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)" data-theme="blue" class="blue-theme working">4</a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)" data-theme="purple" class="purple-theme">5</a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)" data-theme="megna" class="megna-theme">6</a>
-                        </li>
-                        <li class="d-block m-t-30">
-                            <b>With Dark sidebar</b>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)" data-theme="default-dark" class="default-dark-theme">7</a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)" data-theme="green-dark" class="green-dark-theme">8</a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)" data-theme="red-dark" class="red-dark-theme">9</a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)" data-theme="blue-dark" class="blue-dark-theme">10</a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)" data-theme="purple-dark" class="purple-dark-theme">11</a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)" data-theme="megna-dark" class="megna-dark-theme ">12</a>
-                        </li>
-                    </ul>
-                    <ul class="m-t-20 chatonline">
-                        <li>
-                            <b>Chat option</b>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)">
-                                <img src="../assets/images/users/1.jpg" alt="user-img" class="img-circle">
-                                <span>Varun Dhavan
-                                                        <small class="text-success">online</small>
-                                                    </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)">
-                                <img src="../assets/images/users/2.jpg" alt="user-img" class="img-circle">
-                                <span>Genelia Deshmukh
-                                                        <small class="text-warning">Away</small>
-                                                    </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)">
-                                <img src="../assets/images/users/3.jpg" alt="user-img" class="img-circle">
-                                <span>Ritesh Deshmukh
-                                                        <small class="text-danger">Busy</small>
-                                                    </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)">
-                                <img src="../assets/images/users/4.jpg" alt="user-img" class="img-circle">
-                                <span>Arijit Sinh
-                                                        <small class="text-muted">Offline</small>
-                                                    </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)">
-                                <img src="../assets/images/users/5.jpg" alt="user-img" class="img-circle">
-                                <span>Govinda Star
-                                                        <small class="text-success">online</small>
-                                                    </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)">
-                                <img src="../assets/images/users/6.jpg" alt="user-img" class="img-circle">
-                                <span>John Abraham
-                                                        <small class="text-success">online</small>
-                                                    </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)">
-                                <img src="../assets/images/users/7.jpg" alt="user-img" class="img-circle">
-                                <span>Hritik Roshan
-                                                        <small class="text-success">online</small>
-                                                    </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)">
-                                <img src="../assets/images/users/8.jpg" alt="user-img" class="img-circle">
-                                <span>Pwandeep rajan
-                                                        <small class="text-success">online</small>
-                                                    </span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="slimScrollBar"
-                 style="background: rgb(220, 220, 220); width: 5px; position: absolute; top: 0px; opacity: 0.4; display: block; border-radius: 7px; z-index: 99; right: 1px;"></div>
-            <div class="slimScrollRail"
-                 style="width: 5px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div>
-        </div>
-    </div>
-    <!-- ============================================================== -->
-    <!-- End Right sidebar -->
-    <!-- ============================================================== -->
-    </div>
-    <!-- ============================================================== -->
-    <!-- End Container fluid  -->
-    <!-- ============================================================== -->
-    <!-- ============================================================== -->
-    <!-- footer -->
-    <!-- ============================================================== -->
-    <footer class="footer">
-        © 2019 Material Pro Admin by wrappixel.com
-    </footer>
-    <!-- ============================================================== -->
-    <!-- End footer -->
-    <!-- ============================================================== -->
     </div>
 @endsection
 
 @push('scripts')
-    {{--<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>--}}
-    {{--<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>--}}
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
     <script>
         $(document).ready(function () {
-             // $('#table').DataTable();
+            $('#table').DataTable();
         });
     </script>
 @endpush
