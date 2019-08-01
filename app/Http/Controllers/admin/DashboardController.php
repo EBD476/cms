@@ -13,6 +13,8 @@ class DashboardController extends Controller
 {
     public function index()
     {
+
+       // \Artisan::call('up');
         $products_count = Product::All()->count();
         $project_count = Project::All()->count();
         $dealership=Dealerships::All()->count();

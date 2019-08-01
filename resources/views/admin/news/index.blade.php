@@ -74,24 +74,24 @@
                     <div class="card">
                         <div class="card-body">
                             <a href="{{route('news.create')}}" class="btn btn-primary">{{__('Add New News')}}</a>
-                            <h4 class="card-title">Data Table</h4>
-                            <h6 class="card-subtitle">Data table example</h6>
+                            <h4 class="card-title"></h4>
+                            <h6 class="card-subtitle"></h6>
                             <div class="table-responsive m-t-40">
                                 <div id="myTable_wrapper"
                                      class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
                                     <div class="row">
                                         <div class="col-sm-12 col-md-6">
-                                            <div class="dataTables_length" id="myTable_length"><label>Show <select
+                                            <div class="dataTables_length" id="myTable_length"><label>{{__('Show')}}<select
                                                             name="myTable_length" aria-controls="myTable"
                                                             class="form-control form-control-sm">
                                                         <option value="10">10</option>
                                                         <option value="25">25</option>
                                                         <option value="50">50</option>
                                                         <option value="100">100</option>
-                                                    </select> entries</label></div>
+                                                    </select>{{__('entries')}}</label></div>
                                         </div>
                                         <div class="col-sm-12 col-md-6">
-                                            <div id="myTable_filter" class="dataTables_filter"><label>Search:<input
+                                            <div id="myTable_filter" class="dataTables_filter"><label>{{__('Search')}}:<input
                                                             type="search" class="form-control form-control-sm"
                                                             placeholder="" aria-controls="myTable"></label></div>
                                         </div>
@@ -106,47 +106,22 @@
                                                     <th class="sorting_asc" tabindex="0" aria-controls="myTable"
                                                         rowspan="1" colspan="1" aria-sort="ascending"
                                                         aria-label="Name: activate to sort column descending"
-                                                        style="width: 146px;">Name
+                                                        style="width: 146px;"> {{__('ID')}}
                                                     </th>
                                                     <th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1"
                                                         colspan="1"
                                                         aria-label="Position: activate to sort column ascending"
-                                                        style="width: 242px;">Position
+                                                        style="width: 242px;">  {{__('Title')}}
                                                     </th>
                                                     <th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1"
                                                         colspan="1"
                                                         aria-label="Office: activate to sort column ascending"
-                                                        style="width: 106px;">Office
-                                                    </th>
-                                                    <th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1"
-                                                        colspan="1" aria-label="Age: activate to sort column ascending"
-                                                        style="width: 38px;">Age
-                                                    </th>
-                                                    <th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1"
-                                                        colspan="1"
-                                                        aria-label="Start date: activate to sort column ascending"
-                                                        style="width: 92px;">Start date
-                                                    </th>
-                                                    <th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1"
-                                                        colspan="1"
-                                                        aria-label="Salary: activate to sort column ascending"
-                                                        style="width: 69px;">Salary
+                                                        style="width: 106px;">{{__('Action')}}
+
                                                     </th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                <th>
-                                                    {{__('ID')}}
-                                                </th>
-                                                <th>
-                                                    {{__('Title')}}
-                                                </th>
-                                                <th>
-                                                    {{__('Action')}}
-                                                </th>
-                                                </thead>
-                                                <tbody>
-
                                                 @foreach($news as $key => $news)
                                                     <tr>
                                                         <td>
@@ -430,11 +405,11 @@
 @endsection
 
 @push('scripts')
-    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
+    {{--<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>--}}
+    {{--<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>--}}
     <script>
         $(document).ready(function () {
-            $('#table').DataTable();
+             // $('#table').DataTable();
         });
     </script>
 @endpush

@@ -3,10 +3,12 @@
 @section('title','Product')
 
 @push('css')
+    <link href="{{asset('backend/css.pro/froala_editor.pkgd.min.css')}}" rel="stylesheet"/>
     <link href="{{asset('backend/style/kamadatepicker.min.css')}}" rel="stylesheet"/>
 @endpush
 
 @section('content')
+    <!-- Content Wrapper. Contains page content -->
     <div class="page-wrapper" style="min-height: 177px;">
         <!-- ============================================================== -->
         <!-- Container fluid  -->
@@ -60,39 +62,40 @@
                     </div>
                 </div>
             </div>
-                <!-- Content Header (Page header) -->
+            <!-- Content Header (Page header) -->
 
-                <section class="content-header">
-                    <h1>
-                        {{__('Edit Project')}}
-                        <small>{{__('Preview')}}</small>
-                    </h1>
-                    <ol class="breadcrumb">
-                        <li><a href="#"><i class="fa fa-dashboard"></i>{{__('Home')}}</a></li>
-                        <li><a href="#">{{__('Forms')}}</a></li>
-                        <li class="active">{{__('General Elements')}}</li>
-                    </ol>
-                </section>
+            <section class="content-header">
+                <h1>
+                    {{__('Edit Product')}}
+                    <small>{{__('Preview')}}</small>
+                </h1>
+                <ol class="breadcrumb">
+                    <li><a href="#"><i class="fa fa-dashboard"></i>{{__('Home')}}</a></li>
+                    <li><a href="#">{{__('Forms')}}</a></li>
+                    <li class="active">{{__('General Elements')}}</li>
+                </ol>
+            </section>
 
-                <!-- /.content-wrapper -->
-                <!-- Main content -->
+            <!-- /.content-wrapper -->
+            <!-- Main content -->
 
             <div class="row">
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Basic Material inputs</h4>
-                            <h6 class="card-subtitle">Just add <code>form-material</code> class to the form that's it.</h6>
+                            {{--<h4 class="card-title">Basic Material inputs</h4>--}}
+                            {{--<h6 class="card-subtitle">Just add <code>form-material</code> class to the form that's it.--}}
+                            {{--</h6>--}}
 
-                <section class="content">
-                    <div class="row">
-                        <!-- left column -->
-                        <div class="col-md-6">
-                            <!-- general form elements -->
-                            <div class="box box-primary">
-                                <div class="box-header with-border">
-                                    <h3 class="box-title">{{__('Project')}}</h3>
-                                </div>
+                            <section class="content">
+                                <div class="row">
+                                    <!-- left column -->
+                                    <div class="col-md-6">
+                                        <!-- general form elements -->
+                                        <div class="box box-primary">
+                                            <div class="box-header with-border">
+                                                <h3 class="box-title">{{__('Product')}}</h3>
+                                            </div>
                                 <!-- /.box-header -->
                                 <!-- form start -->
                                 <form method="post" action="{{route('product.update',$product->id)}}"
@@ -113,10 +116,10 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputFile">{{__('product Description')}}</label>
-                                            <input type="text" class="form-control"
-                                                   placeholder="{{__('product Description')}}" id="exampleInputFile"
+                                            <textarea type="text" class="form-control"
+                                                   placeholder="{{__('product Description')}}" id="froala"
                                                    name="hp_product_description"
-                                                   value="{{$product->hp_product_description}}">
+                                                      >{{$product->hp_product_description}}</textarea>
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputFile">{{__('product Price')}}</label>
@@ -137,10 +140,7 @@
                                                    placeholder="{{__('product status')}}" id="exampleInputFile"
                                                    name="hp_product_status" value="{{$product->hp_product_status}}">
                                         </div>
-                                        <div class="form-group">
-                                            <label for="exampleInputFile">{{__('product Image')}}</label>
-                                            <input type="file" id="exampleInputFile" name="hp_product_image">
-                                        </div>
+                                        <input type="hidden" name="hn_image" id="hn_image">
                                         <div class="checkbox">
                                             <label>
                                                 <input type="checkbox">{{__('Check me out')}}
@@ -153,18 +153,55 @@
                                         <button type="submit" class="btn btn-primary">{{__('Submit')}}</button>
                                     </div>
                                 </form>
+                                            <form action="{{url('/admin/image-save')}}" class="dropzone" id="dropzone"
+                                                  enctype="multipart/form-data">
+                                                @csrf
+                                                @method('POST')
+                                                <div class="fallback">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputFile">{{__('Image')}}</label>
+                                                        <input type="file" class="form-control"
+                                                               name="file">
+                                                    </div>
+                                                </div>
+                                            </form>
                             </div>
 
                             @endsection
 
                             @push('scripts')
-                                <script src="{{asset('backend/src/kamadatepicker.min.js')}}"></script>
-                                <script>
-                                    kamaDatepicker('test-date-id', {
-                                        buttonsColor: "blue",
-                                        forceFarsiDigits: true,
-                                        nextButtonIcon: "fa fa-arrow-circle-right",
-                                        previousButtonIcon: "fa fa-arrow-circle-left"
-                                    });
-                                </script>
+                                            <script src="{{asset('backend/src/kamadatepicker.min.js')}}"></script>
+                                            <script src="{{asset('backend/js.pro/froala_editor.pkgd.min.js')}}"></script>
+                                            <script src="{{asset('backend/js.pro/dropzone.js')}}"></script>
+                                            <script>
+                                                kamaDatepicker('test-date-id', {
+                                                    buttonsColor: "blue",
+                                                    forceFarsiDigits: true,
+                                                    nextButtonIcon: "fa fa-arrow-circle-right",
+                                                    previousButtonIcon: "fa fa-arrow-circle-left"
+                                                });
+                                                var editor = new FroalaEditor('#froala');
+
+                                                Dropzone.options.dropzone =
+                                                    {
+                                                        maxFilesize: 12,
+                                                        // فایل نوع آبجکت است
+                                                        renameFile: function (file) {
+                                                            var dt = new Date();
+                                                            var time = dt.getTime();
+                                                            return time + '-' + file.name;
+                                                        },
+                                                        acceptedFiles: ".jpeg,.jpg,.png,.gif",
+                                                        addRemoveLinks: true,
+                                                        timeout: 5000,
+                                                        success: function (file, response) {
+                                                            // اسم اینپوت و مقداری که باید به آن ارسال شود
+                                                            $('#hn_image').val(file.upload.filename);
+                                                        },
+                                                        error: function (file, response) {
+                                                            return false;
+                                                        }
+                                                    };
+                                            </script>
+
     @endpush

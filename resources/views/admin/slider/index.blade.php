@@ -7,55 +7,124 @@
 @endpush
 
 @section('content')
-    <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <h1>
-                {{__('Data Tables')}}
-                <small>advanced tables</small>
-            </h1>
-            <a href="{{route('slider.create')}}" class="btn btn-primary">{{__('Add New Slider')}}</a>
-            <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i>{{__('Home')}}</a></li>
-                <li><a href="#">{{__('Tables')}}</a></li>
-                <li class="active">{{__('Data tables')}}</li>
-            </ol>
-        </section>
-
-        <!-- Main content -->
-        <section class="content">
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="box">
-                        <div class="box-header">
-                            <h3 class="box-title">{{__('Hover Data Table')}}</h3>
+    <div class="page-wrapper" style="min-height: 177px;">
+        <!-- ============================================================== -->
+        <!-- Container fluid  -->
+        <!-- ============================================================== -->
+        <div class="container-fluid">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="row page-titles">
+                <div class="col-md-5 col-8 align-self-center">
+                    <h3 class="text-themecolor m-b-0 m-t-0">Table Data table</h3>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="javascript:void(0)">Home</a>
+                        </li>
+                        <li class="breadcrumb-item active">Table Data table</li>
+                    </ol>
+                </div>
+                <div class="col-md-7 col-4 align-self-center">
+                    <div class="d-flex m-t-10 justify-content-end">
+                        <div class="d-flex m-r-20 m-l-10 hidden-md-down">
+                            <div class="chart-text m-r-10">
+                                <h6 class="m-b-0">
+                                    <small>THIS MONTH</small>
+                                </h6>
+                                <h4 class="m-t-0 text-info">$58,356</h4>
+                            </div>
+                            <div class="spark-chart">
+                                <div id="monthchart">
+                                    <canvas width="60" height="35"
+                                            style="display: inline-block; width: 60px; height: 35px; vertical-align: top;"></canvas>
+                                </div>
+                            </div>
                         </div>
-                        <!-- /.box-header -->
-                        <div class="box-body">
-                                <table id="table" class="table" cellspacing="0" width="100%">
-                                    <thead class=" text-primary">
-                                    <th>
-                                        ID
-                                    </th>
-                                    <th>
-                                        Title
-                                    </th>
-                                    <th>
-                                        Sub Title
-                                    </th>
-                                    <th>
-                                        image
-                                    </th>
-                                    <th>
-                                        Create At
-                                    </th>
-                                    <th>
-                                        Update At
-                                    </th>
-                                    <th>
-                                        action
-                                    </th>
-                                    </thead>
+                        <div class="d-flex m-r-20 m-l-10 hidden-md-down">
+                            <div class="chart-text m-r-10">
+                                <h6 class="m-b-0">
+                                    <small>LAST MONTH</small>
+                                </h6>
+                                <h4 class="m-t-0 text-primary">$48,356</h4>
+                            </div>
+                            <div class="spark-chart">
+                                <div id="lastmonthchart">
+                                    <canvas width="60" height="35"
+                                            style="display: inline-block; width: 60px; height: 35px; vertical-align: top;"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="">
+                            <button class="right-side-toggle waves-effect waves-light btn-success btn btn-circle btn-sm pull-right m-l-10">
+                                <i class="ti-settings text-white"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Start Page Content -->
+            <!-- ============================================================== -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <a href="{{route('slider.create')}}" class="btn btn-primary">{{__('Add New Slider')}}</a>
+                            <h4 class="card-title"></h4>
+                            <h6 class="card-subtitle"></h6>
+                            <div class="table-responsive m-t-40">
+                                <div id="myTable_wrapper"
+                                     class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-6">
+                                            <div class="dataTables_length" id="myTable_length"><label>{{__('Show')}} <select
+                                                            name="myTable_length" aria-controls="myTable"
+                                                            class="form-control form-control-sm">
+                                                        <option value="10">10</option>
+                                                        <option value="25">25</option>
+                                                        <option value="50">50</option>
+                                                        <option value="100">100</option>
+                                                    </select>{{__('entries')}}</label></div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-6">
+                                            <div id="myTable_filter" class="dataTables_filter"><label>{{__('Search')}}:<input
+                                                            type="search" class="form-control form-control-sm"
+                                                            placeholder="" aria-controls="myTable"></label></div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <table id="myTable"
+                                                   class="table table-bordered table-striped dataTable no-footer"
+                                                   role="grid" aria-describedby="myTable_info">
+                                                <thead>
+                                                <tr role="row">
+                                                    <th class="sorting_asc" tabindex="0" aria-controls="myTable"
+                                                        rowspan="1" colspan="1" aria-sort="ascending"
+                                                        aria-label="Name: activate to sort column descending"
+                                                        style="width: 146px;"> {{__('ID')}}
+                                                    </th>
+                                                    <th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1"
+                                                        colspan="1"
+                                                        aria-label="Position: activate to sort column ascending"
+                                                        style="width: 242px;"> {{__('Title')}}
+                                                    </th>
+                                                    <th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1"
+                                                        colspan="1"
+                                                        aria-label="Office: activate to sort column ascending"
+                                                        style="width: 106px;">{{__('Sub Title')}}
+                                                    </th>
+                                                    <th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1"
+                                                        colspan="1"
+                                                        aria-label="Start date: activate to sort column ascending"
+                                                        style="width: 92px;">  {{__('action')}}
+                                                    </th>
+                                                </tr>
+                                                </thead>
                                     <tbody>
 
                                     @foreach($sliders as $key => $slider)
@@ -68,15 +137,6 @@
                                             </td>
                                             <td>
                                                 {{$slider -> sub_title}}
-                                            </td>
-                                            <td>
-                                                {{$slider -> image}}
-                                            </td>
-                                            <td>
-                                                {{$slider -> created_at}}
-                                            </td>
-                                            <td>
-                                                {{$slider -> updated_at}}
                                             </td>
                                             <td>
                                                <a href="{{route('slider.edit',$slider->id)}}" class="btn btn-info btn-sm"><i class="material-icons">mode_edit</i></a>

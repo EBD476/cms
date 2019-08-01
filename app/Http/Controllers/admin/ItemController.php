@@ -44,30 +44,13 @@ class ItemController extends Controller
             'name' => 'required' ,
             'description' => 'required' ,
            ' price'=>'required',
-            'image' => 'required|mimes:jpg,jpeg,png,bmp' ,
         ]);
-        $image = $request->file('image');
-        $slug = str_slug($request->title);
-        if(isset($image))
-        {
-            $currentdate = Carbon::now()->todatestring();
-            $imagename = $slug . '-' . $currentdate . '-' . uniqid() . '.' . $image->getClientOriginalExtension();
-            if (!file_exists('upload/item')) {
-                mkdir('upload/item', 0777, true);
-            }
-            $image->move('upload/item', $imagename);
-        }
-        else
-        {
-            $imagename='default.png';
-        }
-
         $item = new items();
         $item->categoury_id= $request->category;
         $item->name= $request->name;
         $item->description= $request->description;
         $item->price= $request->price;
-        $item->image=$imagename;
+        $item->image = $request->hn_image;
         $item->save();
         return redirect()->route('items.index');
 
@@ -111,30 +94,14 @@ class ItemController extends Controller
             'name' => 'required' ,
             'description' => 'required' ,
             ' price'=>'required',
-            'image' => 'required|mimes:jpg,jpeg,png,bmp' ,
         ]);
-        $image = $request -> file('image');
-        $slug = str_slug($request->title);
         $item=items::find($id);
-        if(isset($image)){
-            $currentdate =Carbon::now()->todatestring();
-            $imagename = $slug.'-'.$currentdate.'-'.uniqid().'.'.$image->getClientOriginalExtension();
-            if (!file_exists('upload/item'))
-            {
-                mkdir('upload/item',0777,true);
-                $image->move('upload/item',$imagename);
-
-            }else
-            {
-                $imagename='default.png';
-            }
             $item->name= $request->name;
             $item->description= $request->description;
             $item->price= $request->price;
-            $item->image=$imagename;
+            $item->image = $request->hn_image;
             $item->save();
             return redirect()->route('items.index')->with('successMSG','item Successfully Update');
-        }
     }
 
     /**
@@ -154,5 +121,25 @@ class ItemController extends Controller
         }
         $item->delete();
         return redirect()->back()->with('successMSG','Item Successfully Delete');
+    }
+    public function item_upload(Request $request)
+    {
+        $image = $request->file('file');
+        $filename=$_FILES['file']['name'];
+
+        if (isset($image)) {
+            $current_date = Carbon::now()->todatestring();
+//          $image_name = $current_date . '-' . uniqid() . '.' . $image->getClientOriginalExtension();
+            if (!file_exists('img/news')) {
+                mkdir('img/news', 0777, true);
+            }
+            $image->move('img/item', $filename);
+        } else {
+            $image_name = 'default.png';
+        }
+//        $news = new News();
+//        $news->hn_image = $image_name;
+//        $news->save();
+//
     }
 }

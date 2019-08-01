@@ -47,34 +47,18 @@ class ProjectsController extends Controller
             'hp_project_owner' => 'required' ,
             'hp_project_type' => 'required',
             'hp_project_units'=> 'required',
-            'hp_project_image'=> 'required',
-            'hp_project_location'=> 'required',
+            'hp_project_address'=> 'required',
             'hp_project_description'=> 'required',
             'hp_project_options'=> 'required',
             'hp_project_complete_date'=> 'required',
         ]);
-        $image = $request->file('hp_project_image');
-        $slug = str_slug($request->hp_project_image);
-        if(isset($image))
-        {
-            $current_date = Carbon::now()->todatestring();
-            $image_name = $slug . '-' . $current_date . '-' . uniqid() . '.' . $image->getClientOriginalExtension();
-            if (!file_exists('upload/project')) {
-                mkdir('upload/project', 0777, true);
-            }
-            $image->move('upload/project', $image_name);
-        }
-        else
-        {
-            $image_name='default.png';
-        }
         $projects = new Project();
         $projects->hp_project_name= $request->hp_project_name;
         $projects->hp_project_owner= $request->hp_project_owner;
         $projects->hp_project_type=$request->hp_project_type;
         $projects->hp_project_units=$request->hp_project_units;
-        $projects->hp_project_image=$image_name;
-        $projects->hp_project_location=$request->hp_project_location;
+        $projects->hp_project_image=$request->hn_image;
+        $projects->hp_project_address=$request->hp_project_address;
         $projects->hp_project_description=$request->hp_project_description;
         $projects->hp_project_options=$request->hp_project_options;
         $projects->hp_project_complete_date=$request->hp_project_complete_date;
@@ -121,34 +105,18 @@ class ProjectsController extends Controller
             'hp_project_owner' => 'required' ,
             'hp_project_type' => 'required',
             'hp_project_units'=> 'required',
-            'hp_project_image'=> 'required',
-            'hp_project_location'=> 'required',
+            'hp_project_address'=> 'required',
             'hp_project_description'=> 'required',
             'hp_project_options'=> 'required',
             'hp_project_complete_date'=> 'required',
         ]);
         $projects=Project::find($id);
-        $image = $request->file('hp_project_image');
-        $slug = str_slug($request->hp_project_image);
-        if(isset($image))
-        {
-            $current_date = Carbon::now()->todatestring();
-            $image_name = $slug . '-' . $current_date . '-' . uniqid() . '.' . $image->getClientOriginalExtension();
-            if (!file_exists('upload/project')) {
-                mkdir('upload/project', 0777, true);
-            }
-            $image->move('upload/project', $image_name);
-        }
-        else
-        {
-            $image_name='default.png';
-        }
         $projects->hp_project_name= $request->hp_project_name;
         $projects->hp_project_owner= $request->hp_project_owner;
         $projects->hp_project_type=$request->hp_project_type;
         $projects->hp_project_units=$request->hp_project_units;
-        $projects->hp_project_image=$image_name;
-        $projects->hp_project_location=$request->hp_project_location;
+        $projects->hp_project_image=$request->hn_image;
+        $projects->hp_project_address=$request->hp_project_address;
         $projects->hp_project_description=$request->hp_project_description;
         $projects->hp_project_options=$request->hp_project_options;
         $projects->hp_project_complete_date=$request->hp_project_complete_date;
@@ -169,4 +137,25 @@ class ProjectsController extends Controller
         $projects->delete();
         return redirect()->back();
     }
+    public function project_upload(Request $request)
+    {
+        $image = $request->file('file');
+        $filename=$_FILES['file']['name'];
+
+        if (isset($image)) {
+            $current_date = Carbon::now()->todatestring();
+//          $image_name = $current_date . '-' . uniqid() . '.' . $image->getClientOriginalExtension();
+            if (!file_exists('img/project')) {
+                mkdir('img/project', 0777, true);
+            }
+            $image->move('img/project', $filename);
+        } else {
+            $image_name = 'default.png';
+        }
+//        $news = new News();
+//        $news->hn_image = $image_name;
+//        $news->save();
+//
+    }
+
 }

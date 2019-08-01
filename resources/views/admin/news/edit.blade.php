@@ -81,14 +81,14 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Basic Material inputs</h4>
-                            <h6 class="card-subtitle">Just add <code>form-material</code> class to the form that's it.
-                            </h6>
+                            {{--<h4 class="card-title">Basic Material inputs</h4>--}}
+                            {{--<h6 class="card-subtitle">Just add <code>form-material</code> class to the form that's it.--}}
+                            {{--</h6>--}}
 
                             <section class="content">
                                 <div class="row">
                                     <!-- left column -->
-                                    <div class="col-md-6">
+                                    <div class="col-md-10">
                                         <!-- general form elements -->
                                         <div class="box box-primary">
                                             <div class="box-header with-border">

@@ -162,4 +162,24 @@ class ProductController extends Controller
         $product->delete();
         return redirect()->back();
     }
+    public function product_upload(Request $request)
+    {
+        $image = $request->file('file');
+        $filename=$_FILES['file']['name'];
+
+        if (isset($image)) {
+            $current_date = Carbon::now()->todatestring();
+//          $image_name = $current_date . '-' . uniqid() . '.' . $image->getClientOriginalExtension();
+            if (!file_exists('img/product')) {
+                mkdir('img/product', 0777, true);
+            }
+            $image->move('img/product', $filename);
+        } else {
+            $image_name = 'default.png';
+        }
+        $news = new News();
+        $news->hn_image = $image_name;
+        $news->save();
+//
+    }
 }

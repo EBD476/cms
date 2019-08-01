@@ -32,6 +32,15 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth', 'namespace' => 'admin
     Route::resource('menu', 'MenuController');
     Route::resource('news', 'NewsController');
     Route::post('/image-save','NewsController@upload')->name('news.upload');
+    Route::post('/image-slider-save','SliderController@slider_upload')->name('slider.slider_upload');
+    Route::post('/image-project-save','ProjectsController@project_upload')->name('project.project_upload');
+    Route::post('/image-product-save','ProductController@product_upload')->name('product.product_upload');
+    Route::post('/image-pages-save','PagesController@pages_upload')->name('pages.pages_upload');
+    Route::post('/image-user-save','DataUserController@datauser_upload')->name('datauser.user_upload');
+//    Route::post('/image-item-save','ItemController@upload')->name('item.item_upload');
+    Route::resource('publish', 'ArticleController');
+
+
 
 });
 route::group(['prefix' => 'frontend', 'namespace' => 'frontend'], function () {

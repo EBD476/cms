@@ -64,15 +64,15 @@
             <!-- Content Header (Page header) -->
 
             <section class="content-header">
-                <h1>
-                    {{__('Edit Project')}}
-                    <small>{{__('Preview')}}</small>
-                </h1>
-                <ol class="breadcrumb">
-                    <li><a href="#"><i class="fa fa-dashboard"></i>{{__('Home')}}</a></li>
-                    <li><a href="#">{{__('Forms')}}</a></li>
-                    <li class="active">{{__('General Elements')}}</li>
-                </ol>
+                {{--<h1>--}}
+                    {{--{{__('Edit Project')}}--}}
+                    {{--<small>{{__('Preview')}}</small>--}}
+                {{--</h1>--}}
+                {{--<ol class="breadcrumb">--}}
+                    {{--<li><a href="#"><i class="fa fa-dashboard"></i>{{__('Home')}}</a></li>--}}
+                    {{--<li><a href="#">{{__('Forms')}}</a></li>--}}
+                    {{--<li class="active">{{__('General Elements')}}</li>--}}
+                {{--</ol>--}}
             </section>
 
             <!-- /.content-wrapper -->
@@ -82,14 +82,14 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Basic Material inputs</h4>
-                            <h6 class="card-subtitle">Just add <code>form-material</code> class to the form that's it.
-                            </h6>
+                            {{--<h4 class="card-title">Basic Material inputs</h4>--}}
+                            {{--<h6 class="card-subtitle">Just add <code>form-material</code> class to the form that's it.--}}
+                            {{--</h6>--}}
 
                             <section class="content">
                                 <div class="row">
                                     <!-- left column -->
-                                    <div class="col-md-6">
+                                    <div class="col-md-10">
                                         <!-- general form elements -->
                                         <div class="box box-primary">
                                             <div class="box-header with-border">
@@ -121,20 +121,18 @@
                                                 </div>
                                             </form>
                                             <form action="{{url('/admin/image-save')}}" class="dropzone" id="dropzone"
-                                                    enctype="multipart/form-data">
+                                                  enctype="multipart/form-data">
                                                 @csrf
                                                 @method('POST')
                                                 <div class="fallback">
                                                     <div class="form-group">
                                                         <label for="exampleInputFile">{{__('Image')}}</label>
                                                         <input type="file" class="form-control"
-                                                               name="file">
+                                                               name="file" >
                                                     </div>
                                                 </div>
                                             </form>
                                             <!-- /.box-body -->
-
-
 
 
                                             <!-- /.content -->
@@ -144,33 +142,46 @@
                                                 <script src="{{asset('backend/js.pro/froala_editor.pkgd.min.js')}}"></script>
                                                 <script src="{{asset('backend/js.pro/dropzone.js')}}"></script>
                                                 <script>
-                                                    var editor = new FroalaEditor('#froala');
+                                                    var editor =new FroalaEditor('#froala', {
+
+                                                        // Set the image upload URL.
+                                                        imageUploadURL: '/admin/image-save',
+
+                                                        // Additional upload params.
+                                                        imageUploadParams: {
+                                                            _token : $('input[name=_token]').val()
+                                                        },
+
+                                                        // Set request type.
+                                                        // imageUploadMethod: 'POST',
+
+                                                        // Set max image size to 5MB.
+                                                        imageMaxSize: 5 * 1024 * 1024,
+
+                                                        // Allow to upload PNG and JPG.
+                                                        imageAllowedTypes: ['jpeg', 'jpg', 'png'],
+
+                                                    })
 
                                                     Dropzone.options.dropzone =
                                                         {
                                                             maxFilesize: 12,
                                                             // فایل نوع آبجکت است
-                                                            renameFile: function(file) {
+                                                            renameFile: function (file) {
                                                                 var dt = new Date();
                                                                 var time = dt.getTime();
-                                                                return time + '-' +file.name;
+                                                                return time + '-' + file.name;
                                                             },
                                                             acceptedFiles: ".jpeg,.jpg,.png,.gif",
                                                             addRemoveLinks: true,
                                                             timeout: 5000,
-                                                            success: function(file, response)
-                                                            {
+                                                            success: function (file, response) {
                                                                 // اسم اینپوت و مقداری که باید به آن ارسال شود
-                                                               $('#hn_image').val(file.upload.filename);
+                                                                $('#hn_image').val(file.upload.filename);
                                                             },
-                                                            error: function(file, response)
-                                                            {
+                                                            error: function (file, response) {
                                                                 return false;
                                                             }
                                                         };
                                                 </script>
-
-
-
-
     @endpush

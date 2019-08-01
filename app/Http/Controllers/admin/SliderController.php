@@ -41,27 +41,11 @@ class SliderController extends Controller
         $this->validate($request,[
             'title' => 'required' ,
             'sub_title' => 'required' ,
-            'image' => 'required|mimes:jpg,jpeg,png,bmp' ,
         ]);
-        $image = $request->file('image');
-        $slug = str_slug($request->title);
-        if(isset($image))
-        {
-            $currentdate = Carbon::now()->todatestring();
-            $imagename = $slug . '-' . $currentdate . '-' . uniqid() . '.' . $image->getClientOriginalExtension();
-            if (!file_exists('upload/slider')) {
-                mkdir('upload/slider', 0777, true);
-            }
-            $image->move('upload/slider', $imagename);
-        }
-        else
-        {
-            $imagename='default.png';
-        }
         $slider = new slider();
         $slider->title= $request->title;
         $slider->sub_title= $request->sub_title;
-        $slider->image=$imagename;
+        $slider->image=$request->hn_image;
         $slider->save();
         return redirect()->route('slider.index');
 
@@ -104,25 +88,11 @@ class SliderController extends Controller
         $this->validate($request,[
             'title' => 'required' ,
             'sub_title' => 'required' ,
-            'image' =>'mimes:jpg,jpeg,png,bmp',
         ]);
-        $image = $request -> file('image');
-        $slug = str_slug($request->title);
         $slider=slider::find($id);
-        if(isset($image)) {
-            $currentdate = Carbon::now()->todatestring();
-            $imagename = $slug . '-' . $currentdate . '-' . uniqid() . '.' . $image->getClientOriginalExtension();
-            if (!file_exists('upload/slider')) {
-                mkdir('upload/slider', 0777, true);
-            }
-            $image->move('upload/slider', $imagename);
-        }
-            else{
-                $imagename='default.png';
-            }
             $slider->title= $request->title;
             $slider->sub_title= $request->sub_title;
-            $slider->image= $imagename;
+            $slider->image= $request->hn_image;
             $slider->save();
             return redirect()->route('slider.index')->with('successMSG','Slider Successfully Update');
 
@@ -145,5 +115,25 @@ class SliderController extends Controller
         }
         $slider->delete();
         return redirect()->back()->with('successMSG','Slider Successfully Delete');
+    }
+    public function slider_upload(Request $request)
+    {
+        $image = $request->file('file');
+        $filename=$_FILES['file']['name'];
+
+        if (isset($image)) {
+            $current_date = Carbon::now()->todatestring();
+//          $image_name = $current_date . '-' . uniqid() . '.' . $image->getClientOriginalExtension();
+            if (!file_exists('img/slider')) {
+                mkdir('img/slider', 0777, true);
+            }
+            $image->move('img/slider', $filename);
+        } else {
+            $image_name = 'default.png';
+        }
+//        $news = new News();
+//        $news->hn_image = $image_name;
+//        $news->save();
+//
     }
 }

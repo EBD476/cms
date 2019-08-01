@@ -225,10 +225,10 @@ class PagesController extends Controller
         $pages->title= $request->title;
         $pages->page_slug= $request->page_slug;
         $pages->description=$request->description;
-        $pages->image=$image_name;
-        $pages->image2=$image_name2;
-        $pages->image3=$image_name3;
-        $pages->image4=$image_name4;
+        $pages->image=$request->hn_image;
+        $pages->image2=$request->hn_image2;
+        $pages->image3=$request->hn_image3;
+        $pages->image4=$request->hn_image4;
         $pages->cannonical_link=$request->cannonical_link;
         $pages->seo_title=$request->seo_title;
         $pages->seo_keyword=$request->seo_keyword;
@@ -252,5 +252,25 @@ class PagesController extends Controller
         $pages= Pages::find($id);
         $pages->delete();
         return redirect()->back();
+    }
+    public function pages_upload(Request $request)
+    {
+        $image = $request->file('file');
+        $filename=$_FILES['file']['name'];
+
+        if (isset($image)) {
+            $current_date = Carbon::now()->todatestring();
+//          $image_name = $current_date . '-' . uniqid() . '.' . $image->getClientOriginalExtension();
+            if (!file_exists('img/pages')) {
+                mkdir('img/pages', 0777, true);
+            }
+            $image->move('img/pages', $filename);
+        } else {
+            $image_name = 'default.png';
+        }
+//        $news = new News();
+//        $news->hn_image = $image_name;
+//        $news->save();
+//
     }
 }

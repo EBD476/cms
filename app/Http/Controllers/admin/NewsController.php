@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\News;
+use http\Env\Response;
 use Illuminate\Http\Request;
 use carbon\carbon;
 
@@ -123,9 +124,15 @@ class NewsController extends Controller
         } else {
             $image_name = 'default.png';
         }
+
+        return response()->json([
+            'link' => '/img/news/'.$filename
+        ]);
 //        $news = new News();
 //        $news->hn_image = $image_name;
 //        $news->save();
 //
     }
+
 }
+

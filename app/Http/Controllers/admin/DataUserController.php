@@ -43,7 +43,6 @@ class DataUserController extends Controller
             'phone' => 'required' ,
             'address' => 'required' ,
             'remember_token' =>'required',
-            'image'=>'required|mimes:jpg,jpeg,png,bmp',
         ]);
         $image = $request->file('image');
         $slug = str_slug($request->image);
@@ -69,7 +68,7 @@ class DataUserController extends Controller
         $dataUser->phone= $request->phone;
         $dataUser->address= $request->address;
         $dataUser->remember_token= $request->remember_token;
-        $dataUser->image= $imagename;
+        $dataUser->image = $request->hn_image;
         $dataUser->save();
         return redirect()->route('user.index');
 
@@ -118,22 +117,8 @@ class DataUserController extends Controller
             'phone' => 'required',
             'address' => 'required',
             'remember_token' =>'required',
-            'image' => 'required|mimes:jpg,jpeg,png,bmp',
         ]);
-        $image = $request -> file('image');
-        $slug = str_slug($request->image);
         $dataUser=User::find($id);
-        if(isset($image)) {
-            $currentdate = Carbon::now()->todatestring();
-            $imagename = $slug . '-' . $currentdate . '-' . uniqid() . '.' . $image->getClientOriginalExtension();
-            if (!file_exists('upload/user')) {
-                mkdir('upload/user', 0777, true);
-            }
-            $image->move('upload/user', $imagename);
-        }
-        else{
-            $imagename='default.png';
-        }
             $dataUser->name= $request->name;
             $dataUser->username= $request->username;
             $dataUser->email= $request->email;
@@ -142,7 +127,8 @@ class DataUserController extends Controller
             $dataUser->phone= $request->phone;
             $dataUser->address= $request->address;
             $dataUser->remember_token= $request->remember_token;
-            $dataUser->image=$imagename;
+            $dataUser->image = $request->hn_image;
+        ;
             $dataUser->save();
             return redirect()->route('user.index')->with('successMSG', 'عملیات ویرایش اطلاعات با موفقیت انجام شد.');
 
@@ -161,5 +147,25 @@ class DataUserController extends Controller
             $dataUser->delete();
             return redirect()->back()->with('successMSG','عملیات حذف اطلاعات با موفقیت انجام شد.');
 
+    }
+    public function user_upload(Request $request)
+    {
+        $image = $request->file('file');
+        $filename=$_FILES['file']['name'];
+
+        if (isset($image)) {
+            $current_date = Carbon::now()->todatestring();
+//          $image_name = $current_date . '-' . uniqid() . '.' . $image->getClientOriginalExtension();
+            if (!file_exists('img/news')) {
+                mkdir('img/news', 0777, true);
+            }
+            $image->move('img/user', $filename);
+        } else {
+            $image_name = 'default.png';
+        }
+//        $news = new News();
+//        $news->hn_image = $image_name;
+//        $news->save();
+//
     }
 }

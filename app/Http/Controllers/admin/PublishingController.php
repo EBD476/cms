@@ -81,15 +81,17 @@ class PublishingController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request,[
-            'user_id'=>'required',
+            'hp_auther	' => 'required' ,
             'title' => 'required' ,
-            'concept' => 'required' ,
+            'editor' => 'required' ,
+
         ]);
 
         $publish =publish::find($id);
-        $publish->user_id= $request->user_id;
+        $publish->hp_auther	= $request->hp_auther;
         $publish->title= $request->title;
-        $publish->concept= $request->concept;
+        $publish->editor= $request->concept;
+        $publish->hp_image= $request->hp_image;
         $publish->save();
         return redirect()->route('publish.index');
     }
