@@ -132,7 +132,7 @@
                                                         <td>
                                                             <a href="{{route('publish.edit',$article->id)}}"
                                                                data-toggle="tooltip" data-original-title="Edit">edit <i
-                                                                        class="fa fa-times text-inverse m-r-10"></i>
+                                                                        class="ti-pencil"></i>
                                                             </a>
                                                             <form id="-form-delete{{$article->id}}"
                                                                   style="display: none;" method="POST"
@@ -146,7 +146,7 @@
                                                                             document.getElementById('-form-delete{{$article->id}}').submit();
                                                                             }else {
                                                                             event.preventDefault();
-                                                                            }"><i class="fa fa-fw fa-times"></i>
+                                                                            }"><i class="ti-close"></i>
                                                             </button>
                                                         </td>
                                                     </tr>

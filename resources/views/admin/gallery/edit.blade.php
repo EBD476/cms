@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
-@section('title',__('Menu'))
+@section('title',__('Slider'))
 
 @push('css')
-
+    <link href="{{asset('backend/style/kamadatepicker.min.css')}}" rel="stylesheet"/>
 @endpush
 
 @section('content')
@@ -65,7 +65,7 @@
 
             <section class="content-header">
                 <h1>
-                    {{__('Insert Menu')}}
+                    {{__('Edit Slider')}}
                     <small>{{__('Preview')}}</small>
                 </h1>
                 <ol class="breadcrumb">
@@ -93,74 +93,43 @@
                                         <!-- general form elements -->
                                         <div class="box box-primary">
                                             <div class="box-header with-border">
-                                                <h3 class="box-title">{{__('Menu')}}</h3>
+                                                <h3 class="box-title">{{__('Slider')}}</h3>
                                             </div>
-                        <!-- /.box-header -->
-                        <!-- form start -->
-                        <form role="form" method="post" action="{{route('menu.store')}}" enctype="multipart/form-data">
-                            @csrf
-                            <div class="box-body">
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">{{__('Type')}}</label>
-                                    <select  class="form-control"  name="type">
-                                        @foreach($type as $type)
-                                            <option>{{$type->type}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputFile">{{__('Name')}}</label>
-                                    <input type="text" class="form-control" id="exampleInputText" placeholder="{{__('Name')}}" name="name">
+                                            <!-- /.box-header -->
+                                            <!-- form start -->
+                                            <form role="form" method="post"
+                                                  action="{{route('slider.update',$slider->id)}}"
+                                                  enctype="multipart/form-data">
+                                                @csrf
+                                                @method('PUT')
+                                                <div class="box-body">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">{{__('Slider Title')}}</label>
+                                                        <input type="text" class="form-control"
+                                                               id="exampleInputPassword1" placeholder="{{__('Title')}}"
+                                                               name="title" value="{{$slider->title}}">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="exampleInputFile">{{__('Sub Title')}}</label>
+                                                        <input type="text" class="form-control"
+                                                               placeholder="{{__('Sub Title')}}" id="exampleInputFile"
+                                                               name="sub_title" value="{{$slider->sub_title}}">
+                                                    </div>
+                                                    <input type="hidden" name="hn_image" id="hn_image">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox">{{__('Check me out')}}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <!-- /.box-body -->
 
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputFile">{{__('Items')}}</label>
-                                    <select  class="form-control"   name="items">
-                                        @foreach($items as $items)
-                                            <option>{{$items->title}}</option>
-                                        @endforeach
-
-                                    </select>
-                                    <div class="form-group">
-                                        <label for="exampleInputFile">{{__('Label')}}</label>
-                                        <select  class="form-control"  name="label">
-                                            @foreach($label as $label)
-                                                <option>{{$label->label}}</option>
-                                            @endforeach
-
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputFile">{{__('Parent')}}</label>
-                                        <select class="form-control" name="parent_name">
-                                            @foreach($menus as $menu)
-                                                @if($menu->label == 'parent')
-                                                    <option>
-                                                        {{$menu->name}}
-                                                    </option>
-                                                @endif
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputFile">{{__('Create By')}}</label>
-                                    <input type="text" class="form-control" id="exampleInputText"  name="created_by" value="{{auth()->user()->name}}">
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox">{{__('Check me out')}}
-                                    </label>
-                                </div>
-                                <input type="hidden" name="image" id="image">
-                            </div>
-                            <!-- /.box-body -->
-
-                            <div class="box-footer">
-                                <button type="submit" class="btn btn-primary">{{__('Submit')}}</button>
-                            </div>
-                        </form>
-                                            <form action="{{url('/admin//image-menu-save')}}" class="dropzone" id="dropzone"
+                                                <div class="box-footer">
+                                                    <button type="submit"
+                                                            class="btn btn-primary">{{__('Submit')}}</button>
+                                                </div>
+                                            </form>
+                                            <form action="{{url('/admin/image-save')}}" class="dropzone" id="dropzone"
                                                   enctype="multipart/form-data">
                                                 @csrf
                                                 @method('POST')
@@ -172,12 +141,23 @@
                                                     </div>
                                                 </div>
                                             </form>
-                    </div>
-@endsection
+                                        </div>
 
-@push('scripts')
+                                        @endsection
+
+                                        @push('scripts')
+                                            <script src="{{asset('backend/src/kamadatepicker.min.js')}}"></script>
+                                            <script src="{{asset('backend/js.pro/froala_editor.pkgd.min.js')}}"></script>
                                             <script src="{{asset('backend/js.pro/dropzone.js')}}"></script>
                                             <script>
+                                                kamaDatepicker('test-date-id', {
+                                                    buttonsColor: "blue",
+                                                    forceFarsiDigits: true,
+                                                    nextButtonIcon: "fa fa-arrow-circle-right",
+                                                    previousButtonIcon: "fa fa-arrow-circle-left"
+                                                });
+                                                var editor = new FroalaEditor('#froala');
+
                                                 Dropzone.options.dropzone =
                                                     {
                                                         maxFilesize: 12,
@@ -192,11 +172,16 @@
                                                         timeout: 5000,
                                                         success: function (file, response) {
                                                             // اسم اینپوت و مقداری که باید به آن ارسال شود
-                                                            $('#image').val(file.upload.filename);
+                                                            $('#hn_image').val(file.upload.filename);
                                                         },
                                                         error: function (file, response) {
                                                             return false;
                                                         }
-                                                    };
-                                            </script>
-@endpush
+                                                    };                                            </script>
+
+
+    @endpush
+
+    @push('scripts')
+
+    @endpush

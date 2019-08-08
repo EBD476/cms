@@ -139,8 +139,8 @@
                                                         </td>
                                                         <td>
                                                             <a href="{{route('product.edit',$product->id)}}"
-                                                               data-toggle="tooltip" data-original-title="Edit">edit <i
-                                                                        class="fa fa-times text-inverse m-r-10"></i>
+                                                               data-toggle="tooltip" data-original-title="Edit"><i
+                                                                        class="ti-pencil"></i>
                                                             </a>
                                                             <form id="-form-delete{{$product->id}}"
                                                                   style="display: none;" method="POST"
@@ -154,7 +154,7 @@
                                                                             document.getElementById('-form-delete{{$product->id}}').submit();
                                                                             }else {
                                                                             event.preventDefault();
-                                                                            }"><i class="fa fa-fw fa-times"></i>
+                                                                            }"><i class="ti-close"></i>
                                                             </button>
                                                         </td>
                                                     </tr>

@@ -70,7 +70,7 @@
                                                     document.getElementById('-form-delete{{$category->id}}').submit();
                                                 }else {
                                                     event.preventDefault();
-                                                        }"><i class="material-icons">delete</i></button>
+                                                        }"><i class="ti-close">delete</i></button>
                                             </td>
                                         </tr>
                                     @endforeach

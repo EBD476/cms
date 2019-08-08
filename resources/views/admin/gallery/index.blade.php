@@ -139,7 +139,7 @@
                                                 {{$slider -> sub_title}}
                                             </td>
                                             <td>
-                                               <a href="{{route('slider.edit',$slider->id)}}" class="btn btn-info btn-sm"><i class="ti-pencil"></i></a>
+                                               <a href="{{route('slider.edit',$slider->id)}}" class="btn btn-info btn-sm"><i class="material-icons">mode_edit</i></a>
                                                 <form id ="-form-delete{{$slider->id}}" style="display: none;" method="POST" action="{{route('slider.destroy',$slider->id)}}">
                                                     @csrf
                                                     @method('DELETE')
@@ -149,7 +149,7 @@
                                                     document.getElementById('-form-delete{{$slider->id}}').submit();
                                                 }else {
                                                     event.preventDefault();
-                                                        }"><i class="ti-close"></i></button>
+                                                        }"><i class="material-icons">delete</i></button>
                                             </td>
                                         </tr>
                                     @endforeach

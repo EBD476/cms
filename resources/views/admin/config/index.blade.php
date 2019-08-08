@@ -133,7 +133,7 @@
                                                 {{$config ->hdc_device_id}}
                                             </td>
                                             <td>
-                                                <a href="{{route('config.edit',$config->id)}}" class="btn btn-info btn-sm"><i class="fa fa-fw fa-edit"></i></a>
+                                                <a href="{{route('config.edit',$config->id)}}" class="btn btn-info btn-sm"><i class="ti-pencil"></i></a>
                                                     <form id ="-form-delete{{$config->id}}" style="display: none;" method="POST" action="{{route('config.destroy',$config->id)}}">
                                                         @csrf
                                                         @method('DELETE')
@@ -143,7 +143,7 @@
                                                             document.getElementById('-form-delete{{$config->id}}').submit();
                                                             }else {
                                                             event.preventDefault();
-                                                            }"><i class="material-icons"><i class="fa fa-fw fa-times"></i></i></button>
+                                                            }"><i class="material-icons"><i class="ti-close"></i></i></button>
                                             </td>
                                         </tr>
                                     @endforeach

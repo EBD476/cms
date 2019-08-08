@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title','slider')
+@section('title',__('Contact Us'))
 
 @push('css')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css">
@@ -73,7 +73,6 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <a href="{{route('slider.create')}}" class="btn btn-primary">{{__('Add New Slider')}}</a>
                             <h4 class="card-title"></h4>
                             <h6 class="card-subtitle"></h6>
                             <div class="table-responsive m-t-40">
@@ -81,7 +80,7 @@
                                      class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
                                     <div class="row">
                                         <div class="col-sm-12 col-md-6">
-                                            <div class="dataTables_length" id="myTable_length"><label>{{__('Show')}} <select
+                                            <div class="dataTables_length" id="myTable_length"><label>{{__('Show')}}<select
                                                             name="myTable_length" aria-controls="myTable"
                                                             class="form-control form-control-sm">
                                                         <option value="10">10</option>
@@ -106,61 +105,53 @@
                                                     <th class="sorting_asc" tabindex="0" aria-controls="myTable"
                                                         rowspan="1" colspan="1" aria-sort="ascending"
                                                         aria-label="Name: activate to sort column descending"
-                                                        style="width: 146px;"> {{__('ID')}}
+                                                        style="width: 146px;">{{__('ID')}}
                                                     </th>
                                                     <th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1"
                                                         colspan="1"
                                                         aria-label="Position: activate to sort column ascending"
-                                                        style="width: 242px;"> {{__('Title')}}
+                                                        style="width: 242px;"> {{__('Name')}}
                                                     </th>
                                                     <th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1"
-                                                        colspan="1"
-                                                        aria-label="Office: activate to sort column ascending"
-                                                        style="width: 106px;">{{__('Sub Title')}}
-                                                    </th>
-                                                    <th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1"
-                                                        colspan="1"
-                                                        aria-label="Start date: activate to sort column ascending"
-                                                        style="width: 92px;">  {{__('action')}}
+                                                        colspan="1" aria-label="Age: activate to sort column ascending"
+                                                        style="width: 38px;"> {{__('Action')}}
                                                     </th>
                                                 </tr>
                                                 </thead>
                                     <tbody>
 
-                                    @foreach($sliders as $key => $slider)
+                                    @foreach($contact_us as $key => $contact_us)
                                         <tr>
                                             <td>
                                                 {{$key + 1}}
                                             </td>
                                             <td>
-                                                {{$slider -> title}}
+                                                {{$contact_us ->hc_name}}
                                             </td>
                                             <td>
-                                                {{$slider -> sub_title}}
-                                            </td>
-                                            <td>
-                                               <a href="{{route('slider.edit',$slider->id)}}" class="btn btn-info btn-sm"><i class="ti-pencil"></i></a>
-                                                <form id ="-form-delete{{$slider->id}}" style="display: none;" method="POST" action="{{route('slider.destroy',$slider->id)}}">
+                                                <a href="{{route('contact_us.edit',$contact_us->id)}}" class="btn btn-info btn-sm"><i class="ti-pencil"></i> </a>
+                                                <form id ="-form-delete{{$contact_us->id}}" style="display: none;" method="POST" action="{{route('contact_us.destroy',$contact_us->id)}}">
                                                     @csrf
                                                     @method('DELETE')
                                                 </form>
-                                                <button type="button" class="btn btn-danger btn-sm"  onclick="if(confirm('Are You Sure Delete This?')){
-                                                    event.preventDefault();
-                                                    document.getElementById('-form-delete{{$slider->id}}').submit();
-                                                }else {
-                                                    event.preventDefault();
+                                                <button type="button" class="btn btn-danger btn-sm"  onclick="if(confirm('آیا از حذف این مورد اطمینان دارید؟')){
+                                                        event.preventDefault();
+                                                        document.getElementById('-form-delete{{$contact_us->id}}').submit();
+                                                        }else {
+                                                        event.preventDefault();
                                                         }"><i class="ti-close"></i></button>
                                             </td>
-                                        </tr>
                                     @endforeach
                                     </tbody>
                                 </table>
+                            </div>
                         </div>
                     </div>
                 </div>
+
             </div>
-    </div>
-    </div>
+        </div>
+
         @endsection
 
         @push('scripts')

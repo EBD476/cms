@@ -109,7 +109,7 @@
                                     <input type="text"  class="form-control" placeholder="{{__('Page Slug')}}" id="exampleInputFile" name="page_slug">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputFile">{{__('Description')}}</label>
+                                    <label for="exampleInputFile">{{__('Body')}}</label>
                                     <textarea type="text" class="form-control" id="froala"   name="description"></textarea>
                                 </div>
                                 <input type="hidden" name="hn_image" id="hn_image">
@@ -125,26 +125,26 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputFile">{{__('Seo Title')}}</label>
-                                    <input type="text" class="form-control" placeholder="{{__('Seo Title')}}" id="exampleInputFile" name="seo_title">
+                                    <input type="text" class="form-control"  id="exampleInputFile" name="seo_title">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputFile">{{__('Seo Keyword')}}</label>
-                                    <input type="text" class="form-control" placeholder="{{__('Seo Keyword')}}" id="exampleInputFile" name="seo_keyword">
+                                    <input type="text" class="form-control" id="exampleInputFile" name="seo_keyword">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputFile">{{__('Seo Description')}}</label>
-                                    <textarea type="text" class="form-control" id="froala" placeholder="{{__('Seo Description')}}" name="seo_description">
+                                    <textarea type="text" class="form-control"   name="seo_description">
                                     </textarea> </div>                               <div class="form-group">
                                     <label for="exampleInputFile">{{__('Status')}}</label>
-                                    <input type="text" class="form-control" id="test-date-id" placeholder="{{__('Status')}}" name="status">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputFile">{{__('Created By')}}</label>
-                                    <input type="text" class="form-control" id="test-date-id" placeholder="{{__('Created By')}}" name="created_by">
+                                    <input type="text" class="form-control" id="test-date-id" name="status">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputFile">{{__('Update By')}}</label>
-                                    <input type="text" class="form-control" id="test-date-id" placeholder="{{__('Update By')}}" name="updated_by">
+                                    <input type="text" class="form-control" id="test-date-id" name="updated_by">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputFile">{{__('Created By')}}: </label>
+                                    <label for="exampleInputFile">{{auth()->user()->name}}</label>
                                 </div>
                                 <div class="checkbox">
                                     <label>

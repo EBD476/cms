@@ -53,6 +53,7 @@ class MenuController extends Controller
         $menu->label=$request->label;
         $menu->parent_name=$request->parent_name;
         $menu->created_by=$request->created_by;
+        $menu->image=$request->image;
         $menu->save();
         return redirect()->route('menu.index');
     }
@@ -107,6 +108,7 @@ class MenuController extends Controller
         $menu->parent_name=$request->parent_name;
         $menu->created_by=$request->created_by;
         $menu->updated_by=$request->updated_by;
+        $menu->image=$request->image;
         $menu->save();
         return redirect()->route('menu.index');
     }
@@ -122,5 +124,29 @@ class MenuController extends Controller
         $menu=Menu::FIND($id);
         $menu->delete();
         return redirect()->back();
+    }
+    public function upload(Request $request)
+    {
+        $image = $request->file('file');
+        $filename=$_FILES['file']['name'];
+
+        if (isset($image)) {
+            $current_date = Carbon::now()->todatestring();
+//          $image_name = $current_date . '-' . uniqid() . '.' . $image->getClientOriginalExtension();
+            if (!file_exists('img/menu')) {
+                mkdir('img/menu', 0777, true);
+            }
+            $image->move('img/menu', $filename);
+        } else {
+            $image_name = 'default.png';
+        }
+
+        return response()->json([
+            'link' => '/img/menu/'.$filename
+        ]);
+//        $news = new News();
+//        $news->hn_image = $image_name;
+//        $news->save();
+//
     }
 }

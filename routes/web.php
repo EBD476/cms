@@ -15,7 +15,6 @@ Auth::routes();
 Route::group(['prefix' => 'admin', 'middleware' => 'auth', 'namespace' => 'admin'], function () {
 
     Route::get('dashboard', 'dashboardcontroller@index')->name('admin.dashboard');
-
     Route::resource('slider', 'SliderController');
     Route::resource('product', 'ProductController');
     Route::resource('category', 'CategoryController');
@@ -37,8 +36,11 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth', 'namespace' => 'admin
     Route::post('/image-product-save','ProductController@product_upload')->name('product.product_upload');
     Route::post('/image-pages-save','PagesController@pages_upload')->name('pages.pages_upload');
     Route::post('/image-user-save','DataUserController@datauser_upload')->name('datauser.user_upload');
-//    Route::post('/image-item-save','ItemController@upload')->name('item.item_upload');
+    Route::get('up','dashboardcontroller@up')->name('admin.up');
+    Route::get('down','dashboardcontroller@down')->name('admin.down');
     Route::resource('publish', 'ArticleController');
+    Route::resource('contact_us','ContactUsController');
+
 
 
 

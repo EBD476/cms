@@ -3,7 +3,7 @@
 @section('title',__('Dealership'))
 
 @push('css')
-    {{--<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">--}}
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
 @endpush
 
 @section('content')
@@ -76,115 +76,112 @@
                             <a href="{{route('dealership.create')}}" class="btn btn-primary">{{__('Add New Dealership')}}</a>
                             <h4 class="card-title"></h4>
                             <h6 class="card-subtitle"></h6>
-                            <div class="table-responsive m-t-40">
-                                <div id="myTable_wrapper"
-                                     class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
-                                    <div class="row">
-                                        <div class="col-sm-12 col-md-6">
-                                            <div class="dataTables_length" id="myTable_length"><label>{{__('Show')}} <select
-                                                            name="myTable_length" aria-controls="myTable"
-                                                            class="form-control form-control-sm">
-                                                        <option value="10">10</option>
-                                                        <option value="25">25</option>
-                                                        <option value="50">50</option>
-                                                        <option value="100">100</option>
-                                                    </select>{{__('entries')}}</label></div>
-                                        </div>
-                                        <div class="col-sm-12 col-md-6">
-                                            <div id="myTable_filter" class="dataTables_filter"><label>{{__('Search')}}:<input
-                                                            type="search" class="form-control form-control-sm"
-                                                            placeholder="" aria-controls="myTable"></label></div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <table id="myTable"
-                                                   class="table table-bordered table-striped dataTable no-footer"
-                                                   role="grid" aria-describedby="myTable_info">
-                                                <thead>
-                                                <tr role="row">
-                                                    <th class="sorting_asc" tabindex="0" aria-controls="myTable"
-                                                        rowspan="1" colspan="1" aria-sort="ascending"
-                                                        aria-label="Name: activate to sort column descending"
-                                                        style="width: 146px;">{{__('ID')}}
+                            <dsiv class="row">
+                                <div class="col-sm-12">
+                                    <table id="table"
+                                           class="table table-bordered table-striped dataTable no-footer"
+                                           role="grid" aria-describedby="myTable_info">
+                                        <thead>
+                                        <tr role="row">
+                                            <th class="sorting_asc" tabindex="0" aria-controls="myTable"
+                                                rowspan="1" colspan="1" aria-sort="ascending"
+                                                aria-label="Name: activate to sort column descending"
+                                                style="width: 146px;"> {{__('ID')}}
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1"
+                                                colspan="1"
+                                                aria-label="Position: activate to sort column ascending"
+                                                style="width: 242px;">  {{__('Dealership Code')}}
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1"
+                                                colspan="1"
+                                                aria-label="Position: activate to sort column ascending"
+                                                style="width: 242px;">  {{__('Dealership City')}}
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1"
+                                                colspan="1"
+                                                aria-label="Position: activate to sort column ascending"
+                                                style="width: 242px;">  {{__('Dealership Agent')}}
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1"
+                                                colspan="1"
+                                                aria-label="Office: activate to sort column ascending"
+                                                style="width: 106px;">{{__('Action')}}
 
-                                                    </th>
-                                                    <th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1"
-                                                        colspan="1"
-                                                        aria-label="Position: activate to sort column ascending"
-                                                        style="width: 242px;">{{__('Dealership Code')}}
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($dealerships as $key => $dealerships)
+                                            <tr>
+                                                <td>
+                                                    {{$key + 1}}
+                                                </td>
+                                                <td>
+                                                    {{$dealerships ->hds_dealership_code}}
+                                                </td> <td>
+                                                    {{$dealerships ->hds_dealership_city}}
+                                                </td> <td>
+                                                    {{$dealerships ->hds_dealership_agent}}
+                                                </td>
+                                                <td>
+                                                    <a href="{{route('dealership.edit',$dealerships->id)}}"
+                                                       data-toggle="tooltip" data-original-title="Edit"><i class="ti-pencil"></i>
+                                                    </a>
+                                                    <form id="-form-delete{{$dealerships->id}}"
+                                                          style="display: none;" method="POST"
+                                                          action="{{route('dealership.destroy',$dealerships->id)}}">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                    </form>
+                                                    <button type="button" class="btn btn-danger btn-sm"
+                                                            onclick="if(confirm('آیا از حذف این محصول اطمینان دارید؟')){
+                                                                    event.preventDefault();
+                                                                    document.getElementById('-form-delete{{$dealerships->id}}').submit();
+                                                                    }else {
+                                                                    event.preventDefault();
+                                                                    }"><i class="ti-close"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </dsiv>
 
-                                                    </th>
-                                                    <th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1"
-                                                        colspan="1"
-                                                        aria-label="Office: activate to sort column ascending"
-                                                        style="width: 106px;">{{__('Action')}}
-
-                                                    </th>
-                                                </tr>
-                                                </thead>
-                        <!-- /.box-header -->
-                        <div class="box-body">
-                                <table id="table" class="table table-bordered table-hover" cellspacing="0" width="100%">
-                                    <tbody>
-
-                                    @foreach($dealerships as $key => $dealerships)
-                                        <tr>
-                                            <td>
-                                                {{$key + 1}}
-                                            </td>
-                                            <td>
-                                                {{$dealerships ->hds_dealership_code}}
-                                            </td>
-                                            <td>
-                                                <a href="{{route('dealership.edit',$dealerships->id)}}" class="btn btn-info btn-sm"><i class="fa fa-fw fa-edit"></i> </a>
-                                                <form id ="-form-delete{{$dealerships->id}}" style="display: none;" method="POST" action="{{route('dealership.destroy',$dealerships->id)}}">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                </form>
-                                                <button type="button" class="btn btn-danger btn-sm"  onclick="if(confirm('آیا از حذف این محصول اطمینان دارید؟')){
-                                                        event.preventDefault();
-                                                        document.getElementById('-form-delete{{$dealerships->id}}').submit();
-                                                        }else {
-                                                        event.preventDefault();
-                                                        }"><i class="fa fa-fw fa-times"></i></button>
-                                            </td>
-                                    @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
+    </div>
 
-        @endsection
+@endsection
 
         @push('scripts')
-            {{--<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>--}}
-            {{--<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>--}}
-            {{--<script>--}}
-                {{--$(document).ready(function() {--}}
-                    {{--var eventFired = function ( type ) {--}}
-                        {{--// var n = $('#demo_info')[0];--}}
-                        {{--// n.innerHTML += '<div>'+type+' event - '+new Date().getTime()+'</div>';--}}
-                        {{--// n.scrollTop = n.scrollHeight;--}}
-                    {{--};--}}
+            <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+            <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
+            <script>
+                $(document).ready(function() {
+                    var eventFired = function ( type ) {
+                        // var n = $('#demo_info')[0];
+                        // n.innerHTML += '<div>'+type+' event - '+new Date().getTime()+'</div>';
+                        // n.scrollTop = n.scrollHeight;
+                    };
 
-                    {{--$('#table').DataTable({--}}
-                        {{--"language": {--}}
-                            {{--"url": "//cdn.datatables.net/plug-ins/1.10.18/i18n/Italian.json"--}}
-                        {{--},--}}
-                        {{--"dom": '<"top"i>rt<"top"flp><"clear">'--}}
-                    {{--});--}}
+                    $('#table').DataTable({
+                        "language": {
+                            "url": "//cdn.datatables.net/plug-ins/1.10.18/i18n/Italian.json"
+                        },
+                        "dom": '<"top"i>rt<"top"flp><"clear">'
+                    });
 
-                    {{--// $('#table'),--}}
-                    {{--//     .on( 'order.dt',  function () { eventFired( 'Order' ); } )--}}
-                    {{--//     .on( 'search.dt', function () { eventFired( 'Search' ); } )--}}
-                    {{--//     .on( 'page.dt',   function () { eventFired( 'Page' ); } )--}}
-                    {{--// .DataTable();--}}
-                {{--} );--}}
-            {{--</script>--}}
+                    // $('#table'),
+                    //     .on( 'order.dt',  function () { eventFired( 'Order' ); } )
+                    //     .on( 'search.dt', function () { eventFired( 'Search' ); } )
+                    //     .on( 'page.dt',   function () { eventFired( 'Page' ); } )
+                    // .DataTable();
+                } );
+            </script>
         @endpush

@@ -135,7 +135,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputFile">{{__('Seo Description')}}</label>
-                                    <textarea type="text" class="form-control" id="froala"  name="seo_description">{{$pages->seo_description}}</textarea>
+                                    <textarea type="text" class="form-control"  name="seo_description">{{$pages->seo_description}}</textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputFile">{{__('Status')}}</label>

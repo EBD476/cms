@@ -138,7 +138,7 @@
                                                 {{$pages ->created_by}}
                                             </td>
                                             <td>
-                                                <a href="{{route('pages.edit',$pages->id)}}"class="btn btn-info btn-sm"><i class="fa fa-fw fa-edit"></i></a>
+                                                <a href="{{route('pages.edit',$pages->id)}}"class="btn btn-info btn-sm"><i class="ti-pencil"></i></a>
                                                 <form id ="-form-delete{{$pages->id}}" style="display: none;" method="POST" action="{{route('pages.destroy',$pages->id)}}">
                                                     @csrf
                                                     @method('DELETE')
@@ -149,7 +149,7 @@
                                                         document.getElementById('-form-delete{{$pages->id}}').submit();
                                                         }else {
                                                         event.preventDefault();
-                                                        }"><i class="fa fa-fw fa-times"></i></button>
+                                                        }"><i class="ti-close"></i></button>
                                             </td>
                                         </tr>
                                     @endforeach

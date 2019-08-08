@@ -139,7 +139,7 @@
                                                 {{$menu -> created_at}}
                                             </td>
                                             <td>
-                                                <a href="{{route('menu.edit',$menu->id)}}" class="btn btn-info btn-sm"><i class="fa fa-fw fa-edit"></i> </a>
+                                                <a href="{{route('menu.edit',$menu->id)}}" class="btn btn-info btn-sm"><i class="ti-pencil"></i> </a>
                                                 <form id ="-form-delete{{$menu->id}}" style="display: none;" method="POST" action="{{route('menu.destroy',$menu->id)}}">
                                                     @csrf
                                                     @method('DELETE')
@@ -149,7 +149,7 @@
                                                         document.getElementById('-form-delete{{$menu->id}}').submit();
                                                         }else {
                                                         event.preventDefault();
-                                                        }"><i class="fa fa-fw fa-times"></i></button>
+                                                        }"><i class="ti-close"></i></button>
                                             </td>
                                     @endforeach
                                     </tbody>

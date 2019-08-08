@@ -237,7 +237,7 @@
 
 
 
-<header class="topbar is_stuck" style="position: fixed; top: 0px; width: 1349px;">
+<header class="topbar is_stuck" style="top: 0px; width: 1349px;">
     <nav class="navbar top-navbar navbar-expand-md navbar-light">
         <!-- ============================================================== -->
         <!-- Logo -->
