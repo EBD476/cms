@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title','slider')
+@section('title',__('Gallery'))
 
 @push('css')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css">
@@ -16,45 +16,45 @@
             <!-- Bread crumb and right sidebar toggle -->
             <!-- ============================================================== -->
             <div class="row page-titles">
-                <div class="col-md-5 col-8 align-self-center">
-                    <h3 class="text-themecolor m-b-0 m-t-0">Table Data table</h3>
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item">
-                            <a href="javascript:void(0)">Home</a>
-                        </li>
-                        <li class="breadcrumb-item active">Table Data table</li>
-                    </ol>
-                </div>
+                {{--<div class="col-md-5 col-8 align-self-center">--}}
+                    {{--<h3 class="text-themecolor m-b-0 m-t-0">Table Data table</h3>--}}
+                    {{--<ol class="breadcrumb">--}}
+                        {{--<li class="breadcrumb-item">--}}
+                            {{--<a href="javascript:void(0)">Home</a>--}}
+                        {{--</li>--}}
+                        {{--<li class="breadcrumb-item active">Table Data table</li>--}}
+                    {{--</ol>--}}
+                {{--</div>--}}
                 <div class="col-md-7 col-4 align-self-center">
                     <div class="d-flex m-t-10 justify-content-end">
-                        <div class="d-flex m-r-20 m-l-10 hidden-md-down">
-                            <div class="chart-text m-r-10">
-                                <h6 class="m-b-0">
-                                    <small>THIS MONTH</small>
-                                </h6>
-                                <h4 class="m-t-0 text-info">$58,356</h4>
-                            </div>
-                            <div class="spark-chart">
-                                <div id="monthchart">
-                                    <canvas width="60" height="35"
-                                            style="display: inline-block; width: 60px; height: 35px; vertical-align: top;"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="d-flex m-r-20 m-l-10 hidden-md-down">
-                            <div class="chart-text m-r-10">
-                                <h6 class="m-b-0">
-                                    <small>LAST MONTH</small>
-                                </h6>
-                                <h4 class="m-t-0 text-primary">$48,356</h4>
-                            </div>
-                            <div class="spark-chart">
-                                <div id="lastmonthchart">
-                                    <canvas width="60" height="35"
-                                            style="display: inline-block; width: 60px; height: 35px; vertical-align: top;"></canvas>
-                                </div>
-                            </div>
-                        </div>
+                        {{--<div class="d-flex m-r-20 m-l-10 hidden-md-down">--}}
+                            {{--<div class="chart-text m-r-10">--}}
+                                {{--<h6 class="m-b-0">--}}
+                                    {{--<small>THIS MONTH</small>--}}
+                                {{--</h6>--}}
+                                {{--<h4 class="m-t-0 text-info">$58,356</h4>--}}
+                            {{--</div>--}}
+                            {{--<div class="spark-chart">--}}
+                                {{--<div id="monthchart">--}}
+                                    {{--<canvas width="60" height="35"--}}
+                                            {{--style="display: inline-block; width: 60px; height: 35px; vertical-align: top;"></canvas>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                        {{--<div class="d-flex m-r-20 m-l-10 hidden-md-down">--}}
+                            {{--<div class="chart-text m-r-10">--}}
+                                {{--<h6 class="m-b-0">--}}
+                                    {{--<small>LAST MONTH</small>--}}
+                                {{--</h6>--}}
+                                {{--<h4 class="m-t-0 text-primary">$48,356</h4>--}}
+                            {{--</div>--}}
+                            {{--<div class="spark-chart">--}}
+                                {{--<div id="lastmonthchart">--}}
+                                    {{--<canvas width="60" height="35"--}}
+                                            {{--style="display: inline-block; width: 60px; height: 35px; vertical-align: top;"></canvas>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
                         <div class="">
                             <button class="right-side-toggle waves-effect waves-light btn-success btn btn-circle btn-sm pull-right m-l-10">
                                 <i class="ti-settings text-white"></i>
@@ -73,29 +73,12 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <a href="{{route('slider.create')}}" class="btn btn-primary">{{__('Add New Slider')}}</a>
+                            <a href="{{route('gallery.create')}}" class="btn btn-primary">{{__('Add New Image')}}</a>
                             <h4 class="card-title"></h4>
                             <h6 class="card-subtitle"></h6>
                             <div class="table-responsive m-t-40">
                                 <div id="myTable_wrapper"
                                      class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
-                                    <div class="row">
-                                        <div class="col-sm-12 col-md-6">
-                                            <div class="dataTables_length" id="myTable_length"><label>{{__('Show')}} <select
-                                                            name="myTable_length" aria-controls="myTable"
-                                                            class="form-control form-control-sm">
-                                                        <option value="10">10</option>
-                                                        <option value="25">25</option>
-                                                        <option value="50">50</option>
-                                                        <option value="100">100</option>
-                                                    </select>{{__('entries')}}</label></div>
-                                        </div>
-                                        <div class="col-sm-12 col-md-6">
-                                            <div id="myTable_filter" class="dataTables_filter"><label>{{__('Search')}}:<input
-                                                            type="search" class="form-control form-control-sm"
-                                                            placeholder="" aria-controls="myTable"></label></div>
-                                        </div>
-                                    </div>
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <table id="myTable"
@@ -111,12 +94,12 @@
                                                     <th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1"
                                                         colspan="1"
                                                         aria-label="Position: activate to sort column ascending"
-                                                        style="width: 242px;"> {{__('Title')}}
+                                                        style="width: 242px;"> {{__('Name')}}
                                                     </th>
                                                     <th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1"
                                                         colspan="1"
                                                         aria-label="Office: activate to sort column ascending"
-                                                        style="width: 106px;">{{__('Sub Title')}}
+                                                        style="width: 106px;">{{__('Code')}}
                                                     </th>
                                                     <th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1"
                                                         colspan="1"
@@ -127,29 +110,29 @@
                                                 </thead>
                                     <tbody>
 
-                                    @foreach($sliders as $key => $slider)
+                                    @foreach($gallery as $key => $gallery)
                                         <tr>
                                             <td>
                                                 {{$key + 1}}
                                             </td>
                                             <td>
-                                                {{$slider -> title}}
+                                                {{$gallery ->hg_name}}
                                             </td>
                                             <td>
-                                                {{$slider -> sub_title}}
+                                                {{$gallery ->hg_code}}
                                             </td>
                                             <td>
-                                               <a href="{{route('slider.edit',$slider->id)}}" class="btn btn-info btn-sm"><i class="material-icons">mode_edit</i></a>
-                                                <form id ="-form-delete{{$slider->id}}" style="display: none;" method="POST" action="{{route('slider.destroy',$slider->id)}}">
+                                               <a href="{{route('gallery.edit',$gallery->id)}}" class="btn btn-info btn-sm"><i class="ti-pencil"></i></a>
+                                                <form id ="-form-delete{{$gallery->id}}" style="display: none;" method="POST" action="{{route('gallery.destroy',$gallery->id)}}">
                                                     @csrf
                                                     @method('DELETE')
                                                 </form>
                                                 <button type="button" class="btn btn-danger btn-sm"  onclick="if(confirm('Are You Sure Delete This?')){
                                                     event.preventDefault();
-                                                    document.getElementById('-form-delete{{$slider->id}}').submit();
+                                                    document.getElementById('-form-delete{{$gallery->id}}').submit();
                                                 }else {
                                                     event.preventDefault();
-                                                        }"><i class="material-icons">delete</i></button>
+                                                        }"><i class="ti-close"></i></button>
                                             </td>
                                         </tr>
                                     @endforeach

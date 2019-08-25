@@ -4,7 +4,7 @@
         <!-- User profile -->
         <div class="user-profile" style="background: url({{asset('img/user-info.jpg')}}">
             <!-- User profile image -->
-            <div class="profile-img"><img src="./upload/user/.{{auth()->user()->image}}" alt="{{auth()->user()->username}}"/></div>
+            <div class="profile-img"><img src="{{asset('upload/user/'.auth()->user()->image)}}" /></div>
             <!-- User profile text-->
             <div class="profile-text"><a href="#" class="dropdown-toggle u-dropdown" data-toggle="dropdown"
                                          role="button" aria-haspopup="true" aria-expanded="true">Markarn Doe</a>
@@ -154,7 +154,7 @@
                                     class="mdi mdi-gauge"></i><span
                                     class="hide-menu">{{__('Gallery')}}</span></a>
                         <ul aria-expanded="false" class="collapse">
-                            <li><a href="{{route('menu.index')}}">{{__('Gallery')}}</a></li>
+                            <li><a href="{{route('gallery.index')}}">{{__('Gallery')}}</a></li>
                         </ul>
                 </li>
                 {{--<li class="nav-devider"></li>--}}

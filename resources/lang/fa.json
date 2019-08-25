@@ -249,11 +249,20 @@
   "Menu List":"لیست منوها",
   "Create Menu":"ایجاد منو جدید",
   "Slider List":"لیست اسلایدرها",
-  "Create Slider":"ایجاد اسلایدر جدید"
-
-
-
-
-
-
+  "Create Slider":"ایجاد اسلایدر جدید",
+  "User Name":"نام کاربری",
+  "Email Verified At":"ایمیل تایید",
+  "Remember Token":"سوال امنیتی",
+  "product Price":"قیمت محصول",
+  "product Publish Date":"تاریخ تحویل",
+  "product status":"وضعیت محصول",
+  "Status On":"حالت فعال",
+  "Slider Title":"عنوان اسلایدر",
+  "Sub Title":"زیر عنوان",
+  "Code":"کد",
+  "Insert Image":"اضافه کردن تصویر جدید",
+  "Image Name":"نام تصویر",
+  "Image Code":"کد تصویر",
+  "Add New Image":"اضافه کردن تصویر جدید",
+  "action":"عملیات"
 }

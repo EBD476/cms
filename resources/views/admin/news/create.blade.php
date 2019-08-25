@@ -109,7 +109,7 @@
                                                     <div class="form-group">
                                                         <label for="exampleInputFile">{{__('Description')}}</label>
                                                         <textarea type="text" class="form-control"
-                                                                  placeholder="{{__('description')}}"
+
                                                                   name="hn_description" id="froala"></textarea>
                                                     </div>
                                                     <div class="checkbox checkbox-info">

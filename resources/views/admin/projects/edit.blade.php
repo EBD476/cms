@@ -89,7 +89,7 @@
                             <section class="content">
                                 <div class="row">
                                     <!-- left column -->
-                                    <div class="col-md-6">
+                                    <div class="col-md-10">
                                         <!-- general form elements -->
                                         <div class="box box-primary">
                                             <div class="box-header with-border">
@@ -145,7 +145,7 @@
                                 <button type="submit" class="btn btn-primary">{{__('Submit')}}</button>
                             </div>
                         </form>
-                                            <form action="{{url('/admin/image-save')}}" class="dropzone" id="dropzone"
+                                            <form action="{{url('/admin/image-project-save')}}" class="dropzone" id="dropzone"
                                                   enctype="multipart/form-data">
                                                 @csrf
                                                 @method('POST')

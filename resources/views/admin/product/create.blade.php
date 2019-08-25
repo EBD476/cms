@@ -89,7 +89,7 @@
                             <section class="content">
                                 <div class="row">
                                     <!-- left column -->
-                                    <div class="col-md-6">
+                                    <div class="col-md-10">
                                         <!-- general form elements -->
                                         <div class="box box-primary">
                                             <div class="box-header with-border">
@@ -123,20 +123,20 @@
                                                     <div class="form-group">
                                                         <label for="exampleInputFile">{{__('product Price')}}</label>
                                                         <input type="text" class="form-control"
-                                                               placeholder="{{__('product Price')}}" id="exampleInputFile"
+                                                               id="exampleInputFile"
                                                                name="hp_product_price">
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="exampleInputFile">{{__('product Publish Date')}}</label>
                                                         <input type="text" class="form-control" id="test-date-id"
-                                                               placeholder="{{__('product Publish Date')}}" id="exampleInputFile"
+                                                                id="exampleInputFile"
                                                                name="hp_product_publish_date"
                                                                >
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="exampleInputFile">{{__('product status')}}</label>
                                                         <input type="text" class="form-control"
-                                                               placeholder="{{__('product status')}}" id="exampleInputFile"
+                                                                id="exampleInputFile"
                                                                name="hp_product_status">
                                                     </div>
                                                     <input type="hidden" name="hn_image" id="hn_image">
@@ -150,7 +150,7 @@
                                                     <button type="submit" class="btn btn-primary">{{__('Submit')}}</button>
                                                 </div>
                                             </form>
-                                            <form action="{{url('/admin/image-save')}}" class="dropzone" id="dropzone"
+                                            <form action="{{url('/image-product-save')}}" class="dropzone" id="dropzone"
                                                   enctype="multipart/form-data">
                                                 @csrf
                                                 @method('POST')

@@ -88,7 +88,7 @@
                             <section class="content">
                                 <div class="row">
                                     <!-- left column -->
-                                    <div class="col-md-6">
+                                    <div class="col-md-10">
                                         <!-- general form elements -->
                                         <div class="box box-primary">
                                             <div class="box-header with-border">
@@ -101,16 +101,13 @@
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">{{__('Slider Title')}}</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="{{__('Title')}}" name="title">
+                                    <input type="text" class="form-control" id="exampleInputPassword1"  name="title">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputFile">{{__('Sub Title')}}</label>
-                                    <input type="text" class="form-control" placeholder="{{__('Sub Title')}}" id="exampleInputFile" name="sub_title">
+                                    <input type="text" class="form-control"  id="exampleInputFile" name="sub_title">
                                 </div>
-                                <div class="form-group">
-                                <label for="exampleInputFile">{{__('Image')}}</label>
-                                    <input type="hidden" name="hn_image" id="hn_image">
-                                </div>
+                                <input type="hidden" name="hn_image" id="hn_image">
                                 <div class="checkbox checkbox-info">
                                     <input type="checkbox" id="inputSchedule" name="inputCheckboxesSchedule">
                                     <label for="inputSchedule" class=""> <span>{{__('Check me out')}}</span> </label>
@@ -122,7 +119,7 @@
                                 <button type="submit" class="btn btn-primary">{{__('Submit')}}</button>
                             </div>
                         </form>
-                                            <form action="{{url('/admin/slider_upload')}}" class="dropzone" id="dropzone"
+                                            <form action="{{url('/admin/image-slider-save')}}" class="dropzone" id="dropzone"
                                                   enctype="multipart/form-data">
                                                 @csrf
                                                 @method('POST')

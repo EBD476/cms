@@ -157,7 +157,7 @@
                                 <button type="submit" class="btn btn-primary">{{__('Submit')}}</button>
                             </div>
                         </form>
-                                            <form action="{{url('/admin//image-paged-save')}}" class="dropzone" id="dropzone"
+                                            <form action="{{url('/admin/image-pages-save')}}" class="dropzone" id="dropzone"
                                                   enctype="multipart/form-data">
                                                 @csrf
                                                 @method('POST')

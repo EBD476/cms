@@ -5,6 +5,7 @@
 @push('css')
     <link href="{{asset('backend/css.pro/froala_editor.pkgd.min.css')}}" rel="stylesheet"/>
     <link href="{{asset('backend/style/kamadatepicker.min.css')}}" rel="stylesheet" />
+    <link href="{{ asset('backend/css.pro/leaflet.css') }}" rel="stylesheet">
 @endpush
 
 @section('content')
@@ -102,11 +103,11 @@
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">{{__('Project Name')}}</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="{{__('Project Name')}}" name="hp_project_name">
+                                    <input type="text" class="form-control" id="exampleInputPassword1"  name="hp_project_name">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputFile">{{__('Project Owner')}}</label>
-                                    <input type="text" class="form-control" placeholder="{{__('Project Owner')}}" id="exampleInputFile" name="hp_project_owner">
+                                    <input type="text" class="form-control"  id="exampleInputFile" name="hp_project_owner">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputFile">{{__('Project Type')}}</label>
@@ -124,7 +125,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputFile">{{__('Project Location')}}</label>
-                                    <input type="text" class="form-control"  id="exampleInputFile" name="hp_project_address">
+                                    <div id="map"
+                                         style="width: 100%; height: 300px;direction: ltr;z-index:0"></div>
+                                    <input name="hp_project_address" type="hidden"
+                                           id="location">
+
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputFile">{{__('Project Description')}}</label>
@@ -143,6 +148,7 @@
                                     <input type="checkbox" id="inputSchedule" name="inputCheckboxesSchedule">
                                     <label for="inputSchedule" class=""> <span>{{__('Check me out')}}</span> </label>
                                 </div>
+
                             </div>
                             <!-- /.box-body -->
 
@@ -150,7 +156,7 @@
                                 <button type="submit" class="btn btn-primary">{{__('Submit')}}</button>
                             </div>
                         </form>
-                                            <form action="{{url('/admin/image-save')}}" class="dropzone" id="dropzone"
+                                            <form action="{{url('/admin/image-project-save')}}" class="dropzone" id="dropzone"
                                                   enctype="multipart/form-data">
                                                 @csrf
                                                 @method('POST')
@@ -170,6 +176,43 @@
                                             <script src="{{asset('backend/src/kamadatepicker.min.js')}}"></script>
                                             <script src="{{asset('backend/js.pro/froala_editor.pkgd.min.js')}}"></script>
                                             <script src="{{asset('backend/js.pro/dropzone.js')}}"></script>
+                                            <script src="{{asset('backend/js.pro/leaflet.js')}}"></script>
+                                            <script type="text/javascript">
+
+                                                var loc;
+                                                var greenIcon = L.icon({
+                                                    iconUrl: '../../backend/img/marker-icon-x48.png',
+                                                    shadowUrl: 'leaf-shadow.png',
+
+                                                    iconSize: [48, 48], // size of the icon
+                                                    shadowSize: [50, 64], // size of the shadow
+                                                    iconAnchor: [25, 44], // point of the icon which will correspond to marker's location
+                                                    shadowAnchor: [4, 62],  // the same for the shadow
+                                                    popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+                                                });
+
+                                                var map = L.map('map').setView([35.7736, 51.4631], 15);
+
+                                                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+                                                function onMapClick(e) {
+
+                                                    var jsonLoc = JSON.parse(JSON.stringify(e.latlng));
+                                                    $("#location").val(jsonLoc.lat + ',' + jsonLoc.lng);
+
+                                                    if (loc != undefined) {
+                                                        loc.remove();
+                                                    }
+                                                    loc = L.marker([jsonLoc.lat, jsonLoc.lng], {icon: greenIcon}).addTo(map);
+                                                }
+
+                                                $("#remove").click(function () {
+                                                    loc.remove();
+                                                });
+
+                                                map.on('click', onMapClick);
+
+                                            </script>
                                             <script>
                                                 kamaDatepicker('test-date-id', {
                                                     buttonsColor: "blue",

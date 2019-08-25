@@ -88,7 +88,7 @@
                             <section class="content">
                                 <div class="row">
                                     <!-- left column -->
-                                    <div class="col-md-6">
+                                    <div class="col-md-10">
                                         <!-- general form elements -->
                                         <div class="box box-primary">
                                             <div class="box-header with-border">
@@ -104,19 +104,18 @@
                                                     <div class="form-group">
                                                         <label for="exampleInputPassword1">{{__('Question')}}</label>
                                                         <input type="text" class="form-control" id="exampleInputText"
-                                                               placeholder="{{__('Question')}}" name="question"
+                                                               name="question"
                                                                value="{{$faq->question}}">
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="exampleInputFile">{{__('Answer')}}</label>
                                                         <textarea type="text" class="form-control" id="exampleInputText"
-                                                                  placeholder="{{__('Answer')}}"
                                                                   name="answer">value="{{$faq->answer}}"</textarea>
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="exampleInputFile">{{__('Status')}}</label>
                                                         <input type="text" class="form-control" id="exampleInputText"
-                                                               placeholder="{{__('Status')}}" name="status"
+                                                                name="status"
                                                                value="{{$faq->status}}">
                                                     </div>
                                                     <div class="checkbox checkbox-info">

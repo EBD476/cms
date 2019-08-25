@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
-@section('title',__('Slider'))
+@section('title',__('Gallery'))
 
 @push('css')
-    <link href="{{asset('backend/style/kamadatepicker.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('backend/css.pro/cropper.min.css')}}" rel="stylesheet" type="text/css">
 @endpush
 
 @section('content')
@@ -14,44 +14,44 @@
         <!-- ============================================================== -->
         <div class="container-fluid">
             <div class="row page-titles">
-                <div class="col-md-5 col-8 align-self-center">
-                    <h3 class="text-themecolor m-b-0 m-t-0">Table Data table</h3>
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item">
-                            <a href="javascript:void(0)">Home</a>
-                        </li>
-                        <li class="breadcrumb-item active">Table Data table</li>
-                    </ol>
-                </div>
+                {{--<div class="col-md-5 col-8 align-self-center">--}}
+                {{--<h3 class="text-themecolor m-b-0 m-t-0">Table Data table</h3>--}}
+                {{--<ol class="breadcrumb">--}}
+                {{--<li class="breadcrumb-item">--}}
+                {{--<a href="javascript:void(0)">Home</a>--}}
+                {{--</li>--}}
+                {{--<li class="breadcrumb-item active">Table Data table</li>--}}
+                {{--</ol>--}}
+                {{--</div>--}}
                 <div class="col-md-7 col-4 align-self-center">
                     <div class="d-flex m-t-10 justify-content-end">
+                        {{--<div class="d-flex m-r-20 m-l-10 hidden-md-down">--}}
+                        {{--<div class="chart-text m-r-10">--}}
+                        {{--<h6 class="m-b-0">--}}
+                        {{--<small>THIS MONTH</small>--}}
+                        {{--</h6>--}}
+                        {{--<h4 class="m-t-0 text-info">$58,356</h4>--}}
+                        {{--</div>--}}
+                        {{--<div class="spark-chart">--}}
+                        {{--<div id="monthchart">--}}
+                        {{--<canvas width="60" height="35"--}}
+                        {{--style="display: inline-block; width: 60px; height: 35px; vertical-align: top;"></canvas>--}}
+                        {{--</div>--}}
+                        {{--</div>--}}
+                        {{--</div>--}}
                         <div class="d-flex m-r-20 m-l-10 hidden-md-down">
-                            <div class="chart-text m-r-10">
-                                <h6 class="m-b-0">
-                                    <small>THIS MONTH</small>
-                                </h6>
-                                <h4 class="m-t-0 text-info">$58,356</h4>
-                            </div>
-                            <div class="spark-chart">
-                                <div id="monthchart">
-                                    <canvas width="60" height="35"
-                                            style="display: inline-block; width: 60px; height: 35px; vertical-align: top;"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="d-flex m-r-20 m-l-10 hidden-md-down">
-                            <div class="chart-text m-r-10">
-                                <h6 class="m-b-0">
-                                    <small>LAST MONTH</small>
-                                </h6>
-                                <h4 class="m-t-0 text-primary">$48,356</h4>
-                            </div>
-                            <div class="spark-chart">
-                                <div id="lastmonthchart">
-                                    <canvas width="60" height="35"
-                                            style="display: inline-block; width: 60px; height: 35px; vertical-align: top;"></canvas>
-                                </div>
-                            </div>
+                            {{--<div class="chart-text m-r-10">--}}
+                            {{--<h6 class="m-b-0">--}}
+                            {{--<small>LAST MONTH</small>--}}
+                            {{--</h6>--}}
+                            {{--<h4 class="m-t-0 text-primary">$48,356</h4>--}}
+                            {{--</div>--}}
+                            {{--<div class="spark-chart">--}}
+                            {{--<div id="lastmonthchart">--}}
+                            {{--<canvas width="60" height="35"--}}
+                            {{--style="display: inline-block; width: 60px; height: 35px; vertical-align: top;"></canvas>--}}
+                            {{--</div>--}}
+                            {{--</div>--}}
                         </div>
                         <div class="">
                             <button class="right-side-toggle waves-effect waves-light btn-success btn btn-circle btn-sm pull-right m-l-10">
@@ -65,7 +65,7 @@
 
             <section class="content-header">
                 <h1>
-                    {{__('Insert Slider')}}
+                    {{__('Insert Image')}}
                     <small>{{__('Preview')}}</small>
                 </h1>
                 <ol class="breadcrumb">
@@ -85,7 +85,6 @@
                             {{--<h4 class="card-title">Basic Material inputs</h4>--}}
                             {{--<h6 class="card-subtitle">Just add <code>form-material</code> class to the form that's it.--}}
                             {{--</h6>--}}
-
                             <section class="content">
                                 <div class="row">
                                     <!-- left column -->
@@ -93,38 +92,48 @@
                                         <!-- general form elements -->
                                         <div class="box box-primary">
                                             <div class="box-header with-border">
-                                                <h3 class="box-title">{{__('Slider')}}</h3>
+                                                <h3 class="box-title">{{__('Gallery')}}</h3>
                                             </div>
-                        <!-- /.box-header -->
-                        <!-- form start -->
-                        <form role="form" method="post" action="{{route('slider.store')}}" enctype="multipart/form-data">
-                            @csrf
-                            <div class="box-body">
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">{{__('Slider Title')}}</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="{{__('Title')}}" name="title">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputFile">{{__('Sub Title')}}</label>
-                                    <input type="text" class="form-control" placeholder="{{__('Sub Title')}}" id="exampleInputFile" name="sub_title">
-                                </div>
-                                <div class="form-group">
-                                <label for="exampleInputFile">{{__('Image')}}</label>
-                                    <input type="hidden" name="hn_image" id="hn_image">
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox">{{__('Check me out')}}
-                                    </label>
-                                </div>
-                            </div>
-                            <!-- /.box-body -->
+                                            <!-- /.box-header -->
+                                            <!-- form start -->
+                                            <form role="form" method="post" action="{{route('gallery.store')}}"
+                                                  enctype="multipart/form-data">
+                                                @csrf
+                                                <div class="box-body">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">{{__('Image Name')}}</label>
+                                                        <input type="text" class="form-control"
+                                                               id="exampleInputPassword1" name="hg_name">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="exampleInputFile">{{__('Image Code')}}</label>
+                                                        <input type="text" class="form-control" id="exampleInputFile"
+                                                               name="hg_code">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="exampleInputFile">{{__('Image Description')}}</label>
+                                                        <input type="text" class="form-control" id="exampleInputFile"
+                                                               name="hg_description">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="hidden" name="hn_image" id="hn_image">
+                                                    </div>
 
-                            <div class="box-footer">
-                                <button type="submit" class="btn btn-primary">{{__('Submit')}}</button>
-                            </div>
-                        </form>
-                                            <form action="{{url('/admin/slider_upload')}}" class="dropzone" id="dropzone"
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox">{{__('Check me out')}}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <!-- /.box-body -->
+
+                                                <div class="box-footer">
+                                                    <button type="submit"
+                                                            class="btn btn-primary">{{__('Submit')}}</button>
+                                                </div>
+                                            </form>
+                                            <form action="{{url('/admin/image-gallery-save')}}" class="dropzone"
+                                                  id="dropzone"
                                                   enctype="multipart/form-data">
                                                 @csrf
                                                 @method('POST')
@@ -136,21 +145,16 @@
                                                     </div>
                                                 </div>
                                             </form>
-                    </div>
+                                        </div>
 
-                    @endsection
+                                        @endsection
 
-                    @push('scripts')
-                                            <script src="{{asset('backend/src/kamadatepicker.min.js')}}"></script>
+                                        @push('scripts')
+                                            <script src="{{asset('backend/js.pro/cropper.init.js')}}"></script>
+                                            <script src="{{asset('backend/js.pro/cropper.min.js')}}"></script>
                                             <script src="{{asset('backend/js.pro/froala_editor.pkgd.min.js')}}"></script>
                                             <script src="{{asset('backend/js.pro/dropzone.js')}}"></script>
                                             <script>
-                                                kamaDatepicker('test-date-id', {
-                                                    buttonsColor: "blue",
-                                                    forceFarsiDigits: true,
-                                                    nextButtonIcon: "fa fa-arrow-circle-right",
-                                                    previousButtonIcon: "fa fa-arrow-circle-left"
-                                                });
                                                 var editor = new FroalaEditor('#froala');
 
                                                 Dropzone.options.dropzone =
@@ -172,7 +176,6 @@
                                                         error: function (file, response) {
                                                             return false;
                                                         }
-                                                    };                                            </script>
-
-
+                                                    };
+                                                </script>
     @endpush

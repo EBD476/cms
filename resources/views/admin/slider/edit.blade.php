@@ -88,7 +88,7 @@
                             <section class="content">
                                 <div class="row">
                                     <!-- left column -->
-                                    <div class="col-md-6">
+                                    <div class="col-md-10">
                                         <!-- general form elements -->
                                         <div class="box box-primary">
                                             <div class="box-header with-border">
@@ -105,13 +105,13 @@
                                                     <div class="form-group">
                                                         <label for="exampleInputPassword1">{{__('Slider Title')}}</label>
                                                         <input type="text" class="form-control"
-                                                               id="exampleInputPassword1" placeholder="{{__('Title')}}"
+                                                               id="exampleInputPassword1"
                                                                name="title" value="{{$slider->title}}">
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="exampleInputFile">{{__('Sub Title')}}</label>
                                                         <input type="text" class="form-control"
-                                                               placeholder="{{__('Sub Title')}}" id="exampleInputFile"
+                                                               id="exampleInputFile"
                                                                name="sub_title" value="{{$slider->sub_title}}">
                                                     </div>
                                                     <input type="hidden" name="hn_image" id="hn_image">
@@ -127,7 +127,7 @@
                                                             class="btn btn-primary">{{__('Submit')}}</button>
                                                 </div>
                                             </form>
-                                            <form action="{{url('/admin/image-save')}}" class="dropzone" id="dropzone"
+                                            <form action="{{url('/admin/image-slider-save')}}" class="dropzone" id="dropzone"
                                                   enctype="multipart/form-data">
                                                 @csrf
                                                 @method('POST')

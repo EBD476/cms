@@ -152,10 +152,15 @@ class ProjectsController extends Controller
         } else {
             $image_name = 'default.png';
         }
+
+        return response()->json([
+            'link' => '/img/project/'.$filename
+        ]);
 //        $news = new News();
 //        $news->hn_image = $image_name;
 //        $news->save();
 //
     }
+
 
 }

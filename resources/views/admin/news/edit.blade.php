@@ -109,7 +109,6 @@
                                                     <div class="form-group">
                                                         <label for="exampleInputFile">{{__('Description')}}</label>
                                                         <textarea type="text" class="form-control"
-                                                                  placeholder="{{__('description')}}"
                                                                   id="froala"
                                                                   name="hn_description"
                                                                   >{{$news->hn_description}}</textarea>

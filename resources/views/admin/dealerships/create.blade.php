@@ -104,7 +104,6 @@
                                                             <label for="exampleInputPassword1">{{__('Dealership Code')}}</label>
                                                             <input type="text" class="form-control"
                                                                    id="exampleInputText"
-                                                                   placeholder="{{__('Dealership Code')}}"
                                                                    name="hds_dealership_code">
                                                         </div>
                                                         <div class="form-group">
@@ -121,14 +120,12 @@
                                                             <label for="exampleInputFile">{{__('Dealership Agent')}}</label>
                                                             <input type="text" class="form-control"
                                                                    id="exampleInputText"
-                                                                   placeholder="{{__('Dealership Agent')}}"
                                                                    name="hds_dealership_agent">
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="exampleInputFile">{{__('Dealership Phone')}}</label>
                                                             <input type="text" class="form-control"
                                                                    id="exampleInputText"
-                                                                   placeholder="{{__('Dealership Phone')}}"
                                                                    name="hds_dealership_phone">
 
                                                         </div>
@@ -143,7 +140,6 @@
                                                             <label for="exampleInputFile">{{__('Dealership Address')}}</label>
                                                             <textarea type="text" class="form-control"
                                                                       id="exampleInputFile"
-                                                                      placeholder="{{__('Dealership Address')}}"
                                                                       name="hds_dealership_address"></textarea>
                                                         </div>
                                                         <div class="checkbox checkbox-info">

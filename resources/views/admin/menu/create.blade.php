@@ -88,7 +88,7 @@
                             <section class="content">
                                 <div class="row">
                                     <!-- left column -->
-                                    <div class="col-md-6">
+                                    <div class="col-md-10">
                                         <!-- general form elements -->
                                         <div class="box box-primary">
                                             <div class="box-header with-border">
@@ -109,7 +109,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputFile">{{__('Name')}}</label>
-                                    <input type="text" class="form-control" id="exampleInputText" placeholder="{{__('Name')}}" name="name">
+                                    <input type="text" class="form-control" id="exampleInputText"  name="name">
 
                                 </div>
                                 <div class="form-group">

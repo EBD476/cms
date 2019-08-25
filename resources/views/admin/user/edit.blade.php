@@ -88,7 +88,7 @@
                             <section class="content">
                                 <div class="row">
                                     <!-- left column -->
-                                    <div class="col-md-6">
+                                    <div class="col-md-10">
                                         <!-- general form elements -->
                                         <div class="box box-primary">
                                             <div class="box-header with-border">
@@ -118,7 +118,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputFile">{{__('Email Verified At')}}</label>
-                                    <input type="text" class="form-control" placeholder="{{__('Email Verified At')}}" id="exampleInputFile" name="email_verified_at"  value="{{$dataUser->email_verified_at}}">
+                                    <input type="text" class="form-control" id="exampleInputFile" name="email_verified_at"  value="{{$dataUser->email_verified_at}}">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputFile">{{__('Phone')}}</label>
@@ -130,16 +130,13 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputFile">{{__('Remember Token')}}</label>
-                                    <input type="text" class="form-control" placeholder="{{__('Remember Token')}}" id="exampleInputFile" name="remember_token" value="{{$dataUser->remember_token}}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputFile">{{__('Avatar')}}</label>
-                                    <input type="file"  id="exampleInputFile" name="image" value="{{$dataUser->image}}">
+                                    <input type="text" class="form-control"  id="exampleInputFile" name="remember_token" value="{{$dataUser->remember_token}}">
                                 </div>
                                 <div class="checkbox checkbox-info">
                                     <input type="checkbox" id="inputSchedule" name="inputCheckboxesSchedule">
                                     <label for="inputSchedule" class=""> <span>{{__('Check me out')}}</span> </label>
                                 </div>
+                                <input type="hidden" name="hn_image" id="hn_image">
                             </div>
                             <!-- /.box-body -->
 
@@ -147,9 +144,43 @@
                                 <button type="submit" class="btn btn-primary">{{__('Submit')}}</button>
                             </div>
                         </form>
+                                            <form action="{{url('/admin/image-user-save')}}" class="dropzone" id="dropzone"
+                                                  enctype="multipart/form-data">
+                                                @csrf
+                                                @method('POST')
+                                                <div class="fallback">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputFile">{{__('Image')}}</label>
+                                                        <input type="file" class="form-control"
+                                                               name="file">
+                                                    </div>
+                                                </div>
+                                            </form>
                     </div>
 @endsection
 
 @push('scripts')
-
+                                            <script src="{{asset('backend/js.pro/dropzone.js')}}"></script>
+                                            <script>
+                                                Dropzone.options.dropzone =
+                                                    {
+                                                        maxFilesize: 12,
+                                                        // فایل نوع آبجکت است
+                                                        renameFile: function (file) {
+                                                            var dt = new Date();
+                                                            var time = dt.getTime();
+                                                            return time + '-' + file.name;
+                                                        },
+                                                        acceptedFiles: ".jpeg,.jpg,.png,.gif",
+                                                        addRemoveLinks: true,
+                                                        timeout: 5000,
+                                                        success: function (file, response) {
+                                                            // اسم اینپوت و مقداری که باید به آن ارسال شود
+                                                            $('#hn_image').val(file.upload.filename);
+                                                        },
+                                                        error: function (file, response) {
+                                                            return false;
+                                                        }
+                                                    };
+                                            </script>
 @endpush

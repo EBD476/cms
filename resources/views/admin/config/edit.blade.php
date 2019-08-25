@@ -89,7 +89,7 @@
                             <section class="content">
                                 <div class="row">
                                     <!-- left column -->
-                                    <div class="col-md-6">
+                                    <div class="col-md-10">
                                         <!-- general form elements -->
                                         <div class="box box-primary">
                                             <div class="box-header with-border">
@@ -103,7 +103,7 @@
                                     <div class="box-body">
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">{{__('Device ID')}}</label>
-                                            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Device ID" name="hdc_device_id" value="{{$config->hdc_device_id}}">
+                                            <input type="text" class="form-control" id="exampleInputPassword1"  name="hdc_device_id" value="{{$config->hdc_device_id}}">
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputFile">{{__('Device Serial')}}</label>

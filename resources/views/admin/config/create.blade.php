@@ -89,7 +89,7 @@
                             <section class="content">
                                 <div class="row">
                                     <!-- left column -->
-                                    <div class="col-md-6">
+                                    <div class="col-md-10">
                                         <!-- general form elements -->
                                         <div class="box box-primary">
                                             <div class="box-header with-border">
@@ -104,22 +104,21 @@
                                             <div class="form-group">
                                                 <label for="exampleInputPassword1">{{__('Device ID')}}</label>
                                                 <input type="text" class="form-control" id="exampleInputPassword1"
-                                                       placeholder="{{__('Device ID')}}" name="hdc_device_id">
+                                                        name="hdc_device_id">
                                             </div>
                                             <div class="form-group">
                                                 <label for="exampleInputFile">{{__('Device Serial')}}</label>
                                                 <input type="text" class="form-control" id="exampleInputPassword1"
-                                                       placeholder={{__('Device Serial')}} name="hdc_device_serial">
+                                                        name="hdc_device_serial">
                                             </div>
                                             <div class="form-group">
                                                 <label for="exampleInputFile">{{__('Control Config')}}</label>
                                                 <input type="text" class="form-control" id="exampleInputPassword1"
-                                                       placeholder={{__('Control Config')}} name="hdc_control_config">
+                                                        name="hdc_control_config">
                                             </div>
                                             <div class="form-group">
                                                 <label for="exampleInputFile">{{__('product Description')}}</label>
                                                 <textarea type="text" class="form-control"
-                                                          placeholder="{{__('Description')}}"
                                                           name="hp_product_description"  id="froala"></textarea>
                                             </div>
                                             <div class="checkbox checkbox-info">

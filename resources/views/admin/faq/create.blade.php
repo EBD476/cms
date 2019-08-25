@@ -88,7 +88,7 @@
                             <section class="content">
                                 <div class="row">
                                     <!-- left column -->
-                                    <div class="col-md-6">
+                                    <div class="col-md-10">
                                         <!-- general form elements -->
                                         <div class="box box-primary">
                                             <div class="box-header with-border">
@@ -107,10 +107,10 @@
                                     <textarea type="text" class="form-control"  id="froala"  name="answer"></textarea>
 
                                 </div>
-                                <div class="form-group">
-                                    <label for="exampleInputFile">{{__('Status')}}</label>
-                                    <input type="text" class="form-control" id="exampleInputText" placeholder="{{__('Status')}}" name="status">
-                                </div>
+                                    <div class="checkbox checkbox-info">
+                                        <input type="checkbox" id="inputSchedule" name="status" value="1">
+                                        <label for="inputSchedule" class=""> <span>{{__('Status On')}}</span> </label>
+                                    </div>
                                     <div class="checkbox checkbox-info">
                                         <input type="checkbox" id="inputSchedule" name="inputCheckboxesSchedule">
                                         <label for="inputSchedule" class=""> <span>{{__('Check me out')}}</span> </label>

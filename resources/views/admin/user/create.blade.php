@@ -88,7 +88,7 @@
                             <section class="content">
                                 <div class="row">
                                     <!-- left column -->
-                                    <div class="col-md-6">
+                                    <div class="col-md-10">
                                         <!-- general form elements -->
                                         <div class="box box-primary">
                                             <div class="box-header with-border">
@@ -101,23 +101,23 @@
                                             <div class="box-body">
                                                 <div class="form-group">
                                                     <label for="exampleInputPassword1">{{__('Name')}}</label>
-                                                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="{{__('Name')}}" name="name">
+                                                    <input type="text" class="form-control" id="exampleInputPassword1"  name="name">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="exampleInputPassword1">{{__('User Name')}}</label>
-                                                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="{{__('User Name')}}" name="username">
+                                                    <input type="text" class="form-control" id="exampleInputPassword1"  name="username">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="exampleInputFile">{{__('Email')}}</label>
-                                                    <input type="text" class="form-control" placeholder="{{__('Email')}}" id="exampleInputFile" name="email">
+                                                    <input type="text" class="form-control"  id="exampleInputFile" name="email">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="exampleInputFile">{{__('Email Verified At')}}</label>
-                                                    <input type="text" class="form-control" placeholder="{{__('Email Verified At')}}" id="exampleInputFile" name="email_verified_at">
+                                                    <input type="text" class="form-control"  id="exampleInputFile" name="email_verified_at">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="exampleInputPassword1">{{__('Password')}}</label>
-                                                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="{{__('Password')}}" name="password">
+                                                    <input type="text" class="form-control" id="exampleInputPassword1"  name="password">
                                                 </div>
                                                 {{--<div class="form-group">--}}
                                                 {{--<label for="exampleInputPassword1">{{__('Confirmed Password')}}</label>--}}
@@ -125,15 +125,15 @@
                                                 {{--</div>--}}
                                                 <div class="form-group">
                                                     <label for="exampleInputFile">{{__('Phone')}}</label>
-                                                    <input type="text"  class="form-control" placeholder="{{__('Phone')}}" id="exampleInputFile" name="phone">
+                                                    <input type="text"  class="form-control"  id="exampleInputFile" name="phone">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="exampleInputFile">{{__('Address')}}</label>
-                                                    <input type="text" class="form-control" placeholder="{{__('Address')}}" id="exampleInputFile" name="address">
+                                                    <input type="text" class="form-control"  id="exampleInputFile" name="address">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="exampleInputFile">{{__('Remember Token')}}</label>
-                                                    <input type="text" class="form-control" placeholder="{{__('Remember Token')}}" id="exampleInputFile" name="remember_token">
+                                                    <input type="text" class="form-control"  id="exampleInputFile" name="remember_token">
                                                 </div>
                                                 <input type="hidden" name="hn_image" id="hn_image">
 
@@ -147,7 +147,7 @@
                                                 <button type="submit" class="btn btn-primary">{{__('Submit')}}</button>
                                             </div>
                                         </form>
-                                            <form action="{{url('/admin/image-save')}}" class="dropzone" id="dropzone"
+                                            <form action="{{url('/admin/image-user-save')}}" class="dropzone" id="dropzone"
                                                   enctype="multipart/form-data">
                                                 @csrf
                                                 @method('POST')
