@@ -73,85 +73,66 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
+                            <a href="{{route('contact.create')}}" class="btn btn-primary">{{__('Add New Contact')}}</a>
                             <h4 class="card-title"></h4>
                             <h6 class="card-subtitle"></h6>
-                            <div class="table-responsive m-t-40">
-                                <div id="myTable_wrapper"
-                                     class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
-                                    <div class="row">
-                                        <div class="col-sm-12 col-md-6">
-                                            <div class="dataTables_length" id="myTable_length"><label>{{__('Show')}}<select
-                                                            name="myTable_length" aria-controls="myTable"
-                                                            class="form-control form-control-sm">
-                                                        <option value="10">10</option>
-                                                        <option value="25">25</option>
-                                                        <option value="50">50</option>
-                                                        <option value="100">100</option>
-                                                    </select>{{__('entries')}}</label></div>
-                                        </div>
-                                        <div class="col-sm-12 col-md-6">
-                                            <div id="myTable_filter" class="dataTables_filter"><label>{{__('Search')}}:<input
-                                                            type="search" class="form-control form-control-sm"
-                                                            placeholder="" aria-controls="myTable"></label></div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <table id="myTable"
-                                                   class="table table-bordered table-striped dataTable no-footer"
-                                                   role="grid" aria-describedby="myTable_info">
-                                                <thead>
-                                                <tr role="row">
-                                                    <th class="sorting_asc" tabindex="0" aria-controls="myTable"
-                                                        rowspan="1" colspan="1" aria-sort="ascending"
-                                                        aria-label="Name: activate to sort column descending"
-                                                        style="width: 146px;">{{__('ID')}}
-                                                    </th>
-                                                    <th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1"
-                                                        colspan="1"
-                                                        aria-label="Position: activate to sort column ascending"
-                                                        style="width: 242px;"> {{__('Name')}}
-                                                    </th>
-                                                    <th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1"
-                                                        colspan="1" aria-label="Age: activate to sort column ascending"
-                                                        style="width: 38px;"> {{__('Action')}}
-                                                    </th>
-                                                </tr>
-                                                </thead>
-                                    <tbody>
+                            <dsiv class="row">
+                                <div class="col-sm-12">
+                                    <table id="table"
+                                           class="table table-bordered table-striped dataTable no-footer"
+                                           role="grid" aria-describedby="myTable_info">
+                                        <thead>
+                                        <tr role="row">
+                                            <th class="sorting_asc" tabindex="0" aria-controls="myTable"
+                                                rowspan="1" colspan="1" aria-sort="ascending"
+                                                aria-label="Name: activate to sort column descending"
+                                                style="width: 146px;"> {{__('ID')}}
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1"
+                                                colspan="1"
+                                                aria-label="Position: activate to sort column ascending"
+                                                style="width: 242px;">  {{__('Title')}}
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1"
+                                                colspan="1"
+                                                aria-label="Office: activate to sort column ascending"
+                                                style="width: 106px;">{{__('Action')}}
 
-                                    @foreach($contact_us as $key => $contact_us)
-                                        <tr>
-                                            <td>
-                                                {{$key + 1}}
-                                            </td>
-                                            <td>
-                                                {{$contact_us ->hc_name}}
-                                            </td>
-                                            <td>
-                                                <a href="{{route('contact_us.edit',$contact_us->id)}}" class="btn btn-info btn-sm"><i class="ti-pencil"></i> </a>
-                                                <form id ="-form-delete{{$contact_us->id}}" style="display: none;" method="POST" action="{{route('contact_us.destroy',$contact_us->id)}}">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                </form>
-                                                <button type="button" class="btn btn-danger btn-sm"  onclick="if(confirm('آیا از حذف این مورد اطمینان دارید؟')){
-                                                        event.preventDefault();
-                                                        document.getElementById('-form-delete{{$contact_us->id}}').submit();
-                                                        }else {
-                                                        event.preventDefault();
-                                                        }"><i class="ti-close"></i></button>
-                                            </td>
-                                    @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($contact_us as $key => $contact_us)
+                                            <tr>
+                                                <td>
+                                                    {{$key + 1}}
+                                                </td>
+                                                <td>
+                                                    {{$contact_us ->hc_name}}
+                                                </td>
+                                                <td>
+                                                    <a href="{{route('contact_us.edit',$contact_us->id)}}" class="btn btn-info btn-sm"><i class="ti-pencil"></i> </a>
+                                                    <form id ="-form-delete{{$contact_us->id}}" style="display: none;" method="POST" action="{{route('contact_us.destroy',$contact_us->id)}}">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                    </form>
+                                                    <button type="button" class="btn btn-danger btn-sm"  onclick="if(confirm('آیا از حذف این مورد اطمینان دارید؟')){
+                                                            event.preventDefault();
+                                                            document.getElementById('-form-delete{{$contact_us->id}}').submit();
+                                                            }else {
+                                                            event.preventDefault();
+                                                            }"><i class="ti-close"></i></button>
+                                                </td>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </dsiv>
+
                         </div>
                     </div>
                 </div>
-
             </div>
-        </div>
-
         @endsection
 
         @push('scripts')

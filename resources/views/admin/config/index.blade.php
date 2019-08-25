@@ -76,64 +76,42 @@
                             <a href="{{route('config.create')}}" class="btn btn-primary">{{__('Add New Config')}}</a>
                             <h4 class="card-title"></h4>
                             <h6 class="card-subtitle"></h6>
-                            <div class="table-responsive m-t-40">
-                                <div id="myTable_wrapper"
-                                     class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
-                                    <div class="row">
-                                        <div class="col-sm-12 col-md-6">
-                                            <div class="dataTables_length" id="myTable_length"><label>{{__('Show')}}<select
-                                                            name="myTable_length" aria-controls="myTable"
-                                                            class="form-control form-control-sm">
-                                                        <option value="10">10</option>
-                                                        <option value="25">25</option>
-                                                        <option value="50">50</option>
-                                                        <option value="100">100</option>
-                                                    </select>{{__('entries')}}</label></div>
-                                        </div>
-                                        <div class="col-sm-12 col-md-6">
-                                            <div id="myTable_filter" class="dataTables_filter"><label>{{__('Search')}}:<input
-                                                            type="search" class="form-control form-control-sm"
-                                                            placeholder="" aria-controls="myTable"></label></div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <table id="myTable"
-                                                   class="table table-bordered table-striped dataTable no-footer"
-                                                   role="grid" aria-describedby="myTable_info">
-                                                <thead>
-                                                <tr role="row">
-                                                    <th class="sorting_asc" tabindex="0" aria-controls="myTable"
-                                                        rowspan="1" colspan="1" aria-sort="ascending"
-                                                        aria-label="Name: activate to sort column descending"
-                                                        style="width: 146px;">{{__('ID')}}
+                            <dsiv class="row">
+                                <div class="col-sm-12">
+                                    <table id="table"
+                                           class="table table-bordered table-striped dataTable no-footer"
+                                           role="grid" aria-describedby="myTable_info">
+                                        <thead>
+                                        <tr role="row">
+                                            <th class="sorting_asc" tabindex="0" aria-controls="myTable"
+                                                rowspan="1" colspan="1" aria-sort="ascending"
+                                                aria-label="Name: activate to sort column descending"
+                                                style="width: 146px;"> {{__('ID')}}
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1"
+                                                colspan="1"
+                                                aria-label="Position: activate to sort column ascending"
+                                                style="width: 242px;">  {{__('Title')}}
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1"
+                                                colspan="1"
+                                                aria-label="Office: activate to sort column ascending"
+                                                style="width: 106px;">{{__('Action')}}
 
-                                                    </th>
-                                                    <th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1"
-                                                        colspan="1"
-                                                        aria-label="Position: activate to sort column ascending"
-                                                        style="width: 242px;"> {{__('Device ID')}}
-                                                    </th>
-                                                    <th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1"
-                                                        colspan="1"
-                                                        aria-label="Office: activate to sort column ascending"
-                                                        style="width: 106px;">{{__('Action')}}
-
-                                                    </th>
-                                                </tr>
-                                                </thead>
-                                    <tbody>
-
-                                    @foreach($config as $key => $config)
-                                        <tr>
-                                            <td>
-                                                {{$key + 1}}
-                                            </td>
-                                            <td>
-                                                {{$config ->hdc_device_id}}
-                                            </td>
-                                            <td>
-                                                <a href="{{route('config.edit',$config->id)}}" class="btn btn-info btn-sm"><i class="ti-pencil"></i></a>
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($config as $key => $config)
+                                            <tr>
+                                                <td>
+                                                    {{$key + 1}}
+                                                </td>
+                                                <td>
+                                                    {{$config ->hdc_device_id}}
+                                                </td>
+                                                <td>
+                                                    <a href="{{route('config.edit',$config->id)}}" class="btn btn-info btn-sm"><i class="ti-pencil"></i></a>
                                                     <form id ="-form-delete{{$config->id}}" style="display: none;" method="POST" action="{{route('config.destroy',$config->id)}}">
                                                         @csrf
                                                         @method('DELETE')
@@ -144,26 +122,28 @@
                                                             }else {
                                                             event.preventDefault();
                                                             }"><i class="material-icons"><i class="ti-close"></i></i></button>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </dsiv>
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-        @endsection
+    </div>
+    @endsection
 
         @push('scripts')
-            {{--<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>--}}
-            {{--<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>--}}
-            {{--<script>--}}
-                {{--$(document).ready(function() {--}}
-                    {{--$('#table').DataTable();--}}
-                {{--} );--}}
-            {{--</script>--}}
+            <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+            <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
+            <script>
+                $(document).ready(function() {
+                    $('#table').DataTable();
+                } );
+            </script>
     @endpush
