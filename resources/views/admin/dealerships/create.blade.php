@@ -64,13 +64,11 @@
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <h1>
-                        {{__('Insert Project')}}
-                        <small>{{__('Preview')}}</small>
+                        {{__('Insert Dealership')}}
                     </h1>
                     <ol class="breadcrumb">
-                        <li><a href="#"><i class="fa fa-dashboard"></i>{{__('Home')}}</a></li>
-                        <li><a href="#">{{__('Forms')}}</a></li>
-                        <li class="active">{{__('General Elements')}}</li>
+                        <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{__('Home')}}</a></li>
+                        <li><a href="{{route('dealership.index')}}">{{__('Dealership')}}</a></li>
                     </ol>
                 </section>
 
@@ -101,33 +99,41 @@
                                                     @csrf
                                                     <div class="box-body">
                                                         <div class="form-group">
-                                                            <label for="exampleInputPassword1">{{__('Dealership Code')}}</label>
-                                                            <input type="text" class="form-control"
-                                                                   id="exampleInputText"
-                                                                   name="hds_dealership_code">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="exampleInputFile">{{__('Dealership City')}}</label>
-                                                            <select name="hds_dealership_city">
-                                                                @foreach($address_city as $addresses_city)
-                                                                    <option value="{{$addresses_city->id}}">
-                                                                        {{$addresses_city->hp_city}}
-                                                                    </option>
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
-                                                        <div class="form-group">
                                                             <label for="exampleInputFile">{{__('Dealership Agent')}}</label>
                                                             <input type="text" class="form-control"
                                                                    id="exampleInputText"
                                                                    name="hds_dealership_agent">
                                                         </div>
                                                         <div class="form-group">
-                                                            <label for="exampleInputFile">{{__('Dealership Phone')}}</label>
+                                                            <label for="exampleInputFile">{{__('Dealership Phone 1')}}</label>
                                                             <input type="text" class="form-control"
                                                                    id="exampleInputText"
-                                                                   name="hds_dealership_phone">
+                                                                   name="hds_dealership_phone_1">
 
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="exampleInputFile">{{__('Dealership Phone 2')}}</label>
+                                                            <input type="text" class="form-control"
+                                                                   id="exampleInputText"
+                                                                   name="hds_dealership_phone_2">
+
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="exampleInputFile">{{__('Dealership Phone 3')}}</label>
+                                                            <input type="text" class="form-control"
+                                                                   id="exampleInputText"
+                                                                   name="hds_dealership_phone_3">
+
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="exampleInputFile">{{__('Dealership City')}}</label>
+                                                            <select class="select" name="hds_dealership_city">
+                                                                @foreach($address_city as $addresses_city)
+                                                                    <option value="{{$addresses_city->id}}">
+                                                                        {{$addresses_city->hp_city}}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="exampleInputFile">{{__('Dealership Location')}}</label>

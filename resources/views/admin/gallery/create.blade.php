@@ -66,11 +66,10 @@
             <section class="content-header">
                 <h1>
                     {{__('Insert Image')}}
-                    <small>{{__('Preview')}}</small>
                 </h1>
                 <ol class="breadcrumb">
-                    <li><a href="#"><i class="fa fa-dashboard"></i>{{__('Home')}}</a></li>
-                    <li><a href="#">{{__('Forms')}}</a></li>
+                    <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{__('Home')}}</a></li>
+                    <li><a href="{{route('gallery.index')}}">{{__('Gallery')}}</a></li>
                     <li class="active">{{__('General Elements')}}</li>
                 </ol>
             </section>
@@ -106,6 +105,18 @@
                                                                id="exampleInputPassword1" name="hg_name">
                                                     </div>
                                                     <div class="form-group">
+                                                        <label for="exampleInputPassword1">{{__('Category Name')}}</label>
+                                                        <select name="hg_category_name">
+                                                            @foreach($category as $category)
+                                                                <option>
+                                                                    {{$category->name}}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                        <input type="text" class="form-control"
+                                                               id="exampleInputPassword1" name="hg_category_name">
+                                                    </div>
+                                                    <div class="form-group">
                                                         <label for="exampleInputFile">{{__('Image Code')}}</label>
                                                         <input type="text" class="form-control" id="exampleInputFile"
                                                                name="hg_code">
@@ -119,10 +130,9 @@
                                                         <input type="hidden" name="hn_image" id="hn_image">
                                                     </div>
 
-                                                    <div class="checkbox">
-                                                        <label>
-                                                            <input type="checkbox">{{__('Check me out')}}
-                                                        </label>
+                                                    <div class="checkbox checkbox-info">
+                                                        <input type="checkbox" id="inputSchedule" name="hg_show" value="0">
+                                                        <label for="inputSchedule" class=""> <span>{{__('Show in Gallery')}}</span> </label>
                                                     </div>
                                                 </div>
                                                 <!-- /.box-body -->
@@ -177,5 +187,5 @@
                                                             return false;
                                                         }
                                                     };
-                                                </script>
+                                            </script>
     @endpush

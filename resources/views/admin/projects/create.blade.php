@@ -4,7 +4,7 @@
 
 @push('css')
     <link href="{{asset('backend/css.pro/froala_editor.pkgd.min.css')}}" rel="stylesheet"/>
-    <link href="{{asset('backend/style/kamadatepicker.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('backend/style/kamadatepicker.min.css')}}" rel="stylesheet"/>
     <link href="{{ asset('backend/css.pro/leaflet.css') }}" rel="stylesheet">
 @endpush
 
@@ -67,12 +67,10 @@
             <section class="content-header">
                 <h1>
                     {{__('Insert Project')}}
-                    <small>{{__('Preview')}}</small>
                 </h1>
                 <ol class="breadcrumb">
-                    <li><a href="#"><i class="fa fa-dashboard"></i>{{__('Home')}}</a></li>
-                    <li><a href="#">{{__('Forms')}}</a></li>
-                    <li class="active">{{__('General Elements')}}</li>
+                    <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{__('Home')}}</a></li>
+                    <li><a href="{{route('project.index')}}">{{__('Project')}}</a></li>
                 </ol>
             </section>
 
@@ -96,67 +94,102 @@
                                             <div class="box-header with-border">
                                                 <h3 class="box-title">{{__('Project')}}</h3>
                                             </div>
-                        <!-- /.box-header -->
-                        <!-- form start -->
-                        <form role="form" method="post" action="{{route('project.store')}}" enctype="multipart/form-data">
-                            @csrf
-                            <div class="box-body">
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">{{__('Project Name')}}</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1"  name="hp_project_name">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputFile">{{__('Project Owner')}}</label>
-                                    <input type="text" class="form-control"  id="exampleInputFile" name="hp_project_owner">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputFile">{{__('Project Type')}}</label>
-                                    <select type="text" class="form-control"  name="hp_project_type">
-                                        @foreach($type as $type)
-                                            <option>
-                                                {{$type->hp_project_type}}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputFile">{{__('Project Units')}}</label>
-                                    <input type="text" class="form-control"  id="exampleInputFile" name="hp_project_units">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputFile">{{__('Project Location')}}</label>
-                                    <div id="map"
-                                         style="width: 100%; height: 300px;direction: ltr;z-index:0"></div>
-                                    <input name="hp_project_address" type="hidden"
-                                           id="location">
+                                            <!-- /.box-header -->
+                                            <!-- form start -->
+                                            <form role="form" method="post" action="{{route('project.store')}}"
+                                                  enctype="multipart/form-data">
+                                                @csrf
+                                                <div class="box-body">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">{{__('Project Name')}}</label>
+                                                        <input type="text" class="form-control"
+                                                               id="exampleInputPassword1" name="hp_project_name">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="exampleInputFile">{{__('Project Owner')}}</label>
+                                                        <input type="text" class="form-control" id="exampleInputFile"
+                                                               name="hp_project_owner">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="exampleInputFile">{{__('Project Type')}}</label>
+                                                        <select type="text" class="form-control" name="hp_project_type">
+                                                            @foreach($type as $type)
+                                                                <option>
+                                                                    {{$type->hp_project_type}}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="exampleInputFile">{{__('Project Units')}}</label>
+                                                        <input type="text" class="form-control" id="exampleInputFile"
+                                                               name="hp_project_units">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="exampleInputFile">{{__('State')}}</label>
+                                                        <select name="hp_project_state" class="form-control">
+                                                            @foreach($state as $state)
+                                                                <option value="{{$state->id}}">
+                                                                    {{$state->hp_project_state}}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="exampleInputFile">{{__('City')}}</label>
+                                                        <select name="hp_project_city" class="form-control">
+                                                            @foreach($city as $city)
+                                                                <option value="{{$city->id}}">
+                                                                    {{$city->hp_city}}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="exampleInputFile">{{__('Project Address')}}</label>
+                                                        <input type="text" class="form-control" id="exampleInputFile"
+                                                               name="hp_project_address">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="exampleInputFile">{{__('Project Location')}}</label>
+                                                        <div id="map"
+                                                             style="width: 100%; height: 300px;direction: ltr;z-index:0"></div>
+                                                        <input name="hp_project_address" type="hidden"
+                                                               id="location">
 
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputFile">{{__('Project Description')}}</label>
-                                    <textarea type="text" class="form-control"  id="froala" name="hp_project_description"></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputFile">{{__('Project Options')}}</label>
-                                    <input type="text" class="form-control"  id="exampleInputFile" name="hp_project_options">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputFile">{{__('Project Complete Date')}}</label>
-                                    <input type="text" class="form-control" id="test-date-id"  name="hp_project_complete_date">
-                                </div>
-                                <input type="hidden" name="hn_image" id="hn_image">
-                                <div class="checkbox checkbox-info">
-                                    <input type="checkbox" id="inputSchedule" name="inputCheckboxesSchedule">
-                                    <label for="inputSchedule" class=""> <span>{{__('Check me out')}}</span> </label>
-                                </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="exampleInputFile">{{__('Project Description')}}</label>
+                                                        <textarea type="text" class="form-control" id="froala"
+                                                                  name="hp_project_description"></textarea>
+                                                    </div>
+                                                    {{--<div class="form-group">--}}
+                                                    {{--<label for="exampleInputFile">{{__('Project Options')}}</label>--}}
+                                                    {{--<input type="text" class="form-control"  id="exampleInputFile" name="hp_project_options">--}}
+                                                    {{--</div>--}}
+                                                    <div class="form-group">
+                                                        <label for="exampleInputFile">{{__('Project Complete Date')}}</label>
+                                                        <input type="text" class="form-control" id="test-date-id"
+                                                               name="hp_project_complete_date">
+                                                    </div>
+                                                    <input type="hidden" name="hn_image" id="hn_image">
+                                                    <div class="checkbox checkbox-info">
+                                                        <input type="checkbox" id="inputSchedule"
+                                                               name="inputCheckboxesSchedule">
+                                                        <label for="inputSchedule" class="">
+                                                            <span>{{__('Check me out')}}</span> </label>
+                                                    </div>
 
-                            </div>
-                            <!-- /.box-body -->
+                                                </div>
+                                                <!-- /.box-body -->
 
-                            <div class="box-footer">
-                                <button type="submit" class="btn btn-primary">{{__('Submit')}}</button>
-                            </div>
-                        </form>
-                                            <form action="{{url('/admin/image-project-save')}}" class="dropzone" id="dropzone"
+                                                <div class="box-footer">
+                                                    <button type="submit"
+                                                            class="btn btn-primary">{{__('Submit')}}</button>
+                                                </div>
+                                            </form>
+                                            <form action="{{url('/admin/image-project-save')}}" class="dropzone"
+                                                  id="dropzone"
                                                   enctype="multipart/form-data">
                                                 @csrf
                                                 @method('POST')
@@ -168,11 +201,11 @@
                                                     </div>
                                                 </div>
                                             </form>
-                    </div>
+                                        </div>
 
-@endsection
+                                        @endsection
 
-@push('scripts')
+                                        @push('scripts')
                                             <script src="{{asset('backend/src/kamadatepicker.min.js')}}"></script>
                                             <script src="{{asset('backend/js.pro/froala_editor.pkgd.min.js')}}"></script>
                                             <script src="{{asset('backend/js.pro/dropzone.js')}}"></script>

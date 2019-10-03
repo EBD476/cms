@@ -64,14 +64,12 @@
             <!-- Content Header (Page header) -->
 
             <section class="content-header">
-                {{--<h1>--}}
-                    {{--{{__('Edit Project')}}--}}
-                    {{--<small>{{__('Preview')}}</small>--}}
-                {{--</h1>--}}
+                <h1>
+                    {{__('Insert Article')}}
+                </h1>
                 <ol class="breadcrumb">
-                    <li><a href="#"><i class="fa fa-dashboard"></i>{{__('Home')}}</a></li>
-                    <li><a href="#">{{__('Forms')}}</a></li>
-                    <li class="active">{{__('General Elements')}}</li>
+                    <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{__('Home')}}</a></li>
+                    <li><a href="{{route('config.index')}}">{{__('Device Config')}}</a></li>
                 </ol>
             </section>
 

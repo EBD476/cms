@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\category;
 use App\Gallery;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -26,7 +27,8 @@ class GalleryController extends Controller
      */
     public function create()
     {
-        return view('admin.gallery.create');
+        $category=category::all();
+        return view('admin.gallery.create',compact('category'));
     }
 
     /**
@@ -41,12 +43,16 @@ class GalleryController extends Controller
             'hg_name' => 'required' ,
             'hg_code' => 'required' ,
             'hg_description' => 'required' ,
+            'hg_category_name' => 'required' ,
+            'hg_show' => 'required' ,
         ]);
         $gallery = new Gallery();
         $gallery->hg_name= $request->hg_name;
+        $gallery->hg_category_name= $request->hg_category_name;
         $gallery->hg_code= $request->hg_code;
         $gallery->hg_description= $request->hg_description;
         $gallery->hg_image=$request->hn_image;
+        $gallery->hg_show=$request->hg_show;
         $gallery->save();
         return redirect()->route('gallery.index');
 
@@ -90,12 +96,17 @@ class GalleryController extends Controller
             'hg_name' => 'required' ,
             'hg_code' => 'required' ,
             'hg_description' => 'required' ,
+            'hg_category_name' => 'required' ,
+            'hg_show' => 'required' ,
+
         ]);
         $gallery =Gallery::find($id);
         $gallery->hg_name= $request->hg_name;
+        $gallery->hg_category_name= $request->hg_category_name;
         $gallery->hg_code= $request->hg_code;
         $gallery->hg_description= $request->hg_description;
         $gallery->hg_image=$request->hn_image;
+        $gallery->hg_show=$request->hg_show;
         $gallery->save();
         return redirect()->route('gallery.index');
 

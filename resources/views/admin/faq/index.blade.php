@@ -17,12 +17,12 @@
             <!-- ============================================================== -->
             <div class="row page-titles">
                 <div class="col-md-5 col-8 align-self-center">
-                    <h3 class="text-themecolor m-b-0 m-t-0">Table Data table</h3>
+                    <h3 class="text-themecolor m-b-0 m-t-0">{{__('HANTA ERP System')}}</h3>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">
-                            <a href="javascript:void(0)">Home</a>
+                            <a href="{{route('admin.dashboard')}}">{{__('Home')}}</a>
                         </li>
-                        <li class="breadcrumb-item active">Table Data table</li>
+                        <li class="breadcrumb-item active">{{__('FAQ Page')}}</li>
                     </ol>
                 </div>
                 <div class="col-md-7 col-4 align-self-center">
@@ -80,23 +80,6 @@
                                 <div id="myTable_wrapper"
                                      class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
                                     <div class="row">
-                                        <div class="col-sm-12 col-md-6">
-                                            <div class="dataTables_length" id="myTable_length"><label>{{__('Show')}}<select
-                                                            name="myTable_length" aria-controls="myTable"
-                                                            class="form-control form-control-sm">
-                                                        <option value="10">10</option>
-                                                        <option value="25">25</option>
-                                                        <option value="50">50</option>
-                                                        <option value="100">100</option>
-                                                    </select>{{__('entries')}}</label></div>
-                                        </div>
-                                        <div class="col-sm-12 col-md-6">
-                                            <div id="myTable_filter" class="dataTables_filter"><label>{{__('Search')}}:<input
-                                                            type="search" class="form-control form-control-sm"
-                                                            placeholder="" aria-controls="myTable"></label></div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
                                         <div class="col-sm-12">
                                             <table id="myTable"
                                                    class="table table-bordered table-striped dataTable no-footer"
@@ -106,7 +89,17 @@
                                                     <th class="sorting_asc" tabindex="0" aria-controls="myTable"
                                                         rowspan="1" colspan="1" aria-sort="ascending"
                                                         aria-label="Name: activate to sort column descending"
+                                                        style="width: 146px;">{{__('Status')}}
+                                                    </th>
+                                                    <th class="sorting_asc" tabindex="0" aria-controls="myTable"
+                                                        rowspan="1" colspan="1" aria-sort="ascending"
+                                                        aria-label="Name: activate to sort column descending"
                                                         style="width: 146px;">{{__('ID')}}
+                                                    </th>
+                                                    <th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1"
+                                                        colspan="1"
+                                                        aria-label="Position: activate to sort column ascending"
+                                                        style="width: 242px;"> {{__('Question')}}
                                                     </th>
                                                     <th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1"
                                                         colspan="1"
@@ -124,7 +117,17 @@
                                     @foreach($faq as $key => $faq)
                                         <tr>
                                             <td>
+                                                <div class="checkbox checkbox-info">
+                                                    <input type="checkbox" id="inputSchedule"
+                                                           name="hp_product_status" value="0">
+                                                    <label for="inputSchedule" class=""></label>
+                                                </div>
+                                            </td>
+                                            <td>
                                                 {{$key + 1}}
+                                            </td>
+                                            <td>
+                                                {{$faq ->question}}
                                             </td>
                                             <td>
                                                 {{$faq ->status}}

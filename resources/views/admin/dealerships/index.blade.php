@@ -17,12 +17,12 @@
             <!-- ============================================================== -->
             <div class="row page-titles">
                 <div class="col-md-5 col-8 align-self-center">
-                    <h3 class="text-themecolor m-b-0 m-t-0">Table Data table</h3>
+                    <h3 class="text-themecolor m-b-0 m-t-0">{{__('HANTA ERP System')}}</h3>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">
-                            <a href="javascript:void(0)">Home</a>
+                            <a href="{{route('admin.dashboard')}}">{{__('Home')}}</a>
                         </li>
-                        <li class="breadcrumb-item active">Table Data table</li>
+                        <li class="breadcrumb-item active">{{__('Dealerships Page')}}</li>
                     </ol>
                 </div>
                 <div class="col-md-7 col-4 align-self-center">
@@ -115,6 +115,13 @@
                                         @foreach($dealerships as $key => $dealerships)
                                             <tr>
                                                 <td>
+                                                    <div class="checkbox checkbox-info">
+                                                        <input type="checkbox" id="inputSchedule"
+                                                               name="hp_product_status" value="0">
+                                                        <label for="inputSchedule" class=""></label>
+                                                    </div>
+                                                </td>
+                                                <td>
                                                     {{$key + 1}}
                                                 </td>
                                                 <td>
@@ -163,25 +170,8 @@
             <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
             <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
             <script>
-                $(document).ready(function() {
-                    var eventFired = function ( type ) {
-                        // var n = $('#demo_info')[0];
-                        // n.innerHTML += '<div>'+type+' event - '+new Date().getTime()+'</div>';
-                        // n.scrollTop = n.scrollHeight;
-                    };
-
-                    $('#table').DataTable({
-                        "language": {
-                            "url": "//cdn.datatables.net/plug-ins/1.10.18/i18n/Italian.json"
-                        },
-                        "dom": '<"top"i>rt<"top"flp><"clear">'
-                    });
-
-                    // $('#table'),
-                    //     .on( 'order.dt',  function () { eventFired( 'Order' ); } )
-                    //     .on( 'search.dt', function () { eventFired( 'Search' ); } )
-                    //     .on( 'page.dt',   function () { eventFired( 'Page' ); } )
-                    // .DataTable();
-                } );
+                $(document).ready(function () {
+                    $('#table').DataTable();
+                });
             </script>
         @endpush

@@ -65,12 +65,10 @@
             <section class="content-header">
                 <h1>
                     {{__('Edit User')}}
-                    <small>{{__('Preview')}}</small>
                 </h1>
                 <ol class="breadcrumb">
-                    <li><a href="#"><i class="fa fa-dashboard"></i>{{__('Home')}}</a></li>
-                    <li><a href="#">{{__('Forms')}}</a></li>
-                    <li class="active">{{__('General Elements')}}</li>
+                    <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{__('Home')}}</a></li>
+                    <li><a href="{{route('user.index')}}">{{__('User')}}</a></li>
                 </ol>
             </section>
 
@@ -108,18 +106,18 @@
                                     <label for="exampleInputPassword1">{{__('User Name')}}</label>
                                     <input type="text" class="form-control" id="exampleInputPassword1" name="username" value="{{$dataUser->username}}">
                                 </div>
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">{{__('Password')}}</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1"  name="password" value="{{$dataUser->password}}">
-                                </div>
+                                {{--<div class="form-group">--}}
+                                    {{--<label for="exampleInputPassword1">{{__('Password')}}</label>--}}
+                                    {{--<input type="text" class="form-control" id="exampleInputPassword1"  name="password" value="{{$dataUser->password}}">--}}
+                                {{--</div>--}}
                                 <div class="form-group">
                                     <label for="exampleInputFile">{{__('Email')}}</label>
                                     <input type="text" class="form-control"  id="exampleInputFile" name="email" value="{{$dataUser->email}}">
                                 </div>
-                                <div class="form-group">
-                                    <label for="exampleInputFile">{{__('Email Verified At')}}</label>
-                                    <input type="text" class="form-control" id="exampleInputFile" name="email_verified_at"  value="{{$dataUser->email_verified_at}}">
-                                </div>
+                                {{--<div class="form-group">--}}
+                                    {{--<label for="exampleInputFile">{{__('Email Verified At')}}</label>--}}
+                                    {{--<input type="text" class="form-control" id="exampleInputFile" name="email_verified_at"  value="{{$dataUser->email_verified_at}}">--}}
+                                {{--</div>--}}
                                 <div class="form-group">
                                     <label for="exampleInputFile">{{__('Phone')}}</label>
                                     <input type="text"  class="form-control"  id="exampleInputFile" name="phone" value="{{$dataUser->phone}}">
@@ -128,10 +126,10 @@
                                     <label for="exampleInputFile">{{__('Address')}}</label>
                                     <input type="text" class="form-control"  id="exampleInputFile" name="address" value="{{$dataUser->address}}">
                                 </div>
-                                <div class="form-group">
-                                    <label for="exampleInputFile">{{__('Remember Token')}}</label>
-                                    <input type="text" class="form-control"  id="exampleInputFile" name="remember_token" value="{{$dataUser->remember_token}}">
-                                </div>
+                                {{--<div class="form-group">--}}
+                                    {{--<label for="exampleInputFile">{{__('Remember Token')}}</label>--}}
+                                    {{--<input type="text" class="form-control"  id="exampleInputFile" name="remember_token" value="{{$dataUser->remember_token}}">--}}
+                                {{--</div>--}}
                                 <div class="checkbox checkbox-info">
                                     <input type="checkbox" id="inputSchedule" name="inputCheckboxesSchedule">
                                     <label for="inputSchedule" class=""> <span>{{__('Check me out')}}</span> </label>

@@ -129,13 +129,6 @@
                                                                     @method('PUT')
                                                                     <div class="box-body">
                                                                         <div class="form-group">
-                                                                            <label for="exampleInputPassword1">{{__('Dealership Code')}}</label>
-                                                                            <input type="text" class="form-control"
-                                                                                   id="exampleInputText"
-                                                                                   name="hds_dealership_code"
-                                                                                   value="{{$dealerships->hds_dealership_code}}">
-                                                                        </div>
-                                                                        <div class="form-group">
                                                                             <label for="exampleInputFile">{{__('Dealership City')}}</label>
                                                                             <input type="text" class="form-control"
                                                                                    id="exampleInputFile"
@@ -150,11 +143,25 @@
                                                                                    value="{{$dealerships->hds_dealership_agent}}">
                                                                         </div>
                                                                         <div class="form-group">
-                                                                            <label for="exampleInputFile">{{__('Dealership Phone')}}</label>
+                                                                            <label for="exampleInputFile">{{__('Dealership Phone 1')}}</label>
                                                                             <input type="text" class="form-control"
-                                                                                   id="exampleInputFile"
-                                                                                   name="hds_dealership_phone"
-                                                                                   value="{{$dealerships->hds_dealership_phone}}">
+                                                                                   id="exampleInputText"
+                                                                                   name="hds_dealership_phone_1" value="{{$dealerships->hds_dealership_phone_1}}">
+
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="exampleInputFile">{{__('Dealership Phone 2')}}</label>
+                                                                            <input type="text" class="form-control"
+                                                                                   id="exampleInputText"
+                                                                                   name="hds_dealership_phone_2" value="{{$dealerships->hds_dealership_phone_2}}">
+
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="exampleInputFile">{{__('Dealership Phone 3')}}</label>
+                                                                            <input type="text" class="form-control"
+                                                                                   id="exampleInputText"
+                                                                                   name="hds_dealership_phone_3" value="{{$dealerships->hds_dealership_phone_3}}">
+
                                                                         </div>
                                                                         <div class="form-group">
                                                                             <label for="exampleInputFile">{{__('Dealership State')}}</label>

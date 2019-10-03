@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Address_City;
+use App\Address_State;
 use App\hnt_projects;
 use App\Project;
 use App\Type_Project;
@@ -30,8 +32,10 @@ class ProjectsController extends Controller
      */
     public function create()
     {
+        $city=Address_City::ALL();
+        $state=Address_State::ALL();
         $type=Type_Project::ALL();
-        return view('admin.projects.create',compact( 'type'));
+        return view('admin.projects.create',compact( 'type','city','state'));
     }
 
     /**
@@ -48,6 +52,8 @@ class ProjectsController extends Controller
             'hp_project_type' => 'required',
             'hp_project_units'=> 'required',
             'hp_project_address'=> 'required',
+            'hp_project_state'=> 'required',
+            'hp_project_city'=> 'required',
             'hp_project_description'=> 'required',
             'hp_project_options'=> 'required',
             'hp_project_complete_date'=> 'required',
@@ -59,6 +65,8 @@ class ProjectsController extends Controller
         $projects->hp_project_units=$request->hp_project_units;
         $projects->hp_project_image=$request->hn_image;
         $projects->hp_project_address=$request->hp_project_address;
+        $projects->hp_project_city=$request->hp_project_city;
+        $projects->hp_project_state=$request->hp_project_state;
         $projects->hp_project_description=$request->hp_project_description;
         $projects->hp_project_options=$request->hp_project_options;
         $projects->hp_project_complete_date=$request->hp_project_complete_date;
@@ -106,6 +114,8 @@ class ProjectsController extends Controller
             'hp_project_type' => 'required',
             'hp_project_units'=> 'required',
             'hp_project_address'=> 'required',
+            'hp_project_state'=> 'required',
+            'hp_project_city'=> 'required',
             'hp_project_description'=> 'required',
             'hp_project_options'=> 'required',
             'hp_project_complete_date'=> 'required',
@@ -117,6 +127,8 @@ class ProjectsController extends Controller
         $projects->hp_project_units=$request->hp_project_units;
         $projects->hp_project_image=$request->hn_image;
         $projects->hp_project_address=$request->hp_project_address;
+        $projects->hp_project_city=$request->hp_project_city;
+        $projects->hp_project_state=$request->hp_project_state;
         $projects->hp_project_description=$request->hp_project_description;
         $projects->hp_project_options=$request->hp_project_options;
         $projects->hp_project_complete_date=$request->hp_project_complete_date;

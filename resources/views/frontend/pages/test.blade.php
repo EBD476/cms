@@ -208,7 +208,6 @@
             </div>
         </div>
         <!--     *********    END PROJECTS 2      *********      -->
-    {{--@endforeach--}}
 @endsection
 
 @push('scripts')

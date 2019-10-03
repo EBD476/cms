@@ -17,12 +17,12 @@
             <!-- ============================================================== -->
             <div class="row page-titles">
                 <div class="col-md-5 col-8 align-self-center">
-                    <h3 class="text-themecolor m-b-0 m-t-0">Table Data table</h3>
+                    <h3 class="text-themecolor m-b-0 m-t-0">{{__('HANTA ERP System')}}</h3>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">
-                            <a href="javascript:void(0)">Home</a>
+                            <a href="{{route('admin.dashboard')}}">{{__('Home')}}</a>
                         </li>
-                        <li class="breadcrumb-item active">Table Data table</li>
+                        <li class="breadcrumb-item active">{{__('Menu Page')}}</li>
                     </ol>
                 </div>
                 <div class="col-md-7 col-4 align-self-center">
@@ -106,6 +106,11 @@
                                                     <th class="sorting_asc" tabindex="0" aria-controls="myTable"
                                                         rowspan="1" colspan="1" aria-sort="ascending"
                                                         aria-label="Name: activate to sort column descending"
+                                                        style="width: 146px;">{{__('Status')}}
+                                                    </th>
+                                                    <th class="sorting_asc" tabindex="0" aria-controls="myTable"
+                                                        rowspan="1" colspan="1" aria-sort="ascending"
+                                                        aria-label="Name: activate to sort column descending"
                                                         style="width: 146px;">{{__('ID')}}
                                                     </th>
                                                     <th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1"
@@ -129,6 +134,13 @@
 
                                     @foreach($menu as $key => $menu)
                                         <tr>
+                                            <td>
+                                                <div class="checkbox checkbox-info">
+                                                    <input type="checkbox" id="inputSchedule"
+                                                           name="hp_product_status" value="0">
+                                                    <label for="inputSchedule" class=""></label>
+                                                </div>
+                                            </td>
                                             <td>
                                                 {{$key + 1}}
                                             </td>

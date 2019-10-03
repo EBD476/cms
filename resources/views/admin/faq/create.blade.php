@@ -63,15 +63,12 @@
             </div>            <!-- Content Header (Page header) -->
 
             <section class="content-header">
-                <h1>
-                    {{__('Insert FAQ')}}
-                    <small>{{__('Preview')}}</small>
-                </h1>
+                <h1>{{__('Insert FAQ')}}</h1>
                 <ol class="breadcrumb">
-                    <li><a href="#"><i class="fa fa-dashboard"></i>{{__('Home')}}</a></li>
-                    <li><a href="#">{{__('Forms')}}</a></li>
-                    <li class="active">{{__('General Elements')}}</li>
+                    <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{__('Home')}}</a></li>
+                    <li><a href="{{route('faq.index')}}">{{__('FAQ')}}</a></li>
                 </ol>
+
             </section>
 
             <!-- /.content-wrapper -->
@@ -94,40 +91,49 @@
                                             <div class="box-header with-border">
                                                 <h3 class="box-title">{{__('FAQ')}}</h3>
                                             </div>
-                        <!-- /.box-header -->
-                        <!-- form start -->
-                        <form role="form" method="post" action="{{route('faq.store')}}" enctype="multipart/form-data">
-                            @csrf
-                            <div class="box-body">
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">{{__('Question')}}</label>
-                                    <textarea type="text" class="form-control"  id="froala" name="question">
-                                    </textarea>                                <div class="form-group">
-                                    <label for="exampleInputFile">{{__('Answer')}}</label>
-                                    <textarea type="text" class="form-control"  id="froala"  name="answer"></textarea>
+                                            <!-- /.box-header -->
+                                            <!-- form start -->
+                                            <form role="form" method="post" action="{{route('faq.store')}}"
+                                                  enctype="multipart/form-data">
+                                                @csrf
+                                                <div class="box-body">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">{{__('Question')}}</label>
+                                                        <textarea type="text" class="form-control" id="froala"
+                                                                  name="question">
+                                    </textarea>
+                                                        <div class="form-group">
+                                                            <label for="exampleInputFile">{{__('Answer')}}</label>
+                                                            <textarea type="text" class="form-control" id="froala"
+                                                                      name="answer"></textarea>
 
-                                </div>
-                                    <div class="checkbox checkbox-info">
-                                        <input type="checkbox" id="inputSchedule" name="status" value="1">
-                                        <label for="inputSchedule" class=""> <span>{{__('Status On')}}</span> </label>
-                                    </div>
-                                    <div class="checkbox checkbox-info">
-                                        <input type="checkbox" id="inputSchedule" name="inputCheckboxesSchedule">
-                                        <label for="inputSchedule" class=""> <span>{{__('Check me out')}}</span> </label>
-                                    </div>
-                            </div>
-                            <!-- /.box-body -->
+                                                        </div>
+                                                        <div class="checkbox checkbox-info">
+                                                            <input type="checkbox" id="inputSchedule" name="status"
+                                                                   value="1">
+                                                            <label for="inputSchedule" class="">
+                                                                <span>{{__('Status On')}}</span> </label>
+                                                        </div>
+                                                        <div class="checkbox checkbox-info">
+                                                            <input type="checkbox" id="inputSchedule"
+                                                                   name="inputCheckboxesSchedule">
+                                                            <label for="inputSchedule" class="">
+                                                                <span>{{__('Check me out')}}</span> </label>
+                                                        </div>
+                                                    </div>
+                                                    <!-- /.box-body -->
 
-                            <div class="box-footer">
-                                <button type="submit" class="btn btn-primary">{{__('Submit')}}</button>
-                            </div>
-                        </form>
-                    </div>
-@endsection
+                                                    <div class="box-footer">
+                                                        <button type="submit"
+                                                                class="btn btn-primary">{{__('Submit')}}</button>
+                                                    </div>
+                                            </form>
+                                        </div>
+                                        @endsection
 
-@push('scripts')
+                                        @push('scripts')
                                             <script src="{{asset('backend/js.pro/froala_editor.pkgd.min.js')}}"></script>
                                             <script>
                                                 var editor = new FroalaEditor('#froala');
                                             </script>
-@endpush
+    @endpush

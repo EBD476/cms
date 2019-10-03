@@ -15,7 +15,54 @@
             <!-- ============================================================== -->
             <!-- Bread crumb and right sidebar toggle -->
             <!-- ============================================================== -->
-            <!-- ============================================================== -->
+            <div class="row page-titles">
+                <div class="col-md-5 col-8 align-self-center">
+                    <h3 class="text-themecolor m-b-0 m-t-0">{{__('HANTA ERP System')}}</h3>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="{{route('admin.dashboard')}}">{{__('Home')}}</a>
+                        </li>
+                        <li class="breadcrumb-item active">{{__('Product Page')}}</li>
+                    </ol>
+                </div>
+                <div class="col-md-7 col-4 align-self-center">
+                    <div class="d-flex m-t-10 justify-content-end">
+                        <div class="d-flex m-r-20 m-l-10 hidden-md-down">
+                            <div class="chart-text m-r-10">
+                                <h6 class="m-b-0">
+                                    <small>THIS MONTH</small>
+                                </h6>
+                                <h4 class="m-t-0 text-info">$58,356</h4>
+                            </div>
+                            <div class="spark-chart">
+                                <div id="monthchart">
+                                    <canvas width="60" height="35"
+                                            style="display: inline-block; width: 60px; height: 35px; vertical-align: top;"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex m-r-20 m-l-10 hidden-md-down">
+                            <div class="chart-text m-r-10">
+                                <h6 class="m-b-0">
+                                    <small>LAST MONTH</small>
+                                </h6>
+                                <h4 class="m-t-0 text-primary">$48,356</h4>
+                            </div>
+                            <div class="spark-chart">
+                                <div id="lastmonthchart">
+                                    <canvas width="60" height="35"
+                                            style="display: inline-block; width: 60px; height: 35px; vertical-align: top;"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="">
+                            <button class="right-side-toggle waves-effect waves-light btn-success btn btn-circle btn-sm pull-right m-l-10">
+                                <i class="ti-settings text-white"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <!-- End Bread crumb and right sidebar toggle -->
             <!-- ============================================================== -->
             <!-- ============================================================== -->
@@ -38,6 +85,11 @@
                                                    role="grid" aria-describedby="myTable_info">
                                                 <thead>
                                                 <tr role="row">
+                                                    <th class="sorting_asc" tabindex="0" aria-controls="myTable"
+                                                        rowspan="1" colspan="1" aria-sort="ascending"
+                                                        aria-label="Name: activate to sort column descending"
+                                                        style="width: 146px;">{{__('Status')}}
+                                                    </th>
                                                     <th class="sorting_asc" tabindex="0" aria-controls="myTable"
                                                         rowspan="1" colspan="1" aria-sort="ascending"
                                                         aria-label="Name: activate to sort column descending"
@@ -64,6 +116,13 @@
                                                 @foreach($product as $key => $product)
                                                     <tr>
                                                         <td>
+                                                            <div class="checkbox checkbox-info">
+                                                                <input type="checkbox" id="inputSchedule"
+                                                                       name="hp_product_status" value="0">
+                                                                <label for="inputSchedule" class=""></label>
+                                                            </div>
+                                                        </td>
+                                                        <td>
                                                             {{$key + 1}}
                                                         </td>
                                                         <td>
@@ -74,8 +133,7 @@
                                                         </td>
                                                         <td>
                                                             <a href="{{route('product.edit',$product->id)}}"
-                                                               data-toggle="tooltip" data-original-title="Edit"><i
-                                                                        class="ti-pencil"></i>
+                                                               class="btn btn-info btn-sm"><i class="ti-pencil"></i></a>
                                                             </a>
                                                             <form id="-form-delete{{$product->id}}"
                                                                   style="display: none;" method="POST"
@@ -98,89 +156,7 @@
                                             </table>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-sm-12 col-md-5">
-                                            <div class="dataTables_info" id="myTable_info" role="status"
-                                                 aria-live="polite">Showing 1 to 10 of 57 entries
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-12 col-md-7">
-                                            <div class="dataTables_paginate paging_simple_numbers"
-                                                 id="myTable_paginate">
-                                                <ul class="pagination">
-                                                    <li class="paginate_button page-item previous disabled"
-                                                        id="myTable_previous"><a href="#" aria-controls="myTable"
-                                                                                 data-dt-idx="0" tabindex="0"
-                                                                                 class="page-link">Previous</a></li>
-                                                    <li class="paginate_button page-item active"><a href="#"
-                                                                                                    aria-controls="myTable"
-                                                                                                    data-dt-idx="1"
-                                                                                                    tabindex="0"
-                                                                                                    class="page-link">1</a>
-                                                    </li>
-                                                    <li class="paginate_button page-item "><a href="#"
-                                                                                              aria-controls="myTable"
-                                                                                              data-dt-idx="2"
-                                                                                              tabindex="0"
-                                                                                              class="page-link">2</a>
-                                                    </li>
-                                                    <li class="paginate_button page-item "><a href="#"
-                                                                                              aria-controls="myTable"
-                                                                                              data-dt-idx="3"
-                                                                                              tabindex="0"
-                                                                                              class="page-link">3</a>
-                                                    </li>
-                                                    <li class="paginate_button page-item "><a href="#"
-                                                                                              aria-controls="myTable"
-                                                                                              data-dt-idx="4"
-                                                                                              tabindex="0"
-                                                                                              class="page-link">4</a>
-                                                    </li>
-                                                    <li class="paginate_button page-item "><a href="#"
-                                                                                              aria-controls="myTable"
-                                                                                              data-dt-idx="5"
-                                                                                              tabindex="0"
-                                                                                              class="page-link">5</a>
-                                                    </li>
-                                                    <li class="paginate_button page-item "><a href="#"
-                                                                                              aria-controls="myTable"
-                                                                                              data-dt-idx="6"
-                                                                                              tabindex="0"
-                                                                                              class="page-link">6</a>
-                                                    </li>
-                                                    <li class="paginate_button page-item next" id="myTable_next"><a
-                                                                href="#" aria-controls="myTable" data-dt-idx="7"
-                                                                tabindex="0" class="page-link">Next</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12 col-md-5">
-                            <div class="dataTables_info" id="example_info" role="status" aria-live="polite">Showing 1 to
-                                17 of 17 entries
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-7">
-                            <div class="dataTables_paginate paging_simple_numbers" id="example_paginate">
-                                <ul class="pagination">
-                                    <li class="paginate_button page-item previous disabled" id="example_previous"><a
-                                                href="#" aria-controls="example" data-dt-idx="0" tabindex="0"
-                                                class="page-link">Previous</a></li>
-                                    <li class="paginate_button page-item active"><a href="#" aria-controls="example"
-                                                                                    data-dt-idx="1" tabindex="0"
-                                                                                    class="page-link">1</a></li>
-                                    <li class="paginate_button page-item next disabled" id="example_next"><a href="#"
-                                                                                                             aria-controls="example"
-                                                                                                             data-dt-idx="2"
-                                                                                                             tabindex="0"
-                                                                                                             class="page-link">Next</a>
-                                    </li>
-                                </ul>
                             </div>
                         </div>
                     </div>
@@ -188,8 +164,7 @@
             </div>
         </div>
     </div>
-    </div>
-    </div>
+
     <!-- ============================================================== -->
     <!-- End PAge Content -->
     <!-- ============================================================== -->
@@ -321,11 +296,6 @@
                     </ul>
                 </div>
             </div>
-            <div class="slimScrollBar"
-                 style="background: rgb(220, 220, 220); width: 5px; position: absolute; top: 0px; opacity: 0.4; display: block; border-radius: 7px; z-index: 99; right: 1px;"></div>
-            <div class="slimScrollRail"
-                 style="width: 5px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div>
-        </div>
     </div>
     <!-- ============================================================== -->
     <!-- End Right sidebar -->
@@ -334,14 +304,6 @@
     <!-- ============================================================== -->
     <!-- End Container fluid  -->
     <!-- ============================================================== -->
-    <!-- ============================================================== -->
-    <!-- footer -->
-    <!-- ============================================================== -->
-    <footer class="footer">
-        © 2019 Material Pro Admin by wrappixel.com
-    </footer>
-    <!-- ============================================================== -->
-    <!-- End footer -->
     <!-- ============================================================== -->
     </div>
 @endsection

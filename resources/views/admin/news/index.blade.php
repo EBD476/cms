@@ -17,44 +17,44 @@
             <!-- ============================================================== -->
             <div class="row page-titles">
                 <div class="col-md-5 col-8 align-self-center">
-                    {{--<h3 class="text-themecolor m-b-0 m-t-0">Table Data table</h3>--}}
-                    {{--<ol class="breadcrumb">--}}
-                        {{--<li class="breadcrumb-item">--}}
-                            {{--<a href="javascript:void(0)">Home</a>--}}
-                        {{--</li>--}}
-                        {{--<li class="breadcrumb-item active">Table Data table</li>--}}
-                    {{--</ol>--}}
+                    <h3 class="text-themecolor m-b-0 m-t-0">{{__('HANTA ERP System')}}</h3>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="{{route('admin.dashboard')}}">{{__('Home')}}</a>
+                        </li>
+                        <li class="breadcrumb-item active">{{__('News Page')}}</li>
+                    </ol>
                 </div>
                 <div class="col-md-7 col-4 align-self-center">
-                    {{--<div class="d-flex m-t-10 justify-content-end">--}}
-                        {{--<div class="d-flex m-r-20 m-l-10 hidden-md-down">--}}
-                            {{--<div class="chart-text m-r-10">--}}
-                                {{--<h6 class="m-b-0">--}}
-                                    {{--<small>THIS MONTH</small>--}}
-                                {{--</h6>--}}
-                                {{--<h4 class="m-t-0 text-info">$58,356</h4>--}}
-                            {{--</div>--}}
-                            {{--<div class="spark-chart">--}}
-                                {{--<div id="monthchart">--}}
-                                    {{--<canvas width="60" height="35"--}}
-                                            {{--style="display: inline-block; width: 60px; height: 35px; vertical-align: top;"></canvas>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                        {{--<div class="d-flex m-r-20 m-l-10 hidden-md-down">--}}
-                            {{--<div class="chart-text m-r-10">--}}
-                                {{--<h6 class="m-b-0">--}}
-                                    {{--<small>LAST MONTH</small>--}}
-                                {{--</h6>--}}
-                                {{--<h4 class="m-t-0 text-primary">$48,356</h4>--}}
-                            {{--</div>--}}
-                            {{--<div class="spark-chart">--}}
-                                {{--<div id="lastmonthchart">--}}
-                                    {{--<canvas width="60" height="35"--}}
-                                            {{--style="display: inline-block; width: 60px; height: 35px; vertical-align: top;"></canvas>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
+                    <div class="d-flex m-t-10 justify-content-end">
+                        <div class="d-flex m-r-20 m-l-10 hidden-md-down">
+                            <div class="chart-text m-r-10">
+                                <h6 class="m-b-0">
+                                    <small>THIS MONTH</small>
+                                </h6>
+                                <h4 class="m-t-0 text-info">$58,356</h4>
+                            </div>
+                            <div class="spark-chart">
+                                <div id="monthchart">
+                                    <canvas width="60" height="35"
+                                            style="display: inline-block; width: 60px; height: 35px; vertical-align: top;"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex m-r-20 m-l-10 hidden-md-down">
+                            <div class="chart-text m-r-10">
+                                <h6 class="m-b-0">
+                                    <small>LAST MONTH</small>
+                                </h6>
+                                <h4 class="m-t-0 text-primary">$48,356</h4>
+                            </div>
+                            <div class="spark-chart">
+                                <div id="lastmonthchart">
+                                    <canvas width="60" height="35"
+                                            style="display: inline-block; width: 60px; height: 35px; vertical-align: top;"></canvas>
+                                </div>
+                            </div>
+                        </div>
                         <div class="">
                             <button class="right-side-toggle waves-effect waves-light btn-success btn btn-circle btn-sm pull-right m-l-10">
                                 <i class="ti-settings text-white"></i>
@@ -62,6 +62,7 @@
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
             <!-- ============================================================== -->
             <!-- End Bread crumb and right sidebar toggle -->
@@ -86,12 +87,22 @@
                                             <th class="sorting_asc" tabindex="0" aria-controls="myTable"
                                                 rowspan="1" colspan="1" aria-sort="ascending"
                                                 aria-label="Name: activate to sort column descending"
+                                                style="width: 146px;">{{__('Status')}}
+                                            </th>
+                                            <th class="sorting_asc" tabindex="0" aria-controls="myTable"
+                                                rowspan="1" colspan="1" aria-sort="ascending"
+                                                aria-label="Name: activate to sort column descending"
                                                 style="width: 146px;"> {{__('ID')}}
                                             </th>
                                             <th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1"
                                                 colspan="1"
                                                 aria-label="Position: activate to sort column ascending"
                                                 style="width: 242px;">  {{__('Title')}}
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1"
+                                                colspan="1"
+                                                aria-label="Position: activate to sort column ascending"
+                                                style="width: 242px;">{{__('Published at')}}
                                             </th>
                                             <th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1"
                                                 colspan="1"
@@ -105,14 +116,24 @@
                                         @foreach($news as $key => $news)
                                             <tr>
                                                 <td>
+                                                    <div class="checkbox checkbox-info">
+                                                        <input type="checkbox" id="inputSchedule"
+                                                               name="hp_product_status" value="0">
+                                                        <label for="inputSchedule" class=""></label>
+                                                    </div>
+                                                </td>
+                                                <td>
                                                     {{$key + 1}}
                                                 </td>
                                                 <td>
                                                     {{$news ->hn_title}}
                                                 </td>
                                                 <td>
+                                                    {{$news ->created_at}}
+                                                </td>
+                                                <td>
                                                     <a href="{{route('news.edit',$news->id)}}"
-                                                       data-toggle="tooltip" data-original-title="Edit"><i class="ti-pencil"></i>
+                                                       class="btn btn-info btn-sm"><i class="ti-pencil"></i></a>
                                                     </a>
                                                     <form id="-form-delete{{$news->id}}"
                                                           style="display: none;" method="POST"

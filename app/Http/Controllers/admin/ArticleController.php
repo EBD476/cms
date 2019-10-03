@@ -21,7 +21,6 @@ class ArticleController extends Controller
      */
     public function create()
     {
-//        $user=User::ALL();
         return view('admin.editor.create');
     }
 
@@ -37,6 +36,8 @@ class ArticleController extends Controller
             'ha_title	' => 'required',
             'ha_auther' => 'required',
             'ha_editor' => 'required',
+            'ha_show' => 'required',
+
 
         ]);
 
@@ -45,6 +46,8 @@ class ArticleController extends Controller
         $article->ha_auther = $request->hn_title;
         $article->ha_editor = $request->hn_description;
         $article->ha_image = $request->hn_image;
+        $article->ha_show = $request->ha_show;
+
         $article->save();
         return redirect()->route('publish.index');
     }
@@ -86,6 +89,7 @@ class ArticleController extends Controller
             'ha_title	' => 'required',
             'ha_auther' => 'required',
             'ha_editor' => 'required',
+            'ha_show' => 'required',
 
         ]);
         $article = Article::find($id);
@@ -93,6 +97,7 @@ class ArticleController extends Controller
         $article->ha_auther = $request->hn_title;
         $article->ha_editor = $request->hn_description;
         $article->ha_image = $request->hn_image;
+        $article->ha_show = $request->ha_show;
         $article->save();
         return redirect()->route('news.index');
     }

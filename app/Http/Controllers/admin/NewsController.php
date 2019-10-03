@@ -38,13 +38,14 @@ class NewsController extends Controller
         $this->validate($request, [
             'hn_title' => 'required',
             'hn_description' => 'required',
-//            'hn_image' => 'required' ,
+            'hn_show' => 'required',
         ]);
 
         $news = new News();
         $news->hn_title = $request->hn_title;
         $news->hn_description = $request->hn_description;
         $news->hn_image = $request->hn_image;
+        $news->hn_show = $request->hn_show;
         $news->save();
         return redirect()->route('news.index');
     }
@@ -82,16 +83,17 @@ class NewsController extends Controller
     public function update(Request $request, $id)
     {
 
-//        $this->validate($request,[
-//            'hn_title'=>'required',
-//            'hn_description' => 'required' ,
+        $this->validate($request,[
+            'hn_title'=>'required',
+            'hn_description' => 'required' ,
 //            'hn_view_count' => 'required' ,
-////            'hn_image' => 'required' ,
-//        ]);
+            'hn_show' => 'required',
+        ]);
         $news = News::find($id);
         $news->hn_title = $request->hn_title;
         $news->hn_description = $request->hn_description;
         $news->hn_image = $request->hn_image;
+        $news->hn_show = $request->hn_show;
         $news->save();
         return redirect()->route('news.index');
     }

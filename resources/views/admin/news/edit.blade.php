@@ -64,12 +64,10 @@
             <section class="content-header">
                 <h1>
                     {{__('Edit News')}}
-                    <small>{{__('Preview')}}</small>
                 </h1>
                 <ol class="breadcrumb">
-                    <li><a href="#"><i class="fa fa-dashboard"></i>{{__('Home')}}</a></li>
-                    <li><a href="#">{{__('Forms')}}</a></li>
-                    <li class="active">{{__('General Elements')}}</li>
+                    <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{__('Home')}}</a></li>
+                    <li><a href="{{route('news.index')}}">{{__('News')}}</a></li>
                 </ol>
             </section>
 
@@ -120,8 +118,8 @@
                                                                src="/img/news/{{$news->hn_image}}">
                                                     </div>
                                                     <div class="checkbox checkbox-info">
-                                                        <input type="checkbox" id="inputSchedule" name="inputCheckboxesSchedule">
-                                                        <label for="inputSchedule" class=""> <span>{{__('Check me out')}}</span> </label>
+                                                        <input type="checkbox" id="inputSchedule" name="hn_show" value="0">
+                                                        <label for="inputSchedule" class=""> <span>{{__('Show in News')}}</span> </label>
                                                     </div>
                                                 </div>
                                                 <input type="hidden" name="hn_image" id="hn_image">

@@ -4,7 +4,7 @@
 
 @push('css')
     <link href="{{asset('backend/css.pro/froala_editor.pkgd.min.css')}}" rel="stylesheet"/>
-    <link href="{{asset('backend/style/kamadatepicker.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('backend/style/kamadatepicker.min.css')}}" rel="stylesheet"/>
 @endpush
 
 @section('content')
@@ -66,12 +66,10 @@
             <section class="content-header">
                 <h1>
                     {{__('Insert Product')}}
-                    <small>{{__('Preview')}}</small>
                 </h1>
                 <ol class="breadcrumb">
-                    <li><a href="#"><i class="fa fa-dashboard"></i>{{__('Home')}}</a></li>
-                    <li><a href="#">{{__('Forms')}}</a></li>
-                    <li class="active">{{__('General Elements')}}</li>
+                    <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{__('Home')}}</a></li>
+                    <li><a href="{{route('product.index')}}">{{__('Product')}}</a></li>
                 </ol>
             </section>
 
@@ -104,20 +102,22 @@
                                                 <div class="box-body">
                                                     <div class="form-group">
                                                         <label for="exampleInputPassword1">{{__('Product Name')}}</label>
-                                                        <input type="text" class="form-control" id="exampleInputPassword1"
-                                                               name="hp_product_name" >
+                                                        <input type="text" class="form-control"
+                                                               id="exampleInputPassword1"
+                                                               name="hp_product_name">
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="exampleInputFile">{{__('Product Model')}}</label>
                                                         <input type="text" class="form-control"
-                                                               placeholder="{{__('Product Model')}}" id="exampleInputFile"
-                                                               name="hp_product_model" >
+                                                               placeholder="{{__('Product Model')}}"
+                                                               id="exampleInputFile"
+                                                               name="hp_product_model">
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="exampleInputFile">{{__('product Description')}}</label>
                                                         <textarea type="text" class="form-control"
                                                                   id="froala"
-                                                               name="hp_product_description"
+                                                                  name="hp_product_description"
                                                         ></textarea>
                                                     </div>
                                                     <div class="form-group">
@@ -129,25 +129,23 @@
                                                     <div class="form-group">
                                                         <label for="exampleInputFile">{{__('product Publish Date')}}</label>
                                                         <input type="text" class="form-control" id="test-date-id"
-                                                                id="exampleInputFile"
+                                                               id="exampleInputFile"
                                                                name="hp_product_publish_date"
-                                                               >
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="exampleInputFile">{{__('product status')}}</label>
-                                                        <input type="text" class="form-control"
-                                                                id="exampleInputFile"
-                                                               name="hp_product_status">
+                                                        >
                                                     </div>
                                                     <input type="hidden" name="hn_image" id="hn_image">
                                                     <div class="checkbox checkbox-info">
-                                                        <input type="checkbox" id="inputSchedule" name="inputCheckboxesSchedule">
-                                                        <label for="inputSchedule" class=""> <span>{{__('Check me out')}}</span> </label>
-                                                    </div>                                                </div>
+                                                        <input type="checkbox" id="inputSchedule"
+                                                               name="hp_product_status" value="0">
+                                                        <label for="inputSchedule" class="">
+                                                            <span>{{__('product status')}}</span> </label>
+                                                    </div>
+                                                </div>
                                                 <!-- /.box-body -->
 
                                                 <div class="box-footer">
-                                                    <button type="submit" class="btn btn-primary">{{__('Submit')}}</button>
+                                                    <button type="submit"
+                                                            class="btn btn-primary">{{__('Submit')}}</button>
                                                 </div>
                                             </form>
                                             <form action="{{url('/image-product-save')}}" class="dropzone" id="dropzone"
@@ -163,10 +161,10 @@
                                                 </div>
                                             </form>
                                         </div>
-        <!-- /.content -->
-        @endsection
+                                        <!-- /.content -->
+                                        @endsection
 
-        @push('scripts')
+                                        @push('scripts')
 
                                             <script src="{{asset('backend/src/kamadatepicker.min.js')}}"></script>
                                             <script src="{{asset('backend/js.pro/froala_editor.pkgd.min.js')}}"></script>

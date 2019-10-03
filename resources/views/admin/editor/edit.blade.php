@@ -65,13 +65,12 @@
             <section class="content-header">
                 <h1>
                     {{__('Edit Article')}}
-                    <small>{{__('Preview')}}</small>
                 </h1>
-                <ol class="breadcrumb">
-                    <li><a href="#"><i class="fa fa-dashboard"></i>{{__('Home')}}</a></li>
-                    <li><a href="#">{{__('Forms')}}</a></li>
-                    <li class="active">{{__('General Elements')}}</li>
-                </ol>
+                    <ol class="breadcrumb">
+                        <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{__('Home')}}</a></li>
+                        <li><a href="{{route('publish.index')}}">{{__('Article')}}</a></li>
+                    </ol>
+
             </section>
 
             <!-- /.content-wrapper -->
@@ -125,6 +124,10 @@
                                                         <img
                                                                id="exampleInputFile"
                                                                src="/img/news/{{$article->ha_image}}">
+                                                    </div>
+                                                    <div class="checkbox checkbox-info">
+                                                        <input type="checkbox" id="inputSchedule" name="ha_show" value="0">
+                                                        <label for="inputSchedule" class=""> <span>{{__('Show in Article')}}</span> </label>
                                                     </div>
                                                 </div>
                                                 <input type="hidden" name="hn_image" id="hn_image">

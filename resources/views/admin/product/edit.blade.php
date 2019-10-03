@@ -66,12 +66,10 @@
             <section class="content-header">
                 <h1>
                     {{__('Edit Product')}}
-                    <small>{{__('Preview')}}</small>
                 </h1>
                 <ol class="breadcrumb">
-                    <li><a href="#"><i class="fa fa-dashboard"></i>{{__('Home')}}</a></li>
-                    <li><a href="#">{{__('Forms')}}</a></li>
-                    <li class="active">{{__('General Elements')}}</li>
+                    <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{__('Home')}}</a></li>
+                    <li><a href="{{route('product.index')}}">{{__('Product')}}</a></li>
                 </ol>
             </section>
 
@@ -132,16 +130,11 @@
                                                    name="hp_product_publish_date"
                                                    value="{{$product->hp_product_publish_date}}">
                                         </div>
-                                        <div class="form-group">
-                                            <label for="exampleInputFile">{{__('product status')}}</label>
-                                            <input type="text" class="form-control"
-                                                   id="exampleInputFile"
-                                                   name="hp_product_status" value="{{$product->hp_product_status}}">
-                                        </div>
-                                        <input type="hidden" name="hn_image" id="hn_image">
                                         <div class="checkbox checkbox-info">
-                                            <input type="checkbox" id="inputSchedule" name="inputCheckboxesSchedule">
-                                            <label for="inputSchedule" class=""> <span>{{__('Check me out')}}</span> </label>
+                                            <input type="checkbox" id="inputSchedule"
+                                                   name="hp_product_status" value="0">
+                                            <label for="inputSchedule" class="">
+                                                <span>{{__('product status')}}</span> </label>
                                         </div>
                                     </div>
                                     <!-- /.box-body -->

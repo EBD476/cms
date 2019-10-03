@@ -65,12 +65,10 @@
             <section class="content-header">
                 <h1>
                     {{__('Insert Article')}}
-                    <small>{{__('Preview')}}</small>
                 </h1>
                 <ol class="breadcrumb">
-                    <li><a href="#"><i class="fa fa-dashboard"></i>{{__('Home')}}</a></li>
-                    <li><a href="#">{{__('Forms')}}</a></li>
-                    <li class="active">{{__('General Elements')}}</li>
+                    <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{__('Home')}}</a></li>
+                    <li><a href="{{route('publish.index')}}">{{__('Article')}}</a></li>
                 </ol>
             </section>
 
@@ -110,6 +108,10 @@
                                                         <label for="exampleInputFile">{{__('Description')}}</label>
                                                         <textarea type="text" class="form-control"
                                                                   name="hn_description" id="froala"></textarea>
+                                                    </div>
+                                                    <div class="checkbox checkbox-info">
+                                                        <input type="checkbox" id="inputSchedule" name="ha_show" value="0">
+                                                        <label for="inputSchedule" class=""> <span>{{__('Show in Article')}}</span> </label>
                                                     </div>
                                                     <input type="hidden" name="hn_image" id="ha_image">
                                                 </div>

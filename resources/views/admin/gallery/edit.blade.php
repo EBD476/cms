@@ -65,13 +65,11 @@
 
             <section class="content-header">
                 <h1>
-                    {{__('Insert Image')}}
-                    <small>{{__('Preview')}}</small>
+                    {{__('Edit Image')}}
                 </h1>
                 <ol class="breadcrumb">
-                    <li><a href="#"><i class="fa fa-dashboard"></i>{{__('Home')}}</a></li>
-                    <li><a href="#">{{__('Forms')}}</a></li>
-                    <li class="active">{{__('General Elements')}}</li>
+                    <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{__('Home')}}</a></li>
+                    <li><a href="{{route('gallery.index')}}">{{__('Gallery')}}</a></li>
                 </ol>
             </section>
 
@@ -118,8 +116,8 @@
                                                     </div>
                                                         <input type="hidden" name="hn_image" id="hn_image">
                                                     <div class="checkbox checkbox-info">
-                                                        <input type="checkbox" id="inputSchedule" name="inputCheckboxesSchedule">
-                                                        <label for="inputSchedule" class=""> <span>{{__('Check me out')}}</span> </label>
+                                                        <input type="checkbox" id="inputSchedule" name="hg_show" value="0">
+                                                        <label for="inputSchedule" class=""> <span>{{__('Show in Gallery')}}</span> </label>
                                                     </div>
                                                 </div>
                                                 <!-- /.box-body -->

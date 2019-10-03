@@ -48,7 +48,9 @@ class DealershipsController extends Controller
             'hds_dealership_city' => 'required',
             'hds_dealership_agent' => 'required',
             'hds_dealership_address' => 'required',
-            'hds_dealership_phone' => 'required',
+            'hds_dealership_phone_1' => 'required',
+            'hds_dealership_phone_2' => 'required',
+            'hds_dealership_phone_3' => 'required',
             'hds_dealership_state' => 'required',
         ]);
 
@@ -58,7 +60,9 @@ class DealershipsController extends Controller
         $dealerships->hds_dealership_city = $request->hds_dealership_city;
         $dealerships->hds_dealership_agent = $request->hds_dealership_agent;
         $dealerships->hds_dealership_address = $request->hds_dealership_address;
-        $dealerships->hds_dealership_phone = $request->hds_dealership_phone;
+        $dealerships->hds_dealership_phone_1 = $request->hds_dealership_phone_1;
+        $dealerships->hds_dealership_phone_2 = $request->hds_dealership_phone_2;
+        $dealerships->hds_dealership_phone_3 = $request->hds_dealership_phone_3;
         $dealerships->hds_dealership_state = $request->hds_dealership_state;
         $dealerships->save();
         return redirect()->route('dealerships.index');

@@ -102,14 +102,14 @@
                     {{--</ul>--}}
                 {{--</li>--}}
                 <!-- Config access -->
-                <li><a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
-                                class="mdi mdi-gauge"></i><span
-                                class="hide-menu">{{__('Config')}}</span></a>
-                    <ul aria-expanded="false" class="collapse">
-                        <li><a href="{{route('config.index')}}">{{__('Config List')}}</a></li>
-                        <li><a href="{{route('config.create')}}">{{__('Create Config')}}</a></li>
-                    </ul>
-                </li>
+                {{--<li><a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i--}}
+                                {{--class="mdi mdi-gauge"></i><span--}}
+                                {{--class="hide-menu">{{__('Config')}}</span></a>--}}
+                    {{--<ul aria-expanded="false" class="collapse">--}}
+                        {{--<li><a href="{{route('config.index')}}">{{__('Config List')}}</a></li>--}}
+                        {{--<li><a href="{{route('config.create')}}">{{__('Create Config')}}</a></li>--}}
+                    {{--</ul>--}}
+                {{--</li>--}}
                 <!-- Menu access -->
                 <!-- Setting access -->
                 <li><a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
@@ -117,6 +117,8 @@
                                 class="hide-menu">{{__('Setting')}}</span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="{{route('setting.create')}}">{{__('Setting')}}</a></li>
+                        <li><a href="{{route('admin.up')}}">{{__('Up Web')}}</a></li>
+                        <li><a href="{{route('admin.down')}}">{{__('Down Web')}}</a></li>
                     </ul>
                 </li>
                 <!-- page access -->
@@ -175,14 +177,6 @@
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="{{route('contact_us.index')}}">{{__('show list')}}</a></li>
                         <li><a href="{{route('contact_us.create')}}">{{__('Contact Us')}}</a></li>
-                    </ul>
-                </li>
-                 <li><a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
-                                class="mdi mdi-gauge"></i><span
-                                class="hide-menu">{{__('Maintenance')}}</span></a>
-                    <ul aria-expanded="false" class="collapse">
-                        <li><a href="{{route('admin.up')}}">{{__('Up Web')}}</a></li>
-                        <li><a href="{{route('admin.down')}}">{{__('Down Web')}}</a></li>
                     </ul>
                 </li>
             </ul>

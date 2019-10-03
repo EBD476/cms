@@ -17,12 +17,12 @@
             <!-- ============================================================== -->
             <div class="row page-titles">
                 <div class="col-md-5 col-8 align-self-center">
-                    <h3 class="text-themecolor m-b-0 m-t-0">Table Data table</h3>
+                    <h3 class="text-themecolor m-b-0 m-t-0">{{__('HANTA ERP System')}}</h3>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">
-                            <a href="javascript:void(0)">Home</a>
+                            <a href="{{route('admin.dashboard')}}">{{__('Home')}}</a>
                         </li>
-                        <li class="breadcrumb-item active">Table Data table</li>
+                        <li class="breadcrumb-item active">{{__('Article Page')}}</li>
                     </ol>
                 </div>
                 <div class="col-md-7 col-4 align-self-center">
@@ -80,29 +80,17 @@
                                 <div id="myTable_wrapper"
                                      class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
                                     <div class="row">
-                                        <div class="col-sm-12 col-md-6">
-                                            <div class="dataTables_length" id="myTable_length"><label>{{__('Show')}}<select
-                                                            name="myTable_length" aria-controls="myTable"
-                                                            class="form-control form-control-sm">
-                                                        <option value="10">10</option>
-                                                        <option value="25">25</option>
-                                                        <option value="50">50</option>
-                                                        <option value="100">100</option>
-                                                    </select>{{__('entries')}}</label></div>
-                                        </div>
-                                        <div class="col-sm-12 col-md-6">
-                                            <div id="myTable_filter" class="dataTables_filter"><label> {{__('Search')}}:<input
-                                                            type="search" class="form-control form-control-sm"
-                                                            placeholder="" aria-controls="myTable"></label></div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
                                         <div class="col-sm-12">
                                             <table id="myTable"
                                                    class="table table-bordered table-striped dataTable no-footer"
                                                    role="grid" aria-describedby="myTable_info">
                                                 <thead>
                                                 <tr role="row">
+                                                    <th class="sorting_asc" tabindex="0" aria-controls="myTable"
+                                                        rowspan="1" colspan="1" aria-sort="ascending"
+                                                        aria-label="Name: activate to sort column descending"
+                                                        style="width: 146px;">{{__('Status')}}
+                                                    </th>
                                                     <th class="sorting_asc" tabindex="0" aria-controls="myTable"
                                                         rowspan="1" colspan="1" aria-sort="ascending"
                                                         aria-label="Name: activate to sort column descending"
@@ -115,6 +103,11 @@
                                                     </th>
                                                     <th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1"
                                                         colspan="1"
+                                                        aria-label="Position: activate to sort column ascending"
+                                                        style="width: 242px;">{{__('Published at')}}
+                                                    </th>
+                                                    <th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1"
+                                                        colspan="1"
                                                         aria-label="Office: activate to sort column ascending"
                                                         style="width: 106px;"> {{__('Action')}}
                                                     </th>
@@ -124,10 +117,20 @@
                                                 @foreach($article as $key => $article)
                                                     <tr>
                                                         <td>
+                                                            <div class="checkbox checkbox-info">
+                                                                <input type="checkbox" id="inputSchedule"
+                                                                       name="hp_product_status" value="0">
+                                                                <label for="inputSchedule" class=""></label>
+                                                            </div>
+                                                        </td>
+                                                        <td>
                                                             {{$key + 1}}
                                                         </td>
                                                         <td>
                                                             {{$article ->ha_title}}
+                                                        </td>
+                                                        <td>
+                                                            {{$news ->created_at}}
                                                         </td>
                                                         <td>
                                                             <a href="{{route('publish.edit',$article->id)}}"
@@ -216,37 +219,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-12 col-md-5">
-                            <div class="dataTables_info" id="example_info" role="status" aria-live="polite">Showing 1 to
-                                17 of 17 entries
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-7">
-                            <div class="dataTables_paginate paging_simple_numbers" id="example_paginate">
-                                <ul class="pagination">
-                                    <li class="paginate_button page-item previous disabled" id="example_previous"><a
-                                                href="#" aria-controls="example" data-dt-idx="0" tabindex="0"
-                                                class="page-link">Previous</a></li>
-                                    <li class="paginate_button page-item active"><a href="#" aria-controls="example"
-                                                                                    data-dt-idx="1" tabindex="0"
-                                                                                    class="page-link">1</a></li>
-                                    <li class="paginate_button page-item next disabled" id="example_next"><a href="#"
-                                                                                                             aria-controls="example"
-                                                                                                             data-dt-idx="2"
-                                                                                                             tabindex="0"
-                                                                                                             class="page-link">Next</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
-    </div>
-    </div>
+
     <!-- ============================================================== -->
     <!-- End PAge Content -->
     <!-- ============================================================== -->
@@ -378,11 +355,6 @@
                     </ul>
                 </div>
             </div>
-            <div class="slimScrollBar"
-                 style="background: rgb(220, 220, 220); width: 5px; position: absolute; top: 0px; opacity: 0.4; display: block; border-radius: 7px; z-index: 99; right: 1px;"></div>
-            <div class="slimScrollRail"
-                 style="width: 5px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div>
-        </div>
     </div>
     <!-- ============================================================== -->
     <!-- End Right sidebar -->
@@ -390,15 +362,6 @@
     </div>
     <!-- ============================================================== -->
     <!-- End Container fluid  -->
-    <!-- ============================================================== -->
-    <!-- ============================================================== -->
-    <!-- footer -->
-    <!-- ============================================================== -->
-    <footer class="footer">
-        © 2019 Material Pro Admin by wrappixel.com
-    </footer>
-    <!-- ============================================================== -->
-    <!-- End footer -->
     <!-- ============================================================== -->
     </div>
 @endsection

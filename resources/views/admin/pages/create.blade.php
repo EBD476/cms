@@ -65,12 +65,10 @@
             <section class="content-header">
                 <h1>
                     {{__('Insert Pages')}}
-                    <small>{{__('Preview')}}</small>
                 </h1>
                 <ol class="breadcrumb">
-                    <li><a href="#"><i class="fa fa-dashboard"></i>{{__('Home')}}</a></li>
-                    <li><a href="#">{{__('Forms')}}</a></li>
-                    <li class="active">{{__('General Elements')}}</li>
+                    <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{__('Home')}}</a></li>
+                    <li><a href="{{route('pages.index')}}">{{__('Dealership')}}</a></li>
                 </ol>
             </section>
 
@@ -101,11 +99,11 @@
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="exampleInputFile">{{__('Title')}}</label>
-                                    <input type="text" class="form-control" placeholder="{{__('Title')}}" id="exampleInputFile" name="title">
+                                    <input type="text" class="form-control" id="exampleInputFile" name="title">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputFile">{{__('Page Slug')}}</label>
-                                    <input type="text"  class="form-control" placeholder="{{__('Page Slug')}}" id="exampleInputFile" name="page_slug">
+                                    <input type="text"  class="form-control" id="exampleInputFile" name="page_slug">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputFile">{{__('Body')}}</label>
@@ -120,7 +118,7 @@
                                 <input type="hidden" name="hn_image4" id="hn_image4">
                                 <div class="form-group">
                                     <label for="exampleInputFile">{{__('Cannonical Link')}}</label>
-                                    <input type="text" class="form-control" placeholder="{{__('Cannonical Link')}}" id="exampleInputFile" name="cannonical_link">
+                                    <input type="text" class="form-control"  id="exampleInputFile" name="cannonical_link">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputFile">{{__('Seo Title')}}</label>

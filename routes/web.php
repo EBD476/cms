@@ -36,7 +36,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth', 'namespace' => 'admin
     Route::post('/image-project-save','ProjectsController@project_upload')->name('project.project_upload');
     Route::post('/image-product-save','ProductController@product_upload')->name('product.product_upload');
     Route::post('/image-pages-save','PagesController@pages_upload')->name('pages.pages_upload');
-    Route::post('/image-user-save','DataUserController@datauser_upload')->name('datauser.user_upload');
+    Route::post('/image-user-save','DataUserController@user_upload')->name('datauser.user_upload');
     Route::post('/image-gallery-save','GalleryController@gallery_upload')->name('gallery.gallery_upload');
     Route::get('up','dashboardcontroller@up')->name('admin.up');
     Route::get('down','dashboardcontroller@down')->name('admin.down');
@@ -55,6 +55,9 @@ route::group(['prefix' => 'frontend', 'namespace' => 'frontend'], function () {
     Route::get('pages/{page}', 'PageController@index')->name('frontend.pages.test');
     //  }
     Route::get('product', 'ProductController@index')->name('frontend.product.index');
+    Route::get('gallery', 'GalleryController@index')->name('frontend.gallery.index');
+    Route::get('news', 'NewsController@index')->name('frontend.news.index');
+    Route::get('article', 'ArticleController@index')->name('frontend.article.index');
     Route::get('project', 'ProjectController@index')->name('frontend.project.index');
 
 

@@ -38,32 +38,15 @@ class DataUserController extends Controller
             'name' => 'required' ,
             'username'=>'required',
             'email' => 'required' ,
-            'email_verified_at'=>'required',
             'password' => 'required' ,
             'phone' => 'required' ,
             'address' => 'required' ,
-            'remember_token' =>'required',
+//            'remember_token' =>'required',
         ]);
-        $image = $request->file('image');
-        $slug = str_slug($request->image);
-        if(isset($image))
-        {
-            $currentdate = Carbon::now()->todatestring();
-            $imagename = $slug . '-' . $currentdate . '-' . uniqid() . '.' . $image->getClientOriginalExtension();
-            if (!file_exists('upload/user')) {
-                mkdir('upload/user', 0777, true);
-            }
-            $image->move('upload/user', $imagename);
-        }
-        else
-        {
-            $imagename='default.png';
-        }
         $dataUser = new User();
         $dataUser->name= $request->name;
         $dataUser->username= $request->username;
         $dataUser->email= $request->email;
-        $dataUser->email_verified_at= $request->email_verified_at;
         $dataUser->password= Hash::make($request->password);
         $dataUser->phone= $request->phone;
         $dataUser->address= $request->address;
@@ -112,7 +95,7 @@ class DataUserController extends Controller
             'name' => 'required',
             'username'=>'required',
             'email' => 'required',
-            'email_verified_at'=>'required',
+//            'email_verified_at'=>'required',
             'password' => 'required',
             'phone' => 'required',
             'address' => 'required',
@@ -122,13 +105,12 @@ class DataUserController extends Controller
             $dataUser->name= $request->name;
             $dataUser->username= $request->username;
             $dataUser->email= $request->email;
-            $dataUser->email_verified_at= $request->email_verified_at;
+//          $dataUser->email_verified_at= $request->email_verified_at;
             $dataUser->password= Hash::make($request->password);
             $dataUser->phone= $request->phone;
-            $dataUser->address= $request->address;
+            $dataUser->address=$request->address;
             $dataUser->remember_token= $request->remember_token;
-            $dataUser->image = $request->hn_image;
-        ;
+            $dataUser->image=$request->hn_image;
             $dataUser->save();
             return redirect()->route('user.index')->with('successMSG', 'عملیات ویرایش اطلاعات با موفقیت انجام شد.');
 
@@ -156,8 +138,8 @@ class DataUserController extends Controller
         if (isset($image)) {
             $current_date = Carbon::now()->todatestring();
 //          $image_name = $current_date . '-' . uniqid() . '.' . $image->getClientOriginalExtension();
-            if (!file_exists('img/news')) {
-                mkdir('img/news', 0777, true);
+            if (!file_exists('img/user')) {
+                mkdir('img/user', 0777, true);
             }
             $image->move('img/user', $filename);
         } else {
