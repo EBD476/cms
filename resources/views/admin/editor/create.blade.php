@@ -113,7 +113,7 @@
                                                         <input type="checkbox" id="inputSchedule" name="ha_show" value="0">
                                                         <label for="inputSchedule" class=""> <span>{{__('Show in Article')}}</span> </label>
                                                     </div>
-                                                    <input type="hidden" name="hn_image" id="ha_image">
+                                                    <input type="hidden" name="hn_image" id="hn_image">
                                                 </div>
                                                 <div class="box-footer">
                                                     <button type="submit"
@@ -144,7 +144,26 @@
                                                 <script src="{{asset('backend/js.pro/froala_editor.pkgd.min.js')}}"></script>
                                                 <script src="{{asset('backend/js.pro/dropzone.js')}}"></script>
                                                 <script>
-                                                    var editor = new FroalaEditor('#froala');
+                                                    var editor =new FroalaEditor('#froala', {
+
+                                                        // Set the image upload URL.
+                                                        imageUploadURL: '/admin/image-save',
+
+                                                        // Additional upload params.
+                                                        imageUploadParams: {
+                                                            _token : $('input[name=_token]').val()
+                                                        },
+
+                                                        // Set request type.
+                                                        // imageUploadMethod: 'POST',
+
+                                                        // Set max image size to 5MB.
+                                                        imageMaxSize: 5 * 1024 * 1024,
+
+                                                        // Allow to upload PNG and JPG.
+                                                        imageAllowedTypes: ['jpeg', 'jpg', 'png'],
+
+                                                    })
 
                                                     Dropzone.options.dropzone =
                                                         {

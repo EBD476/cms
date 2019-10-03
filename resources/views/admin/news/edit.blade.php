@@ -118,8 +118,8 @@
                                                                src="/img/news/{{$news->hn_image}}">
                                                     </div>
                                                     <div class="checkbox checkbox-info">
-                                                        <input type="checkbox" id="inputSchedule" name="hn_show" value="0">
-                                                        <label for="inputSchedule" class=""> <span>{{__('Show in News')}}</span> </label>
+                                                        <input type="checkbox" id="inputSchedule" name="inputCheckboxesSchedule">
+                                                        <label for="inputSchedule" class=""> <span>{{__('Check me out')}}</span> </label>
                                                     </div>
                                                 </div>
                                                 <input type="hidden" name="hn_image" id="hn_image">

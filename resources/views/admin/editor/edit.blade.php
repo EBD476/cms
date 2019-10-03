@@ -110,7 +110,7 @@
                                                         <label for="exampleInputPassword1">{{__('Auther')}}</label>
                                                         <input type="text" class="form-control"
                                                                id="exampleInputPassword1"
-                                                               name="hn_title" value="{{$article->ha_auther}}">
+                                                               name="ha_auther" value="{{$article->ha_auther}}">
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="exampleInputFile">{{__('Description')}}</label>

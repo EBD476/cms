@@ -4,8 +4,8 @@
 
 @push('css')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css">
+    <link href="{{asset('backend/css.pro/switchery.min.css')}}" rel="stylesheet"/>
 @endpush
-
 @section('content')
     <div class="page-wrapper" style="min-height: 177px;">
         <!-- ============================================================== -->
@@ -81,16 +81,11 @@
                                      class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <table id="myTable"
+                                            <table id="table"
                                                    class="table table-bordered table-striped dataTable no-footer"
                                                    role="grid" aria-describedby="myTable_info">
                                                 <thead>
                                                 <tr role="row">
-                                                    <th class="sorting_asc" tabindex="0" aria-controls="myTable"
-                                                        rowspan="1" colspan="1" aria-sort="ascending"
-                                                        aria-label="Name: activate to sort column descending"
-                                                        style="width: 146px;">{{__('Status')}}
-                                                    </th>
                                                     <th class="sorting_asc" tabindex="0" aria-controls="myTable"
                                                         rowspan="1" colspan="1" aria-sort="ascending"
                                                         aria-label="Name: activate to sort column descending"
@@ -106,6 +101,11 @@
                                                         aria-label="Position: activate to sort column ascending"
                                                         style="width: 242px;">{{__('Published at')}}
                                                     </th>
+                                                    <th class="sorting_asc" tabindex="0" aria-controls="myTable"
+                                                        rowspan="1" colspan="1" aria-sort="ascending"
+                                                        aria-label="Name: activate to sort column descending"
+                                                        style="width: 146px;">{{__('Status')}}
+                                                    </th>
                                                     <th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1"
                                                         colspan="1"
                                                         aria-label="Office: activate to sort column ascending"
@@ -117,25 +117,22 @@
                                                 @foreach($article as $key => $article)
                                                     <tr>
                                                         <td>
-                                                            <div class="checkbox checkbox-info">
-                                                                <input type="checkbox" id="inputSchedule"
-                                                                       name="hp_product_status" value="0">
-                                                                <label for="inputSchedule" class=""></label>
-                                                            </div>
-                                                        </td>
-                                                        <td>
                                                             {{$key + 1}}
                                                         </td>
                                                         <td>
                                                             {{$article ->ha_title}}
                                                         </td>
                                                         <td>
-                                                            {{$news ->created_at}}
+                                                            {{$article ->created_at}}
+                                                        </td>
+                                                        <td>
+                                                            <input type="checkbox" @if ($article ->ha_status) checked
+                                                                   @endif class="js-switch"
+                                                                   data-size="small" data-id="{{$article->id}}">
                                                         </td>
                                                         <td>
                                                             <a href="{{route('publish.edit',$article->id)}}"
-                                                               data-toggle="tooltip" data-original-title="Edit">edit <i
-                                                                        class="ti-pencil"></i>
+                                                               class="btn btn-info btn-sm"><i class="ti-pencil"></i></a>
                                                             </a>
                                                             <form id="-form-delete{{$article->id}}"
                                                                   style="display: none;" method="POST"
@@ -156,63 +153,6 @@
                                                 @endforeach
                                                 </tbody>
                                             </table>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-12 col-md-5">
-                                            <div class="dataTables_info" id="myTable_info" role="status"
-                                                 aria-live="polite">Showing 1 to 10 of 57 entries
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-12 col-md-7">
-                                            <div class="dataTables_paginate paging_simple_numbers"
-                                                 id="myTable_paginate">
-                                                <ul class="pagination">
-                                                    <li class="paginate_button page-item previous disabled"
-                                                        id="myTable_previous"><a href="#" aria-controls="myTable"
-                                                                                 data-dt-idx="0" tabindex="0"
-                                                                                 class="page-link">Previous</a></li>
-                                                    <li class="paginate_button page-item active"><a href="#"
-                                                                                                    aria-controls="myTable"
-                                                                                                    data-dt-idx="1"
-                                                                                                    tabindex="0"
-                                                                                                    class="page-link">1</a>
-                                                    </li>
-                                                    <li class="paginate_button page-item "><a href="#"
-                                                                                              aria-controls="myTable"
-                                                                                              data-dt-idx="2"
-                                                                                              tabindex="0"
-                                                                                              class="page-link">2</a>
-                                                    </li>
-                                                    <li class="paginate_button page-item "><a href="#"
-                                                                                              aria-controls="myTable"
-                                                                                              data-dt-idx="3"
-                                                                                              tabindex="0"
-                                                                                              class="page-link">3</a>
-                                                    </li>
-                                                    <li class="paginate_button page-item "><a href="#"
-                                                                                              aria-controls="myTable"
-                                                                                              data-dt-idx="4"
-                                                                                              tabindex="0"
-                                                                                              class="page-link">4</a>
-                                                    </li>
-                                                    <li class="paginate_button page-item "><a href="#"
-                                                                                              aria-controls="myTable"
-                                                                                              data-dt-idx="5"
-                                                                                              tabindex="0"
-                                                                                              class="page-link">5</a>
-                                                    </li>
-                                                    <li class="paginate_button page-item "><a href="#"
-                                                                                              aria-controls="myTable"
-                                                                                              data-dt-idx="6"
-                                                                                              tabindex="0"
-                                                                                              class="page-link">6</a>
-                                                    </li>
-                                                    <li class="paginate_button page-item next" id="myTable_next"><a
-                                                                href="#" aria-controls="myTable" data-dt-idx="7"
-                                                                tabindex="0" class="page-link">Next</a></li>
-                                                </ul>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -355,10 +295,10 @@
                     </ul>
                 </div>
             </div>
-    </div>
-    <!-- ============================================================== -->
-    <!-- End Right sidebar -->
-    <!-- ============================================================== -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Right sidebar -->
+        <!-- ============================================================== -->
     </div>
     <!-- ============================================================== -->
     <!-- End Container fluid  -->
@@ -369,9 +309,52 @@
 @push('scripts')
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
+    <script src="{{asset('backend/js.pro/switchery.min.js')}}"></script>
     <script>
         $(document).ready(function () {
             $('#table').DataTable();
+
+            var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+            $('.js-switch').each(function () {
+                new Switchery($(this)[0], $(this).data());
+
+                $(this)[0].onchange = function () {
+//ارسال بخشی از دیتا ی فرم . زمانی که به کل اطلاعات فرم نیازی نیست یا فرمی وجود ندارد
+                    var data = {
+                        id: $(this).data('id'),
+                        //اینپوت هایی که به کنترلر request داده می شود اینجا ساخته شده است.
+                        status: $(this)[0].checked  == true ? 1 : 0
+                    };
+
+                    // $.blockUI();
+
+
+                    //token
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+//پاس کردن دیتا به کنترلر
+                    $.ajax({
+                        url: '/admin/article-status',
+                        type: 'POST',
+                        data: data,
+                        dataType: 'json',
+                        async: false,
+                        success: function (data) {
+                            // alert(data.response);
+                            // setTimeout($.unblockUI, 2000);
+                        },
+                        cache: false,
+                    });
+                    //alert($(this)[0].checked);
+                }
+            });
+
+
         });
+
+
     </script>
 @endpush

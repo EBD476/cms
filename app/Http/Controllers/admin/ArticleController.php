@@ -32,22 +32,17 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'ha_title	' => 'required',
-            'ha_auther' => 'required',
-            'ha_editor' => 'required',
-            'ha_show' => 'required',
-
-
-        ]);
+//        $this->validate($request, [
+//            'ha_title	' => 'required',
+//            'hn_description' => 'required',
+//            'ha_show' => 'required',
+//        ]);
 
         $article = new Article();
         $article->ha_title = $request->hn_title;
-        $article->ha_auther = $request->hn_title;
-        $article->ha_editor = $request->hn_description;
+        $article->ha_editor	 = $request->hn_description;
         $article->ha_image = $request->hn_image;
-        $article->ha_show = $request->ha_show;
-
+        $article->ha_status = $request->ha_show;
         $article->save();
         return redirect()->route('publish.index');
     }
@@ -85,21 +80,21 @@ class ArticleController extends Controller
     public function update(Request $request, $id)
     {
 
-        $this->validate($request, [
-            'ha_title	' => 'required',
-            'ha_auther' => 'required',
-            'ha_editor' => 'required',
-            'ha_show' => 'required',
-
-        ]);
+//        $this->validate($request, [
+//            'ha_title	' => 'required',
+//            'ha_auther' => 'required',
+//            'ha_editor' => 'required',
+//            'ha_show' => 'required',
+//
+//        ]);
         $article = Article::find($id);
         $article->ha_title = $request->hn_title;
-        $article->ha_auther = $request->hn_title;
+        $article->ha_auther = $request->ha_auther;
         $article->ha_editor = $request->hn_description;
         $article->ha_image = $request->hn_image;
-        $article->ha_show = $request->ha_show;
+        $article->ha_status = $request->ha_show;
         $article->save();
-        return redirect()->route('news.index');
+        return redirect()->route('publish.index');
     }
 
     /**
@@ -134,5 +129,11 @@ class ArticleController extends Controller
 //        $news->hn_image = $image_name;
 //        $news->save();
 //
+    }
+    public function update_status(Request $request)
+    {
+        $article=Article::find($request->id);
+        $article->ha_status=$request->status;
+        $article->save();
     }
 }

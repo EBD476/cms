@@ -41,6 +41,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth', 'namespace' => 'admin
     Route::get('up','dashboardcontroller@up')->name('admin.up');
     Route::get('down','dashboardcontroller@down')->name('admin.down');
     Route::resource('publish', 'ArticleController');
+    Route::post('article-status','ArticleController@update_status')->name('publish.article-status');
     Route::resource('contact_us','ContactUsController');
 
 

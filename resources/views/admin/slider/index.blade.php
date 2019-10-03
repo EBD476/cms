@@ -88,11 +88,6 @@
                                                     <th class="sorting_asc" tabindex="0" aria-controls="myTable"
                                                         rowspan="1" colspan="1" aria-sort="ascending"
                                                         aria-label="Name: activate to sort column descending"
-                                                        style="width: 146px;">{{__('Status')}}
-                                                    </th>
-                                                    <th class="sorting_asc" tabindex="0" aria-controls="myTable"
-                                                        rowspan="1" colspan="1" aria-sort="ascending"
-                                                        aria-label="Name: activate to sort column descending"
                                                         style="width: 146px;"> {{__('ID')}}
                                                     </th>
                                                     <th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1"
@@ -104,6 +99,11 @@
                                                         colspan="1"
                                                         aria-label="Office: activate to sort column ascending"
                                                         style="width: 106px;">{{__('Sub Title')}}
+                                                    </th>
+                                                    <th class="sorting_asc" tabindex="0" aria-controls="myTable"
+                                                        rowspan="1" colspan="1" aria-sort="ascending"
+                                                        aria-label="Name: activate to sort column descending"
+                                                        style="width: 146px;">{{__('Status')}}
                                                     </th>
                                                     <th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1"
                                                         colspan="1"
@@ -117,13 +117,6 @@
                                     @foreach($sliders as $key => $slider)
                                         <tr>
                                             <td>
-                                                <div class="checkbox checkbox-info">
-                                                    <input type="checkbox" id="inputSchedule"
-                                                           name="hp_product_status" value="0">
-                                                    <label for="inputSchedule" class=""></label>
-                                                </div>
-                                            </td>
-                                            <td>
                                                 {{$key + 1}}
                                             </td>
                                             <td>
@@ -131,6 +124,13 @@
                                             </td>
                                             <td>
                                                 {{$slider -> sub_title}}
+                                            </td>
+                                            <td>
+                                                <div class="checkbox checkbox-info">
+                                                    <input type="checkbox" id="inputSchedule"
+                                                           name="hp_product_status" value="0">
+                                                    <label for="inputSchedule" class=""></label>
+                                                </div>
                                             </td>
                                             <td>
                                                <a href="{{route('slider.edit',$slider->id)}}" class="btn btn-info btn-sm"><i class="ti-pencil"></i></a>
