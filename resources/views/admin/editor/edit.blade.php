@@ -67,7 +67,7 @@
                     {{__('Edit Article')}}
                 </h1>
                     <ol class="breadcrumb">
-                        <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{__('Home')}}</a></li>
+                        <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{__('Home')}} > </a></li>
                         <li><a href="{{route('publish.index')}}">{{__('Article')}}</a></li>
                     </ol>
 

@@ -68,7 +68,7 @@
                     <small>{{__('Preview')}}</small>
                 </h1>
                 <ol class="breadcrumb">
-                    <li><a href="#"><i class="fa fa-dashboard"></i>{{__('Home')}}</a></li>
+                    <li><a href="#"><i class="fa fa-dashboard"></i>{{__('Home')}} > </a></li>
                     <li><a href="#">{{__('Forms')}}</a></li>
                     <li class="active">{{__('General Elements')}}</li>
                 </ol>

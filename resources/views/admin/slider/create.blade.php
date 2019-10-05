@@ -67,7 +67,7 @@
                     {{__('Insert Slider')}}
                 </h1>
                 <ol class="breadcrumb">
-                    <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{__('Home')}}</a></li>
+                    <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{__('Home')}} > </a></li>
                     <li><a href="{{route('slider.index')}}">{{__('Slider')}}</a></li>
                 </ol>
             </section>

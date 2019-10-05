@@ -68,7 +68,7 @@
                     <small>{{__('Preview')}}</small>
                 </h1>
                 <ol class="breadcrumb">
-                    <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{__('Home')}}</a></li>
+                    <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{__('Home')}} > </a></li>
                     <li><a href="{{route('menu.index')}}">{{__('Menu')}}</a></li>
                 </ol>
             </section>

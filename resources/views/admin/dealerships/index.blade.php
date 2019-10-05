@@ -174,4 +174,52 @@
                     $('#table').DataTable();
                 });
             </script>
+            <script src="{{asset('backend/js.pro/switchery.min.js')}}"></script>
+            <script>
+                $(document).ready(function () {
+                    $('#table').DataTable();
+
+                    var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+                    $('.js-switch').each(function () {
+                        new Switchery($(this)[0], $(this).data());
+
+                        $(this)[0].onchange = function () {
+//ارسال بخشی از دیتا ی فرم . زمانی که به کل اطلاعات فرم نیازی نیست یا فرمی وجود ندارد
+                            var data = {
+                                id: $(this).data('id'),
+                                //اینپوت هایی که به کنترلر request داده می شود اینجا ساخته شده است.
+                                status: $(this)[0].checked  == true ? 1 : 0
+                            };
+
+                            // $.blockUI();
+
+
+                            //token
+                            $.ajaxSetup({
+                                headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                }
+                            });
+//پاس کردن دیتا به کنترلر
+                            $.ajax({
+                                url: '/admin/article-status',
+                                type: 'POST',
+                                data: data,
+                                dataType: 'json',
+                                async: false,
+                                success: function (data) {
+                                    // alert(data.response);
+                                    // setTimeout($.unblockUI, 2000);
+                                },
+                                cache: false,
+                            });
+                            //alert($(this)[0].checked);
+                        }
+                    });
+
+
+                });
+
+
+            </script>
         @endpush

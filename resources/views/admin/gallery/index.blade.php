@@ -4,6 +4,7 @@
 
 @push('css')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css">
+    <link href="{{asset('backend/css.pro/switchery.min.css')}}" rel="stylesheet"/>
 @endpush
 
 @section('content')
@@ -89,11 +90,6 @@
                                                     <th class="sorting_asc" tabindex="0" aria-controls="myTable"
                                                         rowspan="1" colspan="1" aria-sort="ascending"
                                                         aria-label="Name: activate to sort column descending"
-                                                        style="width: 146px;">{{__('Status')}}
-                                                    </th>
-                                                    <th class="sorting_asc" tabindex="0" aria-controls="myTable"
-                                                        rowspan="1" colspan="1" aria-sort="ascending"
-                                                        aria-label="Name: activate to sort column descending"
                                                         style="width: 146px;"> {{__('ID')}}
                                                     </th>
                                                     <th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1"
@@ -105,6 +101,11 @@
                                                         colspan="1"
                                                         aria-label="Office: activate to sort column ascending"
                                                         style="width: 106px;">{{__('Code')}}
+                                                    </th>
+                                                    <th class="sorting_asc" tabindex="0" aria-controls="myTable"
+                                                              rowspan="1" colspan="1" aria-sort="ascending"
+                                                              aria-label="Name: activate to sort column descending"
+                                                              style="width: 146px;">{{__('Status')}}
                                                     </th>
                                                     <th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1"
                                                         colspan="1"
@@ -118,13 +119,6 @@
                                     @foreach($gallery as $key => $gallery)
                                         <tr>
                                             <td>
-                                                <div class="checkbox checkbox-info">
-                                                    <input type="checkbox" id="inputSchedule"
-                                                           name="hp_product_status" value="0">
-                                                    <label for="inputSchedule" class=""></label>
-                                                </div>
-                                            </td>
-                                            <td>
                                                 {{$key + 1}}
                                             </td>
                                             <td>
@@ -132,6 +126,11 @@
                                             </td>
                                             <td>
                                                 {{$gallery ->hg_code}}
+                                            </td>
+                                            <td>
+                                                <input type="checkbox" @if ($gallery ->hp_product_status) checked
+                                                       @endif class="js-switch"
+                                                       data-size="small" data-id="{{$gallery->id}}">
                                             </td>
                                             <td>
                                                <a href="{{route('gallery.edit',$gallery->id)}}" class="btn btn-info btn-sm"><i class="ti-pencil"></i></a>
@@ -159,11 +158,83 @@
         @endsection
 
         @push('scripts')
-            <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-            <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
-            <script>
-                $(document).ready(function() {
-                    $('#table').DataTable();
-                } );
-            </script>
+                        <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+                        <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
+                        <script>
+                            $(document).ready(function() {
+                                $('#table').DataTable({
+                                    "language": {
+                                        "sEmptyTable":     "هیچ داده ای در جدول وجود ندارد",
+                                        "sInfo":           "نمایش _START_ تا _END_ از _TOTAL_ رکورد",
+                                        "sInfoEmpty":      "نمایش 0 تا 0 از 0 رکورد",
+                                        "sInfoFiltered":   "(فیلتر شده از _MAX_ رکورد)",
+                                        "sInfoPostFix":    "",
+                                        "sInfoThousands":  ",",
+                                        "sLengthMenu":     "نمایش _MENU_ رکورد",
+                                        "sLoadingRecords": "در حال بارگزاری...",
+                                        "sProcessing":     "در حال پردازش...",
+                                        "sSearch":         "جستجو:",
+                                        "sZeroRecords":    "رکوردی با این مشخصات پیدا نشد",
+                                        "oPaginate": {
+                                            "sFirst":    "ابتدا",
+                                            "sLast":     "انتها",
+                                            "sNext":     "بعدی",
+                                            "sPrevious": "قبلی"
+                                        },
+                                        "oAria": {
+                                            "sSortAscending":  ": فعال سازی نمایش به صورت صعودی",
+                                            "sSortDescending": ": فعال سازی نمایش به صورت نزولی"
+                                        }
+                                    }
+                                } );
+                            });
+                        </script>
+                        <script src="{{asset('backend/js.pro/switchery.min.js')}}"></script>
+                        <script>
+                            $(document).ready(function () {
+                                $('#table').DataTable();
+
+                                var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+                                $('.js-switch').each(function () {
+                                    new Switchery($(this)[0], $(this).data());
+
+                                    $(this)[0].onchange = function () {
+//ارسال بخشی از دیتا ی فرم . زمانی که به کل اطلاعات فرم نیازی نیست یا فرمی وجود ندارد
+                                        var data = {
+                                            id: $(this).data('id'),
+                                            //اینپوت هایی که به کنترلر request داده می شود اینجا ساخته شده است.
+                                            status: $(this)[0].checked  == true ? 1 : 0
+                                        };
+
+                                        // $.blockUI();
+
+
+                                        //token
+                                        $.ajaxSetup({
+                                            headers: {
+                                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                            }
+                                        });
+//پاس کردن دیتا به کنترلر
+                                        $.ajax({
+                                            url: '/admin/article-status',
+                                            type: 'POST',
+                                            data: data,
+                                            dataType: 'json',
+                                            async: false,
+                                            success: function (data) {
+                                                // alert(data.response);
+                                                // setTimeout($.unblockUI, 2000);
+                                            },
+                                            cache: false,
+                                        });
+                                        //alert($(this)[0].checked);
+                                    }
+                                });
+
+
+                            });
+
+
+                        </script>
     @endpush

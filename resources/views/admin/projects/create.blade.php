@@ -69,7 +69,7 @@
                     {{__('Insert Project')}}
                 </h1>
                 <ol class="breadcrumb">
-                    <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{__('Home')}}</a></li>
+                    <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{__('Home')}} > </a></li>
                     <li><a href="{{route('project.index')}}">{{__('Project')}}</a></li>
                 </ol>
             </section>
