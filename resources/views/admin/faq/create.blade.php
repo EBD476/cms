@@ -114,12 +114,7 @@
                                                             <label for="inputSchedule" class="">
                                                                 <span>{{__('Status On')}}</span> </label>
                                                         </div>
-                                                        <div class="checkbox checkbox-info">
-                                                            <input type="checkbox" id="inputSchedule"
-                                                                   name="inputCheckboxesSchedule">
-                                                            <label for="inputSchedule" class="">
-                                                                <span>{{__('Check me out')}}</span> </label>
-                                                        </div>
+
                                                     </div>
                                                     <!-- /.box-body -->
 
@@ -134,6 +129,47 @@
                                         @push('scripts')
                                             <script src="{{asset('backend/js.pro/froala_editor.pkgd.min.js')}}"></script>
                                             <script>
-                                                var editor = new FroalaEditor('#froala');
+                                                var editor = new FroalaEditor('#froala', {
+
+                                                    // Set the image upload URL.
+                                                    imageUploadURL: '/admin/image-save',
+
+                                                    // Additional upload params.
+                                                    imageUploadParams: {
+                                                        _token: $('input[name=_token]').val()
+                                                    },
+
+                                                    // Set request type.
+                                                    // imageUploadMethod: 'POST',
+
+                                                    // Set max image size to 5MB.
+                                                    imageMaxSize: 5 * 1024 * 1024,
+
+                                                    // Allow to upload PNG and JPG.
+                                                    imageAllowedTypes: ['jpeg', 'jpg', 'png'],
+
+                                                })
+
+                                                Dropzone.options.dropzone =
+                                                    {
+                                                        maxFilesize: 12,
+                                                        // فایل نوع آبجکت است
+                                                        renameFile: function (file) {
+                                                            var dt = new Date();
+                                                            var time = dt.getTime();
+                                                            return time + '-' + file.name;
+                                                        },
+                                                        acceptedFiles: ".jpeg,.jpg,.png,.gif",
+                                                        addRemoveLinks: true,
+                                                        timeout: 5000,
+                                                        success: function (file, response) {
+                                                            // اسم اینپوت و مقداری که باید به آن ارسال شود
+                                                            $('#hn_image').val(file.upload.filename);
+                                                        },
+                                                        error: function (file, response) {
+                                                            return false;
+                                                        }
+                                                    };
                                             </script>
+
     @endpush

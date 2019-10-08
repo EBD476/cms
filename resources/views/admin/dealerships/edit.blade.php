@@ -64,13 +64,11 @@
 
             <section class="content-header">
                 <h1>
-                    {{__('Edit Project')}}
-                    <small>{{__('Preview')}}</small>
+                    {{__('Edit Dealership')}}
                 </h1>
                 <ol class="breadcrumb">
-                    <li><a href="#"><i class="fa fa-dashboard"></i>{{__('Home')}} > </a></li>
-                    <li><a href="#">{{__('Forms')}}</a></li>
-                    <li class="active">{{__('General Elements')}}</li>
+                    <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{__('Home')}}</a></li>
+                    <li><a href="#">{{__('Dealership')}}</a></li>
                 </ol>
             </section>
 
@@ -91,30 +89,14 @@
                                     <div class="col-md-12">
                                         <!-- general form elements -->
                                         <div class="box box-primary">
-                                            <div class="box-header with-border">
-                                                <h3 class="box-title">{{__('Product')}}</h3>
-                                            </div>
                                             <div class="content-wrapper">
                                                 <!-- Content Header (Page header) -->
-                                                <section class="content-header">
-                                                    <h1>
-                                                        {{__('Edit Dealership')}}
-                                                        <small>{{__('Preview')}}</small>
-                                                    </h1>
-                                                    <ol class="breadcrumb">
-                                                        <li><a href="#"><i class="fa fa-dashboard"></i>{{__('Home')}}
-                                                            </a></li>
-                                                        <li><a href="#">{{__('Forms')}}</a></li>
-                                                        <li class="active">{{__('General Elements')}}</li>
-                                                    </ol>
-                                                </section>
-
                                                 <!-- /.content-wrapper -->
                                                 <!-- Main content -->
                                                 <section class="content">
                                                     <div class="row">
                                                         <!-- left column -->
-                                                        <div class="col-md-10">
+                                                        <div class="col-md-12">
                                                             <!-- general form elements -->
                                                             <div class="box box-primary">
                                                                 <div class="box-header with-border">
@@ -128,41 +110,74 @@
                                                                     @csrf
                                                                     @method('PUT')
                                                                     <div class="box-body">
-                                                                        <div class="form-group">
-                                                                            <label for="exampleInputFile">{{__('Dealership City')}}</label>
-                                                                            <input type="text" class="form-control"
-                                                                                   id="exampleInputFile"
-                                                                                   name="hds_dealership_city"
-                                                                                   value="{{$dealerships->hds_dealership_city}}">
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label for="exampleInputFile">{{__('Dealership Agent')}}</label>
-                                                                            <input type="text" class="form-control"
-                                                                                   id="exampleInputFile"
-                                                                                   name="hds_dealership_agent"
-                                                                                   value="{{$dealerships->hds_dealership_agent}}">
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label for="exampleInputFile">{{__('Dealership Phone 1')}}</label>
-                                                                            <input type="text" class="form-control"
-                                                                                   id="exampleInputText"
-                                                                                   name="hds_dealership_phone_1" value="{{$dealerships->hds_dealership_phone_1}}">
+                                                                        <div class="row">
+                                                                            <div class="col-4">
+                                                                                <div class="form-group">
+                                                                                    <label for="exampleInputFile">{{__('Dealership Agent')}}</label>
+                                                                                    <input type="text"
+                                                                                           class="form-control"
+                                                                                           id="exampleInputFile"
+                                                                                           name="hds_dealership_agent"
+                                                                                           value="{{$dealerships->hds_dealership_agent}}">
+                                                                                </div>
 
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label for="exampleInputFile">{{__('Dealership Phone 2')}}</label>
-                                                                            <input type="text" class="form-control"
-                                                                                   id="exampleInputText"
-                                                                                   name="hds_dealership_phone_2" value="{{$dealerships->hds_dealership_phone_2}}">
+                                                                            </div>
+                                                                            <div class="col-4">
+                                                                                <div class="form-group">
+                                                                                    <label for="exampleInputFile">{{__('Dealership Phone 1')}}</label>
+                                                                                    <input type="text"
+                                                                                           class="form-control"
+                                                                                           id="exampleInputText"
+                                                                                           name="hds_dealership_phone_1"
+                                                                                           value="{{$dealerships->hds_dealership_phone_1}}">
 
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label for="exampleInputFile">{{__('Dealership Phone 3')}}</label>
-                                                                            <input type="text" class="form-control"
-                                                                                   id="exampleInputText"
-                                                                                   name="hds_dealership_phone_3" value="{{$dealerships->hds_dealership_phone_3}}">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-4">
+                                                                                <div class="form-group">
+                                                                                    <label for="exampleInputFile">{{__('Dealership Phone 2')}}</label>
+                                                                                    <input type="text"
+                                                                                           class="form-control"
+                                                                                           id="exampleInputText"
+                                                                                           name="hds_dealership_phone_2"
+                                                                                           value="{{$dealerships->hds_dealership_phone_2}}">
 
+                                                                                </div>
+                                                                            </div>
                                                                         </div>
+                                                                        <div class="row">
+                                                                            <div class="col-4">
+                                                                                <div class="form-group">
+                                                                                    <label for="exampleInputFile">{{__('Dealership City')}}</label>
+                                                                                    <input type="text"
+                                                                                           class="form-control"
+                                                                                           id="exampleInputFile"
+                                                                                           name="hds_dealership_city"
+                                                                                           value="{{$dealerships->hds_dealership_city}}">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-4">
+                                                                                <div class="form-group">
+                                                                                    <label for="exampleInputFile">{{__('Dealership Phone 3')}}</label>
+                                                                                    <input type="text"
+                                                                                           class="form-control"
+                                                                                           id="exampleInputText"
+                                                                                           name="hds_dealership_phone_3"
+                                                                                           value="{{$dealerships->hds_dealership_phone_3}}">
+
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-4">
+                                                                                <div class="form-group">
+                                                                                    <label for="exampleInputFile">{{__('Dealership Address')}}</label>
+                                                                                    <textarea type="text"
+                                                                                              class="form-control"
+                                                                                              id="exampleInputFile"
+                                                                                              name="hds_dealership_address"> {{$dealerships->hds_dealership_address}}</textarea>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
                                                                         <div class="form-group">
                                                                             <label for="exampleInputFile">{{__('Dealership State')}}</label>
                                                                             <div id="map"
@@ -172,16 +187,13 @@
                                                                                    name="hds_dealership_state"
                                                                                    value="{{$dealerships->hds_dealership_state}}">
                                                                         </div>
-                                                                        <div class="form-group">
-                                                                            <label for="exampleInputFile">{{__('Dealership Address')}}</label>
-                                                                            <textarea type="text" class="form-control"
-                                                                                      id="exampleInputFile"
-                                                                                      name="hds_dealership_address"> {{$dealerships->hds_dealership_address}}</textarea>
-                                                                        </div>
 
                                                                         <div class="checkbox checkbox-info">
-                                                                            <input type="checkbox" id="status" name="inputCheckboxesSchedule">
-                                                                            <label for="inputSchedule" class=""> <span>{{__('Status')}}</span> </label>
+                                                                            <input type="checkbox" id="inputSchedule"
+                                                                                   name="status"
+                                                                                   @if($dealerships->hds_status) checked @endif>
+                                                                            <label for="inputSchedule" class="">
+                                                                                <span>{{__('Status')}}</span> </label>
                                                                         </div>
                                                                     </div>
                                                                     <!-- /.box-body -->
@@ -201,7 +213,7 @@
                                                                     var loc;
                                                                     var map;
                                                                     var greenIcon;
-                                                                    $(document).ready(function() {
+                                                                    $(document).ready(function () {
 
                                                                         greenIcon = L.icon({
                                                                             iconUrl: '../../../backend/img/marker-icon-x48.png',
@@ -219,7 +231,7 @@
 
                                                                         dealer_location = $("#location").val();
                                                                         dealer_location = dealer_location.split(',');
-                                                                        loc = L.marker([dealer_location[0],dealer_location[1]], {icon: greenIcon}).addTo(map);
+                                                                        loc = L.marker([dealer_location[0], dealer_location[1]], {icon: greenIcon}).addTo(map);
 
                                                                         map.on('click', onMapClick);
                                                                     });
@@ -240,7 +252,6 @@
                                                                     $("#remove").click(function () {
                                                                         loc.remove();
                                                                     });
-
 
 
                                                                 </script>

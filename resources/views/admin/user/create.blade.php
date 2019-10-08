@@ -82,107 +82,146 @@
                             {{--<h4 class="card-title">Basic Material inputs</h4>--}}
                             {{--<h6 class="card-subtitle">Just add <code>form-material</code> class to the form that's it.--}}
                             {{--</h6>--}}
-
                             <section class="content">
-                                <div class="row">
-                                    <!-- left column -->
-                                    <div class="col-md-10">
-                                        <!-- general form elements -->
-                                        <div class="box box-primary">
-                                            <div class="box-header with-border">
-                                                <h3 class="box-title">{{__('User')}}</h3>
-                                            </div>
-                                            <!-- /.box-header -->
-                                        <!-- form start -->
-                                        <form role="form" method="post" action="{{route('user.store')}}" enctype="multipart/form-data">
-                                            @csrf
-                                            <div class="box-body">
-                                                <div class="form-group">
-                                                    <label for="exampleInputPassword1">{{__('Name')}}</label>
-                                                    <input type="text" class="form-control" id="exampleInputPassword1"  name="name">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="exampleInputPassword1">{{__('User Name')}}</label>
-                                                    <input type="text" class="form-control" id="exampleInputPassword1"  name="username">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="exampleInputFile">{{__('Email')}}</label>
-                                                    <input type="text" class="form-control"  id="exampleInputFile" name="email">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="exampleInputFile">{{__('Email Verified At')}}</label>
-                                                    <input type="text" class="form-control"  id="exampleInputFile" name="email_verified_at">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="exampleInputPassword1">{{__('Password')}}</label>
-                                                    <input type="text" class="form-control" id="exampleInputPassword1"  name="password">
-                                                </div>
-                                                {{--<div class="form-group">--}}
-                                                {{--<label for="exampleInputPassword1">{{__('Confirmed Password')}}</label>--}}
-                                                {{--<input type="text" class="form-control" id="exampleInputPassword1" PLACEHOLDER="{{__('Confirmed Password')}}" name="confirmed">--}}
-                                                {{--</div>--}}
-                                                <div class="form-group">
-                                                    <label for="exampleInputFile">{{__('Phone')}}</label>
-                                                    <input type="text"  class="form-control"  id="exampleInputFile" name="phone">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="exampleInputFile">{{__('Address')}}</label>
-                                                    <input type="text" class="form-control"  id="exampleInputFile" name="address">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="exampleInputFile">{{__('Remember Token')}}</label>
-                                                    <input type="text" class="form-control"  id="exampleInputFile" name="remember_token">
-                                                </div>
-                                                <input type="hidden" name="hn_image" id="hn_image">
-
-                                                <div class="checkbox checkbox-info">
-                                                    <input type="checkbox" id="inputSchedule" name="inputCheckboxesSchedule">
-                                                    <label for="inputSchedule" class=""> <span>{{__('Check me out')}}</span> </label>
-                                                </div>
-                                            </div>
-                                            <!-- /.box-body -->
-                                            <div class="box-footer">
-                                                <button type="submit" class="btn btn-primary">{{__('Submit')}}</button>
-                                            </div>
-                                        </form>
-                                            <form action="{{url('/admin/image-user-save')}}" class="dropzone" id="dropzone"
-                                                  enctype="multipart/form-data">
-                                                @csrf
-                                                @method('POST')
-                                                <div class="fallback">
+                                <!-- left column -->
+                                <!-- general form elements -->
+                                <div class="box box-primary">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title">{{__('User')}}</h3>
+                                    </div>
+                                    <!-- /.box-header -->
+                                    <!-- form start -->
+                                    <form role="form" method="post" action="{{route('user.store')}}"
+                                          enctype="multipart/form-data">
+                                        @csrf
+                                        <div class="box-body">
+                                            <div class="row">
+                                                <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <label for="exampleInputFile">{{__('Image')}}</label>
-                                                        <input type="file" class="form-control"
-                                                               name="file">
+                                                        <label for="exampleInputPassword1">{{__('Name')}}</label>
+                                                        <input type="text" class="form-control"
+                                                               id="exampleInputPassword1" name="name">
                                                     </div>
                                                 </div>
-                                            </form>
-                                    </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">{{__('User Name')}}</label>
+                                                        <input type="text" class="form-control"
+                                                               id="exampleInputPassword1" name="username">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputFile">{{__('Email')}}</label>
+                                                        <input type="text" class="form-control"
+                                                               id="exampleInputFile" name="email">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">{{__('Password')}}</label>
+                                                        <input type="text" class="form-control"
+                                                               id="exampleInputPassword1" name="password">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">{{__('Confirmed Password')}}</label>
+                                                        <input type="text" class="form-control"
+                                                               id="exampleInputPassword1"
+                                                               name="confirmed">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputFile">{{__('Email Verified At')}}</label>
+                                                        <input type="text" class="form-control"
+                                                               id="exampleInputFile"
+                                                               name="email_verified_at">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputFile">{{__('Phone')}}</label>
+                                                        <input type="text" class="form-control"
+                                                               id="exampleInputFile" name="phone">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputFile">{{__('Remember Token')}}</label>
+                                                        <input type="text" class="form-control"
+                                                               id="exampleInputFile" name="remember_token">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputFile">{{__('Address')}}</label>
+                                                        <input type="text" class="form-control"
+                                                               id="exampleInputFile" name="address">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="checkbox checkbox-info">
+                                                <input type="checkbox" id="inputSchedule"
+                                                       name="inputCheckboxesSchedule">
+                                                <label for="inputSchedule" class="">
+                                                    <span>{{__('Active')}}</span> </label>
+                                            </div>
+                                            <input type="hidden" name="hn_image" id="hn_image">
 
-@endsection
+                                        </div>
+                                        <!-- /.box-body -->
+                                        <div class="box-footer">
+                                            <button type="submit"
+                                                    class="btn btn-primary">{{__('Submit')}}</button>
+                                        </div>
+                                    </form>
+                                    <form action="{{url('/admin/image-user-save')}}" class="dropzone"
+                                          id="dropzone"
+                                          enctype="multipart/form-data">
+                                        @csrf
+                                        @method('POST')
+                                        <div class="fallback">
+                                            <div class="form-group">
+                                                <label for="exampleInputFile">{{__('Image')}}</label>
+                                                <input type="file" class="form-control"
+                                                       name="file">
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </section>
+                        </div>
 
-@push('scripts')
-                                            <script src="{{asset('backend/js.pro/dropzone.js')}}"></script>
-                                            <script>
-                                                Dropzone.options.dropzone =
-                                                    {
-                                                        maxFilesize: 12,
-                                                        // فایل نوع آبجکت است
-                                                        renameFile: function (file) {
-                                                            var dt = new Date();
-                                                            var time = dt.getTime();
-                                                            return time + '-' + file.name;
-                                                        },
-                                                        acceptedFiles: ".jpeg,.jpg,.png,.gif",
-                                                        addRemoveLinks: true,
-                                                        timeout: 5000,
-                                                        success: function (file, response) {
-                                                            // اسم اینپوت و مقداری که باید به آن ارسال شود
-                                                            $('#hn_image').val(file.upload.filename);
-                                                        },
-                                                        error: function (file, response) {
-                                                            return false;
-                                                        }
-                                                    };
-                                            </script>
-@endpush
+                        @endsection
+
+                        @push('scripts')
+                            <script src="{{asset('backend/js.pro/dropzone.js')}}"></script>
+                            <script>
+                                Dropzone.options.dropzone =
+                                    {
+                                        maxFilesize: 12,
+                                        // فایل نوع آبجکت است
+                                        renameFile: function (file) {
+                                            var dt = new Date();
+                                            var time = dt.getTime();
+                                            return time + '-' + file.name;
+                                        },
+                                        acceptedFiles: ".jpeg,.jpg,.png,.gif",
+                                        addRemoveLinks: true,
+                                        timeout: 5000,
+                                        success: function (file, response) {
+                                            // اسم اینپوت و مقداری که باید به آن ارسال شود
+                                            $('#hn_image').val(file.upload.filename);
+                                        },
+                                        error: function (file, response) {
+                                            return false;
+                                        }
+                                    };
+                            </script>
+    @endpush

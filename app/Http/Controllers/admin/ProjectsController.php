@@ -70,6 +70,7 @@ class ProjectsController extends Controller
         $projects->hp_project_description=$request->hp_project_description;
         $projects->hp_project_options=$request->hp_project_options;
         $projects->hp_project_complete_date=$request->hp_project_complete_date;
+        $projects->hp_status=$request->hp_status;
         $projects->save();
         return redirect()->route('project.index');
     }
@@ -132,6 +133,7 @@ class ProjectsController extends Controller
         $projects->hp_project_description=$request->hp_project_description;
         $projects->hp_project_options=$request->hp_project_options;
         $projects->hp_project_complete_date=$request->hp_project_complete_date;
+        $projects->hp_status=$request->hp_status;
         $projects->save();
         return redirect()->route('project.index');
 

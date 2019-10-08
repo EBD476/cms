@@ -67,7 +67,7 @@
                     {{__('Insert Article')}}
                 </h1>
                 <ol class="breadcrumb">
-                    <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{__('Home')}} > </a></li>
+                    <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{__('Home')}}</a></li>
                     <li><a href="{{route('publish.index')}}">{{__('Article')}}</a></li>
                 </ol>
             </section>
@@ -86,7 +86,7 @@
                             <section class="content">
                                 <div class="row">
                                     <!-- left column -->
-                                    <div class="col-md-10">
+                                    <div class="col-md-8">
                                         <!-- general form elements -->
                                         <div class="box box-primary">
                                             <div class="box-header with-border">
@@ -110,8 +110,10 @@
                                                                   name="hn_description" id="froala"></textarea>
                                                     </div>
                                                     <div class="checkbox checkbox-info">
-                                                        <input type="checkbox" id="inputSchedule" name="ha_show" value="0">
-                                                        <label for="inputSchedule" class=""> <span>{{__('Show in Article')}}</span> </label>
+                                                        <input type="checkbox" id="inputSchedule" name="ha_show"
+                                                               value="0">
+                                                        <label for="inputSchedule" class="">
+                                                            <span>{{__('Show in Article')}}</span> </label>
                                                     </div>
                                                     <input type="hidden" name="hn_image" id="hn_image">
                                                 </div>
@@ -121,7 +123,7 @@
                                                 </div>
                                             </form>
                                             <form action="{{url('/admin/image-save')}}" class="dropzone" id="dropzone"
-                                                    enctype="multipart/form-data">
+                                                  enctype="multipart/form-data">
                                                 @csrf
                                                 @method('POST')
                                                 <div class="fallback">
@@ -135,8 +137,6 @@
                                             <!-- /.box-body -->
 
 
-
-
                                             <!-- /.content -->
                                             @endsection
 
@@ -144,14 +144,14 @@
                                                 <script src="{{asset('backend/js.pro/froala_editor.pkgd.min.js')}}"></script>
                                                 <script src="{{asset('backend/js.pro/dropzone.js')}}"></script>
                                                 <script>
-                                                    var editor =new FroalaEditor('#froala', {
+                                                    var editor = new FroalaEditor('#froala', {
 
                                                         // Set the image upload URL.
                                                         imageUploadURL: '/admin/image-save',
 
                                                         // Additional upload params.
                                                         imageUploadParams: {
-                                                            _token : $('input[name=_token]').val()
+                                                            _token: $('input[name=_token]').val()
                                                         },
 
                                                         // Set request type.
@@ -169,21 +169,19 @@
                                                         {
                                                             maxFilesize: 12,
                                                             // فایل نوع آبجکت است
-                                                            renameFile: function(file) {
+                                                            renameFile: function (file) {
                                                                 var dt = new Date();
                                                                 var time = dt.getTime();
-                                                                return time + '-' +file.name;
+                                                                return time + '-' + file.name;
                                                             },
                                                             acceptedFiles: ".jpeg,.jpg,.png,.gif",
                                                             addRemoveLinks: true,
                                                             timeout: 5000,
-                                                            success: function(file, response)
-                                                            {
+                                                            success: function (file, response) {
                                                                 // اسم اینپوت و مقداری که باید به آن ارسال شود
-                                                               $('#hn_image').val(file.upload.filename);
+                                                                $('#hn_image').val(file.upload.filename);
                                                             },
-                                                            error: function(file, response)
-                                                            {
+                                                            error: function (file, response) {
                                                                 return false;
                                                             }
                                                         };

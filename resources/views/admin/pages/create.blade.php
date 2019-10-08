@@ -67,8 +67,8 @@
                     {{__('Insert Pages')}}
                 </h1>
                 <ol class="breadcrumb">
-                    <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{__('Home')}} > </a></li>
-                    <li><a href="{{route('pages.index')}}">{{__('Dealership')}}</a></li>
+                    <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{__('Home')}}</a></li>
+                    <li><a href="{{route('pages.index')}}">{{__('Pages')}}</a></li>
                 </ol>
             </section>
 
@@ -86,116 +86,176 @@
                             <section class="content">
                                 <div class="row">
                                     <!-- left column -->
-                                    <div class="col-md-6">
+                                    <div class="col-md-12">
                                         <!-- general form elements -->
                                         <div class="box box-primary">
                                             <div class="box-header with-border">
                                                 <h3 class="box-title">{{__('Pages')}}</h3>
                                             </div>
-                        <!-- /.box-header -->
-                        <!-- form start -->
-                        <form role="form" method="post" action="{{route('pages.store')}}" enctype="multipart/form-data">
-                            @csrf
-                            <div class="box-body">
-                                <div class="form-group">
-                                    <label for="exampleInputFile">{{__('Title')}}</label>
-                                    <input type="text" class="form-control" id="exampleInputFile" name="title">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputFile">{{__('Page Slug')}}</label>
-                                    <input type="text"  class="form-control" id="exampleInputFile" name="page_slug">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputFile">{{__('Body')}}</label>
-                                    <textarea type="text" class="form-control" id="froala"   name="description"></textarea>
-                                </div>
-                                <input type="hidden" name="hn_image" id="hn_image">
-
-                                <input type="hidden" name="hn_image2" id="hn_image2">
-
-                                <input type="hidden" name="hn_image3" id="hn_image3">
-
-                                <input type="hidden" name="hn_image4" id="hn_image4">
-                                <div class="form-group">
-                                    <label for="exampleInputFile">{{__('Cannonical Link')}}</label>
-                                    <input type="text" class="form-control"  id="exampleInputFile" name="cannonical_link">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputFile">{{__('Seo Title')}}</label>
-                                    <input type="text" class="form-control"  id="exampleInputFile" name="seo_title">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputFile">{{__('Seo Keyword')}}</label>
-                                    <input type="text" class="form-control" id="exampleInputFile" name="seo_keyword">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputFile">{{__('Seo Description')}}</label>
-                                    <textarea type="text" class="form-control"   name="seo_description">
-                                    </textarea> </div>                               <div class="form-group">
-                                    <label for="exampleInputFile">{{__('Status')}}</label>
-                                    <input type="text" class="form-control" id="test-date-id" name="status">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputFile">{{__('Update By')}}</label>
-                                    <input type="text" class="form-control" id="test-date-id" name="updated_by">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputFile">{{__('Created By')}}: </label>
-                                    <label for="exampleInputFile">{{auth()->user()->name}}</label>
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox">{{__('Check me out')}}
-                                    </label>
-                                </div>
-                            </div>
-                            <!-- /.box-body -->
-
-                            <div class="box-footer">
-                                <button type="submit" class="btn btn-primary">{{__('Submit')}}</button>
-                            </div>
-                        </form>
-                                            <form action="{{url('/admin/image-pages-save')}}" class="dropzone" id="dropzone"
+                                            <!-- /.box-header -->
+                                            <!-- form start -->
+                                            <form role="form" method="post" action="{{route('pages.store')}}"
                                                   enctype="multipart/form-data">
                                                 @csrf
-                                                @method('POST')
-                                                <div class="fallback">
-                                                    <div class="form-group">
-                                                        <label for="exampleInputFile">{{__('Image')}}</label>
-                                                        <input type="file" class="form-control"
-                                                               name="file">
+                                                <div class="box-body">
+                                                    <div class="row">
+                                                        <div class="col-md-3">
+                                                            <div class="form-group">
+                                                                <label for="exampleInputFile">{{__('Title')}}</label>
+                                                                <input type="text" class="form-control"
+                                                                       id="exampleInputFile" name="title">
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="form-group">
+                                                                <label for="exampleInputFile">{{__('Page Slug')}}</label>
+                                                                <input type="text" class="form-control"
+                                                                       id="exampleInputFile" name="page_slug">
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="form-group">
+                                                                <label for="exampleInputFile">{{__('Seo Title')}}</label>
+                                                                <input type="text" class="form-control"
+                                                                       id="exampleInputFile"
+                                                                       name="seo_title">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="form-group">
+                                                                <label for="exampleInputFile">{{__('Cannonical Link')}}</label>
+                                                                <input type="text" class="form-control"
+                                                                       id="exampleInputFile" name="cannonical_link">
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-3">
+                                                            <div class="form-group">
+                                                                <label for="exampleInputFile">{{__('Seo Keyword')}}</label>
+                                                                <input type="text" class="form-control"
+                                                                       id="exampleInputFile"
+                                                                       name="seo_keyword">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="form-group">
+                                                                <label for="exampleInputFile">{{__('Seo Description')}}</label>
+                                                                <input type="text" class="form-control"
+                                                                       name="seo_description"></div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="form-group">
+                                                                <label for="exampleInputFile">{{__('Update By')}}</label>
+                                                                <input type="text" class="form-control"
+                                                                       id="test-date-id"
+                                                                       name="updated_by">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="form-group">
+                                                                <label for="exampleInputFile">{{__('Created By')}}
+                                                                    : </label>
+                                                                <input class="form-control" name="created_by"
+                                                                       type="text" disabled
+                                                                       value="{{auth()->user()->name}}">
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </form>
-                    </div>
+                                                <div class="form-group">
+                                                    <label for="exampleInputFile">{{__('Body')}}</label>
+                                                    <textarea type="text" class="form-control" id="froala"
+                                                              name="description"></textarea>
+                                                </div>
+                                                <div class="checkbox checkbox-info">
+                                                    <input type="checkbox" id="inputSchedule" name="status">
+                                                    <label for="inputSchedule" class=""> <span>{{__('Status')}}</span>
+                                                    </label>
+                                                </div>
 
-@endsection
+                                                <!-- Hidden Input -->
+                                                <input type="hidden" name="hn_image" id="hn_image">
 
-@push('scripts')
-                                            <script src="{{asset('backend/js.pro/froala_editor.pkgd.min.js')}}"></script>
-                                            <script src="{{asset('backend/js.pro/dropzone.js')}}"></script>
-                                            <script>
-                                                var editor = new FroalaEditor('#froala');
+                                                <input type="hidden" name="hn_image2" id="hn_image2">
 
-                                                Dropzone.options.dropzone =
-                                                    {
-                                                        maxFilesize: 12,
-                                                        // فایل نوع آبجکت است
-                                                        renameFile: function (file) {
-                                                            var dt = new Date();
-                                                            var time = dt.getTime();
-                                                            return time + '-' + file.name;
-                                                        },
-                                                        acceptedFiles: ".jpeg,.jpg,.png,.gif",
-                                                        addRemoveLinks: true,
-                                                        timeout: 5000,
-                                                        success: function (file, response) {
-                                                            // اسم اینپوت و مقداری که باید به آن ارسال شود
-                                                            $('#hn_image').val(file.upload.filename);
-                                                        },
-                                                        error: function (file, response) {
-                                                            return false;
-                                                        }
-                                                    };
-                                            </script>
-@endpush
+                                                <input type="hidden" name="hn_image3" id="hn_image3">
+
+                                                <input type="hidden" name="hn_image4" id="hn_image4">
+                                                <!-- End Hidden Input -->
+                                        </div>
+                                        <!-- /.box-body -->
+
+                                        <div class="box-footer">
+                                            <button type="submit"
+                                                    class="btn btn-primary">{{__('Submit')}}</button>
+                                        </div>
+                                        </form>
+                                        <form action="{{url('/admin/image-pages-save')}}" class="dropzone"
+                                              id="dropzone"
+                                              enctype="multipart/form-data">
+                                            @csrf
+                                            @method('POST')
+                                            <div class="fallback">
+                                                <div class="form-group">
+                                                    <label for="exampleInputFile">{{__('Image')}}</label>
+                                                    <input type="file" class="form-control"
+                                                           name="file">
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                    @endsection
+
+                                    @push('scripts')
+                                        <script src="{{asset('backend/js.pro/froala_editor.pkgd.min.js')}}"></script>
+                                        <script src="{{asset('backend/js.pro/dropzone.js')}}"></script>
+                                        <script>
+                                            var editor = new FroalaEditor('#froala', {
+
+                                                // Set the image upload URL.
+                                                imageUploadURL: '/admin/image-save',
+
+                                                // Additional upload params.
+                                                imageUploadParams: {
+                                                    _token: $('input[name=_token]').val()
+                                                },
+
+                                                // Set request type.
+                                                // imageUploadMethod: 'POST',
+
+                                                // Set max image size to 5MB.
+                                                imageMaxSize: 5 * 1024 * 1024,
+
+                                                // Allow to upload PNG and JPG.
+                                                imageAllowedTypes: ['jpeg', 'jpg', 'png'],
+
+                                            })
+
+                                            Dropzone.options.dropzone =
+                                                {
+                                                    maxFilesize: 12,
+                                                    // فایل نوع آبجکت است
+                                                    renameFile: function (file) {
+                                                        var dt = new Date();
+                                                        var time = dt.getTime();
+                                                        return time + '-' + file.name;
+                                                    },
+                                                    acceptedFiles: ".jpeg,.jpg,.png,.gif",
+                                                    addRemoveLinks: true,
+                                                    timeout: 5000,
+                                                    success: function (file, response) {
+                                                        // اسم اینپوت و مقداری که باید به آن ارسال شود
+                                                        $('#hn_image').val(file.upload.filename);
+                                                    },
+                                                    error: function (file, response) {
+                                                        return false;
+                                                    }
+                                                };
+                                        </script>
+
+    @endpush

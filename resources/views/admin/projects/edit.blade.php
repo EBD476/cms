@@ -101,42 +101,63 @@
                             @csrf
                             @method('PUT')
                             <div class="box-body">
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">{{__('Project Name')}}</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1"  name="hp_project_name" value="{{$projects->hp_project_name}}">
+                                <div class="row">
+                                    <div class="col-3">
+
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">{{__('Project Name')}}</label>
+                                            <input type="text" class="form-control" id="exampleInputPassword1"  name="hp_project_name" value="{{$projects->hp_project_name}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                            <label for="exampleInputFile">{{__('Project Owner')}}</label>
+                                            <input type="text" class="form-control" id="exampleInputFile" name="hp_project_owner" value="{{$projects->hp_project_owner}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                            <label for="exampleInputFile">{{__('Project Type')}}</label>
+                                            <input type="text" class="form-control" id="exampleInputFile" name="hp_project_type" value="{{$projects->hp_project_type}}">
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="exampleInputFile">{{__('Project Owner')}}</label>
-                                    <input type="text" class="form-control" id="exampleInputFile" name="hp_project_owner" value="{{$projects->hp_project_owner}}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputFile">{{__('Project Type')}}</label>
-                                    <input type="text" class="form-control" id="exampleInputFile" name="hp_project_type" value="{{$projects->hp_project_type}}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputFile">{{__('Project Units')}}</label>
-                                    <input type="text" class="form-control" id="exampleInputFile" name="hp_project_units" value="{{$projects->hp_project_units}}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputFile">{{__('Project Address')}}</label>
-                                    <input type="text" class="form-control" id="exampleInputFile" name="hp_project_address" value="{{$projects->hp_project_address}}">
+                                <div class="row">
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                            <label for="exampleInputFile">{{__('Project Units')}}</label>
+                                            <input type="text" class="form-control" id="exampleInputFile" name="hp_project_units" value="{{$projects->hp_project_units}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                            <label for="exampleInputFile">{{__('Project Address')}}</label>
+                                            <input type="text" class="form-control" id="exampleInputFile" name="hp_project_address" value="{{$projects->hp_project_address}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                            <label for="exampleInputFile">{{__('Project Options')}}</label>
+                                            <input type="text" class="form-control" id="exampleInputFile" name="hp_project_options" value="{{$projects->hp_project_options}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                            <label for="exampleInputFile">{{__('Project Complete Date')}}</label>
+                                            <input type="text" class="form-control" id="test-date-id" name="hp_project_complete_date" value="{{$projects->hp_project_complete_date}}">
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputFile">{{__('Project Description')}}</label>
                                     <textarea type="text" class="form-control" id="froala" name="hp_project_description" >{{$projects->hp_project_description}}</textarea>
                                 </div>
-                                <div class="form-group">
-                                    <label for="exampleInputFile">{{__('Project Options')}}</label>
-                                    <input type="text" class="form-control" id="exampleInputFile" name="hp_project_options" value="{{$projects->hp_project_options}}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputFile">{{__('Project Complete Date')}}</label>
-                                    <input type="text" class="form-control" id="test-date-id" name="hp_project_complete_date" value="{{$projects->hp_project_complete_date}}">
-                                </div>
                                 <input type="hidden" name="hn_image" id="hn_image">
                                 <div class="checkbox checkbox-info">
-                                    <input type="checkbox" id="inputSchedule" name="inputCheckboxesSchedule">
-                                    <label for="inputSchedule" class=""> <span>{{__('Check me out')}}</span> </label>
+                                    <input type="checkbox" id="inputSchedule" name="status" @if($projects->hp_status) checked @endif>
+                                    <label for="inputSchedule" class=""> <span>{{__('Status')}}</span> </label>
                                 </div>
                             </div>
                             <!-- /.box-body -->

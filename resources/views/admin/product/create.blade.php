@@ -68,7 +68,7 @@
                     {{__('Insert Product')}}
                 </h1>
                 <ol class="breadcrumb">
-                    <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{__('Home')}} > </a></li>
+                    <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{__('Home')}}</a></li>
                     <li><a href="{{route('product.index')}}">{{__('Product')}}</a></li>
                 </ol>
             </section>
@@ -100,38 +100,55 @@
                                                 @csrf
                                                 @method('PUT')
                                                 <div class="box-body">
-                                                    <div class="form-group">
-                                                        <label for="exampleInputPassword1">{{__('Product Name')}}</label>
-                                                        <input type="text" class="form-control"
-                                                               id="exampleInputPassword1"
-                                                               name="hp_product_name">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="exampleInputPassword1">{{__('Product Name')}}</label>
+                                                                <input type="text" class="form-control"
+                                                                       id="exampleInputPassword1"
+                                                                       name="hp_product_name">
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="exampleInputFile">{{__('Product Model')}}</label>
+                                                                <input type="text" class="form-control"
+                                                                       placeholder="{{__('Product Model')}}"
+                                                                       id="exampleInputFile"
+                                                                       name="hp_product_model">
+                                                            </div>
+
+                                                        </div>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <label for="exampleInputFile">{{__('Product Model')}}</label>
-                                                        <input type="text" class="form-control"
-                                                               placeholder="{{__('Product Model')}}"
-                                                               id="exampleInputFile"
-                                                               name="hp_product_model">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="exampleInputFile">{{__('product Price')}}</label>
+                                                                <input type="text" class="form-control"
+                                                                       id="exampleInputFile"
+                                                                       name="hp_product_price">
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="exampleInputFile">{{__('product Publish Date')}}</label>
+                                                                <input type="text" class="form-control" id="test-date-id"
+                                                                       id="exampleInputFile"
+                                                                       name="hp_product_publish_date"
+                                                                >
+                                                            </div>
+
+                                                        </div>
                                                     </div>
+
                                                     <div class="form-group">
                                                         <label for="exampleInputFile">{{__('product Description')}}</label>
                                                         <textarea type="text" class="form-control"
                                                                   id="froala"
                                                                   name="hp_product_description"
                                                         ></textarea>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="exampleInputFile">{{__('product Price')}}</label>
-                                                        <input type="text" class="form-control"
-                                                               id="exampleInputFile"
-                                                               name="hp_product_price">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="exampleInputFile">{{__('product Publish Date')}}</label>
-                                                        <input type="text" class="form-control" id="test-date-id"
-                                                               id="exampleInputFile"
-                                                               name="hp_product_publish_date"
-                                                        >
                                                     </div>
                                                     <input type="hidden" name="hn_image" id="hn_image">
                                                     <div class="checkbox checkbox-info">

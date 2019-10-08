@@ -100,16 +100,17 @@
                                                 @method('PUT')
                                                 <div class="box-body">
                                                     <div class="form-group">
-                                                        <label for="exampleInputPassword1">{{__('Question')}}</label>
-                                                        <input type="text" class="form-control" id="exampleInputText"
-                                                               name="question"
-                                                               value="{{$faq->question}}">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="exampleInputFile">{{__('Answer')}}</label>
-                                                        <textarea type="text" class="form-control" id="exampleInputText"
-                                                                  name="answer">value="{{$faq->answer}}"</textarea>
-                                                    </div>
+                                                        <div class="form-group">
+                                                            <label for="exampleInputPassword1">{{__('Question')}}</label>
+                                                            <textarea type="text" class="form-control" id="froala"
+                                                                      name="question">{{$faq->question}}
+                                                             </textarea>
+                                                            <div class="form-group">
+                                                                <label for="exampleInputFile">{{__('Answer')}}</label>
+                                                                <textarea type="text" class="form-control" id="froala"
+                                                                          name="answer">{{$faq->answer}}</textarea>
+
+                                                            </div>
                                                     <div class="form-group">
                                                         <label for="exampleInputFile">{{__('Status')}}</label>
                                                         <input type="text" class="form-control" id="exampleInputText"

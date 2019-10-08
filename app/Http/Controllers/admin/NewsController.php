@@ -45,7 +45,7 @@ class NewsController extends Controller
         $news->hn_title = $request->hn_title;
         $news->hn_description = $request->hn_description;
         $news->hn_image = $request->hn_image;
-        $news->hn_show = $request->hn_show;
+        $news->hn_status = $request->hn_show;
         $news->save();
         return redirect()->route('news.index');
     }
@@ -93,7 +93,7 @@ class NewsController extends Controller
         $news->hn_title = $request->hn_title;
         $news->hn_description = $request->hn_description;
         $news->hn_image = $request->hn_image;
-        $news->hn_show = $request->hn_show;
+        $news->hn_status = $request->hn_show;
         $news->save();
         return redirect()->route('news.index');
     }

@@ -67,7 +67,7 @@
                     {{__('Edit Article')}}
                 </h1>
                     <ol class="breadcrumb">
-                        <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{__('Home')}} > </a></li>
+                        <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{__('Home')}}</a></li>
                         <li><a href="{{route('publish.index')}}">{{__('Article')}}</a></li>
                     </ol>
 
@@ -126,7 +126,7 @@
                                                                src="/img/news/{{$article->ha_image}}">
                                                     </div>
                                                     <div class="checkbox checkbox-info">
-                                                        <input type="checkbox" id="inputSchedule" name="ha_show" value="0">
+                                                        <input type="checkbox" id="inputSchedule" name="ha_show" @if($article->ha_status) checked @endif>
                                                         <label for="inputSchedule" class=""> <span>{{__('Show in Article')}}</span> </label>
                                                     </div>
                                                 </div>

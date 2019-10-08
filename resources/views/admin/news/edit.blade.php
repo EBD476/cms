@@ -66,7 +66,7 @@
                     {{__('Edit News')}}
                 </h1>
                 <ol class="breadcrumb">
-                    <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{__('Home')}} > </a></li>
+                    <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{__('Home')}}</a></li>
                     <li><a href="{{route('news.index')}}">{{__('News')}}</a></li>
                 </ol>
             </section>
@@ -85,7 +85,7 @@
                             <section class="content">
                                 <div class="row">
                                     <!-- left column -->
-                                    <div class="col-md-10">
+                                    <div class="col-md-8">
                                         <!-- general form elements -->
                                         <div class="box box-primary">
                                             <div class="box-header with-border">
@@ -118,8 +118,8 @@
                                                                src="/img/news/{{$news->hn_image}}">
                                                     </div>
                                                     <div class="checkbox checkbox-info">
-                                                        <input type="checkbox" id="inputSchedule" name="inputCheckboxesSchedule">
-                                                        <label for="inputSchedule" class=""> <span>{{__('Check me out')}}</span> </label>
+                                                        <input type="checkbox" id="inputSchedule" name="hn_show" @if($news->hn_status) checked @endif>
+                                                        <label for="inputSchedule" class=""> <span>{{__('Status')}}</span> </label>
                                                     </div>
                                                 </div>
                                                 <input type="hidden" name="hn_image" id="hn_image">

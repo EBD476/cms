@@ -17,7 +17,7 @@ class SliderController extends Controller
     public function index()
     {
         $sliders = slider:: all();
-        return view('admin.slider.index',compact('sliders'));
+        return view('admin.slider.index', compact('sliders'));
     }
 
     /**
@@ -33,19 +33,20 @@ class SliderController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        $this->validate($request,[
-            'title' => 'required' ,
-            'sub_title' => 'required' ,
+        $this->validate($request, [
+            'title' => 'required',
+            'sub_title' => 'required',
         ]);
         $slider = new slider();
-        $slider->title= $request->title;
-        $slider->sub_title= $request->sub_title;
-        $slider->image=$request->hn_image;
+        $slider->title = $request->title;
+        $slider->sub_title = $request->sub_title;
+        $slider->image = $request->hn_image;
+        $slider->status = $request->status;
         $slider->save();
         return redirect()->route('slider.index');
 
@@ -54,7 +55,7 @@ class SliderController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -67,59 +68,60 @@ class SliderController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         $slider = slider::find($id);
-        return view('admin.slider.edit',compact('slider'));
+        return view('admin.slider.edit', compact('slider'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request,[
-            'title' => 'required' ,
-            'sub_title' => 'required' ,
+        $this->validate($request, [
+            'title' => 'required',
+            'sub_title' => 'required',
         ]);
-        $slider=slider::find($id);
-            $slider->title= $request->title;
-            $slider->sub_title= $request->sub_title;
-            $slider->image= $request->hn_image;
-            $slider->save();
-            return redirect()->route('slider.index')->with('successMSG','Slider Successfully Update');
+        $slider = slider::find($id);
+        $slider->title = $request->title;
+        $slider->sub_title = $request->sub_title;
+        $slider->image = $request->hn_image;
+        $slider->status = $request->status;
+        $slider->save();
+        return redirect()->route('slider.index')->with('successMSG', 'Slider Successfully Update');
 
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         $slider = slider::find($id);
-        if(file_exists('upload/slider/'.$slider->image))
-        {
+        if (file_exists('upload/slider/' . $slider->image)) {
 
-            unlink('upload/slider/'.$slider->image);
+            unlink('upload/slider/' . $slider->image);
 
         }
         $slider->delete();
-        return redirect()->back()->with('successMSG','Slider Successfully Delete');
+        return redirect()->back()->with('successMSG', 'Slider Successfully Delete');
     }
+
     public function slider_upload(Request $request)
     {
         $image = $request->file('file');
-        $filename=$_FILES['file']['name'];
+        $filename = $_FILES['file']['name'];
 
         if (isset($image)) {
             $current_date = Carbon::now()->todatestring();

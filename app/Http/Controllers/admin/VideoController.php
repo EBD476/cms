@@ -2,17 +2,19 @@
 
 namespace App\Http\Controllers\admin;
 
-use App\FAQ;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class FaqController extends Controller
+class VideoController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
-        $faq= FAQ::all();
-        return view('admin.faq.index',compact('faq'));
-
+        //
     }
 
     /**
@@ -22,7 +24,7 @@ class FaqController extends Controller
      */
     public function create()
     {
-        return view('admin.faq.create');
+        //
     }
 
     /**
@@ -33,17 +35,7 @@ class FaqController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,[
-//            'question'=>'required,max:11',
-//            'answer'=>'required',
-//            'status'=>'required',
-        ]);
-        $faq=new FAQ();
-        $faq->question=$request->question;
-        $faq->answer=$request->answer;
-        $faq->status=$request->status;
-        $faq->save();
-        return redirect()->route('faq.index');
+        //
     }
 
     /**
@@ -65,8 +57,7 @@ class FaqController extends Controller
      */
     public function edit($id)
     {
-        $faq=FAQ::FIND($id);
-        return view('admin.faq.edit',compact('faq'));
+        //
     }
 
     /**
@@ -78,17 +69,7 @@ class FaqController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request,[
-            'question'=>'required',
-            'answer'=>'required',
-            'status'=>'required',
-        ]);
-        $faq=FAQ::FIND($id);
-        $faq->question=$request->question;
-        $faq->answer=$request->answer;
-        $faq->status=$request->status;
-        $faq->save();
-        return redirect()->route('faq.index');
+        //
     }
 
     /**
@@ -99,8 +80,6 @@ class FaqController extends Controller
      */
     public function destroy($id)
     {
-        $faq=FAQ::FIND($id);
-        $faq->delete();
-        return redirect()->back();
+        //
     }
 }

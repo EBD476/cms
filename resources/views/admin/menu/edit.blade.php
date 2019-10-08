@@ -137,8 +137,8 @@
                                     <input type="text" class="form-control" id="exampleInputText" placeholder="{{__('Update By')}}" name="updated_by" value="{{auth()->user()->name}}">
                                 </div>
                                 <div class="checkbox checkbox-info">
-                                    <input type="checkbox" id="inputSchedule" name="inputCheckboxesSchedule">
-                                    <label for="inputSchedule" class=""> <span>{{__('Check me out')}}</span> </label>
+                                    <input type="checkbox" id="inputSchedule" name="status" @if($menu->status) checked @endif>
+                                    <label for="inputSchedule" class=""> <span>{{__('Status')}}</span> </label>
                                 </div>
                             </div>
                             <!-- /.box-body -->

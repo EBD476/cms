@@ -69,7 +69,7 @@
                     {{__('Insert Project')}}
                 </h1>
                 <ol class="breadcrumb">
-                    <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{__('Home')}} > </a></li>
+                    <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{__('Home')}}</a></li>
                     <li><a href="{{route('project.index')}}">{{__('Project')}}</a></li>
                 </ol>
             </section>
@@ -88,7 +88,7 @@
                             <section class="content">
                                 <div class="row">
                                     <!-- left column -->
-                                    <div class="col-md-10">
+                                    <div class="col-md-12">
                                         <!-- general form elements -->
                                         <div class="box box-primary">
                                             <div class="box-header with-border">
@@ -100,55 +100,80 @@
                                                   enctype="multipart/form-data">
                                                 @csrf
                                                 <div class="box-body">
-                                                    <div class="form-group">
-                                                        <label for="exampleInputPassword1">{{__('Project Name')}}</label>
-                                                        <input type="text" class="form-control"
-                                                               id="exampleInputPassword1" name="hp_project_name">
+                                                    <div class="row">
+                                                        <div class="col-3">
+                                                            <div class="form-group">
+                                                                <label for="exampleInputPassword1">{{__('Project Name')}}</label>
+                                                                <input type="text" class="form-control"
+                                                                       id="exampleInputPassword1" name="hp_project_name">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-3">
+                                                            <div class="form-group">
+                                                                <label for="exampleInputFile">{{__('Project Owner')}}</label>
+                                                                <input type="text" class="form-control" id="exampleInputFile"
+                                                                       name="hp_project_owner">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-3">
+                                                            <div class="form-group">
+                                                                <label for="exampleInputFile">{{__('Project Type')}}</label>
+                                                                <select type="text" class="form-control" name="hp_project_type">
+                                                                    @foreach($type as $type)
+                                                                        <option>
+                                                                            {{$type->hp_project_type}}
+                                                                        </option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-3">
+                                                            <div class="form-group">
+                                                                <label for="exampleInputFile">{{__('Project Units')}}</label>
+                                                                <input type="text" class="form-control" id="exampleInputFile"
+                                                                       name="hp_project_units">
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <label for="exampleInputFile">{{__('Project Owner')}}</label>
-                                                        <input type="text" class="form-control" id="exampleInputFile"
-                                                               name="hp_project_owner">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="exampleInputFile">{{__('Project Type')}}</label>
-                                                        <select type="text" class="form-control" name="hp_project_type">
-                                                            @foreach($type as $type)
-                                                                <option>
-                                                                    {{$type->hp_project_type}}
-                                                                </option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="exampleInputFile">{{__('Project Units')}}</label>
-                                                        <input type="text" class="form-control" id="exampleInputFile"
-                                                               name="hp_project_units">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="exampleInputFile">{{__('State')}}</label>
-                                                        <select name="hp_project_state" class="form-control">
-                                                            @foreach($state as $state)
-                                                                <option value="{{$state->id}}">
-                                                                    {{$state->hp_project_state}}
-                                                                </option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="exampleInputFile">{{__('City')}}</label>
-                                                        <select name="hp_project_city" class="form-control">
-                                                            @foreach($city as $city)
-                                                                <option value="{{$city->id}}">
-                                                                    {{$city->hp_city}}
-                                                                </option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="exampleInputFile">{{__('Project Address')}}</label>
-                                                        <input type="text" class="form-control" id="exampleInputFile"
-                                                               name="hp_project_address">
+                                                    <div class="row">
+                                                        <div class="col-3">
+                                                            <div class="form-group">
+                                                                <label for="exampleInputFile">{{__('State')}}</label>
+                                                                <select name="hp_project_state" class="form-control">
+                                                                    @foreach($state as $state)
+                                                                        <option value="{{$state->id}}">
+                                                                            {{$state->hp_project_state}}
+                                                                        </option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-3">
+                                                            <div class="form-group">
+                                                                <label for="exampleInputFile">{{__('City')}}</label>
+                                                                <select name="hp_project_city" class="form-control">
+                                                                    @foreach($city as $city)
+                                                                        <option value="{{$city->id}}">
+                                                                            {{$city->hp_city}}
+                                                                        </option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-3">
+                                                            <div class="form-group">
+                                                                <label for="exampleInputFile">{{__('Project Address')}}</label>
+                                                                <input type="text" class="form-control" id="exampleInputFile"
+                                                                       name="hp_project_address">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-3">
+                                                            <div class="form-group">
+                                                                <label for="exampleInputFile">{{__('Project Complete Date')}}</label>
+                                                                <input type="text" class="form-control" id="test-date-id"
+                                                                       name="hp_project_complete_date">
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="exampleInputFile">{{__('Project Location')}}</label>
@@ -167,17 +192,10 @@
                                                     {{--<label for="exampleInputFile">{{__('Project Options')}}</label>--}}
                                                     {{--<input type="text" class="form-control"  id="exampleInputFile" name="hp_project_options">--}}
                                                     {{--</div>--}}
-                                                    <div class="form-group">
-                                                        <label for="exampleInputFile">{{__('Project Complete Date')}}</label>
-                                                        <input type="text" class="form-control" id="test-date-id"
-                                                               name="hp_project_complete_date">
-                                                    </div>
                                                     <input type="hidden" name="hn_image" id="hn_image">
                                                     <div class="checkbox checkbox-info">
-                                                        <input type="checkbox" id="inputSchedule"
-                                                               name="inputCheckboxesSchedule">
-                                                        <label for="inputSchedule" class="">
-                                                            <span>{{__('Check me out')}}</span> </label>
+                                                        <input type="checkbox" id="inputSchedule" name="status">
+                                                        <label for="inputSchedule" class=""> <span>{{__('Status')}}</span> </label>
                                                     </div>
 
                                                 </div>

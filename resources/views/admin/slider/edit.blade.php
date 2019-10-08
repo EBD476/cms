@@ -67,7 +67,7 @@
                     {{__('Edit Slider')}}
                 </h1>
                 <ol class="breadcrumb">
-                    <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{__('Home')}} > </a></li>
+                    <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{__('Home')}}</a></li>
                     <li><a href="{{route('slider.index')}}">{{__('Slider')}}</a></li>
                 </ol>
             </section>
@@ -100,22 +100,31 @@
                                                 @csrf
                                                 @method('PUT')
                                                 <div class="box-body">
-                                                    <div class="form-group">
-                                                        <label for="exampleInputPassword1">{{__('Slider Title')}}</label>
-                                                        <input type="text" class="form-control"
-                                                               id="exampleInputPassword1"
-                                                               name="title" value="{{$slider->title}}">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="exampleInputPassword1">{{__('Slider Title')}}</label>
+                                                                <input type="text" class="form-control"
+                                                                       id="exampleInputPassword1"
+                                                                       name="title" value="{{$slider->title}}">
+                                                            </div>
+                                                        </div>
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label for="exampleInputFile">{{__('Sub Title')}}</label>
+                                                                    <input type="text" class="form-control"
+                                                                           id="exampleInputFile"
+                                                                           name="sub_title" value="{{$slider->sub_title}}">
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <label for="exampleInputFile">{{__('Sub Title')}}</label>
-                                                        <input type="text" class="form-control"
-                                                               id="exampleInputFile"
-                                                               name="sub_title" value="{{$slider->sub_title}}">
-                                                    </div>
+
                                                     <input type="hidden" name="hn_image" id="hn_image">
                                                     <div class="checkbox checkbox-info">
-                                                        <input type="checkbox" id="inputSchedule" name="inputCheckboxesSchedule">
-                                                        <label for="inputSchedule" class=""> <span>{{__('Check me out')}}</span> </label>
+                                                        <input type="checkbox" id="inputSchedule" name="status" @if($slider->status) checked @endif>
+                                                        <label for="inputSchedule" class=""> <span>{{__('Status')}}</span> </label>
                                                     </div>
                                                 </div>
                                                 <!-- /.box-body -->

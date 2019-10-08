@@ -67,7 +67,7 @@
                     {{__('Edit Pages')}}
                 </h1>
                 <ol class="breadcrumb">
-                    <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{__('Home')}} > </a></li>
+                    <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{__('Home')}}</a></li>
                     <li><a href="{{route('pages.index')}}">{{__('Pages')}}</a></li>
                 </ol>
             </section>
@@ -87,7 +87,7 @@
                             <section class="content">
                                 <div class="row">
                                     <!-- left column -->
-                                    <div class="col-md-6">
+                                    <div class="col-md-12">
                                         <!-- general form elements -->
                                         <div class="box box-primary">
                                             <div class="box-header with-border">
@@ -99,59 +99,86 @@
                             @csrf
                             @method('PUT')
                             <div class="box-body">
-                                <div class="form-group">
-                                    <label for="exampleInputFile">{{__('Title')}}</label>
-                                    <input type="text" class="form-control"  id="exampleInputFile" name="title" value="{{$pages->title}}">
+                                <div class="row">
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                            <label for="exampleInputFile">{{__('Title')}}</label>
+                                            <input type="text" class="form-control"  id="exampleInputFile" name="title" value="{{$pages->title}}">
+                                        </div>
+
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                            <label for="exampleInputFile">{{__('Page Slug')}}</label>
+                                            <input type="text"  class="form-control"  id="exampleInputFile" name="page_slug" value="{{$pages->page_slug}}">
+                                        </div>
+
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                            <label for="exampleInputFile">{{__('Seo Title')}}</label>
+                                            <input type="text" class="form-control"  id="exampleInputFile" name="seo_title" value="{{$pages->seo_title}}">
+                                        </div>
+
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                            <label for="exampleInputFile">{{__('Seo Keyword')}}</label>
+                                            <input type="text" class="form-control"  id="exampleInputFile" name="seo_keyword" value="{{$pages->seo_keyword}}">
+                                        </div>
+
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="exampleInputFile">{{__('Page Slug')}}</label>
-                                    <input type="text"  class="form-control"  id="exampleInputFile" name="page_slug" value="{{$pages->page_slug}}">
+                                <div class="row">
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                            <label for="exampleInputFile">{{__('Seo Description')}}</label>
+                                            <textarea type="text" class="form-control"  name="seo_description">{{$pages->seo_description}}</textarea>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                            <label for="exampleInputFile">{{__('Status')}}</label>
+                                            <input type="text" class="form-control" id="test-date-id"  name="status" value="{{$pages->status}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                            <label for="exampleInputFile">{{__('Created By')}}</label>
+                                            <input disabled type="text" class="form-control" id="test-date-id"  name="created_by" value="{{$pages->created_by}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                            <label for="exampleInputFile">{{__('Update By')}}</label>
+                                            <input disabled type="text" class="form-control" id="test-date-id"  name="updated_by" value="{{$pages->updated_by}}">
+                                        </div>
+
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputFile">{{__('Description')}}</label>
                                     <textarea type="text" class="form-control" id="froala" name="description">{{$pages->description}}</textarea>
                                 </div>
-                                <input type="hidden" name="hn_image" id="hn_image">
-
-                                <input type="hidden" name="hn_image" id="hn_image">
-
-                                <input type="hidden" name="hn_image" id="hn_image">
-
-                                <input type="hidden" name="hn_image" id="hn_image">
-
                                 <div class="form-group">
                                     <label for="exampleInputFile">{{__('Cannonical Link')}}</label>
                                     <input type="text" class="form-control"  id="exampleInputFile" name="cannonical_link" value="{{$pages->cannonical_link}}">
                                 </div>
-                                <div class="form-group">
-                                    <label for="exampleInputFile">{{__('Seo Title')}}</label>
-                                    <input type="text" class="form-control"  id="exampleInputFile" name="seo_title" value="{{$pages->seo_title}}">
+                                <div class="checkbox checkbox-info">
+                                    <input type="checkbox" id="inputSchedule" name="status" @if($pages->status) checked @endif>
+                                    <label for="inputSchedule" class=""> <span>{{__('Status')}}</span> </label>
                                 </div>
-                                <div class="form-group">
-                                    <label for="exampleInputFile">{{__('Seo Keyword')}}</label>
-                                    <input type="text" class="form-control"  id="exampleInputFile" name="seo_keyword" value="{{$pages->seo_keyword}}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputFile">{{__('Seo Description')}}</label>
-                                    <textarea type="text" class="form-control"  name="seo_description">{{$pages->seo_description}}</textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputFile">{{__('Status')}}</label>
-                                    <input type="text" class="form-control" id="test-date-id"  name="status" value="{{$pages->status}}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputFile">{{__('Created By')}}</label>
-                                    <input type="text" class="form-control" id="test-date-id"  name="created_by" value="{{$pages->created_by}}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputFile">{{__('Update By')}}</label>
-                                    <input type="text" class="form-control" id="test-date-id"  name="updated_by" value="{{$pages->updated_by}}">
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox">{{__('Check me out')}}
-                                    </label>
-                                </div>
+
+                                <input type="hidden" name="hn_image" id="hn_image">
+
+                                <input type="hidden" name="hn_image" id="hn_image">
+
+                                <input type="hidden" name="hn_image" id="hn_image">
+
+                                <input type="hidden" name="hn_image" id="hn_image">
+
+
                             </div>
                             <!-- /.box-body -->
 

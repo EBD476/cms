@@ -145,8 +145,8 @@
                                     <input type="text" class="form-control" id="exampleInputText"  name="created_by" value="{{auth()->user()->name}}">
                                 </div>
                                 <div class="checkbox checkbox-info">
-                                    <input type="checkbox" id="inputSchedule" name="inputCheckboxesSchedule">
-                                    <label for="inputSchedule" class=""> <span>{{__('Check me out')}}</span> </label>
+                                    <input type="checkbox" id="inputSchedule" name="status">
+                                    <label for="inputSchedule" class=""> <span>{{__('Status')}}</span> </label>
                                 </div>
                                 <input type="hidden" name="image" id="image">
                             </div>
