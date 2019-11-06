@@ -130,11 +130,12 @@ class NewsController extends Controller
         return response()->json([
             'link' => '/img/news/'.$filename
         ]);
-//        $news = new News();
-//        $news->hn_image = $image_name;
-//        $news->save();
-//
     }
-
+    public function update_status(Request $request)
+    {
+        $article=Article::find($request->id);
+        $article->ha_status=$request->status;
+        $article->save();
+    }
 }
 

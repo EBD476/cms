@@ -345,6 +345,7 @@
         $(document).ready(function () {
             var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
             $('.js-switch').each(function () {
+                // چون پکیج هستش بعضی اوقات نیاز میشه new بشن
                 new Switchery($(this)[0], $(this).data());
 
                 $(this)[0].onchange = function () {

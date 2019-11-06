@@ -212,7 +212,7 @@
                         status: $(this)[0].checked  == true ? 1 : 0
                     };
 
-                    // $.blockUI();
+                    $.blockUI();
 
 
                     //token
@@ -230,7 +230,7 @@
                         async: false,
                         success: function (data) {
                             // alert(data.response);
-                            // setTimeout($.unblockUI, 2000);
+                            setTimeout($.unblockUI, 2000);
                         },
                         cache: false,
                     });
