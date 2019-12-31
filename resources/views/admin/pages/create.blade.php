@@ -94,12 +94,11 @@
                                             </div>
                                             <!-- /.box-header -->
                                             <!-- form start -->
-                                            <form role="form" method="post" action="{{route('pages.store')}}"
+                                            <form id="form1"
                                                   enctype="multipart/form-data">
-                                                @csrf
                                                 <div class="box-body">
                                                     <div class="row">
-                                                        <div class="col-md-3">
+                                                        <div class="col-md-4">
                                                             <div class="form-group">
                                                                 <label for="exampleInputFile">{{__('Title')}}</label>
                                                                 <input type="text" class="form-control"
@@ -107,7 +106,7 @@
                                                             </div>
 
                                                         </div>
-                                                        <div class="col-md-3">
+                                                        <div class="col-md-4">
                                                             <div class="form-group">
                                                                 <label for="exampleInputFile">{{__('Page Slug')}}</label>
                                                                 <input type="text" class="form-control"
@@ -115,15 +114,7 @@
                                                             </div>
 
                                                         </div>
-                                                        <div class="col-md-3">
-                                                            <div class="form-group">
-                                                                <label for="exampleInputFile">{{__('Seo Title')}}</label>
-                                                                <input type="text" class="form-control"
-                                                                       id="exampleInputFile"
-                                                                       name="seo_title">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-3">
+                                                        <div class="col-md-4">
                                                             <div class="form-group">
                                                                 <label for="exampleInputFile">{{__('Cannonical Link')}}</label>
                                                                 <input type="text" class="form-control"
@@ -133,36 +124,27 @@
                                                         </div>
                                                     </div>
                                                     <div class="row">
-                                                        <div class="col-md-3">
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="exampleInputFile">{{__('Seo Title')}}</label>
+                                                                <textarea type="text" class="form-control"
+                                                                          id="exampleInputFile"
+                                                                          name="seo_title"></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
                                                             <div class="form-group">
                                                                 <label for="exampleInputFile">{{__('Seo Keyword')}}</label>
-                                                                <input type="text" class="form-control"
+                                                                <textarea type="text" class="form-control"
                                                                        id="exampleInputFile"
-                                                                       name="seo_keyword">
+                                                                          name="seo_keyword"></textarea>
                                                             </div>
                                                         </div>
-                                                        <div class="col-md-3">
+                                                        <div class="col-md-4">
                                                             <div class="form-group">
                                                                 <label for="exampleInputFile">{{__('Seo Description')}}</label>
-                                                                <input type="text" class="form-control"
-                                                                       name="seo_description"></div>
-                                                        </div>
-                                                        <div class="col-md-3">
-                                                            <div class="form-group">
-                                                                <label for="exampleInputFile">{{__('Update By')}}</label>
-                                                                <input type="text" class="form-control"
-                                                                       id="test-date-id"
-                                                                       name="updated_by">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-3">
-                                                            <div class="form-group">
-                                                                <label for="exampleInputFile">{{__('Created By')}}
-                                                                    : </label>
-                                                                <input class="form-control" name="created_by"
-                                                                       type="text" disabled
-                                                                       value="{{auth()->user()->name}}">
-                                                            </div>
+                                                                <textarea type="text" class="form-control"
+                                                                          name="seo_description"></textarea></div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -185,77 +167,118 @@
                                                 <input type="hidden" name="hn_image3" id="hn_image3">
 
                                                 <input type="hidden" name="hn_image4" id="hn_image4">
-                                                <!-- End Hidden Input -->
-                                        </div>
-                                        <!-- /.box-body -->
-
-                                        <div class="box-footer">
-                                            <button type="submit"
-                                                    class="btn btn-primary">{{__('Submit')}}</button>
-                                        </div>
-                                        </form>
-                                        <form action="{{url('/admin/image-pages-save')}}" class="dropzone"
-                                              id="dropzone"
-                                              enctype="multipart/form-data">
-                                            @csrf
-                                            @method('POST')
-                                            <div class="fallback">
-                                                <div class="form-group">
-                                                    <label for="exampleInputFile">{{__('Image')}}</label>
-                                                    <input type="file" class="form-control"
-                                                           name="file">
+                                            </form>
+                                            <!-- End Hidden Input -->
+                                            <!-- /.box-body -->
+                                            <form action="{{url('/admin/image-pages-save')}}" class="dropzone"
+                                                  id="dropzone"
+                                                  enctype="multipart/form-data">
+                                                @csrf
+                                                @method('POST')
+                                                <div class="fallback">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputFile">{{__('Image')}}</label>
+                                                        <input type="file" class="form-control"
+                                                               name="file">
+                                                    </div>
                                                 </div>
+                                            </form>
+                                            <br>
+                                            <div class="box-footer">
+                                                <button id="sub_form1" type="submit"
+                                                        class="btn btn-primary">{{__('Submit')}}</button>
                                             </div>
-                                        </form>
+                                        </div>
                                     </div>
+                                </div>
+                            </section>
+                            @endsection
 
-                                    @endsection
+                            @push('scripts')
+                                <script src="{{asset('backend/js.pro/froala_editor.pkgd.min.js')}}"></script>
+                                <script src="{{asset('backend/js.pro/dropzone.js')}}"></script>
+                                <script>
+                                    var editor = new FroalaEditor('#froala', {
 
-                                    @push('scripts')
-                                        <script src="{{asset('backend/js.pro/froala_editor.pkgd.min.js')}}"></script>
-                                        <script src="{{asset('backend/js.pro/dropzone.js')}}"></script>
-                                        <script>
-                                            var editor = new FroalaEditor('#froala', {
+                                        // Set the image upload URL.
+                                        imageUploadURL: '/admin/image-save',
 
-                                                // Set the image upload URL.
-                                                imageUploadURL: '/admin/image-save',
+                                        // Additional upload params.
+                                        imageUploadParams: {
+                                            _token: $('input[name=_token]').val()
+                                        },
 
-                                                // Additional upload params.
-                                                imageUploadParams: {
-                                                    _token: $('input[name=_token]').val()
+                                        // Set request type.
+                                        // imageUploadMethod: 'POST',
+
+                                        // Set max image size to 5MB.
+                                        imageMaxSize: 5 * 1024 * 1024,
+
+                                        // Allow to upload PNG and JPG.
+                                        imageAllowedTypes: ['jpeg', 'jpg', 'png'],
+
+                                    })
+
+                                    Dropzone.options.dropzone =
+                                        {
+                                            maxFilesize: 12,
+                                            // فایل نوع آبجکت است
+                                            renameFile: function (file) {
+                                                var dt = new Date();
+                                                var time = dt.getTime();
+                                                return time + '-' + file.name;
+                                            },
+                                            acceptedFiles: ".jpeg,.jpg,.png,.gif",
+                                            addRemoveLinks: true,
+                                            timeout: 5000,
+                                            success: function (file, response) {
+                                                // اسم اینپوت و مقداری که باید به آن ارسال شود
+                                                $('#hn_image').val(file.upload.filename);
+                                            },
+                                            error: function (file, response) {
+                                                return false;
+                                            }
+                                        };
+                                </script>
+                                <script src="{{asset('backend/js.pro/blockUI.js')}}"
+                                        type="text/javascript"></script>
+                                <script>
+                                    $(document).ready(function () {
+                                        $("#sub_form1").on('click',function (event) {
+                                            var data = $("#form1").serialize();
+                                            event.preventDefault();
+                                            $.blockUI();
+
+                                            $.ajaxSetup({
+                                                headers: {
+                                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                                }
+                                            });
+                                            $.blockUI({
+                                                message: '{{__('please wait...')}}', css: {
+                                                    border: 'none',
+                                                    padding: '15px',
+                                                    backgroundColor: '#000',
+                                                    '-webkit-border-radius': '10px',
+                                                    '-moz-border-radius': '10px',
+                                                    opacity: .5,
+                                                    color: '#fff'
+                                                }
+                                            });
+                                            $.ajax({
+                                                url: '/admin/pages',
+                                                type: 'POST',
+                                                data: data,
+                                                dataType: 'json',
+                                                async: false,
+                                                success: function (data) {
+                                                    setTimeout($.unblockUI, 2000);
+                                                    location.reload();
                                                 },
-
-                                                // Set request type.
-                                                // imageUploadMethod: 'POST',
-
-                                                // Set max image size to 5MB.
-                                                imageMaxSize: 5 * 1024 * 1024,
-
-                                                // Allow to upload PNG and JPG.
-                                                imageAllowedTypes: ['jpeg', 'jpg', 'png'],
-
-                                            })
-
-                                            Dropzone.options.dropzone =
-                                                {
-                                                    maxFilesize: 12,
-                                                    // فایل نوع آبجکت است
-                                                    renameFile: function (file) {
-                                                        var dt = new Date();
-                                                        var time = dt.getTime();
-                                                        return time + '-' + file.name;
-                                                    },
-                                                    acceptedFiles: ".jpeg,.jpg,.png,.gif",
-                                                    addRemoveLinks: true,
-                                                    timeout: 5000,
-                                                    success: function (file, response) {
-                                                        // اسم اینپوت و مقداری که باید به آن ارسال شود
-                                                        $('#hn_image').val(file.upload.filename);
-                                                    },
-                                                    error: function (file, response) {
-                                                        return false;
-                                                    }
-                                                };
-                                        </script>
+                                                cache: false,
+                                            });
+                                        });
+                                    });
+                                </script>
 
     @endpush

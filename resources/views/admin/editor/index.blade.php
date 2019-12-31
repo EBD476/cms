@@ -310,6 +310,7 @@
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
     <script src="{{asset('backend/js.pro/switchery.min.js')}}"></script>
+    <script src="{{asset('backend/js.pro/sweetalert.min.js')}}"></script>
     <script>
         $(document).ready(function() {
             $('#table').DataTable({
@@ -371,8 +372,12 @@
                         dataType: 'json',
                         async: false,
                         success: function (data) {
-                            // alert(data.response);
-                            // setTimeout($.unblockUI, 2000);
+                            swal({
+                                title: "",
+                                text: "{{__('success')}}",
+                                icon: "success",
+                                button:"{{__('Done')}}"
+                            })
                         },
                         cache: false,
                     });

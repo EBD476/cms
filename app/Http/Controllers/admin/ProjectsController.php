@@ -72,8 +72,7 @@ class ProjectsController extends Controller
         $projects->hp_project_complete_date=$request->hp_project_complete_date;
         $projects->hp_status=$request->hp_status;
         $projects->save();
-        return redirect()->route('project.index');
-    }
+        return json_encode(["response" => "Done"]);    }
 
     /**
      * Display the specified resource.
@@ -135,8 +134,7 @@ class ProjectsController extends Controller
         $projects->hp_project_complete_date=$request->hp_project_complete_date;
         $projects->hp_status=$request->hp_status;
         $projects->save();
-        return redirect()->route('project.index');
-
+        return json_encode(["response" => "Done"]);
     }
 
     /**
@@ -174,6 +172,13 @@ class ProjectsController extends Controller
 //        $news->hn_image = $image_name;
 //        $news->save();
 //
+    }
+    public function project_status(Request $request)
+    {
+        $sataus = Project::find($request->id);
+        $sataus->hp_status = $request->status;
+        $sataus->save();
+        return json_encode(["response" => "Done"]);
     }
 
 

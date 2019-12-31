@@ -94,11 +94,8 @@
                                             </div>
                                             <!-- /.box-header -->
                                             <!-- form start -->
-                                            <form role="form" method="post"
-                                                  action="{{route('slider.update',$slider->id)}}"
+                                            <form id="form1"
                                                   enctype="multipart/form-data">
-                                                @csrf
-                                                @method('PUT')
                                                 <div class="box-body">
                                                     <div class="row">
                                                         <div class="col-md-6">
@@ -109,32 +106,29 @@
                                                                        name="title" value="{{$slider->title}}">
                                                             </div>
                                                         </div>
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
-                                                                    <label for="exampleInputFile">{{__('Sub Title')}}</label>
-                                                                    <input type="text" class="form-control"
-                                                                           id="exampleInputFile"
-                                                                           name="sub_title" value="{{$slider->sub_title}}">
-                                                                </div>
-
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="exampleInputFile">{{__('Sub Title')}}</label>
+                                                                <input type="text" class="form-control"
+                                                                       id="exampleInputFile"
+                                                                       name="sub_title" value="{{$slider->sub_title}}">
                                                             </div>
+
                                                         </div>
                                                     </div>
+                                                </div>
 
-                                                    <input type="hidden" name="hn_image" id="hn_image">
-                                                    <div class="checkbox checkbox-info">
-                                                        <input type="checkbox" id="inputSchedule" name="status" @if($slider->status) checked @endif>
-                                                        <label for="inputSchedule" class=""> <span>{{__('Status')}}</span> </label>
-                                                    </div>
+                                                <input type="hidden" name="hn_image" id="hn_image">
+                                                <div class="checkbox checkbox-info">
+                                                    <input type="checkbox" id="inputSchedule" name="status"
+                                                           @if($slider->status) checked @endif>
+                                                    <label for="inputSchedule" class=""> <span>{{__('Status')}}</span>
+                                                    </label>
                                                 </div>
                                                 <!-- /.box-body -->
-
-                                                <div class="box-footer">
-                                                    <button type="submit"
-                                                            class="btn btn-primary">{{__('Submit')}}</button>
-                                                </div>
                                             </form>
-                                            <form action="{{url('/admin/image-slider-save')}}" class="dropzone" id="dropzone"
+                                            <form action="{{url('/admin/image-slider-save')}}" class="dropzone"
+                                                  id="dropzone"
                                                   enctype="multipart/form-data">
                                                 @csrf
                                                 @method('POST')
@@ -146,47 +140,89 @@
                                                     </div>
                                                 </div>
                                             </form>
-                                        </div>
+                                            <br>
+                                            <div class="box-footer">
+                                                <button id="sub_form1" type="submit"
+                                                        class="btn btn-primary">{{__('Submit')}}</button>
+                                            </div>
 
-                                        @endsection
+                                            @endsection
 
-                                        @push('scripts')
-                                            <script src="{{asset('backend/src/kamadatepicker.min.js')}}"></script>
-                                            <script src="{{asset('backend/js.pro/froala_editor.pkgd.min.js')}}"></script>
-                                            <script src="{{asset('backend/js.pro/dropzone.js')}}"></script>
-                                            <script>
-                                                kamaDatepicker('test-date-id', {
-                                                    buttonsColor: "blue",
-                                                    forceFarsiDigits: true,
-                                                    nextButtonIcon: "fa fa-arrow-circle-right",
-                                                    previousButtonIcon: "fa fa-arrow-circle-left"
-                                                });
-                                                var editor = new FroalaEditor('#froala');
+                                            @push('scripts')
+                                                <script src="{{asset('backend/src/kamadatepicker.min.js')}}"></script>
+                                                <script src="{{asset('backend/js.pro/froala_editor.pkgd.min.js')}}"></script>
+                                                <script src="{{asset('backend/js.pro/dropzone.js')}}"></script>
+                                                <script>
+                                                    kamaDatepicker('test-date-id', {
+                                                        buttonsColor: "blue",
+                                                        forceFarsiDigits: true,
+                                                        nextButtonIcon: "fa fa-arrow-circle-right",
+                                                        previousButtonIcon: "fa fa-arrow-circle-left"
+                                                    });
+                                                    var editor = new FroalaEditor('#froala');
 
-                                                Dropzone.options.dropzone =
-                                                    {
-                                                        maxFilesize: 12,
-                                                        // فایل نوع آبجکت است
-                                                        renameFile: function (file) {
-                                                            var dt = new Date();
-                                                            var time = dt.getTime();
-                                                            return time + '-' + file.name;
-                                                        },
-                                                        acceptedFiles: ".jpeg,.jpg,.png,.gif",
-                                                        addRemoveLinks: true,
-                                                        timeout: 5000,
-                                                        success: function (file, response) {
-                                                            // اسم اینپوت و مقداری که باید به آن ارسال شود
-                                                            $('#hn_image').val(file.upload.filename);
-                                                        },
-                                                        error: function (file, response) {
-                                                            return false;
-                                                        }
-                                                    };                                            </script>
+                                                    Dropzone.options.dropzone =
+                                                        {
+                                                            maxFilesize: 12,
+                                                            // فایل نوع آبجکت است
+                                                            renameFile: function (file) {
+                                                                var dt = new Date();
+                                                                var time = dt.getTime();
+                                                                return time + '-' + file.name;
+                                                            },
+                                                            acceptedFiles: ".jpeg,.jpg,.png,.gif",
+                                                            addRemoveLinks: true,
+                                                            timeout: 5000,
+                                                            success: function (file, response) {
+                                                                // اسم اینپوت و مقداری که باید به آن ارسال شود
+                                                                $('#hn_image').val(file.upload.filename);
+                                                            },
+                                                            error: function (file, response) {
+                                                                return false;
+                                                            }
+                                                        };                                            </script>
 
 
-    @endpush
+                                            @endpush
 
-    @push('scripts')
+                                            @push('scripts')
+                                                <script src="{{asset('backend/js.pro/jquery.blockUI.js')}}"
+                                                <script>
+                                                    $(document).ready(function () {
+                                                        $("#sub_form1").on('click', function (event) {
+                                                            var data = $("#form1").serialize();
+                                                            event.preventDefault();
+                                                            $.blockUI();
 
+                                                            $.ajaxSetup({
+                                                                headers: {
+                                                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                                                }
+                                                            });
+                                                            $.blockUI({
+                                                                message: '{{__('please wait...')}}', css: {
+                                                                    border: 'none',
+                                                                    padding: '15px',
+                                                                    backgroundColor: '#000',
+                                                                    '-webkit-border-radius': '10px',
+                                                                    '-moz-border-radius': '10px',
+                                                                    opacity: .5,
+                                                                    color: '#fff'
+                                                                }
+                                                            });
+                                                            $.ajax({
+                                                                url: '/admin/slider/' + data.id,
+                                                                type: 'POST',
+                                                                data: data,
+                                                                dataType: 'json',
+                                                                async: false,
+                                                                success: function (data) {
+                                                                    setTimeout($.unblockUI, 2000);
+                                                                    location.reload();
+                                                                },
+                                                                cache: false,
+                                                            });
+                                                        });
+                                                    });
+                                                </script>
     @endpush

@@ -95,26 +95,24 @@
                                             </div>
                                 <!-- /.box-header -->
                                 <!-- form start -->
-                                <form role="form" method="post" action="{{route('config.update',$config->id)}}" ENCTYPE="multipart/form-data">
-                                    @csrf
-                                    @method('PUT')
+                                <form id="form1" ENCTYPE="multipart/form-data">
                                     <div class="box-body">
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">{{__('Device ID')}}</label>
-                                            <input type="text" class="form-control" id="exampleInputPassword1"  name="hdc_device_id" value="{{$config->hdc_device_id}}">
+                                            <input type="text" class="form-control" id="hdc_device_id"  name="hdc_device_id" value="{{$config->hdc_device_id}}" data-id="{{$config->hdc_device_id}}">
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputFile">{{__('Device Serial')}}</label>
-                                            <input type="text" class="form-control" id="exampleInputFile" name="hdc_device_serial" value="{{$config->hdc_device_serial}}">
+                                            <input type="text" class="form-control" id="hdc_device_serial" name="hdc_device_serial" value="{{$config->hdc_device_serial}}">
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputFile">{{__('Control Config')}}</label>
-                                            <input type="text" class="form-control" id="exampleInputFile" name="hdc_control_config" value="{{$config->hdc_control_config}}">
+                                            <input type="text" class="form-control" id="hdc_control_config" name="hdc_control_config" value="{{$config->hdc_control_config}}">
 
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputFile">{{__('product Description')}}</label>
-                                            <textarea type="text" class="form-control"  name="hp_product_description"  id="froala" value="{{$config->hp_product_description}}"></textarea>
+                                            <textarea type="text" class="form-control"  name="hp_product_description" data-hp_product_description="{{$config->hp_product_description}}"  id="froala" value="{{$config->hp_product_description}}"></textarea>
                                         </div>
                                         <div class="checkbox checkbox-info">
                                             <input type="checkbox" id="inputSchedule" name="inputCheckboxesSchedule">
@@ -134,5 +132,50 @@
                                             <script src="{{asset('backend/js.pro/froala_editor.pkgd.min.js')}}"></script>
                                             <script>
                                                 var editor = new FroalaEditor('#froala');
+                                            </script>
+                                            <script src="{{asset('backend/js.pro/blockUI.js')}}" type="text/javascript"></script>
+                                            <script>
+                                                $(document).ready(function () {
+                                                    $("#form1").submit(function (event) {
+                                                        var data ={
+                                                            hdc_device_serial : $("#hdc_device_serial").val(),
+                                                            hdc_control_config : $("#hdc_control_config").val(),
+                                                            hp_product_description : $("#hp_product_description").data('hp_product_description'),
+                                                            id:$("#hdc_device_id").data('id'),
+                                                        }
+                                                        event.preventDefault();
+                                                        $.blockUI();
+
+                                                        $.ajaxSetup({
+                                                            headers: {
+                                                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                                            }
+                                                        });
+                                                        $.blockUI({
+                                                            message: '{{__('please wait...')}}', css: {
+                                                                border: 'none',
+                                                                padding: '15px',
+                                                                backgroundColor: '#000',
+                                                                '-webkit-border-radius': '10px',
+                                                                '-moz-border-radius': '10px',
+                                                                opacity: .5,
+                                                                color: '#fff'
+                                                            }
+                                                        });
+                                                        $.ajax({
+                                                            url: '/admin/config/'+data.id,
+                                                            type: 'POST',
+                                                            data: data,
+                                                            dataType: 'json',
+                                                            method:'put',
+                                                            async: false,
+                                                            success: function (data) {
+                                                                setTimeout($.unblockUI, 2000);
+                                                                location.reload();
+                                                            },
+                                                            cache: false,
+                                                        });
+                                                    });
+                                                });
                                             </script>
 @endpush

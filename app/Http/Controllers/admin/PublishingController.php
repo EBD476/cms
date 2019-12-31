@@ -43,10 +43,11 @@ class PublishingController extends Controller
         $publish = new publish();
         $publish->user_id= $request->user_id;
         $publish->title= $request->title;
-        $publish->concept= $request->concept;
+        $request->froala = str_replace('<p data-f-id="pbf" style="text-align: center; font-size: 14px; margin-top: 30px; opacity: 0.65; font-family: sans-serif;">Powered by <a href="https://www.froala.com/wysiwyg-editor?pb=1" title="Froala Editor">Froala Editor</a></p>', "", $request->froala);
+        $publish->ha_editor= $request->froala;
+        $publish->ha_status= $request->hn_show;
         $publish->save();
-        return redirect()->route('publish.index');
-    }
+        return json_encode(["response" => "Done"]);    }
 
     /**
      * Display the specified resource.
@@ -90,11 +91,12 @@ class PublishingController extends Controller
         $publish =publish::find($id);
         $publish->hp_auther	= $request->hp_auther;
         $publish->title= $request->title;
-        $publish->editor= $request->concept;
+        $request->froala = str_replace('<p data-f-id="pbf" style="text-align: center; font-size: 14px; margin-top: 30px; opacity: 0.65; font-family: sans-serif;">Powered by <a href="https://www.froala.com/wysiwyg-editor?pb=1" title="Froala Editor">Froala Editor</a></p>', "", $request->froala);
+        $publish->ha_editor= $request->froala;
         $publish->hp_image= $request->hp_image;
+        $publish->ha_status= $request->hn_show;
         $publish->save();
-        return redirect()->route('publish.index');
-    }
+        return json_encode(["response" => "Done"]);    }
 
     /**
      * Remove the specified resource from storage.

@@ -95,13 +95,11 @@
                                             </div>
                                             <!-- /.box-header -->
                                             <!-- form start -->
-                                            <form method="post" action="{{route('product.store')}}"
+                                            <form id="form1"
                                                   ENCTYPE="multipart/form-data">
-                                                @csrf
-                                                @method('PUT')
                                                 <div class="box-body">
                                                     <div class="row">
-                                                        <div class="col-md-6">
+                                                        <div class="col-md-4">
                                                             <div class="form-group">
                                                                 <label for="exampleInputPassword1">{{__('Product Name')}}</label>
                                                                 <input type="text" class="form-control"
@@ -110,30 +108,18 @@
                                                             </div>
 
                                                         </div>
-                                                        <div class="col-md-6">
+                                                        <div class="col-md-4">
                                                             <div class="form-group">
                                                                 <label for="exampleInputFile">{{__('Product Model')}}</label>
                                                                 <input type="text" class="form-control"
-                                                                       placeholder="{{__('Product Model')}}"
                                                                        id="exampleInputFile"
                                                                        name="hp_product_model">
                                                             </div>
 
                                                         </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-md-6">
+                                                        <div class="col-md-4">
                                                             <div class="form-group">
-                                                                <label for="exampleInputFile">{{__('product Price')}}</label>
-                                                                <input type="text" class="form-control"
-                                                                       id="exampleInputFile"
-                                                                       name="hp_product_price">
-                                                            </div>
-
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label for="exampleInputFile">{{__('product Publish Date')}}</label>
+                                                                <label for="exampleInputFile">{{__('Product Publish Date')}}</label>
                                                                 <input type="text" class="form-control" id="test-date-id"
                                                                        id="exampleInputFile"
                                                                        name="hp_product_publish_date"
@@ -150,22 +136,16 @@
                                                                   name="hp_product_description"
                                                         ></textarea>
                                                     </div>
-                                                    <input type="hidden" name="hn_image" id="hn_image">
                                                     <div class="checkbox checkbox-info">
-                                                        <input type="checkbox" id="inputSchedule"
-                                                               name="hp_product_status" value="0">
-                                                        <label for="inputSchedule" class="">
-                                                            <span>{{__('product status')}}</span> </label>
+                                                        <input type="checkbox" id="inputSchedule" name="status">
+                                                        <label for="inputSchedule" class=""> <span>{{__('Status')}}</span> </label>
                                                     </div>
+                                                    <input type="hidden" name="hp_product_image" id="hp_product_image">
                                                 </div>
                                                 <!-- /.box-body -->
-
-                                                <div class="box-footer">
-                                                    <button type="submit"
-                                                            class="btn btn-primary">{{__('Submit')}}</button>
-                                                </div>
                                             </form>
-                                            <form action="{{url('/image-product-save')}}" class="dropzone" id="dropzone"
+                                        </div>
+                                            <form action="{{url('/admin/image-product-save')}}" class="dropzone" id="dropzone"
                                                   enctype="multipart/form-data">
                                                 @csrf
                                                 @method('POST')
@@ -177,12 +157,16 @@
                                                     </div>
                                                 </div>
                                             </form>
+                                        <br>
+                                        <div class="box-footer">
+                                            <button id="sub_form1" type="submit"
+                                                    class="btn btn-primary">{{__('Submit')}}</button>
                                         </div>
                                         <!-- /.content -->
                                         @endsection
 
                                         @push('scripts')
-
+                                            <script src="{{asset('backend/js.pro/jquery.blockUI.js')}}" type="text/javascript"></script>
                                             <script src="{{asset('backend/src/kamadatepicker.min.js')}}"></script>
                                             <script src="{{asset('backend/js.pro/froala_editor.pkgd.min.js')}}"></script>
                                             <script src="{{asset('backend/js.pro/dropzone.js')}}"></script>
@@ -209,12 +193,50 @@
                                                         timeout: 5000,
                                                         success: function (file, response) {
                                                             // اسم اینپوت و مقداری که باید به آن ارسال شود
-                                                            $('#hn_image').val(file.upload.filename);
+                                                            $('#hp_product_image').val(file.upload.filename);
                                                         },
                                                         error: function (file, response) {
                                                             return false;
                                                         }
                                                     };                                            </script>
+                                            <script>
+                                                $(document).ready(function () {
+                                                    $("#sub_form1").on('click',function (event) {
+                                                        var data = $("#form1").serialize();
+                                                        event.preventDefault();
+                                                        $.blockUI();
+
+                                                        $.ajaxSetup({
+                                                            headers: {
+                                                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                                            }
+                                                        });
+                                                        $.blockUI({
+                                                            message: '{{__('please wait...')}}', css: {
+                                                                border: 'none',
+                                                                padding: '15px',
+                                                                backgroundColor: '#000',
+                                                                '-webkit-border-radius': '10px',
+                                                                '-moz-border-radius': '10px',
+                                                                opacity: .5,
+                                                                color: '#fff'
+                                                            }
+                                                        });
+                                                        $.ajax({
+                                                            url: '/admin/product',
+                                                            type: 'POST',
+                                                            data: data,
+                                                            dataType: 'json',
+                                                            async: false,
+                                                            success: function (data) {
+                                                                setTimeout($.unblockUI, 2000);
+                                                                location.reload();
+                                                            },
+                                                            cache: false,
+                                                        });
+                                                    });
+                                                });
+                                            </script>
 
 
     @endpush

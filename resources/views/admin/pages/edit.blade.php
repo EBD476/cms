@@ -93,100 +93,83 @@
                                             <div class="box-header with-border">
                                                 <h3 class="box-title">{{__('Pages')}}</h3>
                                             </div>
-                        <!-- /.box-header -->
-                        <!-- form start -->
-                        <form role="form" method="post" action="{{route('pages.update',$pages->id)}}" enctype="multipart/form-data">
-                            @csrf
-                            @method('PUT')
-                            <div class="box-body">
-                                <div class="row">
-                                    <div class="col-3">
-                                        <div class="form-group">
-                                            <label for="exampleInputFile">{{__('Title')}}</label>
-                                            <input type="text" class="form-control"  id="exampleInputFile" name="title" value="{{$pages->title}}">
-                                        </div>
+                                            <!-- /.box-header -->
+                                            <!-- form start -->
+                                            <form id="form1"
+                                                  enctype="multipart/form-data">
+                                                <div class="box-body">
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="exampleInputFile">{{__('Title')}}</label>
+                                                                <input type="text" class="form-control"
+                                                                       id="exampleInputFile" name="title" value="{{$pages->title}}">
+                                                            </div>
 
-                                    </div>
-                                    <div class="col-3">
-                                        <div class="form-group">
-                                            <label for="exampleInputFile">{{__('Page Slug')}}</label>
-                                            <input type="text"  class="form-control"  id="exampleInputFile" name="page_slug" value="{{$pages->page_slug}}">
-                                        </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="exampleInputFile">{{__('Page Slug')}}</label>
+                                                                <input type="text" class="form-control"
+                                                                       id="exampleInputFile" name="page_slug" value="{{$pages->page_slug}}">
+                                                            </div>
 
-                                    </div>
-                                    <div class="col-3">
-                                        <div class="form-group">
-                                            <label for="exampleInputFile">{{__('Seo Title')}}</label>
-                                            <input type="text" class="form-control"  id="exampleInputFile" name="seo_title" value="{{$pages->seo_title}}">
-                                        </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="exampleInputFile">{{__('Cannonical Link')}}</label>
+                                                                <input type="text" class="form-control"
+                                                                       id="exampleInputFile" name="cannonical_link" value="{{$pages->cannonical_link}}">
+                                                            </div>
 
-                                    </div>
-                                    <div class="col-3">
-                                        <div class="form-group">
-                                            <label for="exampleInputFile">{{__('Seo Keyword')}}</label>
-                                            <input type="text" class="form-control"  id="exampleInputFile" name="seo_keyword" value="{{$pages->seo_keyword}}">
-                                        </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="exampleInputFile">{{__('Seo Title')}}</label>
+                                                                <textarea type="text" class="form-control"
+                                                                          id="exampleInputFile"
+                                                                          name="seo_title">{{$pages->seo_title}}</textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="exampleInputFile">{{__('Seo Keyword')}}</label>
+                                                                <textarea type="text" class="form-control"
+                                                                          id="exampleInputFile"
+                                                                          name="seo_keyword">{{$pages->seo_keyword}}</textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="exampleInputFile">{{__('Seo Description')}}</label>
+                                                                <textarea type="text" class="form-control"
+                                                                          name="seo_description">{{$pages->seo_description}}</textarea></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="exampleInputFile">{{__('Body')}}</label>
+                                                    <textarea type="text" class="form-control" id="froala"
+                                                              name="description">{{$pages->body}}</textarea>
+                                                </div>
+                                                <div class="checkbox checkbox-info">
+                                                    <input type="checkbox" id="inputSchedule" name="status">
+                                                    <label for="inputSchedule" class=""> <span>{{__('Status')}}</span>
+                                                    </label>
+                                                </div>
 
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-3">
-                                        <div class="form-group">
-                                            <label for="exampleInputFile">{{__('Seo Description')}}</label>
-                                            <textarea type="text" class="form-control"  name="seo_description">{{$pages->seo_description}}</textarea>
-                                        </div>
+                                                <!-- Hidden Input -->
+                                                <input type="hidden" name="hn_image" id="hn_image">
 
-                                    </div>
-                                    <div class="col-3">
-                                        <div class="form-group">
-                                            <label for="exampleInputFile">{{__('Status')}}</label>
-                                            <input type="text" class="form-control" id="test-date-id"  name="status" value="{{$pages->status}}">
-                                        </div>
-                                    </div>
-                                    <div class="col-3">
-                                        <div class="form-group">
-                                            <label for="exampleInputFile">{{__('Created By')}}</label>
-                                            <input disabled type="text" class="form-control" id="test-date-id"  name="created_by" value="{{$pages->created_by}}">
-                                        </div>
-                                    </div>
-                                    <div class="col-3">
-                                        <div class="form-group">
-                                            <label for="exampleInputFile">{{__('Update By')}}</label>
-                                            <input disabled type="text" class="form-control" id="test-date-id"  name="updated_by" value="{{$pages->updated_by}}">
-                                        </div>
+                                                <input type="hidden" name="hn_image2" id="hn_image2">
 
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputFile">{{__('Description')}}</label>
-                                    <textarea type="text" class="form-control" id="froala" name="description">{{$pages->description}}</textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputFile">{{__('Cannonical Link')}}</label>
-                                    <input type="text" class="form-control"  id="exampleInputFile" name="cannonical_link" value="{{$pages->cannonical_link}}">
-                                </div>
-                                <div class="checkbox checkbox-info">
-                                    <input type="checkbox" id="inputSchedule" name="status" @if($pages->status) checked @endif>
-                                    <label for="inputSchedule" class=""> <span>{{__('Status')}}</span> </label>
-                                </div>
+                                                <input type="hidden" name="hn_image3" id="hn_image3">
 
-                                <input type="hidden" name="hn_image" id="hn_image">
-
-                                <input type="hidden" name="hn_image" id="hn_image">
-
-                                <input type="hidden" name="hn_image" id="hn_image">
-
-                                <input type="hidden" name="hn_image" id="hn_image">
-
-
-                            </div>
-                            <!-- /.box-body -->
-
-                            <div class="box-footer">
-                                <button type="submit" class="btn btn-primary">{{__('Submit')}}</button>
-                            </div>
-                        </form>
-                                            <form action="{{url('/admin/image-pages-save')}}" class="dropzone" id="dropzone"
+                                                <input type="hidden" name="hn_image4" id="hn_image4">
+                                            </form>                                            <form action="{{url('/admin/image-pages-save')}}" class="dropzone"
+                                                  id="dropzone"
                                                   enctype="multipart/form-data">
                                                 @csrf
                                                 @method('POST')
@@ -198,11 +181,16 @@
                                                     </div>
                                                 </div>
                                             </form>
-                    </div>
+                                            <br>
+                                            <div class="box-footer">
+                                                <button id="sub_form1" type="submit"
+                                                        class="btn btn-primary">{{__('Submit')}}</button>
+                                            </div>
+                                        </div>
 
-@endsection
+                                        @endsection
 
-@push('scripts')
+                                        @push('scripts')
                                             <script src="{{asset('backend/js.pro/froala_editor.pkgd.min.js')}}"></script>
                                             <script src="{{asset('backend/js.pro/dropzone.js')}}"></script>
                                             <script>
@@ -229,4 +217,44 @@
                                                         }
                                                     };
                                             </script>
-@endpush
+                                            <script src="{{asset('backend/js.pro/blockUI.js')}}"
+                                                    type="text/javascript"></script>
+                                            <script>
+                                                $(document).ready(function () {
+                                                    $("#sub_form1").on('click',function (event) {
+                                                        var data = $("#form1").serialize();
+                                                        event.preventDefault();
+                                                        $.blockUI();
+
+                                                        $.ajaxSetup({
+                                                            headers: {
+                                                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                                            }
+                                                        });
+                                                        $.blockUI({
+                                                            message: '{{__('please wait...')}}', css: {
+                                                                border: 'none',
+                                                                padding: '15px',
+                                                                backgroundColor: '#000',
+                                                                '-webkit-border-radius': '10px',
+                                                                '-moz-border-radius': '10px',
+                                                                opacity: .5,
+                                                                color: '#fff'
+                                                            }
+                                                        });
+                                                        $.ajax({
+                                                            url: '/admin/pages/' + data.id,
+                                                            type: 'POST',
+                                                            data: data,
+                                                            dataType: 'json',
+                                                            async: false,
+                                                            success: function (data) {
+                                                                setTimeout($.unblockUI, 2000);
+                                                                location.reload();
+                                                            },
+                                                            cache: false,
+                                                        });
+                                                    });
+                                                });
+                                            </script>
+    @endpush

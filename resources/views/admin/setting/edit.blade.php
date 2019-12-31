@@ -63,7 +63,7 @@
 
             <section class="content-header">
                 <h1>
-                    {{__('Insert Setting')}}
+                    {{__('Setting')}}
                 </h1>
                 <ol class="breadcrumb">
                     <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{__('Home')}}</a></li>
@@ -78,354 +78,174 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body wizard-content">
-                            <h4 class="card-title">Step wizard</h4>
-                            <h6 class="card-subtitle">You can find the
-                                <a href="http://www.jquery-steps.com" target="_blank">offical website</a>
-                            </h6>
-                            <form action="#" class="tab-wizard wizard-circle wizard clearfix" role="application" id="steps-uid-0"><div class="steps clearfix"><ul role="tablist"><li role="tab" class="first done" aria-disabled="false" aria-selected="false"><a id="steps-uid-0-t-0" href="#steps-uid-0-h-0" aria-controls="steps-uid-0-p-0"><span class="step">1</span> Personal Info</a></li><li role="tab" class="done" aria-disabled="false" aria-selected="false"><a id="steps-uid-0-t-1" href="#steps-uid-0-h-1" aria-controls="steps-uid-0-p-1"><span class="step">2</span> Job Status</a></li><li role="tab" class="done" aria-disabled="false" aria-selected="false"><a id="steps-uid-0-t-2" href="#steps-uid-0-h-2" aria-controls="steps-uid-0-p-2"><span class="step">3</span> Interview</a></li><li role="tab" class="last current" aria-disabled="false" aria-selected="true"><a id="steps-uid-0-t-3" href="#steps-uid-0-h-3" aria-controls="steps-uid-0-p-3"><span class="current-info audible">current step: </span><span class="step">4</span> Remark</a></li></ul></div><div class="content clearfix">
-                                    <!-- Step 1 -->
-                                    <h6 id="steps-uid-0-h-0" tabindex="-1" class="title">Personal Info</h6>
-                                    <section id="steps-uid-0-p-0" role="tabpanel" aria-labelledby="steps-uid-0-h-0" class="body" aria-hidden="true" style="display: none;">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="firstName1">First Name :</label>
-                                                    <input type="text" class="form-control" id="firstName1"> </div>
+                            <section class="content">
+                                <div class="row">
+                                    <!-- left column -->
+                                    <div class="col-md-10">
+                                        <!-- general form elements -->
+                                        <div class="box box-primary">
+                                            <div class="box-header with-border">
+                                                {{--<h3 class="box-title">{{__('Setting')}}</h3>--}}
                                             </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="lastName1">Last Name :</label>
-                                                    <input type="text" class="form-control" id="lastName1"> </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="emailAddress1">Email Address :</label>
-                                                    <input type="email" class="form-control" id="emailAddress1"> </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="phoneNumber1">Phone Number :</label>
-                                                    <input type="tel" class="form-control" id="phoneNumber1"> </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="location1">Select City :</label>
-                                                    <select class="custom-select form-control" id="location1" name="location">
-                                                        <option value="">Select City</option>
-                                                        <option value="Amsterdam">India</option>
-                                                        <option value="Berlin">USA</option>
-                                                        <option value="Frankfurt">Dubai</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="date1">Date of Birth :</label>
-                                                    <input type="date" class="form-control" id="date1"> </div>
-                                            </div>
-                                        </div>
-                                    </section>
-                                    <!-- Step 2 -->
-                                    <h6 id="steps-uid-0-h-1" tabindex="-1" class="title">Job Status</h6>
-                                    <section id="steps-uid-0-p-1" role="tabpanel" aria-labelledby="steps-uid-0-h-1" class="body" aria-hidden="true" style="display: none;">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="jobTitle1">Job Title :</label>
-                                                    <input type="text" class="form-control" id="jobTitle1"> </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="videoUrl1">Company Name :</label>
-                                                    <input type="text" class="form-control" id="videoUrl1">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label for="shortDescription1">Job Description :</label>
-                                                    <textarea name="shortDescription" id="shortDescription1" rows="6" class="form-control"></textarea>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </section>
-                                    <!-- Step 3 -->
-                                    <h6 id="steps-uid-0-h-2" tabindex="-1" class="title">Interview</h6>
-                                    <section id="steps-uid-0-p-2" role="tabpanel" aria-labelledby="steps-uid-0-h-2" class="body" aria-hidden="true" style="display: none;">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="int1">Interview For :</label>
-                                                    <input type="text" class="form-control" id="int1"> </div>
-                                                <div class="form-group">
-                                                    <label for="intType1">Interview Type :</label>
-                                                    <select class="custom-select form-control" id="intType1" data-placeholder="Type to search cities" name="intType1">
-                                                        <option value="Banquet">Normal</option>
-                                                        <option value="Fund Raiser">Difficult</option>
-                                                        <option value="Dinner Party">Hard</option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="Location1">Location :</label>
-                                                    <select class="custom-select form-control" id="Location1" name="location">
-                                                        <option value="">Select City</option>
-                                                        <option value="India">India</option>
-                                                        <option value="USA">USA</option>
-                                                        <option value="Dubai">Dubai</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="jobTitle2">Interview Date :</label>
-                                                    <input type="date" class="form-control" id="jobTitle2">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Requirements :</label>
-                                                    <div class="m-b-10">
-                                                        <label class="custom-control custom-radio">
-                                                            <input id="radio1" name="radio" type="radio" class="custom-control-input">
-                                                            <span class="custom-control-label">Employee</span>
-                                                        </label>
-                                                        <label class="custom-control custom-radio">
-                                                            <input id="radio2" name="radio" type="radio" class="custom-control-input">
-                                                            <span class="custom-control-label">Membership</span>
-                                                        </label>
+                                            <!-- /.box-header -->
+                                            <div class="box-body">
+                                                <ul id="myTab" class="nav nav-tabs setting-tab-list" role="tablist">
+                                                    <li role="presentation" class="active">
+                                                        <a href="#tab1" aria-controls="home" role="tab" data-toggle="tab">&nbsp&nbsp{{__('SEO Setting')}}&nbsp</a>&nbsp
+                                                    </li>
+                                                    <li role="presentation">
+                                                        <a href="#tab2" aria-controls="1" role="tab" data-toggle="tab">&nbsp&nbsp{{__('Company Details')}}&nbsp</a>&nbsp
+                                                    </li>
+                                                    <li role="presentation">
+                                                        <a href="#tab3" aria-controls="2" role="tab" data-toggle="tab">&nbsp&nbsp{{__('Mail Setting')}}&nbsp</a>&nbsp
+                                                    </li>
+                                                    <li role="presentation">
+                                                        <a href="#tab4" aria-controls="3" role="tab" data-toggle="tab">&nbsp&nbsp{{__('Footer Setting')}}&nbsp</a>&nbsp
+                                                    </li>
+                                                    <li role="presentation">
+                                                        <a href="#tab5" aria-controls="4" role="tab" data-toggle="tab">&nbsp&nbsp{{__('Access Setting')}}&nbsp</a>&nbsp
+                                                    </li>
+                                                    <li role="presentation">
+                                                        <a href="#tab6" aria-controls="5" role="tab" data-toggle="tab">&nbsp&nbsp{{__('Terms Setting')}}&nbsp</a>&nbsp
+                                                    </li>
+                                                    <li role="presentation">
+                                                        <a href="#tab7" aria-controls="6" role="tab" data-toggle="tab">&nbsp&nbsp{{__('Google Setting')}}&nbsp</a>&nbsp
+                                                    </li>
+                                                </ul>
+                                                <form method="post" action="{{route('setting.update',$setting->id)}}" id="myTabContent" class="tab-content setting-tab" enctype="multipart/form-data">
+                                                    <div role="tabpanel"  class="tab-pane active" id="tab1" >
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <br>
+                                                        <div class="form-group">
+                                                            <label for="exampleInputFile">{{__('Logo')}}</label>
+                                                            <input type="file" class="form-control" id="exampleInputFile" name="logo" value="{{$setting->logo}}">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="exampleInputFile">{{__('Image Header')}}</label>
+                                                            <input type="file" class="form-control" id="exampleInputFile" name="hnt_setting_image_header" value="{{$setting->hnt_setting_image_header}}">
+                                                        </div>
+                                                        <!--col-lg-10-->
+                                                        <!--form control-->
+                                                        <div class="form-group">
+                                                            <label for="exampleInputFile">{{__('Favicon')}}</label>
+                                                            <input type="file" class="form-control" id="exampleInputFile" placeholder="{{__('Favicon')}}" name="favicon">
+                                                        </div>
+                                                        <!--col-lg-10-->
+                                                        <!--form control-->
+                                                        <div class="form-group">
+                                                            <div class="form-group">
+                                                                <label for="exampleInputFile">{{__('Seo Title')}}</label>
+                                                                <textarea type="text" class="form-control" placeholder="{{__('Seo Title')}}" id="exampleInputFile" name="seo_title">{{$setting->seo_title}}</textarea>
+                                                            </div>
+                                                            <!--col-lg-10-->
+                                                        </div>
+                                                        <!--form control-->
+
+                                                        <div class="form-group">
+                                                            <div class="form-group">
+                                                                <label for="exampleInputFile">{{__('Seo keyword')}}</label>
+                                                                <textarea type="text" class="form-control" placeholder="{{__('Seo keyword')}}" id="exampleInputFile" name="seo_keyword">{{$setting->seo_keyword}}</textarea>
+                                                            </div>
+                                                        </div>
+
+                                                        <!--form control-->
+                                                        <div class="form-group">
+                                                            <div class="form-group">
+                                                                <label for="exampleInputFile">{{__('Seo Description')}}</label>
+                                                                <textarea type="text" class="form-control"  id="exampleInputFile" name="seo_description">{{$setting->seo_description}}</textarea>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </section>
-                                    <!-- Step 4 -->
-                                    <h6 id="steps-uid-0-h-3" tabindex="-1" class="title current">Remark</h6>
-                                    <section id="steps-uid-0-p-3" role="tabpanel" aria-labelledby="steps-uid-0-h-3" class="body current" aria-hidden="false" style="">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="behName1">Behaviour :</label>
-                                                    <input type="text" class="form-control" id="behName1">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="participants1">Confidance</label>
-                                                    <input type="text" class="form-control" id="participants1">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="participants1">Result</label>
-                                                    <select class="custom-select form-control" id="participants1" name="location">
-                                                        <option value="">Select Result</option>
-                                                        <option value="Selected">Selected</option>
-                                                        <option value="Rejected">Rejected</option>
-                                                        <option value="Call Second-time">Call Second-time</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="decisions1">Comments</label>
-                                                    <textarea name="decisions" id="decisions1" rows="4" class="form-control"></textarea>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Rate Interviwer :</label>
-                                                    <div class="c-inputs-stacked">
-                                                        <label class="inline custom-control custom-checkbox block">
-                                                            <input type="checkbox" class="custom-control-input">
-                                                            <span class="custom-control-label ml-0">1 star</span>
-                                                        </label>
-                                                        <label class="inline custom-control custom-checkbox block">
-                                                            <input type="checkbox" class="custom-control-input">
-                                                            <span class="custom-control-label ml-0">2 star</span>
-                                                        </label>
-                                                        <label class="inline custom-control custom-checkbox block">
-                                                            <input type="checkbox" class="custom-control-input">
-                                                            <span class="custom-control-label ml-0">3 star</span>
-                                                        </label>
-                                                        <label class="inline custom-control custom-checkbox block">
-                                                            <input type="checkbox" class="custom-control-input">
-                                                            <span class="custom-control-label ml-0">4 star</span>
-                                                        </label>
-                                                        <label class="inline custom-control custom-checkbox block">
-                                                            <input type="checkbox" class="custom-control-input">
-                                                            <span class="custom-control-label ml-0">5 star</span>
-                                                        </label>
+                                                    <div role="tabpanel" class="tab-pane" id="tab2">
+                                                        <br>
+                                                        <div class="form-group">
+                                                            <label for="exampleInputFile">{{__('Company Contact')}}</label>
+                                                            <input type="text" class="form-control"  id="exampleInputFile" name="company_contact" value="{{$setting->company_contact}}">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="exampleInputFile">{{__('Company Address')}}</label>
+                                                            <textarea type="text" class="form-control"  id="exampleInputFile" name="company_address">{{$setting->company_address}}</textarea>
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                    <div role="tabpanel" class="tab-pane" id="tab3">
+                                                        <br>
+                                                        <div class="form-group">
+                                                            <label for="exampleInputFile">{{__('From Name')}}</label>
+                                                            <input type="text" class="form-control"  id="exampleInputFile" name="from_name" value="{{$setting->from_name}}">
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="exampleInputFile">{{__('From Email')}}</label>
+                                                            <input type="text" class="form-control"  id="exampleInputFile" name="from_email" value="{{$setting->from_email}}">
+                                                        </div>
+                                                        <!--form control-->
+                                                    </div>
+                                                    <div role="tabpanel" class="tab-pane" id="tab4">
+                                                        <br>
+                                                        <div class="form-group">
+                                                            <label for="exampleInputFile">{{__('Copyright Text')}}</label>
+                                                            <input type="text" class="form-control"  id="exampleInputFile" name="copyright_text" value="{{$setting->copyright_text}}">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="exampleInputFile">{{__('Footer Text')}}</label>
+                                                            <input type="text" class="form-control"  id="exampleInputFile" name="footer_text" value="{{$setting->footer_text}}">
+                                                        </div>
+                                                    </div>
+                                                    <div role="tabpanel" class="tab-pane" id="tab5">
+                                                        <br>
+                                                        <div class="form-group">
+                                                            <label for="exampleInputFile">{{__('Facebook')}}</label>
+                                                            <input type="text" class="form-control"  id="exampleInputFile" name="facebook" value="{{$setting->facebook}}">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="exampleInputFile">{{__('Linkedin')}}</label>
+                                                            <input type="text" class="form-control"  id="exampleInputFile" name="linkedin", value="{{$setting->linkedin}}">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="exampleInputFile">{{__('Twitter')}}</label>
+                                                            <input type="text" class="form-control"  id="exampleInputFile" name="twitter" value="{{$setting->twitter}}">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="exampleInputFile">{{__('Google')}}</label>
+                                                            <input type="text" class="form-control"  id="exampleInputFile" name="google" value="{{$setting->google}}">
+                                                        </div>
+                                                    </div>
+                                                    <div role="tabpanel" class="tab-pane" id="tab6">
+                                                        <br>
+                                                        <div class="form-group">
+                                                            <label for="exampleInputFile">{{__('Terms')}}</label>
+                                                            <input type="text" class="form-control" id="exampleInputFile" name="terms" value="{{$setting->terms}}">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="exampleInputFile">{{__('Disclaimer')}}</label>
+                                                            <input type="text" class="form-control"  id="exampleInputFile" name="disclaimer" value="{{$setting->disclaimer}}">
+                                                        </div>
+                                                    </div>
+                                                    <div role="tabpanel" class="tab-pane" id="tab7">
+                                                        <br>
+                                                        <div class="form-group">
+                                                            <label for="exampleInputFile">{{__('Google Analytics')}}</label>
+                                                            <input type="text" class="form-control"  id="exampleInputFile" name="google_analytics" value="{{$setting->google_analytics}}">
+                                                        </div>
+                                                        <!--form control-->
+                                                    </div>
+                                                    <!-- /.box-body -->
+                                                    <div class="box-footer">
+                                                        <button type="submit" class="btn btn-primary">{{__('Submit')}}</button>
+                                                    </div>
+                                                </form>
                                             </div>
                                         </div>
-                                    </section>
-                                </div><div class="actions clearfix"><ul role="menu" aria-label="Pagination"><li class="" aria-disabled="false"><a href="#previous" role="menuitem">Previous</a></li><li aria-hidden="true" aria-disabled="true" class="disabled" style="display: none;"><a href="#next" role="menuitem">Next</a></li><li aria-hidden="false" style=""><a href="#finish" role="menuitem">Submit</a></li></ul></div></form>
+                                    </div>
+                                </div>
+                            </section>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-
-
-
-
-    {{--<h4 class="card-title">Basic Material inputs</h4>--}}
-    {{--<h6 class="card-subtitle">Just add <code>form-material</code> class to the form that's it.--}}
-    {{--</h6>--}}
-
-    {{--<section class="content">--}}
-    {{--<div class="row">--}}
-    {{--<!-- left column -->--}}
-    {{--<div class="col-md-10">--}}
-    {{--<!-- general form elements -->--}}
-    {{--<div class="box box-primary">--}}
-    {{--<div class="box-header with-border">--}}
-    {{--<h3 class="box-title">{{__('Setting')}}</h3>--}}
-    {{--</div>--}}
-    {{--<!-- /.box-header -->--}}
-    {{--<div class="box-body">--}}
-    {{--<ul id="myTab" class="nav nav-tabs setting-tab-list" role="tablist">--}}
-    {{--<li role="presentation" class="active">--}}
-    {{--<a href="#tab1" aria-controls="home" role="tab" data-toggle="tab">{{__('SEO Setting')}}</a>--}}
-    {{--</li>--}}
-    {{--<li role="presentation">--}}
-    {{--<a href="#tab2" aria-controls="1" role="tab" data-toggle="tab">{{__('Company Details')}}</a>--}}
-    {{--</li>--}}
-    {{--<li role="presentation">--}}
-    {{--<a href="#tab3" aria-controls="2" role="tab" data-toggle="tab">{{__('Mail Setting')}}</a>--}}
-    {{--</li>--}}
-    {{--<li role="presentation">--}}
-    {{--<a href="#tab4" aria-controls="3" role="tab" data-toggle="tab">{{__('Footer Setting')}}</a>--}}
-    {{--</li>--}}
-    {{--<li role="presentation">--}}
-    {{--<a href="#tab5" aria-controls="4" role="tab" data-toggle="tab">{{__('Access Setting')}}</a>--}}
-    {{--</li>--}}
-    {{--<li role="presentation">--}}
-    {{--<a href="#tab6" aria-controls="5" role="tab" data-toggle="tab">{{__('Terms Setting')}}</a>--}}
-    {{--</li>--}}
-    {{--<li role="presentation">--}}
-    {{--<a href="#tab7" aria-controls="6" role="tab" data-toggle="tab">{{__('Google Setting')}}</a>--}}
-    {{--</li>--}}
-    {{--</ul>--}}
-    {{--<form method="post" action="{{route('setting.update',$setting->id)}}" id="myTabContent" class="tab-content setting-tab" enctype="multipart/form-data">--}}
-    {{--<div role="tabpanel"  class="tab-pane active" id="tab1" >--}}
-    {{--@csrf--}}
-    {{--@method('PUT')--}}
-    {{--<div class="form-group">--}}
-    {{--<label for="exampleInputFile">{{__('Logo')}}</label>--}}
-    {{--<input type="file" class="form-control" id="exampleInputFile" name="logo" value="{{$setting->logo}}">--}}
-    {{--</div>--}}
-    {{--<div class="form-group">--}}
-    {{--<label for="exampleInputFile">{{__('Image Header')}}</label>--}}
-    {{--<input type="file" class="form-control" id="exampleInputFile" name="hnt_setting_image_header" value="{{$setting->hnt_setting_image_header}}">--}}
-    {{--</div>--}}
-    {{--<!--col-lg-10-->--}}
-    {{--<!--form control-->--}}
-    {{--<div class="form-group">--}}
-    {{--<label for="exampleInputFile">{{__('Favicon')}}</label>--}}
-    {{--<input type="file" class="form-control" id="exampleInputFile" placeholder="{{__('Favicon')}}" name="favicon">--}}
-    {{--</div>--}}
-    {{--<!--col-lg-10-->--}}
-    {{--<!--form control-->--}}
-    {{--<div class="form-group">--}}
-    {{--<div class="form-group">--}}
-    {{--<label for="exampleInputFile">{{__('Seo Title')}}</label>--}}
-    {{--<input type="text" class="form-control" placeholder="{{__('Seo Title')}}" id="exampleInputFile" name="seo_title" value="{{$setting->seo_title}}">--}}
-    {{--</div>--}}
-    {{--<!--col-lg-10-->--}}
-    {{--</div>--}}
-    {{--<!--form control-->--}}
-
-    {{--<div class="form-group">--}}
-    {{--<div class="form-group">--}}
-    {{--<label for="exampleInputFile">{{__('Seo keyword')}}</label>--}}
-    {{--<input type="text" class="form-control" placeholder="{{__('Seo keyword')}}" id="exampleInputFile" name="seo_keyword" value="{{$setting->seo_keyword}}">--}}
-    {{--</div>--}}
-    {{--</div>--}}
-
-    {{--<!--form control-->--}}
-    {{--<div class="form-group">--}}
-    {{--<div class="form-group">--}}
-    {{--<label for="exampleInputFile">{{__('Seo Description')}}</label>--}}
-    {{--<input type="text" class="form-control"  id="exampleInputFile" name="seo_description" value="{{$setting->seo_description}}">--}}
-    {{--</div>--}}
-    {{--</div>--}}
-    {{--</div>--}}
-    {{--<div role="tabpanel" class="tab-pane" id="tab2">--}}
-    {{--<div class="form-group">--}}
-    {{--<label for="exampleInputFile">{{__('Company Contact')}}</label>--}}
-    {{--<input type="text" class="form-control"  id="exampleInputFile" name="company_contact" value="{{$setting->company_contact}}">--}}
-    {{--</div>--}}
-    {{--<div class="form-group">--}}
-    {{--<label for="exampleInputFile">{{__('Company Address')}}</label>--}}
-    {{--<input type="text" class="form-control"  id="exampleInputFile" name="company_address" value="{{$setting->company_address}}">--}}
-    {{--</div>--}}
-    {{--</div>--}}
-    {{--<div role="tabpanel" class="tab-pane" id="tab3">--}}
-    {{--<div class="form-group">--}}
-    {{--<label for="exampleInputFile">{{__('From Name')}}</label>--}}
-    {{--<input type="text" class="form-control"  id="exampleInputFile" name="from_name" value="{{$setting->from_name}}">--}}
-    {{--</div>--}}
-
-    {{--<div class="form-group">--}}
-    {{--<label for="exampleInputFile">{{__('From Email')}}</label>--}}
-    {{--<input type="text" class="form-control"  id="exampleInputFile" name="from_email" value="{{$setting->from_email}}">--}}
-    {{--</div>--}}
-    {{--<!--form control-->--}}
-    {{--</div>--}}
-    {{--<div role="tabpanel" class="tab-pane" id="tab4">--}}
-    {{--<div class="form-group">--}}
-    {{--<label for="exampleInputFile">{{__('Copyright Text')}}</label>--}}
-    {{--<input type="text" class="form-control"  id="exampleInputFile" name="copyright_text" value="{{$setting->copyright_text}}">--}}
-    {{--</div>--}}
-    {{--<div class="form-group">--}}
-    {{--<label for="exampleInputFile">{{__('Footer Text')}}</label>--}}
-    {{--<input type="text" class="form-control"  id="exampleInputFile" name="footer_text" value="{{$setting->footer_text}}">--}}
-    {{--</div>--}}
-    {{--</div>--}}
-    {{--<div role="tabpanel" class="tab-pane" id="tab5">--}}
-    {{--<div class="form-group">--}}
-    {{--<label for="exampleInputFile">{{__('Facebook')}}</label>--}}
-    {{--<input type="text" class="form-control"  id="exampleInputFile" name="facebook" value="{{$setting->facebook}}">--}}
-    {{--</div>--}}
-    {{--<div class="form-group">--}}
-    {{--<label for="exampleInputFile">{{__('Linkedin')}}</label>--}}
-    {{--<input type="text" class="form-control"  id="exampleInputFile" name="linkedin", value="{{$setting->linkedin}}">--}}
-    {{--</div>--}}
-    {{--<div class="form-group">--}}
-    {{--<label for="exampleInputFile">{{__('Twitter')}}</label>--}}
-    {{--<input type="text" class="form-control"  id="exampleInputFile" name="twitter" value="{{$setting->twitter}}">--}}
-    {{--</div>--}}
-    {{--<div class="form-group">--}}
-    {{--<label for="exampleInputFile">{{__('Google')}}</label>--}}
-    {{--<input type="text" class="form-control"  id="exampleInputFile" name="google" value="{{$setting->google}}">--}}
-    {{--</div>--}}
-    {{--</div>--}}
-
-    {{--<div role="tabpanel" class="tab-pane" id="tab6">--}}
-    {{--<div class="form-group">--}}
-    {{--<label for="exampleInputFile">{{__('Terms')}}</label>--}}
-    {{--<input type="text" class="form-control" id="exampleInputFile" name="terms" value="{{$setting->terms}}">--}}
-    {{--</div>--}}
-    {{--<div class="form-group">--}}
-    {{--<label for="exampleInputFile">{{__('Disclaimer')}}</label>--}}
-    {{--<input type="text" class="form-control"  id="exampleInputFile" name="disclaimer" value="{{$setting->disclaimer}}">--}}
-    {{--</div>--}}
-    {{--</div>--}}
-    {{--<div role="tabpanel" class="tab-pane" id="tab7">--}}
-    {{--<div class="form-group">--}}
-    {{--<label for="exampleInputFile">{{__('Google Analytics')}}</label>--}}
-    {{--<input type="text" class="form-control"  id="exampleInputFile" name="google_analytics" value="{{$setting->google_analytics}}">--}}
-    {{--</div>--}}
-    {{--<!--form control-->--}}
-    {{--</div>--}}
-    {{--<!-- /.box-body -->--}}
-    {{--<div class="box-footer">--}}
-    {{--<button type="submit" class="btn btn-primary">{{__('Submit')}}</button>--}}
-    {{--</div>--}}
-    {{--</form>--}}
-    {{--</div>--}}
-    {{--</div>--}}
-    {{--</div>--}}
-    {{--</div>--}}
 @endsection
 @push('scripts')
     <script src="{{asset('backend/js.pro/jquery.validate.min.js')}}"></script>

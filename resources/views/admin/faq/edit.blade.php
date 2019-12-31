@@ -94,10 +94,8 @@
                                             </div>
                                             <!-- /.box-header -->
                                             <!-- form start -->
-                                            <form role="form" method="post" action="{{route('faq.update',$faq->id)}}"
+                                            <form id="form1"
                                                   enctype="multipart/form-data">
-                                                @csrf
-                                                @method('PUT')
                                                 <div class="box-body">
                                                     <div class="form-group">
                                                         <div class="form-group">
@@ -136,5 +134,45 @@
                                             <script src="{{asset('backend/js.pro/froala_editor.pkgd.min.js')}}"></script>
                                             <script>
                                                 var editor = new FroalaEditor('#froala');
+                                            </script>
+                                            <script src="{{asset('backend/js.pro/jquery.blockUI.js')}}" type="text/javascript"></script>
+                                            <script>
+                                                $(document).ready(function () {
+                                                    $("#form1").submit(function (event) {
+                                                        var data = $("#form1").serialize();
+                                                        event.preventDefault();
+                                                        $.blockUI();
+
+                                                        $.ajaxSetup({
+                                                            headers: {
+                                                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                                            }
+                                                        });
+                                                        $.blockUI({
+                                                            message: '{{__('please wait...')}}', css: {
+                                                                border: 'none',
+                                                                padding: '15px',
+                                                                backgroundColor: '#000',
+                                                                '-webkit-border-radius': '10px',
+                                                                '-moz-border-radius': '10px',
+                                                                opacity: .5,
+                                                                color: '#fff'
+                                                            }
+                                                        });
+                                                        $.ajax({
+                                                            url: '/admin/faq/'+data.id,
+                                                            type: 'POST',
+                                                            data: data,
+                                                            dataType: 'json',
+                                                            method:'put',
+                                                            async: false,
+                                                            success: function (data) {
+                                                                setTimeout($.unblockUI, 2000);
+                                                                location.reload();
+                                                            },
+                                                            cache: false,
+                                                        });
+                                                    });
+                                                });
                                             </script>
     @endpush

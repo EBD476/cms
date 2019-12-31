@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Article;
 use App\Http\Controllers\Controller;
 use App\News;
 use http\Env\Response;
@@ -36,18 +37,22 @@ class NewsController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'hn_title' => 'required',
-            'hn_description' => 'required',
-            'hn_show' => 'required',
+//            'hn_title' => 'required',
+//            'hn_description' => 'required',
+//            'hn_show' => 'required',
         ]);
 
         $news = new News();
         $news->hn_title = $request->hn_title;
+        $request->hn_description = str_replace('<p data-f-id="pbf" style="text-align: center; font-size: 14px; margin-top: 30px; opacity: 0.65; font-family: sans-serif;">Powered by <a href="https://www.froala.com/wysiwyg-editor?pb=1" title="Froala Editor">Froala Editor</a></p>', "", $request->hn_description);
         $news->hn_description = $request->hn_description;
         $news->hn_image = $request->hn_image;
-        $news->hn_status = $request->hn_show;
+        if($request->hn_show == 'on')
+        {
+            $news->hn_status = 1;
+        }
         $news->save();
-        return redirect()->route('news.index');
+        return json_encode(["response" => "Done"]);
     }
 
     /**
@@ -83,19 +88,20 @@ class NewsController extends Controller
     public function update(Request $request, $id)
     {
 
-        $this->validate($request,[
-            'hn_title'=>'required',
-            'hn_description' => 'required' ,
+        $this->validate($request, [
+//            'hn_title'=>'required',
+//            'hn_description' => 'required' ,
 //            'hn_view_count' => 'required' ,
-            'hn_show' => 'required',
+//            'hn_show' => 'required',
         ]);
         $news = News::find($id);
         $news->hn_title = $request->hn_title;
-        $news->hn_description = $request->hn_description;
+        $request->froala = str_replace('<p data-f-id="pbf" style="text-align: center; font-size: 14px; margin-top: 30px; opacity: 0.65; font-family: sans-serif;">Powered by <a href="https://www.froala.com/wysiwyg-editor?pb=1" title="Froala Editor">Froala Editor</a></p>', "", $request->froala);
+        $news->hn_description = $request->froala;
         $news->hn_image = $request->hn_image;
-        $news->hn_status = $request->hn_show;
+        $news->hn_status =$request->ha_show;
         $news->save();
-        return redirect()->route('news.index');
+        return json_encode(["response" => "Done"]);
     }
 
     /**
@@ -114,7 +120,7 @@ class NewsController extends Controller
     public function upload(Request $request)
     {
         $image = $request->file('file');
-        $filename=$_FILES['file']['name'];
+        $filename = $_FILES['file']['name'];
 
         if (isset($image)) {
             $current_date = Carbon::now()->todatestring();
@@ -128,14 +134,16 @@ class NewsController extends Controller
         }
 
         return response()->json([
-            'link' => '/img/news/'.$filename
+            'link' => '/img/news/' . $filename
         ]);
     }
+
     public function update_status(Request $request)
     {
-        $article=Article::find($request->id);
-        $article->ha_status=$request->status;
-        $article->save();
+        $sataus = News::find($request->id);
+        $sataus->hn_status = $request->status;
+        $sataus->save();
+        return json_encode(["response" => "Done"]);
     }
 }
 

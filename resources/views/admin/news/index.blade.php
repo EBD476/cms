@@ -126,7 +126,7 @@
                                                     {{$news ->created_at}}
                                                 </td>
                                                 <td>
-                                                    <input type="checkbox" @if ($news ->hn_show) checked
+                                                    <input type="checkbox" @if ($news->hn_status) checked
                                                            @endif class="js-switch"
                                                            data-size="small" data-id="{{$news->id}}">
                                                 </td>
@@ -197,6 +197,7 @@
         });
     </script>
     <script src="{{asset('backend/js.pro/switchery.min.js')}}"></script>
+    <script src="{{asset('backend/js.pro/sweetalert.min.js')}}"></script>
     <script>
         $(document).ready(function () {
 
@@ -211,10 +212,6 @@
                         //اینپوت هایی که به کنترلر request داده می شود اینجا ساخته شده است.
                         status: $(this)[0].checked  == true ? 1 : 0
                     };
-
-                    $.blockUI();
-
-
                     //token
                     $.ajaxSetup({
                         headers: {
@@ -223,18 +220,21 @@
                     });
 //پاس کردن دیتا به کنترلر
                     $.ajax({
-                        url: '/admin/news',
+                        url: '/admin/news_update_status',
                         type: 'POST',
                         data: data,
                         dataType: 'json',
                         async: false,
                         success: function (data) {
-                            // alert(data.response);
-                            setTimeout($.unblockUI, 2000);
+                            swal({
+                                title: "",
+                                text: "{{__('success')}}",
+                                icon: "success",
+                                button:"{{__('Done')}}"
+                            })
                         },
                         cache: false,
                     });
-                    //alert($(this)[0].checked);
                 }
             });
 

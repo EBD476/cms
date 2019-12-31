@@ -38,10 +38,19 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth', 'namespace' => 'admin
     Route::post('/image-pages-save','PagesController@pages_upload')->name('pages.pages_upload');
     Route::post('/image-user-save','DataUserController@user_upload')->name('datauser.user_upload');
     Route::post('/image-gallery-save','GalleryController@gallery_upload')->name('gallery.gallery_upload');
+    Route::post('/news_update_status','NewsController@update_status')->name('news.update_status ');
+    Route::post('/project-status','ProjectsController@project_status')->name('project.project-status');
+    Route::post('/dealership-status','DealershipsController@dealership_status')->name('dealership.dealership-status');
+    Route::post('/pages-status','PagesController@pages_status')->name('pages.pages-status');
+    Route::post('/faq-status','FaqController@faq_status')->name('faq.faq-status');
+    Route::post('/menu-status','MenuController@menu_status')->name('menu.menu-status');
+    Route::post('/gallery-status','GalleryController@gallery_status')->name('gallery.gallery-status');
+    Route::post('/slider-status','SliderController@slider_status')->name('slider.slider-status');
     Route::get('up','dashboardcontroller@up')->name('admin.up');
     Route::get('down','dashboardcontroller@down')->name('admin.down');
     Route::resource('publish', 'ArticleController');
     Route::post('article-status','ArticleController@update_status')->name('publish.article-status');
+    Route::post('product-status','ProductController@product_status')->name('product.product-status');
     Route::resource('contact_us','ContactUsController');
 
 

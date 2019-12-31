@@ -93,89 +93,88 @@
                                             <div class="box-header with-border">
                                                 <h3 class="box-title">{{__('Product')}}</h3>
                                             </div>
-                                <!-- /.box-header -->
-                                <!-- form start -->
-                                <form method="post" action="{{route('product.update',$product->id)}}"
-                                      ENCTYPE="multipart/form-data">
-                                    @csrf
-                                    @method('PUT')
-                                    <div class="box-body">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="exampleInputPassword1">{{__('Product Name')}}</label>
-                                                    <input type="text" class="form-control" id="exampleInputPassword1"
-                                                           name="hp_product_name" value="{{$product->hp_product_name}}">
-                                                </div>
+                                            <!-- /.box-header -->
+                                            <!-- form start -->
+                                            <form id="form1"
+                                                  ENCTYPE="multipart/form-data">
+                                                <div class="box-body">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="exampleInputPassword1">{{__('Product Name')}}</label>
+                                                                <input type="text" class="form-control"
+                                                                       id="hp_product_name"
+                                                                       data-id="{{$product->id}}"
+                                                                       name="hp_product_name"
+                                                                       value="{{$product->hp_product_name}}">
+                                                            </div>
 
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="exampleInputFile">{{__('Product Model')}}</label>
-                                                    <input type="text" class="form-control"
-                                                           id="exampleInputFile"
-                                                           name="hp_product_model" value="{{$product->hp_product_model}}">
-                                                </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="exampleInputFile">{{__('Product Model')}}</label>
+                                                                <input type="text" class="form-control"
+                                                                       id="hp_product_model"
+                                                                       name="hp_product_model"
+                                                                       value="{{$product->hp_product_model}}">
+                                                            </div>
 
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="exampleInputFile">{{__('product Price')}}</label>
-                                                    <input type="text" class="form-control"
-                                                           id="exampleInputFile"
-                                                           name="hp_product_price" VALUE="{{$product->hp_product_price}}">
-                                                </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="form-group">
+                                                                <label for="exampleInputFile">{{__('product Publish Date')}}</label>
+                                                                <input type="text" class="form-control"
+                                                                       id="test-date-id"
+                                                                       name="hp_product_publish_date"
+                                                                       value="{{$product->hp_product_publish_date}}">
+                                                            </div>
 
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="exampleInputFile">{{__('product Publish Date')}}</label>
-                                                    <input type="text" class="form-control" id="test-date-id"
-                                                           id="exampleInputFile"
-                                                           name="hp_product_publish_date"
-                                                           value="{{$product->hp_product_publish_date}}">
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="exampleInputFile">{{__('product Description')}}</label>
-                                            <textarea type="text" class="form-control" id="froala"
-                                                   name="hp_product_description"
-                                                      >{{$product->hp_product_description}}</textarea>
-                                        </div>
-                                        <div class="checkbox checkbox-info">
-                                            <input type="checkbox" id="inputSchedule"
-                                                   name="hp_product_status" @if($product->hp_product_status) checked @endif>
-                                            <label for="inputSchedule" class="">
-                                                <span>{{__('product status')}}</span> </label>
-                                        </div>
-                                    </div>
-                                    <!-- /.box-body -->
-
-                                    <div class="box-footer">
-                                        <button type="submit" class="btn btn-primary">{{__('Submit')}}</button>
-                                    </div>
-                                </form>
-                                            <form action="{{url('/image-product-save')}}" class="dropzone" id="dropzone"
-                                                  enctype="multipart/form-data">
-                                                @csrf
-                                                @method('POST')
-                                                <div class="fallback">
+                                                        </div>
+                                                    </div>
                                                     <div class="form-group">
-                                                        <label for="exampleInputFile">{{__('Image')}}</label>
-                                                        <input type="file" class="form-control"
-                                                               name="file">
+                                                        <label for="exampleInputFile">{{__('product Description')}}</label>
+                                                        <textarea type="text" class="form-control" id="froala"
+                                                                  name="hp_product_description"
+                                                        >{{$product->hp_product_description}}</textarea>
+                                                    </div>
+                                                    <div class="checkbox checkbox-info">
+                                                        <input type="checkbox" id="inputSchedule" name="status"
+                                                               @if($product->hp_product_status) checked @endif>
+                                                        <label for="inputSchedule" class="">
+                                                            <span>{{__('Status')}}</span> </label>
                                                     </div>
                                                 </div>
+                                                <input type="hidden" name="hp_product_image" id="hp_product_image">
+                                                <!-- /.box-body -->
                                             </form>
-                            </div>
+                                        </div>
 
-                            @endsection
+                                        <form action="{{url('/admin/image-product-save')}}" class="dropzone"
+                                              id="dropzone"
+                                              enctype="multipart/form-data">
+                                            @csrf
+                                            @method('POST')
+                                            <div class="fallback">
+                                                <div class="form-group">
+                                                    <label for="exampleInputFile">{{__('Image')}}</label>
+                                                    <input type="file" class="form-control"
+                                                           name="file">
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <br>
+                                        <div class="box-footer">
+                                            <button id="sub_form1" type="submit"
+                                                    class="btn btn-primary">{{__('Submit')}}</button>
+                                        </div>
 
-                            @push('scripts')
+                                        @endsection
+
+                                        @push('scripts')
+                                            <script src="{{asset('backend/js.pro/jquery.blockUI.js')}}"
+                                                    type="text/javascript"></script>
                                             <script src="{{asset('backend/src/kamadatepicker.min.js')}}"></script>
                                             <script src="{{asset('backend/js.pro/froala_editor.pkgd.min.js')}}"></script>
                                             <script src="{{asset('backend/js.pro/dropzone.js')}}"></script>
@@ -202,12 +201,59 @@
                                                         timeout: 5000,
                                                         success: function (file, response) {
                                                             // اسم اینپوت و مقداری که باید به آن ارسال شود
-                                                            $('#hn_image').val(file.upload.filename);
+                                                            $('#hp_product_image').val(file.upload.filename);
                                                         },
                                                         error: function (file, response) {
                                                             return false;
                                                         }
                                                     };
+                                            </script>
+                                            <script>
+                                                $(document).ready(function () {
+                                                    $("#sub_form1").on('click', function (event) {
+                                                        var data =
+                                                            {
+                                                                id: $('#hp_product_name').data('id'),
+                                                                hp_product_name: $('#hp_product_name').val(),
+                                                                hp_product_model: $('#hp_product_model').val(),
+                                                                hp_product_publish_date: $('#test-date-id').val(),
+                                                                hp_product_description: $('#froala').val(),
+                                                                hp_product_status: $('#hp_product_status').val(),
+                                                                hp_product_image: $('#hp_product_image').val(),
+
+                                                            }
+                                                        event.preventDefault();
+                                                        $.ajaxSetup({
+                                                            headers: {
+                                                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                                            }
+                                                        });
+                                                        $.blockUI({
+                                                            message: '{{__('please wait...')}}', css: {
+                                                                border: 'none',
+                                                                padding: '15px',
+                                                                backgroundColor: '#000',
+                                                                '-webkit-border-radius': '10px',
+                                                                '-moz-border-radius': '10px',
+                                                                opacity: .5,
+                                                                color: '#fff'
+                                                            }
+                                                        });
+                                                        $.ajax({
+                                                            url: '/admin/product/' + data.id,
+                                                            type: 'POST',
+                                                            data: data,
+                                                            dataType: 'json',
+                                                            method: 'put',
+                                                            async: false,
+                                                            success: function (data) {
+                                                                setTimeout($.unblockUI, 2000);
+                                                                location.reload();
+                                                            },
+                                                            cache: false,
+                                                        });
+                                                    });
+                                                });
                                             </script>
 
     @endpush

@@ -35,7 +35,6 @@ class PagesController extends Controller
         $this->validate($request,[
             'title' => 'required' ,
             'page_slug' => 'required' ,
-            'description' => 'required',
             'image' =>'mimes:jpg,jpeg,png,bmp',
             'image2' =>'mimes:jpg,jpeg,png,bmp',
             'image3' =>'mimes:jpg,jpeg,png,bmp',
@@ -45,8 +44,6 @@ class PagesController extends Controller
             'seo_keyword'=> 'required',
             'seo_description'=> 'required',
             'status'=> 'required',
-            'created_by'=> 'required',
-            'updated_by'=> 'required',
         ]);
         $image = $request -> file('image');
         $slug = str_slug($request->title);
@@ -103,7 +100,7 @@ class PagesController extends Controller
         $pages = new Pages();
         $pages->title= $request->title;
         $pages->page_slug= $request->page_slug;
-        $pages->description=$request->description;
+        $pages->body=$request->froala;
         $pages->image=$image_name;
         $pages->image2=$image_name2;
         $pages->image3=$image_name3;
@@ -113,11 +110,9 @@ class PagesController extends Controller
         $pages->seo_keyword=$request->seo_keyword;
         $pages->seo_description=$request->seo_description;
         $pages->status=$request->status;
-        $pages->created_by=$request->created_by;
-        $pages->updated_by=$request->updated_by;
+        $pages->created_by=auth()->user()->name;
         $pages->save();
-        return redirect()->route('pages.index');
-    }
+        return json_encode(["response" => "Done"]);    }
 
     /**
      * Display the specified resource.
@@ -156,7 +151,6 @@ class PagesController extends Controller
         $this->validate($request,[
             'title' => 'required' ,
             'page_slug' => 'required' ,
-            'description' => 'required',
             'image' =>'mimes:jpg,jpeg,png,bmp',
             'image2' =>'mimes:jpg,jpeg,png,bmp',
             'image3' =>'mimes:jpg,jpeg,png,bmp',
@@ -166,8 +160,6 @@ class PagesController extends Controller
             'seo_keyword'=> 'required',
             'seo_description'=> 'required',
             'status'=> 'required',
-            'created_by'=> 'required',
-            'updated_by'=> 'required',
         ]);
         $pages=Pages::find($id);
         $image = $request -> file('image');
@@ -224,7 +216,7 @@ class PagesController extends Controller
         }
         $pages->title= $request->title;
         $pages->page_slug= $request->page_slug;
-        $pages->description=$request->description;
+        $pages->body=$request->froala;
         $pages->image=$request->hn_image;
         $pages->image2=$request->hn_image2;
         $pages->image3=$request->hn_image3;
@@ -234,11 +226,9 @@ class PagesController extends Controller
         $pages->seo_keyword=$request->seo_keyword;
         $pages->seo_description=$request->seo_description;
         $pages->status=$request->status;
-        $pages->created_by=$request->created_by;
-        $pages->updated_by=$request->updated_by;
+        $pages->updated_by=$request->auth()->user()->name;
         $pages->save();
-        return redirect()->route('pages.index');
-
+        return json_encode(["response" => "Done"]);
     }
 
     /**
@@ -272,5 +262,12 @@ class PagesController extends Controller
 //        $news->hn_image = $image_name;
 //        $news->save();
 //
+    }
+    public function pages_status(Request $request)
+    {
+        $sataus = Pages::find($request->id);
+        $sataus->status = $request->status;
+        $sataus->save();
+        return json_encode(["response" => "Done"]);
     }
 }

@@ -127,10 +127,10 @@
                                 class="hide-menu">{{__('Pages')}}</span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="{{route('pages.index')}}">{{__('View List Pages')}}</a></li>
-                        @foreach(App\Menu::ALL() as $menu)
-                                    <li><a href="{{route('frontend.pages.test',$menu->items)}}">{{$menu->name}}</a></li>
-                            </li>
-                        @endforeach
+                        {{--@foreach(App\Menu::ALL() as $menu)--}}
+                                    {{--<li><a href="{{route('frontend.pages.test',$menu->items)}}">{{$menu->name}}</a></li>--}}
+                            {{--</li>--}}
+                        {{--@endforeach--}}
                     </ul>
                 </li>
                 <!-- FAQ access -->

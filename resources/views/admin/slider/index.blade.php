@@ -163,12 +163,14 @@
                     @push('scripts')
                         <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
                         <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
+                        <script src="{{asset('backend/js.pro/switchery.min.js')}}"></script>
+                        <script src="{{asset('backend/js.pro/sweetalert.min.js')}}"></script>
                         <script>
                             $(document).ready(function () {
                                 $('#table').DataTable();
                             });
                         </script>
-                        <script src="{{asset('backend/js.pro/switchery.min.js')}}"></script>
+
                         <script>
                             $(document).ready(function () {
                                 $('#table').DataTable();
@@ -184,10 +186,6 @@
                                             //اینپوت هایی که به کنترلر request داده می شود اینجا ساخته شده است.
                                             status: $(this)[0].checked == true ? 1 : 0
                                         };
-
-                                        // $.blockUI();
-
-
                                         //token
                                         $.ajaxSetup({
                                             headers: {
@@ -196,18 +194,21 @@
                                         });
 //پاس کردن دیتا به کنترلر
                                         $.ajax({
-                                            url: '/admin/article-status',
+                                            url: '/admin/slider-status',
                                             type: 'POST',
                                             data: data,
                                             dataType: 'json',
                                             async: false,
                                             success: function (data) {
-                                                // alert(data.response);
-                                                // setTimeout($.unblockUI, 2000);
+                                                swal({
+                                                    title: "",
+                                                    text: "{{__('success')}}",
+                                                    icon: "success",
+                                                    button:"{{__('Done')}}"
+                                                })
                                             },
                                             cache: false,
                                         });
-                                        //alert($(this)[0].checked);
                                     }
                                 });
 

@@ -97,8 +97,7 @@
                                                 <h3 class="box-title">{{__('Items')}}</h3>
                                             </div>
                                             <!-- form -->
-                            <form method="post" action="{{route('items.store')}}" enctype="multipart/form-data">
-                                @csrf
+                            <form id="form1" enctype="multipart/form-data">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
@@ -200,5 +199,44 @@
                     return false;
                 }
             };
+    </script>
+    <script src="{{asset('backend/js.pro/blockUI.js')}}" type="text/javascript"></script>
+    <script>
+        $(document).ready(function () {
+            $("#form1").submit(function (event) {
+                var data = $("#form1").serialize();
+                event.preventDefault();
+                $.blockUI();
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.blockUI({
+                    message: '{{__('please wait...')}}', css: {
+                        border: 'none',
+                        padding: '15px',
+                        backgroundColor: '#000',
+                        '-webkit-border-radius': '10px',
+                        '-moz-border-radius': '10px',
+                        opacity: .5,
+                        color: '#fff'
+                    }
+                });
+                $.ajax({
+                    url: '/admin/items',
+                    type: 'POST',
+                    data: data,
+                    dataType: 'json',
+                    async: false,
+                    success: function (data) {
+                        setTimeout($.unblockUI, 2000);
+                        location.reload();
+                    },
+                    cache: false,
+                });
+            });
+        });
     </script>
 @endpush

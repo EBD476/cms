@@ -103,4 +103,11 @@ class FaqController extends Controller
         $faq->delete();
         return redirect()->back();
     }
+    public function faq_status(Request $request)
+    {
+        $sataus = FAQ::find($request->id);
+        $sataus->status = $request->status;
+        $sataus->save();
+        return json_encode(["response" => "Done"]);
+    }
 }

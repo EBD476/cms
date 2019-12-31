@@ -5,6 +5,7 @@
 @push('css')
     <link href="{{asset('backend/css.pro/froala_editor.pkgd.min.css')}}" rel="stylesheet"/>
     <link href="{{asset('backend/style/kamadatepicker.min.css')}}" rel="stylesheet" />
+    <link href="{{ asset('backend/css.pro/leaflet.css') }}" rel="stylesheet">
 @endpush
 
 @section('content')
@@ -97,27 +98,22 @@
                                             </div>
                         <!-- /.box-header -->
                         <!-- form start -->
-                        <form role="form" method="post" action="{{route('project.update',$projects->id)}}" enctype="multipart/form-data">
-                            @csrf
-                            @method('PUT')
+                        <form id="form1" enctype="multipart/form-data">
                             <div class="box-body">
                                 <div class="row">
-                                    <div class="col-3">
-
-                                    </div>
-                                    <div class="col-3">
+                                    <div class="col-4">
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">{{__('Project Name')}}</label>
                                             <input type="text" class="form-control" id="exampleInputPassword1"  name="hp_project_name" value="{{$projects->hp_project_name}}">
                                         </div>
                                     </div>
-                                    <div class="col-3">
+                                    <div class="col-4">
                                         <div class="form-group">
                                             <label for="exampleInputFile">{{__('Project Owner')}}</label>
                                             <input type="text" class="form-control" id="exampleInputFile" name="hp_project_owner" value="{{$projects->hp_project_owner}}">
                                         </div>
                                     </div>
-                                    <div class="col-3">
+                                    <div class="col-4">
                                         <div class="form-group">
                                             <label for="exampleInputFile">{{__('Project Type')}}</label>
                                             <input type="text" class="form-control" id="exampleInputFile" name="hp_project_type" value="{{$projects->hp_project_type}}">
@@ -125,30 +121,38 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-3">
+                                    <div class="col-4">
                                         <div class="form-group">
                                             <label for="exampleInputFile">{{__('Project Units')}}</label>
                                             <input type="text" class="form-control" id="exampleInputFile" name="hp_project_units" value="{{$projects->hp_project_units}}">
                                         </div>
                                     </div>
-                                    <div class="col-3">
+                                    <div class="col-4">
                                         <div class="form-group">
                                             <label for="exampleInputFile">{{__('Project Address')}}</label>
                                             <input type="text" class="form-control" id="exampleInputFile" name="hp_project_address" value="{{$projects->hp_project_address}}">
                                         </div>
                                     </div>
-                                    <div class="col-3">
-                                        <div class="form-group">
-                                            <label for="exampleInputFile">{{__('Project Options')}}</label>
-                                            <input type="text" class="form-control" id="exampleInputFile" name="hp_project_options" value="{{$projects->hp_project_options}}">
-                                        </div>
-                                    </div>
-                                    <div class="col-3">
+                                    {{--<div class="col-3">--}}
+                                        {{--<div class="form-group">--}}
+                                            {{--<label for="exampleInputFile">{{__('Project Options')}}</label>--}}
+                                            {{--<input type="text" class="form-control" id="exampleInputFile" name="hp_project_options" value="{{$projects->hp_project_options}}">--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                    <div class="col-4">
                                         <div class="form-group">
                                             <label for="exampleInputFile">{{__('Project Complete Date')}}</label>
                                             <input type="text" class="form-control" id="test-date-id" name="hp_project_complete_date" value="{{$projects->hp_project_complete_date}}">
                                         </div>
                                     </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputFile">{{__('Project Location')}}</label>
+                                    <div id="map"
+                                         style="width: 100%; height: 300px;direction: ltr;z-index:0"></div>
+                                    <input name="hp_project_address" type="hidden"
+                                           id="location">
+
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputFile">{{__('Project Description')}}</label>
@@ -161,11 +165,8 @@
                                 </div>
                             </div>
                             <!-- /.box-body -->
-
-                            <div class="box-footer">
-                                <button type="submit" class="btn btn-primary">{{__('Submit')}}</button>
-                            </div>
                         </form>
+                                        </div>
                                             <form action="{{url('/admin/image-project-save')}}" class="dropzone" id="dropzone"
                                                   enctype="multipart/form-data">
                                                 @csrf
@@ -178,7 +179,11 @@
                                                     </div>
                                                 </div>
                                             </form>
-                    </div>
+                                        <br>
+
+                                        <div class="box-footer">
+                                            <button type="submit" class="btn btn-primary">{{__('Submit')}}</button>
+                                        </div>
 
 @endsection
 
@@ -186,6 +191,8 @@
                                             <script src="{{asset('backend/src/kamadatepicker.min.js')}}"></script>
                                             <script src="{{asset('backend/js.pro/froala_editor.pkgd.min.js')}}"></script>
                                             <script src="{{asset('backend/js.pro/dropzone.js')}}"></script>
+                                            <script src="{{asset('backend/js.pro/leaflet.js')}}"></script>
+                                            <script src="{{asset('backend/js.pro/jquery.blockUI.js')}}" type="text/javascript"></script>
                                             <script>
                                                 kamaDatepicker('test-date-id', {
                                                     buttonsColor: "blue",
@@ -214,6 +221,78 @@
                                                         error: function (file, response) {
                                                             return false;
                                                         }
-                                                    };                                            </script>
+                                                    };
+                                            </script>
+                                            <script>
+                                                $(document).ready(function () {
+                                                    $("#form1").submit(function (event) {
+                                                        var data = $("#form1").serialize();
+                                                        event.preventDefault();
+                                                        $.ajaxSetup({
+                                                            headers: {
+                                                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                                            }
+                                                        });
+                                                        $.blockUI({
+                                                            message: '{{__('please wait...')}}', css: {
+                                                                border: 'none',
+                                                                padding: '15px',
+                                                                backgroundColor: '#000',
+                                                                '-webkit-border-radius': '10px',
+                                                                '-moz-border-radius': '10px',
+                                                                opacity: .5,
+                                                                color: '#fff'
+                                                            }
+                                                        });
+                                                        $.ajax({
+                                                            url: '/admin/project/'+data.id,
+                                                            type: 'POST',
+                                                            data: data,
+                                                            dataType: 'json',
+                                                            async: false,
+                                                            success: function (data) {
+                                                                setTimeout($.unblockUI, 2000);
+                                                                location.reload();
+                                                            },
+                                                            cache: false,
+                                                        });
+                                                    });
+                                                });
+                                            </script>
+                                            <script type="text/javascript">
 
-    @endpush
+                                                var loc;
+                                                var greenIcon = L.icon({
+                                                    iconUrl: '../../backend/img/marker-icon-x48.png',
+                                                    shadowUrl: 'leaf-shadow.png',
+
+                                                    iconSize: [48, 48], // size of the icon
+                                                    shadowSize: [50, 64], // size of the shadow
+                                                    iconAnchor: [25, 44], // point of the icon which will correspond to marker's location
+                                                    shadowAnchor: [4, 62],  // the same for the shadow
+                                                    popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+                                                });
+
+                                                var map = L.map('map').setView([35.7736, 51.4631], 15);
+
+                                                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+                                                function onMapClick(e) {
+
+                                                    var jsonLoc = JSON.parse(JSON.stringify(e.latlng));
+                                                    $("#location").val(jsonLoc.lat + ',' + jsonLoc.lng);
+
+                                                    if (loc != undefined) {
+                                                        loc.remove();
+                                                    }
+                                                    loc = L.marker([jsonLoc.lat, jsonLoc.lng], {icon: greenIcon}).addTo(map);
+                                                }
+
+                                                $("#remove").click(function () {
+                                                    loc.remove();
+                                                });
+
+                                                map.on('click', onMapClick);
+
+                                            </script>
+@endpush

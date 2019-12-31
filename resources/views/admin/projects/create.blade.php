@@ -96,9 +96,8 @@
                                             </div>
                                             <!-- /.box-header -->
                                             <!-- form start -->
-                                            <form role="form" method="post" action="{{route('project.store')}}"
+                                            <form id="form1"
                                                   enctype="multipart/form-data">
-                                                @csrf
                                                 <div class="box-body">
                                                     <div class="row">
                                                         <div class="col-3">
@@ -200,11 +199,6 @@
 
                                                 </div>
                                                 <!-- /.box-body -->
-
-                                                <div class="box-footer">
-                                                    <button type="submit"
-                                                            class="btn btn-primary">{{__('Submit')}}</button>
-                                                </div>
                                             </form>
                                             <form action="{{url('/admin/image-project-save')}}" class="dropzone"
                                                   id="dropzone"
@@ -220,6 +214,11 @@
                                                 </div>
                                             </form>
                                         </div>
+                                        <br>
+                                        <div class="box-footer">
+                                            <button id="sub-form1" type="submit"
+                                                    class="btn btn-primary">{{__('Submit')}}</button>
+                                        </div>
 
                                         @endsection
 
@@ -228,6 +227,7 @@
                                             <script src="{{asset('backend/js.pro/froala_editor.pkgd.min.js')}}"></script>
                                             <script src="{{asset('backend/js.pro/dropzone.js')}}"></script>
                                             <script src="{{asset('backend/js.pro/leaflet.js')}}"></script>
+                                            <script src="{{asset('backend/js.pro/jquery.blockUI.js')}}" type="text/javascript"></script>
                                             <script type="text/javascript">
 
                                                 var loc;
@@ -293,6 +293,45 @@
                                                             return false;
                                                         }
                                                     };                                            </script>
+                                            <script>
+                                                $(document).ready(function () {
+                                                    $("#sub-form1").on('click',function (event) {
+                                                        var data = $("#form1").serialize();
+                                                        event.preventDefault();
+
+                                                        $.blockUI();
+
+                                                        $.ajaxSetup({
+                                                            headers: {
+                                                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                                            }
+                                                        });
+                                                        $.blockUI({
+                                                            message: '{{__('please wait...')}}', css: {
+                                                                border: 'none',
+                                                                padding: '15px',
+                                                                backgroundColor: '#000',
+                                                                '-webkit-border-radius': '10px',
+                                                                '-moz-border-radius': '10px',
+                                                                opacity: .5,
+                                                                color: '#fff'
+                                                            }
+                                                        });
+                                                        $.ajax({
+                                                            url: '/admin/project',
+                                                            type: 'POST',
+                                                            data: data,
+                                                            dataType: 'json',
+                                                            async: false,
+                                                            success: function (data) {
+                                                                setTimeout($.unblockUI, 2000);
+                                                                location.reload();
+                                                            },
+                                                            cache: false,
+                                                        });
+                                                    });
+                                                });
+                                            </script>
 
 
     @endpush

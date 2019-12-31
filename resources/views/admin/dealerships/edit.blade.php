@@ -104,11 +104,8 @@
                                                                 </div>
                                                                 <!-- /.box-header -->
                                                                 <!-- form start -->
-                                                                <form role="form" method="post"
-                                                                      action="{{route('dealership.update',$dealerships->id)}}"
+                                                                <form id="form1"
                                                                       enctype="multipart/form-data">
-                                                                    @csrf
-                                                                    @method('PUT')
                                                                     <div class="box-body">
                                                                         <div class="row">
                                                                             <div class="col-4">
@@ -116,7 +113,8 @@
                                                                                     <label for="exampleInputFile">{{__('Dealership Agent')}}</label>
                                                                                     <input type="text"
                                                                                            class="form-control"
-                                                                                           id="exampleInputFile"
+                                                                                           id="hds_dealership_agent"
+                                                                                           data-id="{{$dealerships->id}}"
                                                                                            name="hds_dealership_agent"
                                                                                            value="{{$dealerships->hds_dealership_agent}}">
                                                                                 </div>
@@ -127,7 +125,7 @@
                                                                                     <label for="exampleInputFile">{{__('Dealership Phone 1')}}</label>
                                                                                     <input type="text"
                                                                                            class="form-control"
-                                                                                           id="exampleInputText"
+                                                                                           id="hds_dealership_phone_1"
                                                                                            name="hds_dealership_phone_1"
                                                                                            value="{{$dealerships->hds_dealership_phone_1}}">
 
@@ -138,7 +136,7 @@
                                                                                     <label for="exampleInputFile">{{__('Dealership Phone 2')}}</label>
                                                                                     <input type="text"
                                                                                            class="form-control"
-                                                                                           id="exampleInputText"
+                                                                                           id="hds_dealership_phone_2"
                                                                                            name="hds_dealership_phone_2"
                                                                                            value="{{$dealerships->hds_dealership_phone_2}}">
 
@@ -151,7 +149,7 @@
                                                                                     <label for="exampleInputFile">{{__('Dealership City')}}</label>
                                                                                     <input type="text"
                                                                                            class="form-control"
-                                                                                           id="exampleInputFile"
+                                                                                           id="hds_dealership_city"
                                                                                            name="hds_dealership_city"
                                                                                            value="{{$dealerships->hds_dealership_city}}">
                                                                                 </div>
@@ -161,7 +159,7 @@
                                                                                     <label for="exampleInputFile">{{__('Dealership Phone 3')}}</label>
                                                                                     <input type="text"
                                                                                            class="form-control"
-                                                                                           id="exampleInputText"
+                                                                                           id="hds_dealership_phone_3"
                                                                                            name="hds_dealership_phone_3"
                                                                                            value="{{$dealerships->hds_dealership_phone_3}}">
 
@@ -172,7 +170,7 @@
                                                                                     <label for="exampleInputFile">{{__('Dealership Address')}}</label>
                                                                                     <textarea type="text"
                                                                                               class="form-control"
-                                                                                              id="exampleInputFile"
+                                                                                              id="hds_dealership_address"
                                                                                               name="hds_dealership_address"> {{$dealerships->hds_dealership_address}}</textarea>
                                                                                 </div>
                                                                             </div>
@@ -208,6 +206,7 @@
 
                                                             @push('scripts')
                                                                 <script src="{{asset('backend/js.pro/leaflet.js')}}"></script>
+                                                                <script src="{{asset('backend/js.pro/jquery.blockUI.js')}}" type="text/javascript"></script>
                                                                 <script type="text/javascript">
 
                                                                     var loc;
@@ -253,6 +252,48 @@
                                                                         loc.remove();
                                                                     });
 
-
+                                                                    $("#form1").submit(function (event) {
+                                                                        var data ={
+                                                                            hds_dealership_agent : $("#hds_dealership_agent").val(),
+                                                                            hds_dealership_phone_1 : $("#hds_dealership_phone_1").val(),
+                                                                            hds_dealership_phone_2 : $("#hds_dealership_phone_2").val(),
+                                                                            hds_dealership_city : $("#hds_dealership_city").val(),
+                                                                            hds_dealership_phone_3 : $("#hds_dealership_phone_3").val(),
+                                                                            hds_dealership_address : $("#hds_dealership_address").val(),
+                                                                            hds_dealership_state : $("#hds_dealership_state").val(),
+                                                                            id:$("#hds_dealership_agent").data('id'),
+                                                                        }
+                                                                        event.preventDefault();
+                                                                        $.ajaxSetup({
+                                                                            headers: {
+                                                                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                                                            }
+                                                                        });
+                                                                        $.blockUI({
+                                                                            message: '{{__('please wait...')}}', css: {
+                                                                                border: 'none',
+                                                                                padding: '15px',
+                                                                                backgroundColor: '#000',
+                                                                                '-webkit-border-radius': '10px',
+                                                                                '-moz-border-radius': '10px',
+                                                                                opacity: .5,
+                                                                                color: '#fff'
+                                                                            }
+                                                                        });
+                                                                        $.ajax({
+                                                                            url: '/admin/dealership/'+data.id,
+                                                                            type: 'POST',
+                                                                            data: data,
+                                                                            dataType: 'json',
+                                                                            async: false,
+                                                                            method:'put',
+                                                                            success: function (data) {
+                                                                                setTimeout($.unblockUI, 2000);
+                                                                                location.reload();
+                                                                            },
+                                                                            cache: false,
+                                                                        });
+                                                                    });
                                                                 </script>
+
     @endpush

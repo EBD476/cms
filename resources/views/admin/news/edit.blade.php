@@ -93,44 +93,43 @@
                                             </div>
                                             <!-- /.box-header -->
                                             <!-- form start -->
-                                            <form method="post" action="{{route('news.update',$news->id)}}"
+                                            <form id="form1"
                                                   ENCTYPE="multipart/form-data">
-                                                @method('PUT')
-                                                @csrf
                                                 <div class="box-body">
                                                     <div class="form-group">
                                                         <label for="exampleInputPassword1">{{__('Title')}}</label>
                                                         <input type="text" class="form-control"
-                                                               id="exampleInputPassword1"
+                                                               id="hn_title"
+                                                               data-id="{{$news->id}}"
                                                                name="hn_title" value="{{$news->hn_title}}">
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="exampleInputFile">{{__('Description')}}</label>
                                                         <textarea type="text" class="form-control"
                                                                   id="froala"
+                                                                  data-hn_description=""
                                                                   name="hn_description"
-                                                                  >{{$news->hn_description}}</textarea>
+                                                        >{{$news->hn_description}}</textarea>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <label for="exampleInputFile">{{__('Image')}}</label>
-                                                        <img
-                                                               id="exampleInputFile"
-                                                               src="/img/news/{{$news->hn_image}}">
-                                                    </div>
+                                                    {{--<div class="form-group">--}}
+                                                    {{--<label for="exampleInputFile">{{__('Image')}}</label>--}}
+                                                    {{--<img--}}
+                                                    {{--id="exampleInputFile"--}}
+                                                    {{--src="/img/news/{{$news->hn_image}}">--}}
+                                                    {{--</div>--}}
                                                     <div class="checkbox checkbox-info">
-                                                        <input type="checkbox" id="inputSchedule" name="hn_show" @if($news->hn_status) checked @endif>
-                                                        <label for="inputSchedule" class=""> <span>{{__('Status')}}</span> </label>
+                                                        <input type="checkbox" id="inputSchedule" name="hn_show"
+                                                               @if($news->hn_status) checked @endif>
+                                                        <label for="inputSchedule" class="">
+                                                            <span>{{__('Status')}}</span> </label>
                                                     </div>
                                                 </div>
                                                 <input type="hidden" name="hn_image" id="hn_image">
                                                 <!-- /.box-body -->
-
-                                                <div class="box-footer">
-                                                    <button type="submit"
-                                                            class="btn btn-primary">{{__('Submit')}}</button>
-                                                </div>
                                             </form>
-                                            <form action="{{url('/admin/image-save')}}" class="dropzone" id="dropzone"
+                                        </div>
+                                        <form action="{{url('/admin/image-save')}}" class="dropzone"
+                                                  id="dropzone"
                                                   enctype="multipart/form-data">
                                                 @csrf
                                                 @method('POST')
@@ -142,7 +141,11 @@
                                                     </div>
                                                 </div>
                                             </form>
-                                        </div>
+                                            <br>
+                                            <div class="box-footer">
+                                                <button id="sub_form1" type="submit"
+                                                        class="btn btn-primary">{{__('Submit')}}</button>
+                                            </div>
 
                                         @endsection
 
@@ -156,24 +159,67 @@
                                                     {
                                                         maxFilesize: 12,
                                                         // فایل نوع آبجکت است
-                                                        renameFile: function(file) {
+                                                        renameFile: function (file) {
                                                             var dt = new Date();
                                                             var time = dt.getTime();
-                                                            return time + '-' +file.name;
+                                                            return time + '-' + file.name;
                                                         },
                                                         acceptedFiles: ".jpeg,.jpg,.png,.gif",
                                                         addRemoveLinks: true,
                                                         timeout: 5000,
-                                                        success: function(file, response)
-                                                        {
+                                                        success: function (file, response) {
                                                             // اسم اینپوت و مقداری که باید به آن ارسال شود
                                                             $('#hn_image').val(file.upload.filename);
                                                         },
-                                                        error: function(file, response)
-                                                        {
+                                                        error: function (file, response) {
                                                             return false;
                                                         }
                                                     };
+                                            </script>
+                                            <script src="{{asset('backend/js.pro/jquery.blockUI.js')}}"
+                                                    type="text/javascript"></script>
+                                            <script>
+                                                $(document).ready(function () {
+                                                    $("#sub_form1").on('click', function (event) {
+                                                        var data = {
+                                                            hn_title: $("#hn_title").val(),
+                                                            froala: $("#froala").val(),
+                                                            ha_show: $("#inputSchedule")[0].checked  == true ? 1 : 0,
+                                                            id: $("#hn_title").data('id'),
+                                                            hn_image: $('#hn_image').val(),
+                                                        };
+                                                        event.preventDefault();
+                                                        $.ajaxSetup({
+                                                            headers: {
+                                                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                                            }
+                                                        });
+                                                        $.blockUI({
+                                                            message: '{{__('please wait...')}}', css: {
+                                                                border: 'none',
+                                                                padding: '15px',
+                                                                backgroundColor: '#000',
+                                                                '-webkit-border-radius': '10px',
+                                                                '-moz-border-radius': '10px',
+                                                                opacity: .5,
+                                                                color: '#fff'
+                                                            }
+                                                        });
+                                                        $.ajax({
+                                                            url: '/admin/news/' + data.id,
+                                                            type: 'POST',
+                                                            data: data,
+                                                            dataType: 'json',
+                                                            async: false,
+                                                            method: 'put',
+                                                            success: function (data) {
+                                                                setTimeout($.unblockUI, 2000);
+                                                                location.reload();
+                                                            },
+                                                            cache: false,
+                                                        });
+                                                    });
+                                                });
                                             </script>
 
     @endpush

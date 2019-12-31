@@ -155,5 +155,12 @@ class DealershipsController extends Controller
 //        $news->save();
 //
     }
+    public function dealership_status(Request $request)
+    {
+        $sataus = Dealerships::find($request->id);
+        $sataus->hds_status = $request->status;
+        $sataus->save();
+        return json_encode(["response" => "Done"]);
+    }
 
 }

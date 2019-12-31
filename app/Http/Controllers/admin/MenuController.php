@@ -55,8 +55,7 @@ class MenuController extends Controller
         $menu->created_by=$request->created_by;
         $menu->image=$request->image;
         $menu->save();
-        return redirect()->route('menu.index');
-    }
+        return json_encode(["response" => "Done"]);    }
 
     /**
      * Display the specified resource.
@@ -110,8 +109,7 @@ class MenuController extends Controller
         $menu->updated_by=$request->updated_by;
         $menu->image=$request->image;
         $menu->save();
-        return redirect()->route('menu.index');
-    }
+        return json_encode(["response" => "Done"]);    }
 
     /**
      * Remove the specified resource from storage.
@@ -148,5 +146,12 @@ class MenuController extends Controller
 //        $news->hn_image = $image_name;
 //        $news->save();
 //
+    }
+    public function menu_status(Request $request)
+    {
+        $sataus = Menu::find($request->id);
+        $sataus->status = $request->status;
+        $sataus->save();
+        return json_encode(["response" => "Done"]);
     }
 }

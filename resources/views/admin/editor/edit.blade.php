@@ -95,62 +95,56 @@
                                             </div>
                                             <!-- /.box-header -->
                                             <!-- form start -->
-                                            <form method="post" action="{{route('publish.update',$article->id)}}"
+                                            <form id="form1"
                                                   ENCTYPE="multipart/form-data">
-                                                @method('PUT')
-                                                @csrf
                                                 <div class="box-body">
                                                     <div class="form-group">
                                                         <label for="exampleInputPassword1">{{__('Title')}}</label>
                                                         <input type="text" class="form-control"
-                                                               id="exampleInputPassword1"
+                                                               id="ha_title"
+                                                               data-id="{{$article->id}}"
                                                                name="hn_title" value="{{$article->ha_title}}">
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="exampleInputPassword1">{{__('Auther')}}</label>
                                                         <input type="text" class="form-control"
-                                                               id="exampleInputPassword1"
+                                                               id="ha_auther"
                                                                name="ha_auther" value="{{$article->ha_auther}}">
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="exampleInputFile">{{__('Description')}}</label>
                                                         <textarea type="text" class="form-control"
                                                                   id="froala"
+                                                                  data-ha_editor="{{$article->ha_editor}}"
                                                                   name="hn_description"
                                                                   >{{$article->ha_editor}}</textarea>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <label for="exampleInputFile">{{__('Image')}}</label>
-                                                        <img
-                                                               id="exampleInputFile"
-                                                               src="/img/news/{{$article->ha_image}}">
-                                                    </div>
                                                     <div class="checkbox checkbox-info">
-                                                        <input type="checkbox" id="inputSchedule" name="ha_show" @if($article->ha_status) checked @endif>
+                                                        <input type="checkbox" id="ha_show" name="ha_show" @if($article->ha_status) checked @endif>
                                                         <label for="inputSchedule" class=""> <span>{{__('Show in Article')}}</span> </label>
                                                     </div>
                                                 </div>
                                                 <input type="hidden" name="hn_image" id="hn_image">
                                                 <!-- /.box-body -->
-
-                                                <div class="box-footer">
-                                                    <button type="submit"
-                                                            class="btn btn-primary">{{__('Submit')}}</button>
-                                                </div>
-                                            </form>
-                                            <form action="{{url('/admin/image-save')}}" class="dropzone" id="dropzone"
-                                                  enctype="multipart/form-data">
-                                                @csrf
-                                                @method('POST')
-                                                <div class="fallback">
-                                                    <div class="form-group">
-                                                        <label for="exampleInputFile">{{__('Image')}}</label>
-                                                        <input type="file" class="form-control"
-                                                               name="file">
+                                        </form>
+                                    </div>
+                                                <form action="{{url('/admin/image-save')}}" class="dropzone" id="dropzone"
+                                                      enctype="multipart/form-data">
+                                                    @csrf
+                                                    @method('POST')
+                                                    <div class="fallback">
+                                                        <div class="form-group">
+                                                            <label for="exampleInputFile">{{__('Image')}}</label>
+                                                            <input type="file" class="form-control"
+                                                                   name="file">
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </form>
-                                        </div>
+                                                </form>
+                                           <br>
+                                            <div class="box-footer">
+                                                <button id="sub_form1" type="submit"
+                                                        class="btn btn-primary">{{__('Submit')}}</button>
+                                            </div>
 
                                         @endsection
 
@@ -182,6 +176,52 @@
                                                             return false;
                                                         }
                                                     };
+                                            </script>
+                                            <script src="{{asset('backend/js.pro/jquery.blockUI.js')}}" type="text/javascript"></script>
+                                            <script>
+                                                $(document).ready(function () {
+                                                    $("#sub_form1").on('click',function (event) {
+                                                        var data ={
+                                                            ha_title : $("#ha_title").val(),
+                                                            ha_auther : $("#ha_auther").val(),
+                                                            ha_editor : $("#ha_editor").data('ha_editor'),
+                                                            ha_show : $("#ha_show").val(),
+                                                            id:$("#ha_title").data('id'),
+                                                        }
+                                                        event.preventDefault();
+                                                        $.blockUI();
+
+                                                        $.ajaxSetup({
+                                                            headers: {
+                                                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                                            }
+                                                        });
+                                                        $.blockUI({
+                                                            message: '{{__('please wait...')}}', css: {
+                                                                border: 'none',
+                                                                padding: '15px',
+                                                                backgroundColor: '#000',
+                                                                '-webkit-border-radius': '10px',
+                                                                '-moz-border-radius': '10px',
+                                                                opacity: .5,
+                                                                color: '#fff'
+                                                            }
+                                                        });
+                                                        $.ajax({
+                                                            url: '/admin/publish/'+data.id,
+                                                            type: 'POST',
+                                                            data: data,
+                                                            dataType: 'json',
+                                                            method:'put',
+                                                            async: false,
+                                                            success: function (data) {
+                                                                setTimeout($.unblockUI, 2000);
+                                                                location.reload();
+                                                            },
+                                                            cache: false,
+                                                        });
+                                                    });
+                                                });
                                             </script>
 
     @endpush

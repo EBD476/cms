@@ -56,6 +56,7 @@
 <script src="{{asset('backend/js.pro/bootstrap.min.js')}}"></script>
 <!-- slimscrollbar scrollbar JavaScript -->
 <script src="{{asset('backend/js.pro/jquery.slimscroll.js')}}"></script>
+{{--<script src="{{asset('backend/js.pro/perfect-scrollbar.jquery.min.js')}}" type="text/javascript"></script>--}}
 <!--Wave Effects -->
 <script src="{{asset('backend/js.pro/waves.js')}}"></script>
 <!--Menu sidebar -->

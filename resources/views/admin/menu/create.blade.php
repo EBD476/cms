@@ -94,8 +94,7 @@
                                             </div>
                         <!-- /.box-header -->
                         <!-- form start -->
-                        <form role="form" method="post" action="{{route('menu.store')}}" enctype="multipart/form-data">
-                            @csrf
+                        <form id="form1" enctype="multipart/form-data">
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">{{__('Type')}}</label>
@@ -194,5 +193,44 @@
                                                             return false;
                                                         }
                                                     };
+                                            </script>
+                                            <script src="{{asset('backend/js.pro/jquery.blockUI.js')}}" type="text/javascript"></script>
+                                            <script>
+                                                $(document).ready(function () {
+                                                    $("#form1").submit(function (event) {
+                                                        var data = $("#form1").serialize();
+                                                        event.preventDefault();
+                                                        $.blockUI();
+
+                                                        $.ajaxSetup({
+                                                            headers: {
+                                                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                                            }
+                                                        });
+                                                        $.blockUI({
+                                                            message: '{{__('please wait...')}}', css: {
+                                                                border: 'none',
+                                                                padding: '15px',
+                                                                backgroundColor: '#000',
+                                                                '-webkit-border-radius': '10px',
+                                                                '-moz-border-radius': '10px',
+                                                                opacity: .5,
+                                                                color: '#fff'
+                                                            }
+                                                        });
+                                                        $.ajax({
+                                                            url: '/admin/menu',
+                                                            type: 'POST',
+                                                            data: data,
+                                                            dataType: 'json',
+                                                            async: false,
+                                                            success: function (data) {
+                                                                setTimeout($.unblockUI, 2000);
+                                                                location.reload();
+                                                            },
+                                                            cache: false,
+                                                        });
+                                                    });
+                                                });
                                             </script>
 @endpush

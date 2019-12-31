@@ -98,9 +98,8 @@
                                             </div>
                                             <!-- /.box-header -->
                                             <!-- form start -->
-                                            <form role="form" method="post" action="{{route('devices.store')}}"
+                                            <form id="form1"
                                                   enctype="multipart/form-data">
-                                                @csrf
                                                 <div class="box-body">
                                                     <div class="form-group">
                                                         <label for="exampleInputPassword1">{{__('Type')}}</label>

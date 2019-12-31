@@ -150,6 +150,13 @@ class GalleryController extends Controller
 //        $news->save();
 //
     }
+    public function gallery_status(Request $request)
+    {
+        $sataus = Gallery::find($request->id);
+        $sataus->hg_show = $request->status;
+        $sataus->save();
+        return json_encode(["response" => "Done"]);
+    }
 
 
 }

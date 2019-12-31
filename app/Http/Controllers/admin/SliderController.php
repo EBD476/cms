@@ -45,11 +45,11 @@ class SliderController extends Controller
         $slider = new slider();
         $slider->title = $request->title;
         $slider->sub_title = $request->sub_title;
-        $slider->image = $request->hn_image;
-        $slider->status = $request->status;
+        $slider->image = $request->image;
+        if($request->status == 'on')
+        { $slider->status = 1;}
         $slider->save();
-        return redirect()->route('slider.index');
-
+        return json_encode(["response" => "Done"]);
     }
 
     /**
@@ -94,10 +94,13 @@ class SliderController extends Controller
         $slider->title = $request->title;
         $slider->sub_title = $request->sub_title;
         $slider->image = $request->hn_image;
-        $slider->status = $request->status;
+        if($request->status == 'on')
+        { $slider->status = 1;}
+        else{
+            $slider->status = 0;
+        }
         $slider->save();
-        return redirect()->route('slider.index')->with('successMSG', 'Slider Successfully Update');
-
+        return json_encode(["response" => "Done"]);
     }
 
     /**
@@ -137,5 +140,12 @@ class SliderController extends Controller
 //        $news->hn_image = $image_name;
 //        $news->save();
 //
+    }
+    public function slider_status(Request $request)
+    {
+        $sataus = slider::find($request->id);
+        $sataus->status = $request->status;
+        $sataus->save();
+        return json_encode(["response" => "Done"]);
     }
 }
