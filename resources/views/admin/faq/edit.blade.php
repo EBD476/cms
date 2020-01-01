@@ -101,31 +101,29 @@
                                                         <div class="form-group">
                                                             <label for="exampleInputPassword1">{{__('Question')}}</label>
                                                             <textarea type="text" class="form-control" id="froala"
-                                                                      name="question">{{$faq->question}}
+                                                                      name="question" data-id="{{$faq->id}}">{{$faq->question}}
                                                              </textarea>
                                                             <div class="form-group">
                                                                 <label for="exampleInputFile">{{__('Answer')}}</label>
-                                                                <textarea type="text" class="form-control" id="froala"
+                                                                <textarea type="text" class="form-control" id="froala2"
                                                                           name="answer">{{$faq->answer}}</textarea>
 
                                                             </div>
-                                                    <div class="form-group">
-                                                        <label for="exampleInputFile">{{__('Status')}}</label>
-                                                        <input type="text" class="form-control" id="exampleInputText"
-                                                                name="status"
-                                                               value="{{$faq->status}}">
-                                                    </div>
-                                                    <div class="checkbox checkbox-info">
-                                                        <input type="checkbox" id="inputSchedule" name="inputCheckboxesSchedule">
-                                                        <label for="inputSchedule" class=""> <span>{{__('Check me out')}}</span> </label>
-                                                    </div>
-                                                </div>
-                                                <!-- /.box-body -->
 
-                                                <div class="box-footer">
-                                                    <button type="submit"
-                                                            class="btn btn-primary">{{__('Submit')}}</button>
-                                                </div>
+                                                            <div class="checkbox checkbox-info">
+                                                                <input type="checkbox" id="inputSchedule"
+                                                                       name="inputCheckboxesSchedule"
+                                                                       @if($faq->status) checked @endif>
+                                                                <label for="inputSchedule" class="">
+                                                                    <span>{{__('Status')}}</span> </label>
+                                                            </div>
+                                                        </div>
+                                                        <!-- /.box-body -->
+
+                                                        <div class="box-footer">
+                                                            <button type="submit"
+                                                                    class="btn btn-primary">{{__('Submit')}}</button>
+                                                        </div>
                                             </form>
                                         </div>
                                         @endsection
@@ -134,15 +132,20 @@
                                             <script src="{{asset('backend/js.pro/froala_editor.pkgd.min.js')}}"></script>
                                             <script>
                                                 var editor = new FroalaEditor('#froala');
+                                                var editor = new FroalaEditor('#froala2');
                                             </script>
-                                            <script src="{{asset('backend/js.pro/jquery.blockUI.js')}}" type="text/javascript"></script>
+                                            <script src="{{asset('backend/js.pro/jquery.blockUI.js')}}"
+                                                    type="text/javascript"></script>
                                             <script>
                                                 $(document).ready(function () {
                                                     $("#form1").submit(function (event) {
-                                                        var data = $("#form1").serialize();
+                                                        var data = {
+                                                            id: $('#froala').data('id'),
+                                                            status: $('#inputSchedule')[0].checked == true ? 1 : 0,
+                                                            question: $('#froala').val(),
+                                                            answer: $('#froala2').val(),
+                                                        }
                                                         event.preventDefault();
-                                                        $.blockUI();
-
                                                         $.ajaxSetup({
                                                             headers: {
                                                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -160,11 +163,11 @@
                                                             }
                                                         });
                                                         $.ajax({
-                                                            url: '/admin/faq/'+data.id,
+                                                            url: '/admin/faq/' + data.id,
                                                             type: 'POST',
                                                             data: data,
                                                             dataType: 'json',
-                                                            method:'put',
+                                                            method: 'put',
                                                             async: false,
                                                             success: function (data) {
                                                                 setTimeout($.unblockUI, 2000);

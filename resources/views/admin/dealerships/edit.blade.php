@@ -146,16 +146,6 @@
                                                                         <div class="row">
                                                                             <div class="col-4">
                                                                                 <div class="form-group">
-                                                                                    <label for="exampleInputFile">{{__('Dealership City')}}</label>
-                                                                                    <input type="text"
-                                                                                           class="form-control"
-                                                                                           id="hds_dealership_city"
-                                                                                           name="hds_dealership_city"
-                                                                                           value="{{$dealerships->hds_dealership_city}}">
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-4">
-                                                                                <div class="form-group">
                                                                                     <label for="exampleInputFile">{{__('Dealership Phone 3')}}</label>
                                                                                     <input type="text"
                                                                                            class="form-control"
@@ -167,23 +157,45 @@
                                                                             </div>
                                                                             <div class="col-4">
                                                                                 <div class="form-group">
-                                                                                    <label for="exampleInputFile">{{__('Dealership Address')}}</label>
-                                                                                    <textarea type="text"
-                                                                                              class="form-control"
-                                                                                              id="hds_dealership_address"
-                                                                                              name="hds_dealership_address"> {{$dealerships->hds_dealership_address}}</textarea>
+                                                                                    <label for="exampleInputFile">{{__('Dealership City')}}</label>
+                                                                                    <input type="text"
+                                                                                           class="form-control"
+                                                                                           id="hds_dealership_city"
+                                                                                           name="hds_dealership_city"
+                                                                                           value="{{$dealerships->hds_dealership_city}}">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-4">
+                                                                                <div class="form-group">
+                                                                                    <label for="exampleInputFile">{{__('Dealership State')}}</label>
+                                                                                    <input type="text"
+                                                                                           class="form-control"
+                                                                                           id="hds_dealership_state"
+                                                                                           name="hds_dealership_state"
+                                                                                           value="{{$dealerships->hds_dealership_state}}">
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-
-                                                                        <div class="form-group">
-                                                                            <label for="exampleInputFile">{{__('Dealership State')}}</label>
-                                                                            <div id="map"
-                                                                                 style="width: 100%; height: 300px;direction: ltr;z-index:0"></div>
-                                                                            <input type="hidden" class="form-control"
-                                                                                   id="location"
-                                                                                   name="hds_dealership_state"
-                                                                                   value="{{$dealerships->hds_dealership_state}}">
+                                                                        <div class="col-12">
+                                                                            <div class="form-group">
+                                                                                <label for="exampleInputFile">{{__('Dealership Address')}}</label>
+                                                                                <textarea type="text"
+                                                                                          class="form-control"
+                                                                                          id="hds_dealership_address"
+                                                                                          name="hds_dealership_address"> {{$dealerships->hds_dealership_address}}</textarea>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-12">
+                                                                            <div class="form-group">
+                                                                                <label for="exampleInputFile">{{__('Dealership Location')}}</label>
+                                                                                <div id="map"
+                                                                                     style="width: 100%; height: 300px;direction: ltr;z-index:0"></div>
+                                                                                <input type="hidden"
+                                                                                       class="form-control"
+                                                                                       id="location"
+                                                                                       name="hds_dealership_state"
+                                                                                       value="{{$dealerships->hds_dealership_loc}}">
+                                                                            </div>
                                                                         </div>
 
                                                                         <div class="checkbox checkbox-info">
@@ -206,7 +218,8 @@
 
                                                             @push('scripts')
                                                                 <script src="{{asset('backend/js.pro/leaflet.js')}}"></script>
-                                                                <script src="{{asset('backend/js.pro/jquery.blockUI.js')}}" type="text/javascript"></script>
+                                                                <script src="{{asset('backend/js.pro/jquery.blockUI.js')}}"
+                                                                        type="text/javascript"></script>
                                                                 <script type="text/javascript">
 
                                                                     var loc;
@@ -253,15 +266,17 @@
                                                                     });
 
                                                                     $("#form1").submit(function (event) {
-                                                                        var data ={
-                                                                            hds_dealership_agent : $("#hds_dealership_agent").val(),
-                                                                            hds_dealership_phone_1 : $("#hds_dealership_phone_1").val(),
-                                                                            hds_dealership_phone_2 : $("#hds_dealership_phone_2").val(),
-                                                                            hds_dealership_city : $("#hds_dealership_city").val(),
-                                                                            hds_dealership_phone_3 : $("#hds_dealership_phone_3").val(),
-                                                                            hds_dealership_address : $("#hds_dealership_address").val(),
-                                                                            hds_dealership_state : $("#hds_dealership_state").val(),
-                                                                            id:$("#hds_dealership_agent").data('id'),
+                                                                        var data = {
+                                                                            hds_dealership_agent: $("#hds_dealership_agent").val(),
+                                                                            hds_dealership_phone_1: $("#hds_dealership_phone_1").val(),
+                                                                            hds_dealership_phone_2: $("#hds_dealership_phone_2").val(),
+                                                                            hds_dealership_city: $("#hds_dealership_city").val(),
+                                                                            hds_dealership_phone_3: $("#hds_dealership_phone_3").val(),
+                                                                            hds_dealership_address: $("#hds_dealership_address").val(),
+                                                                            hds_dealership_state: $("#hds_dealership_state").val(),
+                                                                            hds_dealership_loc: $("#location").val(),
+                                                                            status: $("#inputSchedule")[0].checked == true ? 1 : 0 ,
+                                                                            id: $("#hds_dealership_agent").data('id'),
                                                                         }
                                                                         event.preventDefault();
                                                                         $.ajaxSetup({
@@ -281,12 +296,12 @@
                                                                             }
                                                                         });
                                                                         $.ajax({
-                                                                            url: '/admin/dealership/'+data.id,
+                                                                            url: '/admin/dealership/' + data.id,
                                                                             type: 'POST',
                                                                             data: data,
                                                                             dataType: 'json',
                                                                             async: false,
-                                                                            method:'put',
+                                                                            method: 'put',
                                                                             success: function (data) {
                                                                                 setTimeout($.unblockUI, 2000);
                                                                                 location.reload();

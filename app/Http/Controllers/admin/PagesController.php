@@ -241,7 +241,7 @@ class PagesController extends Controller
     {
         $pages= Pages::find($id);
         $pages->delete();
-        return redirect()->back();
+        return json_encode(["response" => "Done"]);
     }
     public function pages_upload(Request $request)
     {

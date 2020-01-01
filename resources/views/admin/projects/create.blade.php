@@ -104,13 +104,13 @@
                                                             <div class="form-group">
                                                                 <label for="exampleInputPassword1">{{__('Project Name')}}</label>
                                                                 <input type="text" class="form-control"
-                                                                       id="exampleInputPassword1" name="hp_project_name">
+                                                                       id="hp_project_name" name="hp_project_name">
                                                             </div>
                                                         </div>
                                                         <div class="col-3">
                                                             <div class="form-group">
                                                                 <label for="exampleInputFile">{{__('Project Owner')}}</label>
-                                                                <input type="text" class="form-control" id="exampleInputFile"
+                                                                <input type="text" class="form-control" id="hp_project_owner"
                                                                        name="hp_project_owner">
                                                             </div>
                                                         </div>
@@ -129,7 +129,7 @@
                                                         <div class="col-3">
                                                             <div class="form-group">
                                                                 <label for="exampleInputFile">{{__('Project Units')}}</label>
-                                                                <input type="text" class="form-control" id="exampleInputFile"
+                                                                <input type="text" class="form-control" id="hp_project_units"
                                                                        name="hp_project_units">
                                                             </div>
                                                         </div>
@@ -162,7 +162,7 @@
                                                         <div class="col-3">
                                                             <div class="form-group">
                                                                 <label for="exampleInputFile">{{__('Project Address')}}</label>
-                                                                <input type="text" class="form-control" id="exampleInputFile"
+                                                                <input type="text" class="form-control" id="hp_project_address"
                                                                        name="hp_project_address">
                                                             </div>
                                                         </div>
@@ -178,7 +178,7 @@
                                                         <label for="exampleInputFile">{{__('Project Location')}}</label>
                                                         <div id="map"
                                                              style="width: 100%; height: 300px;direction: ltr;z-index:0"></div>
-                                                        <input name="hp_project_address" type="hidden"
+                                                        <input name="hp_project_location" type="hidden"
                                                                id="location">
 
                                                     </div>

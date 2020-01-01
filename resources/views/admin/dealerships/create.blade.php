@@ -67,7 +67,8 @@
                         {{__('Insert Dealership')}}
                     </h1>
                     <ol class="breadcrumb">
-                        <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{__('Home')}}</a></li>
+                        <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{__('Home')}}</a>
+                        </li>
                         <li><a href="{{route('dealership.index')}}">  {{__('Dealership')}}</a></li>
                     </ol>
                 </section>
@@ -115,30 +116,31 @@
 
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-4">
-                                                                <div class="form-group">
-                                                                    <label for="exampleInputFile">{{__('Dealership Phone 3')}}</label>
-                                                                    <input type="text" class="form-control"
-                                                                           id="exampleInputText"
-                                                                           name="hds_dealership_phone_3">
+                                                            <div class="row">
+                                                                <div class="col-md-4">
+                                                                    <div class="form-group">
+                                                                        <label for="exampleInputFile">{{__('Dealership Phone 2')}}</label>
+                                                                        <input type="text" class="form-control"
+                                                                               id="exampleInputText"
+                                                                               name="hds_dealership_phone_2">
 
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-md-4">
-                                                                <div class="form-group">
-                                                                    <label for="exampleInputFile">{{__('Dealership Phone 2')}}</label>
-                                                                    <input type="text" class="form-control"
-                                                                           id="exampleInputText"
-                                                                           name="hds_dealership_phone_2">
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <div class="form-group">
+                                                                            <label for="exampleInputFile">{{__('Dealership Phone 3')}}</label>
+                                                                            <input type="text" class="form-control"
+                                                                                   id="exampleInputText"
+                                                                                   name="hds_dealership_phone_3">
 
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
                                                                     <label for="exampleInputFile">{{__('Dealership City')}}</label>
-                                                                    <select  class="select form-control" name="hds_dealership_city">
+                                                                    <select class="select form-control"
+                                                                            name="hds_dealership_city">
                                                                         @foreach($address_city as $addresses_city)
                                                                             <option value="{{$addresses_city->id}}">
                                                                                 {{$addresses_city->hp_city}}
@@ -149,19 +151,29 @@
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
-                                                                    <label for="exampleInputFile">{{__('Dealership Address')}}</label>
-                                                                    <textarea type="text" class="form-control"
-                                                                              id="exampleInputFile"
-                                                                              name="hds_dealership_address"></textarea>
+                                                                    <label for="exampleInputFile">{{__('Dealership State')}}</label>
+                                                                    <select class="select form-control"
+                                                                            name="hds_dealership_state">
+                                                                        @foreach($address_state as $address_states)
+                                                                            <option value="{{$address_states->id}}">
+                                                                                {{$address_states->hp_project_state}}
+                                                                            </option>
+                                                                        @endforeach
+                                                                    </select>
                                                                 </div>
-
                                                             </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="exampleInputFile">{{__('Dealership Address')}}</label>
+                                                            <textarea type="text" class="form-control"
+                                                                      id="exampleInputFile"
+                                                                      name="hds_dealership_address"></textarea>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="exampleInputFile">{{__('Dealership Location')}}</label>
                                                             <div id="map"
                                                                  style="width: 100%; height: 300px;direction: ltr;z-index:0"></div>
-                                                            <input name="hds_dealership_state" type="hidden"
+                                                            <input name="hds_dealership_loc" type="hidden"
                                                                    id="location">
                                                         </div>
                                                         <div class="checkbox checkbox-info">
@@ -184,7 +196,8 @@
 
                                         @push('scripts')
                                             <script src="{{asset('backend/js.pro/leaflet.js')}}"></script>
-                                            <script src="{{asset('backend/js.pro/jquery.blockUI.js')}}" type="text/javascript"></script>
+                                            <script src="{{asset('backend/js.pro/jquery.blockUI.js')}}"
+                                                    type="text/javascript"></script>
                                             <script type="text/javascript">
 
                                                 var loc;

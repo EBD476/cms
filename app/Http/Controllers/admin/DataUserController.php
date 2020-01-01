@@ -127,8 +127,7 @@ class DataUserController extends Controller
 
             $dataUser = User::find($id);
             $dataUser->delete();
-            return redirect()->back()->with('successMSG','عملیات حذف اطلاعات با موفقیت انجام شد.');
-
+        return json_encode(["response" => "Done"]);
     }
     public function user_upload(Request $request)
     {

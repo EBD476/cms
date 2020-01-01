@@ -23,144 +23,134 @@
                         <li class="breadcrumb-item">
                             <a href="{{route('admin.dashboard')}}">{{__('Home')}}</a>
                         </li>
-                        <li class="breadcrumb-item active">{{__('News Page')}}</li>
+                        &nbsp;
+                        <li>{{__('News Page')}}</li>
                     </ol>
                 </div>
                 {{--<div class="col-md-7 col-4 align-self-center">--}}
-                    {{--<div class="d-flex m-t-10 justify-content-end">--}}
-                        {{--<div class="d-flex m-r-20 m-l-10 hidden-md-down">--}}
-                            {{--<div class="chart-text m-r-10">--}}
-                                {{--<h6 class="m-b-0">--}}
-                                    {{--<small>THIS MONTH</small>--}}
-                                {{--</h6>--}}
-                                {{--<h4 class="m-t-0 text-info">$58,356</h4>--}}
-                            {{--</div>--}}
-                            {{--<div class="spark-chart">--}}
-                                {{--<div id="monthchart">--}}
-                                    {{--<canvas width="60" height="35"--}}
-                                            {{--style="display: inline-block; width: 60px; height: 35px; vertical-align: top;"></canvas>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                        {{--<div class="d-flex m-r-20 m-l-10 hidden-md-down">--}}
-                            {{--<div class="chart-text m-r-10">--}}
-                                {{--<h6 class="m-b-0">--}}
-                                    {{--<small>LAST MONTH</small>--}}
-                                {{--</h6>--}}
-                                {{--<h4 class="m-t-0 text-primary">$48,356</h4>--}}
-                            {{--</div>--}}
-                            {{--<div class="spark-chart">--}}
-                                {{--<div id="lastmonthchart">--}}
-                                    {{--<canvas width="60" height="35"--}}
-                                            {{--style="display: inline-block; width: 60px; height: 35px; vertical-align: top;"></canvas>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                        {{--<div class="">--}}
-                            {{--<button class="right-side-toggle waves-effect waves-light btn-success btn btn-circle btn-sm pull-right m-l-10">--}}
-                                {{--<i class="ti-settings text-white"></i>--}}
-                            {{--</button>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
+                {{--<div class="d-flex m-t-10 justify-content-end">--}}
+                {{--<div class="d-flex m-r-20 m-l-10 hidden-md-down">--}}
+                {{--<div class="chart-text m-r-10">--}}
+                {{--<h6 class="m-b-0">--}}
+                {{--<small>THIS MONTH</small>--}}
+                {{--</h6>--}}
+                {{--<h4 class="m-t-0 text-info">$58,356</h4>--}}
+                {{--</div>--}}
+                {{--<div class="spark-chart">--}}
+                {{--<div id="monthchart">--}}
+                {{--<canvas width="60" height="35"--}}
+                {{--style="display: inline-block; width: 60px; height: 35px; vertical-align: top;"></canvas>--}}
+                {{--</div>--}}
+                {{--</div>--}}
+                {{--</div>--}}
+                {{--<div class="d-flex m-r-20 m-l-10 hidden-md-down">--}}
+                {{--<div class="chart-text m-r-10">--}}
+                {{--<h6 class="m-b-0">--}}
+                {{--<small>LAST MONTH</small>--}}
+                {{--</h6>--}}
+                {{--<h4 class="m-t-0 text-primary">$48,356</h4>--}}
+                {{--</div>--}}
+                {{--<div class="spark-chart">--}}
+                {{--<div id="lastmonthchart">--}}
+                {{--<canvas width="60" height="35"--}}
+                {{--style="display: inline-block; width: 60px; height: 35px; vertical-align: top;"></canvas>--}}
+                {{--</div>--}}
+                {{--</div>--}}
+                {{--</div>--}}
+                {{--<div class="">--}}
+                {{--<button class="right-side-toggle waves-effect waves-light btn-success btn btn-circle btn-sm pull-right m-l-10">--}}
+                {{--<i class="ti-settings text-white"></i>--}}
+                {{--</button>--}}
+                {{--</div>--}}
+                {{--</div>--}}
                 {{--</div>--}}
             </div>
-            </div>
-            <!-- ============================================================== -->
-            <!-- End Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- Start Page Content -->
-            <!-- ============================================================== -->
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <a href="{{route('news.create')}}" class="btn btn-primary">{{__('Add New News')}}</a>
-                            <h4 class="card-title"></h4>
-                            <h6 class="card-subtitle"></h6>
-                            <dsiv class="row">
-                                <div class="col-sm-12">
-                                    <table id="table"
-                                           class="table table-bordered table-striped dataTable no-footer"
-                                           role="grid" aria-describedby="myTable_info">
-                                        <thead>
-                                        <tr role="row">
-                                            <th class="sorting_asc" tabindex="0" aria-controls="myTable"
-                                                rowspan="1" colspan="1" aria-sort="ascending"
-                                                aria-label="Name: activate to sort column descending"
-                                                style="width: 146px;"> {{__('ID')}}
-                                            </th>
-                                            <th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1"
-                                                colspan="1"
-                                                aria-label="Position: activate to sort column ascending"
-                                                style="width: 242px;">  {{__('Title')}}
-                                            </th>
-                                            <th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1"
-                                                colspan="1"
-                                                aria-label="Position: activate to sort column ascending"
-                                                style="width: 242px;">{{__('Published at')}}
-                                            </th>
-                                            <th class="sorting_asc" tabindex="0" aria-controls="myTable"
-                                                rowspan="1" colspan="1" aria-sort="ascending"
-                                                aria-label="Name: activate to sort column descending"
-                                                style="width: 146px;">{{__('Status')}}
-                                            </th>
-                                            <th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1"
-                                                colspan="1"
-                                                aria-label="Office: activate to sort column ascending"
-                                                style="width: 106px;">{{__('Action')}}
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Bread crumb and right sidebar toggle -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Start Page Content -->
+        <!-- ============================================================== -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <a href="{{route('news.create')}}" class="btn btn-primary">{{__('Add New News')}}</a>
+                        <h4 class="card-title"></h4>
+                        <h6 class="card-subtitle"></h6>
+                        <dsiv class="row">
+                            <div class="col-sm-12">
+                                <table id="table"
+                                       class="table table-bordered table-striped dataTable no-footer"
+                                       role="grid" aria-describedby="myTable_info">
+                                    <thead>
+                                    <tr role="row">
+                                        <th class="sorting_asc" tabindex="0" aria-controls="myTable"
+                                            rowspan="1" colspan="1" aria-sort="ascending"
+                                            aria-label="Name: activate to sort column descending"
+                                            style="width: 146px;"> {{__('ID')}}
+                                        </th>
+                                        <th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1"
+                                            colspan="1"
+                                            aria-label="Position: activate to sort column ascending"
+                                            style="width: 242px;">  {{__('Title')}}
+                                        </th>
+                                        <th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1"
+                                            colspan="1"
+                                            aria-label="Position: activate to sort column ascending"
+                                            style="width: 242px;">{{__('Published at')}}
+                                        </th>
+                                        <th class="sorting_asc" tabindex="0" aria-controls="myTable"
+                                            rowspan="1" colspan="1" aria-sort="ascending"
+                                            aria-label="Name: activate to sort column descending"
+                                            style="width: 146px;">{{__('Status')}}
+                                        </th>
+                                        <th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1"
+                                            colspan="1"
+                                            aria-label="Office: activate to sort column ascending"
+                                            style="width: 106px;">{{__('Action')}}
 
-                                            </th>
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($news as $key => $news)
+                                        <tr>
+                                            <td>
+                                                {{$key + 1}}
+                                            </td>
+                                            <td>
+                                                {{$news ->hn_title}}
+                                            </td>
+                                            <td>
+                                                {{$news ->created_at}}
+                                            </td>
+                                            <td>
+                                                <input type="checkbox" @if ($news->hn_status) checked
+                                                       @endif class="js-switch"
+                                                       data-size="small" data-id="{{$news->id}}">
+                                            </td>
+                                            <td>
+                                                <a href="{{route('news.edit',$news->id)}}"
+                                                   class="btn btn-info btn-sm"><i class="ti-pencil"></i></a>
+                                                <button data-id="{{$news->id}}" type="button"
+                                                        class="btn btn-danger btn-sm -form-delete"
+                                                ><i class="ti-close"></i>
+                                                </button>
+                                            </td>
                                         </tr>
-                                        </thead>
-                                        <tbody>
-                                        @foreach($news as $key => $news)
-                                            <tr>
-                                                <td>
-                                                    {{$key + 1}}
-                                                </td>
-                                                <td>
-                                                    {{$news ->hn_title}}
-                                                </td>
-                                                <td>
-                                                    {{$news ->created_at}}
-                                                </td>
-                                                <td>
-                                                    <input type="checkbox" @if ($news->hn_status) checked
-                                                           @endif class="js-switch"
-                                                           data-size="small" data-id="{{$news->id}}">
-                                                </td>
-                                                <td>
-                                                    <a href="{{route('news.edit',$news->id)}}"
-                                                       class="btn btn-info btn-sm"><i class="ti-pencil"></i></a>
-                                                    </a>
-                                                    <form id="-form-delete{{$news->id}}"
-                                                          style="display: none;" method="POST"
-                                                          action="{{route('news.destroy',$news->id)}}">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                    </form>
-                                                    <button type="button" class="btn btn-danger btn-sm"
-                                                            onclick="if(confirm('آیا از حذف این محصول اطمینان دارید؟')){
-                                                                    event.preventDefault();
-                                                                    document.getElementById('-form-delete{{$news->id}}').submit();
-                                                                    }else {
-                                                                    event.preventDefault();
-                                                                    }"><i class="ti-close"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </dsiv>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </dsiv>
 
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 @endsection
 
@@ -168,32 +158,32 @@
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('#table').DataTable({
                 "language": {
-                    "sEmptyTable":     "هیچ داده ای در جدول وجود ندارد",
-                    "sInfo":           "نمایش _START_ تا _END_ از _TOTAL_ رکورد",
-                    "sInfoEmpty":      "نمایش 0 تا 0 از 0 رکورد",
-                    "sInfoFiltered":   "(فیلتر شده از _MAX_ رکورد)",
-                    "sInfoPostFix":    "",
-                    "sInfoThousands":  ",",
-                    "sLengthMenu":     "نمایش _MENU_ رکورد",
+                    "sEmptyTable": "هیچ داده ای در جدول وجود ندارد",
+                    "sInfo": "نمایش _START_ تا _END_ از _TOTAL_ رکورد",
+                    "sInfoEmpty": "نمایش 0 تا 0 از 0 رکورد",
+                    "sInfoFiltered": "(فیلتر شده از _MAX_ رکورد)",
+                    "sInfoPostFix": "",
+                    "sInfoThousands": ",",
+                    "sLengthMenu": "نمایش _MENU_ رکورد",
                     "sLoadingRecords": "در حال بارگزاری...",
-                    "sProcessing":     "در حال پردازش...",
-                    "sSearch":         "جستجو:",
-                    "sZeroRecords":    "رکوردی با این مشخصات پیدا نشد",
+                    "sProcessing": "در حال پردازش...",
+                    "sSearch": "جستجو:",
+                    "sZeroRecords": "رکوردی با این مشخصات پیدا نشد",
                     "oPaginate": {
-                        "sFirst":    "ابتدا",
-                        "sLast":     "انتها",
-                        "sNext":     "بعدی",
+                        "sFirst": "ابتدا",
+                        "sLast": "انتها",
+                        "sNext": "بعدی",
                         "sPrevious": "قبلی"
                     },
                     "oAria": {
-                        "sSortAscending":  ": فعال سازی نمایش به صورت صعودی",
+                        "sSortAscending": ": فعال سازی نمایش به صورت صعودی",
                         "sSortDescending": ": فعال سازی نمایش به صورت نزولی"
                     }
                 }
-            } );
+            });
         });
     </script>
     <script src="{{asset('backend/js.pro/switchery.min.js')}}"></script>
@@ -210,7 +200,7 @@
                     var data = {
                         id: $(this).data('id'),
                         //اینپوت هایی که به کنترلر request داده می شود اینجا ساخته شده است.
-                        status: $(this)[0].checked  == true ? 1 : 0
+                        status: $(this)[0].checked == true ? 1 : 0
                     };
                     //token
                     $.ajaxSetup({
@@ -230,7 +220,7 @@
                                 title: "",
                                 text: "{{__('success')}}",
                                 icon: "success",
-                                button:"{{__('Done')}}"
+                                button: "{{__('Done')}}"
                             })
                         },
                         cache: false,
@@ -238,7 +228,52 @@
                 }
             });
 
+            $('.-form-delete').on('click', function (event) {
 
+                var data = {
+                    id: $(this).data('id'),
+                };
+                //token
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                swal({
+                    // title: "",
+                    text: "{{__('Are you sure?')}}",
+                    Button: "{{__('Done')}}",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                        if (willDelete) {
+                            $.ajax({
+                                url: '/admin/news-destroy/' + data.id,
+                                type: 'delete',
+                                data: data,
+                                dataType: 'json',
+                                async: false,
+                                success: function (data) {
+                                },
+                                cache: false,
+                            });
+                            swal("{{__("Poof! Your imaginary file has been deleted!")}}", {
+                                icon: "success",
+                                Button: "{{__('Done')}}",
+                                Button: "{{__('cancel')}}",
+                            });
+                            location.reload();
+                        } else {
+                            swal(
+                                "{{__("Your imaginary file is safe!")}}",
+                                {Button: "{{__('Done')}}"}
+                            );
+
+                        }
+                    });
+            });
         });
 
 

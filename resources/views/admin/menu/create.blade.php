@@ -67,8 +67,8 @@
                     {{__('Insert Menu')}}
                 </h1>
                 <ol class="breadcrumb">
-                    <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{__('Home')}} > </a></li>
-                    <li><a href="{{route('faq.index')}}">{{__('FAQ')}}</a></li>
+                    <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{__('Home')}}</a></li>
+                    <li><a href="{{route('menu.index')}}">{{__('Menu')}}</a></li>
                 </ol>
             </section>
 
@@ -90,87 +90,101 @@
                                         <!-- general form elements -->
                                         <div class="box box-primary">
                                             <div class="box-header with-border">
-                                                <h3 class="box-title">{{__('Menu')}}</h3>
+                                                {{--<h3 class="box-title">{{__('Menu')}}</h3>--}}
                                             </div>
-                        <!-- /.box-header -->
-                        <!-- form start -->
-                        <form id="form1" enctype="multipart/form-data">
-                            <div class="box-body">
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">{{__('Type')}}</label>
-                                    <select  class="form-control"  name="type">
-                                        @foreach($type as $type)
-                                            <option>{{$type->type}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputFile">{{__('Name')}}</label>
-                                    <input type="text" class="form-control" id="exampleInputText"  name="name">
+                                            <!-- /.box-header -->
+                                            <!-- form start -->
+                                            <form id="form1" enctype="multipart/form-data">
+                                                <div class="box-body">
+                                                    <div class="row">
+                                                        <div class="col-4">
+                                                            <div class="form-group">
+                                                                <label for="exampleInputPassword1">{{__('Type')}}</label>
+                                                                <select class="form-control" name="type">
+                                                                    @foreach($type as $type)
+                                                                        <option>{{$type->type}}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <div class="form-group">
+                                                                <label for="exampleInputFile">{{__('Name')}}</label>
+                                                                <input type="text" class="form-control"
+                                                                       id="exampleInputText" name="name">
 
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputFile">{{__('Items')}}</label>
-                                    <select  class="form-control"   name="items">
-                                        @foreach($items as $items)
-                                            <option>{{$items->title}}</option>
-                                        @endforeach
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <div class="form-group">
+                                                                <label for="exampleInputFile">{{__('Items')}}</label>
+                                                                <select class="form-control" name="items">
+                                                                    @foreach($items as $items)
+                                                                        <option>{{$items->title}}</option>
+                                                                    @endforeach
 
-                                    </select>
-                                    <div class="form-group">
-                                        <label for="exampleInputFile">{{__('Label')}}</label>
-                                        <select  class="form-control"  name="label">
-                                            @foreach($label as $label)
-                                                <option>{{$label->label}}</option>
-                                            @endforeach
+                                                                </select>
+                                                            </div>
 
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputFile">{{__('Parent')}}</label>
-                                        <select class="form-control" name="parent_name">
-                                            @foreach($menus as $menu)
-                                                @if($menu->label == 'parent')
-                                                    <option>
-                                                        {{$menu->name}}
-                                                    </option>
-                                                @endif
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputFile">{{__('Create By')}}</label>
-                                    <input type="text" class="form-control" id="exampleInputText"  name="created_by" value="{{auth()->user()->name}}">
-                                </div>
-                                <div class="checkbox checkbox-info">
-                                    <input type="checkbox" id="inputSchedule" name="status">
-                                    <label for="inputSchedule" class=""> <span>{{__('Status')}}</span> </label>
-                                </div>
-                                <input type="hidden" name="image" id="image">
-                            </div>
-                            <!-- /.box-body -->
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <div class="form-group">
+                                                                <label for="exampleInputFile">{{__('Label')}}</label>
+                                                                <select class="form-control" name="label">
+                                                                    @foreach($label as $label)
+                                                                        <option>{{$label->label}}</option>
+                                                                    @endforeach
 
-                            <div class="box-footer">
-                                <button type="submit" class="btn btn-primary">{{__('Submit')}}</button>
-                            </div>
-                        </form>
-                                            <form action="{{url('/admin//image-menu-save')}}" class="dropzone" id="dropzone"
-                                                  enctype="multipart/form-data">
-                                                @csrf
-                                                @method('POST')
-                                                <div class="fallback">
-                                                    <div class="form-group">
-                                                        <label for="exampleInputFile">{{__('Image')}}</label>
-                                                        <input type="file" class="form-control"
-                                                               name="file">
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <div class="form-group">
+                                                                <label for="exampleInputFile">{{__('Parent')}}</label>
+                                                                <select class="form-control" name="parent_name">
+                                                                    @foreach($menus as $menu)
+                                                                        @if($menu->label == 'parent')
+                                                                            <option>
+                                                                                {{$menu->name}}
+                                                                            </option>
+                                                                        @endif
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <input type="hidden" name="image" id="image">
+                                                    </div>
+                                                    <div class="checkbox checkbox-info">
+                                                        <input type="checkbox" id="inputSchedule" name="status">
+                                                        <label for="inputSchedule" class="">
+                                                            <span>{{__('Status')}}</span> </label>
                                                     </div>
                                                 </div>
+                                                <!-- /.box-body -->
                                             </form>
-                    </div>
-@endsection
+                                        </div>
+                                        <form action="{{url('/admin/image-menu-save')}}" class="dropzone"
+                                              id="dropzone"
+                                              enctype="multipart/form-data">
+                                            @csrf
+                                            @method('POST')
+                                            <div class="fallback">
+                                                <div class="form-group">
+                                                    <label for="exampleInputFile">{{__('Image')}}</label>
+                                                    <input type="file" class="form-control"
+                                                           name="file">
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <br>
+                                        <div class="box-footer">
+                                            <button id="sub_form1" type="submit"
+                                                    class="btn btn-primary">{{__('Submit')}}</button>
+                                        </div>
 
-@push('scripts')
+                                        @endsection
+
+                                        @push('scripts')
                                             <script src="{{asset('backend/js.pro/dropzone.js')}}"></script>
                                             <script>
                                                 Dropzone.options.dropzone =
@@ -194,10 +208,11 @@
                                                         }
                                                     };
                                             </script>
-                                            <script src="{{asset('backend/js.pro/jquery.blockUI.js')}}" type="text/javascript"></script>
+                                            <script src="{{asset('backend/js.pro/jquery.blockUI.js')}}"
+                                                    type="text/javascript"></script>
                                             <script>
                                                 $(document).ready(function () {
-                                                    $("#form1").submit(function (event) {
+                                                    $("#sub_form1").on('click',function (event) {
                                                         var data = $("#form1").serialize();
                                                         event.preventDefault();
                                                         $.blockUI();
@@ -233,4 +248,4 @@
                                                     });
                                                 });
                                             </script>
-@endpush
+    @endpush

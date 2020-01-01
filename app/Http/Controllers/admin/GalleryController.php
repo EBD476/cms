@@ -128,8 +128,7 @@ class GalleryController extends Controller
 
         }
         $gallery->delete();
-        return redirect()->back()->with('successMSG','Image Successfully Delete');
-    }
+        return json_encode(["response" => "Done"]);    }
     public function gallery_upload(Request $request)
     {
         $image = $request->file('file');

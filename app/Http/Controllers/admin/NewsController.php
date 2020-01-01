@@ -99,7 +99,12 @@ class NewsController extends Controller
         $request->froala = str_replace('<p data-f-id="pbf" style="text-align: center; font-size: 14px; margin-top: 30px; opacity: 0.65; font-family: sans-serif;">Powered by <a href="https://www.froala.com/wysiwyg-editor?pb=1" title="Froala Editor">Froala Editor</a></p>', "", $request->froala);
         $news->hn_description = $request->froala;
         $news->hn_image = $request->hn_image;
-        $news->hn_status =$request->ha_show;
+        if($request->hn_show == 'on') {
+            $news->hn_status = 1;
+        }
+        else{
+            $news->hn_status = 0;
+        }
         $news->save();
         return json_encode(["response" => "Done"]);
     }
@@ -114,7 +119,7 @@ class NewsController extends Controller
     {
         $news = News::find($id);
         $news->delete();
-        return redirect()->back()->with('successMSG', 'عملیات حذف اطلاعات با موفقیت انجام شد.');
+        return json_encode(["response" => "Done"]);
     }
 
     public function upload(Request $request)

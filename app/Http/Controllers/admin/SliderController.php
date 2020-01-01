@@ -118,8 +118,7 @@ class SliderController extends Controller
 
         }
         $slider->delete();
-        return redirect()->back()->with('successMSG', 'Slider Successfully Delete');
-    }
+        return json_encode(["response" => "Done"]);    }
 
     public function slider_upload(Request $request)
     {

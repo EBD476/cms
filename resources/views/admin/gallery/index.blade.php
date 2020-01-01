@@ -18,12 +18,13 @@
             <!-- ============================================================== -->
             <div class="row page-titles">
                 <div class="col-md-5 col-8 align-self-center">
-                    <h3 class="text-themecolor m-b-0 m-t-0">{{__('HANTA ERP System')}}</h3>
+                    <h3 class="text-themecolor m-b-0 m-t-0">{{__('HANTA CMS System')}}</h3>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">
                             <a href="{{route('admin.dashboard')}}">{{__('Home')}}</a>
                         </li>
-                        <li class="breadcrumb-item active">{{__('Gallery Page')}}</li>
+                        &nbsp;
+                        <li>{{__('Gallery Page')}}</li>
                     </ol>
                 </div>
                 {{--<div class="col-md-7 col-4 align-self-center">--}}
@@ -134,16 +135,10 @@
                                             </td>
                                             <td>
                                                <a href="{{route('gallery.edit',$gallery->id)}}" class="btn btn-info btn-sm"><i class="ti-pencil"></i></a>
-                                                <form id ="-form-delete{{$gallery->id}}" style="display: none;" method="POST" action="{{route('gallery.destroy',$gallery->id)}}">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                </form>
-                                                <button type="button" class="btn btn-danger btn-sm"  onclick="if(confirm('Are You Sure Delete This?')){
-                                                    event.preventDefault();
-                                                    document.getElementById('-form-delete{{$gallery->id}}').submit();
-                                                }else {
-                                                    event.preventDefault();
-                                                        }"><i class="ti-close"></i></button>
+                                                <button data-id="{{$gallery->id}}" type="button"
+                                                        class="btn btn-danger btn-sm -form-delete"
+                                                ><i class="ti-close"></i>
+                                                </button>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -231,7 +226,52 @@
                                     }
                                 });
 
+                                $('.-form-delete').on('click', function (event) {
 
+                                    var data = {
+                                        id: $(this).data('id'),
+                                    };
+                                    //token
+                                    $.ajaxSetup({
+                                        headers: {
+                                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                        }
+                                    });
+                                    swal({
+                                        // title: "",
+                                        text: "{{__('Are you sure?')}}",
+                                        Button: "{{__('Done')}}",
+                                        icon: "warning",
+                                        buttons: true,
+                                        dangerMode: true,
+                                    })
+                                        .then((willDelete) => {
+                                            if (willDelete) {
+                                                $.ajax({
+                                                    url: '/admin/gallery-destroy/' + data.id,
+                                                    type: 'delete',
+                                                    data: data,
+                                                    dataType: 'json',
+                                                    async: false,
+                                                    success: function (data) {
+                                                    },
+                                                    cache: false,
+                                                });
+                                                swal("{{__("Poof! Your imaginary file has been deleted!")}}", {
+                                                    icon: "success",
+                                                    Button: "{{__('Done')}}",
+                                                    Button: "{{__('cancel')}}",
+                                                });
+                                                location.reload();
+                                            } else {
+                                                swal(
+                                                    "{{__("Your imaginary file is safe!")}}",
+                                                    {Button: "{{__('Done')}}"}
+                                                );
+
+                                            }
+                                        });
+                                });
                             });
 
 

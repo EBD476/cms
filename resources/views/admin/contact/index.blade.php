@@ -73,7 +73,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <a href="{{route('contact.create')}}" class="btn btn-primary">{{__('Add New Contact')}}</a>
+{{--                            <a href="{{route('contact.create')}}" class="btn btn-primary">{{__('Add New Contact')}}</a>--}}
                             <h4 class="card-title"></h4>
                             <h6 class="card-subtitle"></h6>
                             <dsiv class="row">

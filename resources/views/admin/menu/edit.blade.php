@@ -65,10 +65,9 @@
             <section class="content-header">
                 <h1>
                     {{__('Edit Menu')}}
-                    <small>{{__('Preview')}}</small>
                 </h1>
                 <ol class="breadcrumb">
-                    <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{__('Home')}} > </a></li>
+                    <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{__('Home')}}</a></li>
                     <li><a href="{{route('menu.index')}}">{{__('Menu')}}</a></li>
                 </ol>
             </section>
@@ -91,72 +90,98 @@
                                         <!-- general form elements -->
                                         <div class="box box-primary">
                                             <div class="box-header with-border">
-                                                <h3 class="box-title">{{__('Menu')}}</h3>
+                                                {{--<h3 class="box-title">{{__('Menu')}}</h3>--}}
                                             </div>
-                        <!-- /.box-header -->
-                        <!-- form start -->
-                        <form id="form1" enctype="multipart/form-data">
-                            <div class="box-body">
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">{{__('Type')}}</label>
-                                    <input type="text" class="form-control" id="exampleInputText" placeholder="{{__('Type')}}" name="type" value="{{$menu->type}}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputFile">{{__('Name')}}</label>
-                                    <input type="text" class="form-control" id="exampleInputText" placeholder="{{__('Name')}}" name="name" value="{{$menu->name}}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputFile">{{__('Items')}}</label>
-                                    <input type="text" class="form-control" id="exampleInputText" placeholder="{{__('Items')}}" name="items" value="{{$menu->items}}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputFile">{{__('Label')}}</label>
-                                    <input type="text" class="form-control" id="exampleInputText" placeholder="{{__('Label')}}" name="label" value="{{$menu->label}}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputFile">{{__('Parent')}}</label>
-                                    <select class="form-control" name="parent_name">
-                                        @foreach($menus as $menu)
-                                            @if($menu->label == 'parent')
-                                        <option>
-                                            {{$menu->name}}
-                                        </option>
-                                            @endif
-                                        @endforeach
-                                    </select>
-                                </div>
+                                            <!-- /.box-header -->
+                                            <!-- form start -->
+                                            <form id="form1" enctype="multipart/form-data">
+                                                <div class="box-body">
+                                                    <div class="row">
+                                                        <div class="col-4">
+                                                            <div class="form-group">
+                                                                <label for="exampleInputFile">{{__('Name')}}</label>
+                                                                <input type="text" class="form-control"
+                                                                       id="name"
+                                                                       placeholder="{{__('Name')}}" name="name"
+                                                                       value="{{$menu->name}}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <div class="form-group">
+                                                                <label for="exampleInputPassword1">{{__('Type')}}</label>
+                                                                <input type="text" class="form-control"
+                                                                       id="type"
+                                                                       data-id="{{$menu->id}}"
+                                                                       placeholder="{{__('Type')}}" name="type"
+                                                                       value="{{$menu->type}}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <div class="form-group">
+                                                                <label for="exampleInputFile">{{__('Items')}}</label>
+                                                                <input type="text" class="form-control"
+                                                                       id="items"
+                                                                       placeholder="{{__('Items')}}" name="items"
+                                                                       value="{{$menu->items}}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <div class="form-group">
+                                                                <label for="exampleInputFile">{{__('Label')}}</label>
+                                                                <input type="text" class="form-control"
+                                                                       id="label"
+                                                                       placeholder="{{__('Label')}}" name="label"
+                                                                       value="{{$menu->label}}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <div class="form-group">
+                                                                <label for="exampleInputFile">{{__('Parent')}}</label>
+                                                                <select class="form-control" id="parent_name" name="parent_name">
+                                                                    @foreach($menus as $menu)
+                                                                        @if($menu->label == 'parent')
+                                                                            <option>
+                                                                                {{$menu->name}}
+                                                                            </option>
+                                                                        @endif
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="checkbox checkbox-info">
+                                                        <input type="checkbox" id="inputSchedule" name="status"
+                                                               @if($menu->status) checked @endif>
+                                                        <label for="inputSchedule" class="">
+                                                            <span>{{__('Status')}}</span> </label>
+                                                    </div>
+                                                </div>
+                                                    <!-- /.box-body -->
 
-                                <div class="form-group">
-                                    <label for="exampleInputFile">{{__('Create By')}}</label>
-                                    <input type="text" class="form-control" id="exampleInputText" placeholder="{{__('Create By')}}" name="created_by" value="{{$menu->created_by}}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputFile">{{__('Update By')}}</label>
-                                    <input type="text" class="form-control" id="exampleInputText" placeholder="{{__('Update By')}}" name="updated_by" value="{{auth()->user()->name}}">
-                                </div>
-                                <div class="checkbox checkbox-info">
-                                    <input type="checkbox" id="inputSchedule" name="status" @if($menu->status) checked @endif>
-                                    <label for="inputSchedule" class=""> <span>{{__('Status')}}</span> </label>
-                                </div>
-                            </div>
-                            <!-- /.box-body -->
+                                                    <div class="box-footer">
+                                                        <button type="submit"
+                                                                class="btn btn-primary">{{__('Submit')}}</button>
+                                                    </div>
+                                            </form>
+                                        </div>
+                                        @endsection
 
-                            <div class="box-footer">
-                                <button type="submit" class="btn btn-primary">{{__('Submit')}}</button>
-                            </div>
-                        </form>
-                    </div>
-@endsection
-
-@push('scripts')
-                                            <script src="{{asset('backend/js.pro/blockUI.js')}}" type="text/javascript"></script>
+                                        @push('scripts')
+                                            <script src="{{asset('backend/js.pro/jquery.blockUI.js')}}"
+                                                    type="text/javascript"></script>
                                             <script>
                                                 $(document).ready(function () {
                                                     $("#form1").submit(function (event) {
-                                                        var data = $("#form1").serialize();
+                                                        var data = {
+                                                            id:$('#type').data('id'),
+                                                            name:$('#name').val(),
+                                                            type:$('#type').val(),
+                                                            items:$('#items').val(),
+                                                            label:$('#label').val(),
+                                                            parent_name:$('#parent_name').val(),
+                                                            status:$('#inputSchedule')[0].checked == true ? 1 : 0,
+                                                        }
                                                         event.preventDefault();
-                                                        $.blockUI();
-
                                                         $.ajaxSetup({
                                                             headers: {
                                                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -174,12 +199,12 @@
                                                             }
                                                         });
                                                         $.ajax({
-                                                            url: '/admin/menu/'+data.id,
+                                                            url: '/admin/menu/' + data.id,
                                                             type: 'POST',
                                                             data: data,
                                                             dataType: 'json',
                                                             async: false,
-                                                            method:'put',
+                                                            method: 'put',
                                                             success: function (data) {
                                                                 setTimeout($.unblockUI, 2000);
                                                                 location.reload();
@@ -189,4 +214,4 @@
                                                     });
                                                 });
                                             </script>
-@endpush
+    @endpush

@@ -40,11 +40,12 @@ class ArticleController extends Controller
 
         $article = new Article();
         $article->ha_title = $request->hn_title;
-        $article->ha_editor	 = $request->hn_description;
+        $request->froala = str_replace('<p data-f-id="pbf" style="text-align: center; font-size: 14px; margin-top: 30px; opacity: 0.65; font-family: sans-serif;">Powered by <a href="https://www.froala.com/wysiwyg-editor?pb=1" title="Froala Editor">Froala Editor</a></p>', "", $request->froala);
+        $article->ha_editor = $request->froala;
         $article->ha_image = $request->hn_image;
         $article->ha_status = $request->ha_show;
         $article->save();
-        return redirect()->route('publish.index');
+        return json_encode(["response" => "Done"]);
     }
 
     /**
@@ -88,13 +89,14 @@ class ArticleController extends Controller
 //
 //        ]);
         $article = Article::find($id);
-        $article->ha_title = $request->hn_title;
-        $article->ha_auther = $request->ha_auther;
-        $article->ha_editor = $request->hn_description;
+        $article->ha_title = $request->ha_title;
+//      $article->ha_auther = $request->ha_auther;
+        $request->froala = str_replace('<p data-f-id="pbf" style="text-align: center; font-size: 14px; margin-top: 30px; opacity: 0.65; font-family: sans-serif;">Powered by <a href="https://www.froala.com/wysiwyg-editor?pb=1" title="Froala Editor">Froala Editor</a></p>', "", $request->froala);
+        $article->ha_editor = $request->froala;
         $article->ha_image = $request->hn_image;
-        $article->ha_status = $request->ha_show;
+        $article->ha_status =$request->ha_show;
         $article->save();
-        return redirect()->route('publish.index');
+        return json_encode(["response" => "Done"]);
     }
 
     /**
@@ -107,13 +109,13 @@ class ArticleController extends Controller
     {
         $article = Article::find($id);
         $article->delete();
-        return redirect()->back()->with('successMSG', 'عملیات حذف اطلاعات با موفقیت انجام شد.');
+        return json_encode(["response" => "Done"]);
     }
 
     public function upload(Request $request)
     {
         $image = $request->file('file');
-        $filename=$_FILES['file']['name'];
+        $filename = $_FILES['file']['name'];
 
         if (isset($image)) {
             $current_date = Carbon::now()->todatestring();
@@ -130,10 +132,12 @@ class ArticleController extends Controller
 //        $news->save();
 //
     }
+
     public function update_status(Request $request)
     {
-        $article=Article::find($request->id);
-        $article->ha_status=$request->status;
+        $article = Article::find($request->id);
+        $article->ha_status = $request->status;
         $article->save();
+        return json_encode(["response" => "Done"]);
     }
 }

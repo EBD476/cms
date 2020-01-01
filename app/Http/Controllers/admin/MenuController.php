@@ -7,6 +7,8 @@ use App\Pages;
 use App\Type;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use carbon\carbon;
+
 
 class MenuController extends Controller
 {
@@ -44,7 +46,6 @@ class MenuController extends Controller
             'items'=>'required',
             'label'=>'required',
             'parent_name'=>'required',
-            'created_by'=>'required',
         ]);
         $menu=new Menu();
         $menu->type=$request->type;
@@ -52,8 +53,12 @@ class MenuController extends Controller
         $menu->items=$request->items;
         $menu->label=$request->label;
         $menu->parent_name=$request->parent_name;
-        $menu->created_by=$request->created_by;
+        $menu->created_by=auth()->user()->id;
         $menu->image=$request->image;
+        if($request->status == 'on'){
+            $menu->status=1;
+        }else{
+            $menu->status = 0;}
         $menu->save();
         return json_encode(["response" => "Done"]);    }
 
@@ -96,8 +101,6 @@ class MenuController extends Controller
             'items'=>'required',
             'label'=>'required',
             'parent_name'=>'required',
-            'created_by'=>'required',
-            'updated_by'=>'required',
         ]);
         $menu=Menu::FIND($id);
         $menu->type=$request->type;
@@ -105,9 +108,9 @@ class MenuController extends Controller
         $menu->items=$request->items;
         $menu->label=$request->label;
         $menu->parent_name=$request->parent_name;
-        $menu->created_by=$request->created_by;
-        $menu->updated_by=$request->updated_by;
+        $menu->updated_by=auth()->user()->id;
         $menu->image=$request->image;
+        $menu->status=$request->status;
         $menu->save();
         return json_encode(["response" => "Done"]);    }
 
@@ -121,8 +124,9 @@ class MenuController extends Controller
     {
         $menu=Menu::FIND($id);
         $menu->delete();
-        return redirect()->back();
+        return json_encode(["response" => "Done"]);
     }
+
     public function upload(Request $request)
     {
         $image = $request->file('file');

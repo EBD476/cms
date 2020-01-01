@@ -101,36 +101,54 @@
                         <form id="form1" enctype="multipart/form-data">
                             <div class="box-body">
                                 <div class="row">
-                                    <div class="col-4">
+                                    <div class="col-3">
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">{{__('Project Name')}}</label>
-                                            <input type="text" class="form-control" id="exampleInputPassword1"  name="hp_project_name" value="{{$projects->hp_project_name}}">
+                                            <input type="text" class="form-control" data-id="{{$projects->id}}" id="hp_project_name" value="{{$projects->hp_project_name}}">
                                         </div>
                                     </div>
-                                    <div class="col-4">
+                                    <div class="col-3">
                                         <div class="form-group">
                                             <label for="exampleInputFile">{{__('Project Owner')}}</label>
-                                            <input type="text" class="form-control" id="exampleInputFile" name="hp_project_owner" value="{{$projects->hp_project_owner}}">
+                                            <input type="text" class="form-control" id="hp_project_owner"  value="{{$projects->hp_project_owner}}">
                                         </div>
                                     </div>
-                                    <div class="col-4">
+                                    <div class="col-3">
                                         <div class="form-group">
                                             <label for="exampleInputFile">{{__('Project Type')}}</label>
-                                            <input type="text" class="form-control" id="exampleInputFile" name="hp_project_type" value="{{$projects->hp_project_type}}">
+                                            <input type="text" class="form-control" id="hp_project_type"  value="{{$projects->hp_project_type}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                            <label for="exampleInputFile">{{__('Project Complete Date')}}</label>
+                                            <input type="text" class="form-control" id="test-date-id" value="{{$projects->hp_project_complete_date}}">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-4">
+                                    <div class="col-3">
                                         <div class="form-group">
                                             <label for="exampleInputFile">{{__('Project Units')}}</label>
-                                            <input type="text" class="form-control" id="exampleInputFile" name="hp_project_units" value="{{$projects->hp_project_units}}">
+                                            <input type="text" class="form-control" id="hp_project_units"  value="{{$projects->hp_project_units}}">
                                         </div>
                                     </div>
-                                    <div class="col-4">
+                                    <div class="col-3">
                                         <div class="form-group">
                                             <label for="exampleInputFile">{{__('Project Address')}}</label>
-                                            <input type="text" class="form-control" id="exampleInputFile" name="hp_project_address" value="{{$projects->hp_project_address}}">
+                                            <input type="text" class="form-control" id="hp_project_address"  value="{{$projects->hp_project_address}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                            <label for="exampleInputFile">{{__('City')}}</label>
+                                            <input type="text" class="form-control" id="hp_project_city" @foreach($city as $cities) @if($cities->id == $projects->hp_project_city ) value=" {{$cities->hp_city}}" @endif @endforeach >
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                            <label for="exampleInputFile">{{__('State')}}</label>
+                                            <input type="text" class="form-control" id="hp_project_state" @foreach($state as $states) @if($states->id == $projects->hp_project_state ) value=" {{$cities->hp_city}}" @endif @endforeach >
                                         </div>
                                     </div>
                                     {{--<div class="col-3">--}}
@@ -139,28 +157,22 @@
                                             {{--<input type="text" class="form-control" id="exampleInputFile" name="hp_project_options" value="{{$projects->hp_project_options}}">--}}
                                         {{--</div>--}}
                                     {{--</div>--}}
-                                    <div class="col-4">
-                                        <div class="form-group">
-                                            <label for="exampleInputFile">{{__('Project Complete Date')}}</label>
-                                            <input type="text" class="form-control" id="test-date-id" name="hp_project_complete_date" value="{{$projects->hp_project_complete_date}}">
-                                        </div>
-                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputFile">{{__('Project Location')}}</label>
                                     <div id="map"
                                          style="width: 100%; height: 300px;direction: ltr;z-index:0"></div>
-                                    <input name="hp_project_address" type="hidden"
+                                    <input  type="hidden"
                                            id="location">
 
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputFile">{{__('Project Description')}}</label>
-                                    <textarea type="text" class="form-control" id="froala" name="hp_project_description" >{{$projects->hp_project_description}}</textarea>
+                                    <textarea type="text" class="form-control" id="froala" >{{$projects->hp_project_description}}</textarea>
                                 </div>
                                 <input type="hidden" name="hn_image" id="hn_image">
                                 <div class="checkbox checkbox-info">
-                                    <input type="checkbox" id="inputSchedule" name="status" @if($projects->hp_status) checked @endif>
+                                    <input type="checkbox" id="inputSchedule"  @if($projects->hp_status) checked @endif>
                                     <label for="inputSchedule" class=""> <span>{{__('Status')}}</span> </label>
                                 </div>
                             </div>
@@ -182,7 +194,8 @@
                                         <br>
 
                                         <div class="box-footer">
-                                            <button type="submit" class="btn btn-primary">{{__('Submit')}}</button>
+                                            <button id="sub-form1" type="submit"
+                                                    class="btn btn-primary">{{__('Submit')}}</button>
                                         </div>
 
 @endsection
@@ -225,8 +238,21 @@
                                             </script>
                                             <script>
                                                 $(document).ready(function () {
-                                                    $("#form1").submit(function (event) {
-                                                        var data = $("#form1").serialize();
+                                                    $("#sub-form1").on('click',function (event) {
+                                                        var data = {
+                                                            id: $('#hp_project_name').data('id'),
+                                                            hp_project_name: $('#hp_project_name').val(),
+                                                            hp_project_units: $('#hp_project_units').val(),
+                                                            hp_project_address: $('#hp_project_address').val(),
+                                                            hp_project_complete_date: $('#test-date-id').val(),
+                                                            hp_project_description: $('#froala').val(),
+                                                            status: $('#inputSchedule')[0].checked == true ? 1 : 0,
+                                                            hp_project_location: $('#location').val(),
+                                                            hp_project_type: $('#hp_project_type').val(),
+                                                            hp_project_owner: $('#hp_project_owner').val(),
+                                                            hp_project_state: $('#hp_project_state').val(),
+                                                            hp_project_city: $('#hp_project_city').val(),
+                                                        }
                                                         event.preventDefault();
                                                         $.ajaxSetup({
                                                             headers: {
@@ -249,6 +275,7 @@
                                                             type: 'POST',
                                                             data: data,
                                                             dataType: 'json',
+                                                            method:'put',
                                                             async: false,
                                                             success: function (data) {
                                                                 setTimeout($.unblockUI, 2000);

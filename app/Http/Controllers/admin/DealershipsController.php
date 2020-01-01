@@ -31,7 +31,7 @@ class DealershipsController extends Controller
     {
         $address_city = Address_City::ALL();
         $address_state = Address_State::all();
-        return view('admin.dealerships.create',compact('address_city','address_state'));
+        return view('admin.dealerships.create', compact('address_city', 'address_state'));
     }
 
     /**
@@ -44,19 +44,19 @@ class DealershipsController extends Controller
     {
 
         $this->validate($request, [
-            'hds_dealership_code' => 'required',
-            'hds_dealership_city' => 'required',
-            'hds_dealership_agent' => 'required',
-            'hds_dealership_address' => 'required',
-            'hds_dealership_phone_1' => 'required',
-            'hds_dealership_phone_2' => 'required',
-            'hds_dealership_phone_3' => 'required',
-            'hds_dealership_state' => 'required',
+//            'hds_dealership_code' => 'required',
+//            'hds_dealership_city' => 'required',
+//            'hds_dealership_agent' => 'required',
+//            'hds_dealership_address' => 'required',
+//            'hds_dealership_phone_1' => 'required',
+//            'hds_dealership_phone_2' => 'required',
+//            'hds_dealership_phone_3' => 'required',
+//            'hds_dealership_state' => 'required',
         ]);
 
 
         $dealerships = new Dealerships();
-        $dealerships->hds_dealership_code = $request->hds_dealership_code;
+//        $dealerships->hds_dealership_code = $request->hds_dealership_code;
         $dealerships->hds_dealership_city = $request->hds_dealership_city;
         $dealerships->hds_dealership_agent = $request->hds_dealership_agent;
         $dealerships->hds_dealership_address = $request->hds_dealership_address;
@@ -64,8 +64,14 @@ class DealershipsController extends Controller
         $dealerships->hds_dealership_phone_2 = $request->hds_dealership_phone_2;
         $dealerships->hds_dealership_phone_3 = $request->hds_dealership_phone_3;
         $dealerships->hds_dealership_state = $request->hds_dealership_state;
+        $dealerships->hds_dealership_loc = $request->hds_dealership_loc;
+        if ($request->hds_status == 'on') {
+            $dealerships->hds_status = 1;
+        } else {
+            $dealerships->hds_status = 0;
+        }
         $dealerships->save();
-        return redirect()->route('dealerships.index');
+        return json_encode(["response" => "Done"]);
     }
 
 
@@ -103,23 +109,26 @@ class DealershipsController extends Controller
     {
 
         $this->validate($request, [
-            'hds_dealership_code' => 'required',
-            'hds_dealership_city' => 'required',
-            'hds_dealership_agent' => 'required',
-            'hds_dealership_address' => 'required',
-            'hds_dealership_phone' => 'required',
-            'hds_dealership_state' => 'required',
+//            'hds_dealership_code' => 'required',
+//            'hds_dealership_city' => 'required',
+//            'hds_dealership_agent' => 'required',
+//            'hds_dealership_address' => 'required',
+//            'hds_dealership_phone' => 'required',
+//            'hds_dealership_state' => 'required',
         ]);
 
         $dealerships = Dealerships::find($id);
-        $dealerships->hds_dealership_code = $request->hds_dealership_code;
         $dealerships->hds_dealership_city = $request->hds_dealership_city;
         $dealerships->hds_dealership_agent = $request->hds_dealership_agent;
         $dealerships->hds_dealership_address = $request->hds_dealership_address;
-        $dealerships->hds_dealership_phone = $request->hds_dealership_phone;
+        $dealerships->hds_dealership_phone_1 = $request->hds_dealership_phone_1;
+        $dealerships->hds_dealership_phone_2 = $request->hds_dealership_phone_2;
+        $dealerships->hds_dealership_phone_3 = $request->hds_dealership_phone_3;
         $dealerships->hds_dealership_state = $request->hds_dealership_state;
+        $dealerships->hds_dealership_loc = $request->hds_dealership_loc;
+        $dealerships->hds_status = $request->status;
         $dealerships->save();
-        return redirect()->route('dealership.index');
+        return json_encode(["response" => "Done"]);
 
     }
 
@@ -133,12 +142,13 @@ class DealershipsController extends Controller
     {
         $dealerships = Dealerships::find($id);
         $dealerships->delete();
-        return redirect()->back();
+        return json_encode(["response" => "Done"]);
     }
+
     public function upload(Request $request)
     {
         $image = $request->file('file');
-        $filename=$_FILES['file']['name'];
+        $filename = $_FILES['file']['name'];
 
         if (isset($image)) {
             $current_date = Carbon::now()->todatestring();
@@ -155,6 +165,7 @@ class DealershipsController extends Controller
 //        $news->save();
 //
     }
+
     public function dealership_status(Request $request)
     {
         $sataus = Dealerships::find($request->id);

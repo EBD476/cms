@@ -22,7 +22,8 @@
                         <li class="breadcrumb-item">
                             <a href="{{route('admin.dashboard')}}">{{__('Home')}}</a>
                         </li>
-                        <li class="breadcrumb-item active">{{__('Article Page')}}</li>
+                        &nbsp;
+                        <li>{{__('Article Page')}}</li>
                     </ol>
                 </div>
                 {{--<div class="col-md-7 col-4 align-self-center">--}}
@@ -134,19 +135,9 @@
                                                             <a href="{{route('publish.edit',$article->id)}}"
                                                                class="btn btn-info btn-sm"><i class="ti-pencil"></i></a>
                                                             </a>
-                                                            <form id="-form-delete{{$article->id}}"
-                                                                  style="display: none;" method="POST"
-                                                                  action="{{route('publish.destroy',$article->id)}}">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                            </form>
-                                                            <button type="button" class="btn btn-danger btn-sm"
-                                                                    onclick="if(confirm('آیا از حذف این محصول اطمینان دارید؟')){
-                                                                            event.preventDefault();
-                                                                            document.getElementById('-form-delete{{$article->id}}').submit();
-                                                                            }else {
-                                                                            event.preventDefault();
-                                                                            }"><i class="ti-close"></i>
+                                                            <button data-id="{{$article->id}}" type="button"
+                                                                    class="btn btn-danger btn-sm -form-delete"
+                                                            ><i class="ti-close"></i>
                                                             </button>
                                                         </td>
                                                     </tr>
@@ -376,16 +367,60 @@
                                 title: "",
                                 text: "{{__('success')}}",
                                 icon: "success",
-                                button:"{{__('Done')}}"
+                                button: "{{__('Done')}}"
                             })
                         },
                         cache: false,
                     });
-                    //alert($(this)[0].checked);
                 }
             });
 
+            $('.-form-delete').on('click', function (event) {
 
+                var data = {
+                    id: $(this).data('id'),
+                };
+                //token
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                swal({
+                    // title: "",
+                    text: "{{__('Are you sure?')}}",
+                    Button: "{{__('Done')}}",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            $.ajax({
+                                url: '/admin/article-destroy/' + data.id,
+                                type: 'delete',
+                                data: data,
+                                dataType: 'json',
+                                async: false,
+                                success: function (data) {
+                                },
+                                cache: false,
+                            });
+                            swal("{{__("Poof! Your imaginary file has been deleted!")}}", {
+                                icon: "success",
+                                Button: "{{__('Done')}}",
+                                Button: "{{__('cancel')}}",
+                            });
+                            location.reload();
+                        } else {
+                            swal(
+                                "{{__("Your imaginary file is safe!")}}",
+                                {Button: "{{__('Done')}}"}
+                            );
+
+                        }
+                    });
+            });
         });
 
 

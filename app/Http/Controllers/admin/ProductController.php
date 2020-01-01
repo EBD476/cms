@@ -68,7 +68,12 @@ class ProductController extends Controller
         $product->hp_product_image = $request->hp_product_image;
         $product->hp_product_description = $request->hp_product_description;
         $product->hp_product_publish_date = $request->hp_product_publish_date;
-        $product->hp_product_status = $request->hp_product_status;
+        if($request->status == 'on'){
+            $product->hp_product_status = 1;
+        }else{
+            $product->hp_product_status = 0;
+        }
+
         $product->save();
         return json_encode(["response" => "Done"]);
     }
@@ -150,13 +155,13 @@ class ProductController extends Controller
     public function destroy($id)
     {
         $product = Product::find($id);
-        if (file_exists('upload/product/' . $product->image)) {
-
-            unlink('upload/product/' . $product->image);
-
-        }
+//        if (file_exists('upload/product/' . $product->image)) {
+//
+//            unlink('upload/product/' . $product->image);
+//
+//        }
         $product->delete();
-        return redirect()->back();
+        return json_encode(["response" => "Done"]);
     }
 
     public function product_upload(Request $request)

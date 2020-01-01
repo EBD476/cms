@@ -305,7 +305,13 @@
   "Project City":"مکان پروژه",
   "please wait...":"لطفا منتظر بمانید...",
   "success":"عملیات با موفقیت ثبت شد...",
-  "Done":"تایید"
+  "Done":"تایید",
+  "cancel":"انصراف",
+  "Are you sure?":"آیا از حذف این مورد اطمینان دارید؟",
+  "Poof! Your imaginary file has been deleted!":"اطلاعات با موفقیت حذف شد!",
+  "Your imaginary file is safe!":"اطلاعات شما ایمن است!",
+  "Insert Menu":"اضافه کردن منو جدید",
+  "Edit Menu":"ویرایش منو"
 
 
 }

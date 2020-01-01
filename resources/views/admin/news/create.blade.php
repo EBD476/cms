@@ -110,7 +110,7 @@
                                                                   name="hn_description" id="froala"></textarea>
                                                     </div>
                                                     <div class="checkbox checkbox-info">
-                                                        <input type="checkbox" id="inputSchedule" name="hn_show" value="0" >
+                                                        <input type="checkbox" id="inputSchedule" name="hn_show">
                                                         <label for="inputSchedule" class=""> <span>{{__('Show in News')}}</span> </label>
                                                     </div>
                                                     <input type="hidden" name="hn_image" id="hn_image">

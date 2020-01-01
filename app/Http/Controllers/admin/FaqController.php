@@ -43,7 +43,7 @@ class FaqController extends Controller
         $faq->answer=$request->answer;
         $faq->status=$request->status;
         $faq->save();
-        return redirect()->route('faq.index');
+        return json_encode(["response" => "Done"]);
     }
 
     /**
@@ -88,7 +88,7 @@ class FaqController extends Controller
         $faq->answer=$request->answer;
         $faq->status=$request->status;
         $faq->save();
-        return redirect()->route('faq.index');
+        return json_encode(["response" => "Done"]);
     }
 
     /**
@@ -101,8 +101,7 @@ class FaqController extends Controller
     {
         $faq=FAQ::FIND($id);
         $faq->delete();
-        return redirect()->back();
-    }
+        return json_encode(["response" => "Done"]);    }
     public function faq_status(Request $request)
     {
         $sataus = FAQ::find($request->id);

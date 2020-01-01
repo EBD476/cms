@@ -23,7 +23,8 @@
                         <li class="breadcrumb-item">
                             <a href="{{route('admin.dashboard')}}">{{__('Home')}}</a>
                         </li>
-                        <li class="breadcrumb-item active">{{__('Project Page')}}</li>
+                        &nbsp;
+                        <li>{{__('Project Page')}}</li>
                     </ol>
                 </div>
                 {{--<div class="col-md-7 col-4 align-self-center">--}}
@@ -159,20 +160,10 @@
                                                         <td>
                                                             <a href="{{route('project.edit',$projects->id)}}"
                                                                class="btn btn-info btn-sm"><i class="ti-pencil"></i></a>
-                                                            <form id="-form-delete{{$projects->id}}"
-                                                                  style="display: none;" method="POST"
-                                                                  action="{{route('project.destroy',$projects->id)}}">
-                                                                @csrf
-                                                                @method('DELETE')
-
-                                                            </form>
-                                                            <button type="button" class="btn btn-danger btn-sm"
-                                                                    onclick="if(confirm('آیا از حذف این محصول اطمینان دارید؟')){
-                                                                            event.preventDefault();
-                                                                            document.getElementById('-form-delete{{$projects->id}}').submit();
-                                                                            }else {
-                                                                            event.preventDefault();
-                                                                            }"><i class="ti-close"></i></button>
+                                                            <button data-id="{{$projects->id}}" type="button"
+                                                                    class="btn btn-danger btn-sm -form-delete"
+                                                            ><i class="ti-close"></i>
+                                                            </button>
                                                         </td>
                                                     </tr>
                                                 @endforeach
@@ -261,7 +252,52 @@
                                         //alert($(this)[0].checked);
                                     }
                                 });
+                                $('.-form-delete').on('click', function (event) {
 
+                                    var data = {
+                                        id: $(this).data('id'),
+                                    };
+                                    //token
+                                    $.ajaxSetup({
+                                        headers: {
+                                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                        }
+                                    });
+                                    swal({
+                                        // title: "",
+                                        text: "{{__('Are you sure?')}}",
+                                        Button: "{{__('Done')}}",
+                                        icon: "warning",
+                                        buttons: true,
+                                        dangerMode: true,
+                                    })
+                                        .then((willDelete) => {
+                                            if (willDelete) {
+                                                $.ajax({
+                                                    url: '/admin/project-destroy/' + data.id,
+                                                    type: 'delete',
+                                                    data: data,
+                                                    dataType: 'json',
+                                                    async: false,
+                                                    success: function (data) {
+                                                    },
+                                                    cache: false,
+                                                });
+                                                swal("{{__("Poof! Your imaginary file has been deleted!")}}", {
+                                                    icon: "success",
+                                                    Button: "{{__('Done')}}",
+                                                    Button: "{{__('cancel')}}",
+                                                });
+                                                location.reload();
+                                            } else {
+                                                swal(
+                                                    "{{__("Your imaginary file is safe!")}}",
+                                                    {Button: "{{__('Done')}}"}
+                                                );
+
+                                            }
+                                        });
+                                });
 
                             });
                         </script>

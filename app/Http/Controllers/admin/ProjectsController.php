@@ -47,16 +47,16 @@ class ProjectsController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'hp_project_name' => 'required' ,
-            'hp_project_owner' => 'required' ,
-            'hp_project_type' => 'required',
-            'hp_project_units'=> 'required',
-            'hp_project_address'=> 'required',
-            'hp_project_state'=> 'required',
-            'hp_project_city'=> 'required',
-            'hp_project_description'=> 'required',
-            'hp_project_options'=> 'required',
-            'hp_project_complete_date'=> 'required',
+//            'hp_project_name' => 'required' ,
+//            'hp_project_owner' => 'required' ,
+//            'hp_project_type' => 'required',
+//            'hp_project_units'=> 'required',
+//            'hp_project_address'=> 'required',
+//            'hp_project_state'=> 'required',
+//            'hp_project_city'=> 'required',
+//            'hp_project_description'=> 'required',
+//            'hp_project_options'=> 'required',
+//            'hp_project_complete_date'=> 'required',
         ]);
         $projects = new Project();
         $projects->hp_project_name= $request->hp_project_name;
@@ -68,9 +68,14 @@ class ProjectsController extends Controller
         $projects->hp_project_city=$request->hp_project_city;
         $projects->hp_project_state=$request->hp_project_state;
         $projects->hp_project_description=$request->hp_project_description;
-        $projects->hp_project_options=$request->hp_project_options;
+//        $projects->hp_project_options=$request->hp_project_options;
         $projects->hp_project_complete_date=$request->hp_project_complete_date;
-        $projects->hp_status=$request->hp_status;
+        if($request->status == 'on'){
+            $projects->hp_status=1;
+        }
+        else{
+            $projects->hp_status=0;
+        }
         $projects->save();
         return json_encode(["response" => "Done"]);    }
 
@@ -95,8 +100,10 @@ class ProjectsController extends Controller
      */
     public function edit($id)
     {
+        $city=Address_City::ALL();
+        $state=Address_State::ALL();
         $projects = Project::find($id);
-        return view('admin.projects.edit',compact('projects'));
+        return view('admin.projects.edit',compact('projects','city','state'));
     }
 
     /**
@@ -109,16 +116,16 @@ class ProjectsController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request,[
-            'hp_project_name' => 'required' ,
-            'hp_project_owner' => 'required' ,
-            'hp_project_type' => 'required',
-            'hp_project_units'=> 'required',
-            'hp_project_address'=> 'required',
-            'hp_project_state'=> 'required',
-            'hp_project_city'=> 'required',
-            'hp_project_description'=> 'required',
-            'hp_project_options'=> 'required',
-            'hp_project_complete_date'=> 'required',
+//            'hp_project_name' => 'required' ,
+//            'hp_project_owner' => 'required' ,
+//            'hp_project_type' => 'required',
+//            'hp_project_units'=> 'required',
+//            'hp_project_address'=> 'required',
+//            'hp_project_state'=> 'required',
+//            'hp_project_city'=> 'required',
+//            'hp_project_description'=> 'required',
+//            'hp_project_options'=> 'required',
+//            'hp_project_complete_date'=> 'required',
         ]);
         $projects=Project::find($id);
         $projects->hp_project_name= $request->hp_project_name;
@@ -132,7 +139,8 @@ class ProjectsController extends Controller
         $projects->hp_project_description=$request->hp_project_description;
         $projects->hp_project_options=$request->hp_project_options;
         $projects->hp_project_complete_date=$request->hp_project_complete_date;
-        $projects->hp_status=$request->hp_status;
+        $projects->hp_project_location=$request->hp_project_location;
+        $projects->hp_status=$request->status;
         $projects->save();
         return json_encode(["response" => "Done"]);
     }
@@ -147,8 +155,7 @@ class ProjectsController extends Controller
     {
         $projects= Project::find($id);
         $projects->delete();
-        return redirect()->back();
-    }
+        return json_encode(["response" => "Done"]);    }
     public function project_upload(Request $request)
     {
         $image = $request->file('file');

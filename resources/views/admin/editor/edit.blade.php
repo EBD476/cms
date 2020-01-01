@@ -105,22 +105,20 @@
                                                                data-id="{{$article->id}}"
                                                                name="hn_title" value="{{$article->ha_title}}">
                                                     </div>
-                                                    <div class="form-group">
-                                                        <label for="exampleInputPassword1">{{__('Auther')}}</label>
-                                                        <input type="text" class="form-control"
-                                                               id="ha_auther"
-                                                               name="ha_auther" value="{{$article->ha_auther}}">
-                                                    </div>
+                                                    {{--<div class="form-group">--}}
+                                                        {{--<label for="exampleInputPassword1">{{__('Auther')}}</label>--}}
+                                                        {{--<input type="text" class="form-control"--}}
+                                                               {{--id="ha_auther"--}}
+                                                               {{--name="ha_auther" value="{{$article->ha_auther}}">--}}
+                                                    {{--</div>--}}
                                                     <div class="form-group">
                                                         <label for="exampleInputFile">{{__('Description')}}</label>
                                                         <textarea type="text" class="form-control"
                                                                   id="froala"
-                                                                  data-ha_editor="{{$article->ha_editor}}"
-                                                                  name="hn_description"
                                                                   >{{$article->ha_editor}}</textarea>
                                                     </div>
                                                     <div class="checkbox checkbox-info">
-                                                        <input type="checkbox" id="ha_show" name="ha_show" @if($article->ha_status) checked @endif>
+                                                        <input type="checkbox" id="inputSchedule" name="ha_show" @if($article->ha_status) checked @endif>
                                                         <label for="inputSchedule" class=""> <span>{{__('Show in Article')}}</span> </label>
                                                     </div>
                                                 </div>
@@ -183,9 +181,9 @@
                                                     $("#sub_form1").on('click',function (event) {
                                                         var data ={
                                                             ha_title : $("#ha_title").val(),
-                                                            ha_auther : $("#ha_auther").val(),
-                                                            ha_editor : $("#ha_editor").data('ha_editor'),
-                                                            ha_show : $("#ha_show").val(),
+                                                            // ha_auther : $("#ha_auther").val(),
+                                                            froala : $("#froala").val(),
+                                                            ha_show : $("#inputSchedule")[0].checked == true ? 1 : 0,
                                                             id:$("#ha_title").data('id'),
                                                         }
                                                         event.preventDefault();

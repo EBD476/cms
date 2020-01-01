@@ -116,11 +116,11 @@
 
                                                     </div>
                                                     <!-- /.box-body -->
-
                                                     <div class="box-footer">
                                                         <button type="submit"
                                                                 class="btn btn-primary">{{__('Submit')}}</button>
                                                     </div>
+                                                </div>
                                             </form>
                                         </div>
                                         @endsection
