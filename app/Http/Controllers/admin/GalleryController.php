@@ -44,7 +44,7 @@ class GalleryController extends Controller
             'hg_code' => 'required' ,
             'hg_description' => 'required' ,
             'hg_category_name' => 'required' ,
-            'hg_show' => 'required' ,
+//            'hg_show' => 'required' ,
         ]);
         $gallery = new Gallery();
         $gallery->hg_name= $request->hg_name;
@@ -52,9 +52,16 @@ class GalleryController extends Controller
         $gallery->hg_code= $request->hg_code;
         $gallery->hg_description= $request->hg_description;
         $gallery->hg_image=$request->hn_image;
-        $gallery->hg_show=$request->hg_show;
+        if($request->hg_show == 'on'){
+            $gallery->hg_show=1;
+
+        }
+        else{
+            $gallery->hg_show=0;
+
+        }
         $gallery->save();
-        return redirect()->route('gallery.index');
+        return json_encode(["response" => "Done"]);
 
     }
 
@@ -66,9 +73,7 @@ class GalleryController extends Controller
      */
     public function show($id)
     {
-        /**
-         *
-         */
+       return view('admin.gallery.show');
     }
 
     /**
@@ -108,7 +113,7 @@ class GalleryController extends Controller
         $gallery->hg_image=$request->hn_image;
         $gallery->hg_show=$request->hg_show;
         $gallery->save();
-        return redirect()->route('gallery.index');
+        return json_encode(["response" => "Done"]);
 
     }
 

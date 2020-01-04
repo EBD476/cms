@@ -311,7 +311,21 @@
   "Poof! Your imaginary file has been deleted!":"اطلاعات با موفقیت حذف شد!",
   "Your imaginary file is safe!":"اطلاعات شما ایمن است!",
   "Insert Menu":"اضافه کردن منو جدید",
-  "Edit Menu":"ویرایش منو"
+  "Edit Menu":"ویرایش منو",
+  "Category":"دسته بندی",
+  "Video":"ویدیو",
+  "Sing Up":"ورود ",
+  "HANTA Smart Home":" خانه هوشمند هانتا",
+  "Designed by":"طراحی شده توسط",
+  "Blog":"بلاگ",
+  "HANTAIBMS":"خانه هوشمند هانتا",
+  "Edit Video":"ویرایش ویدیو",
+  "Video Title":"عنوان",
+  "Video File":"آپلود فایل",
+  "Video Page":"صفحه ویدیو ها",
+  "Add New Video":"اضافه کردن ویدیو جدید",
+  "Show in Video":"نمایش در ویدیو ها",
+  "Insert Video":"اضافه کردن ویدیو جدید"
 
 
 }

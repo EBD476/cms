@@ -101,7 +101,7 @@
                                                     <th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1"
                                                         colspan="1"
                                                         aria-label="Office: activate to sort column ascending"
-                                                        style="width: 106px;">{{__('Code')}}
+                                                        style="width: 106px;">{{__('Category')}}
                                                     </th>
                                                     <th class="sorting_asc" tabindex="0" aria-controls="myTable"
                                                               rowspan="1" colspan="1" aria-sort="ascending"
@@ -126,7 +126,7 @@
                                                 {{$gallery ->hg_name}}
                                             </td>
                                             <td>
-                                                {{$gallery ->hg_code}}
+                                                {{$gallery ->hg_category_name}}
                                             </td>
                                             <td>
                                                 <input type="checkbox" @if ($gallery ->hg_show) checked

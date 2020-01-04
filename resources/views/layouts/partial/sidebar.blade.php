@@ -4,7 +4,7 @@
         <!-- User profile -->
         <div class="user-profile" style="background: url({{asset('img/user-info.jpg')}}">
             <!-- User profile image -->
-            <div class="profile-img"><img src="{{asset('upload/user/'.auth()->user()->image)}}" /></div>
+            <div class="profile-img"><img src="{{asset('upload/user/'.auth()->user()->image)}}"/></div>
             <!-- User profile text-->
             <div class="profile-text"><a href="#" class="dropdown-toggle u-dropdown" data-toggle="dropdown"
                                          role="button" aria-haspopup="true" aria-expanded="true">Markarn Doe</a>
@@ -24,8 +24,8 @@
         <!-- Sidebar navigation-->
         <nav class="sidebar-nav">
             <ul id="sidebarnav">
-                {{--<li class="nav-small-cap">{{__('PERSONAL')}}</li>--}}
-                <!-- dashboard access -->
+            {{--<li class="nav-small-cap">{{__('PERSONAL')}}</li>--}}
+            <!-- dashboard access -->
                 <li><a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
                                 class="mdi mdi-gauge"></i><span
                                 class="hide-menu">{{__('Dashboard')}} </span></a>
@@ -53,7 +53,7 @@
                         <li><a href="{{route('news.create')}}">{{__('Create News')}}</a></li>
                     </ul>
                 </li>
-                 <!-- Article access -->
+                <!-- Article access -->
                 {{--<li class="nav-devider"></li>--}}
                 {{--<li class="nav-small-cap">{{__('Article')}}</li>--}}
                 <li><a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
@@ -64,9 +64,9 @@
                         <li><a href="{{route('publish.create')}}">{{__('Create Article')}}</a></li>
                     </ul>
                 </li>
-                {{--<li class="nav-devider"></li>--}}
-                {{--<li class="nav-small-cap">{{__('Device')}}</li>--}}
-                <!-- product access -->
+            {{--<li class="nav-devider"></li>--}}
+            {{--<li class="nav-small-cap">{{__('Device')}}</li>--}}
+            <!-- product access -->
                 <li><a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
                                 class="mdi mdi-gauge"></i><span
                                 class="hide-menu">{{__('Product')}} </span></a>
@@ -94,23 +94,23 @@
                     </ul>
                 </li>
                 <!-- Device access -->
-                {{--<li><a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i--}}
-                                {{--class="mdi mdi-gauge"></i><span--}}
-                                {{--class="hide-menu">{{__('Device')}} </span></a>--}}
-                    {{--<ul aria-expanded="false" class="collapse">--}}
-                        {{--<li><a href="{{route('devices.index')}}">{{__('Device')}}</a></li>--}}
-                    {{--</ul>--}}
-                {{--</li>--}}
-                <!-- Config access -->
-                {{--<li><a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i--}}
-                                {{--class="mdi mdi-gauge"></i><span--}}
-                                {{--class="hide-menu">{{__('Config')}}</span></a>--}}
-                    {{--<ul aria-expanded="false" class="collapse">--}}
-                        {{--<li><a href="{{route('config.index')}}">{{__('Config List')}}</a></li>--}}
-                        {{--<li><a href="{{route('config.create')}}">{{__('Create Config')}}</a></li>--}}
-                    {{--</ul>--}}
-                {{--</li>--}}
-                <!-- Menu access -->
+            {{--<li><a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i--}}
+            {{--class="mdi mdi-gauge"></i><span--}}
+            {{--class="hide-menu">{{__('Device')}} </span></a>--}}
+            {{--<ul aria-expanded="false" class="collapse">--}}
+            {{--<li><a href="{{route('devices.index')}}">{{__('Device')}}</a></li>--}}
+            {{--</ul>--}}
+            {{--</li>--}}
+            <!-- Config access -->
+            {{--<li><a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i--}}
+            {{--class="mdi mdi-gauge"></i><span--}}
+            {{--class="hide-menu">{{__('Config')}}</span></a>--}}
+            {{--<ul aria-expanded="false" class="collapse">--}}
+            {{--<li><a href="{{route('config.index')}}">{{__('Config List')}}</a></li>--}}
+            {{--<li><a href="{{route('config.create')}}">{{__('Create Config')}}</a></li>--}}
+            {{--</ul>--}}
+            {{--</li>--}}
+            <!-- Menu access -->
                 <!-- Setting access -->
                 <li><a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
                                 class="mdi mdi-gauge"></i><span
@@ -122,14 +122,14 @@
                     </ul>
                 </li>
                 <!-- page access -->
-                    <li><a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
+                <li><a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
                                 class="mdi mdi-gauge"></i><span
                                 class="hide-menu">{{__('Pages')}}</span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="{{route('pages.index')}}">{{__('View List Pages')}}</a></li>
                         {{--@foreach(App\Menu::ALL() as $menu)--}}
-                                    {{--<li><a href="{{route('frontend.pages.test',$menu->items)}}">{{$menu->name}}</a></li>--}}
-                            {{--</li>--}}
+                        {{--<li><a href="{{route('frontend.pages.test',$menu->items)}}">{{$menu->name}}</a></li>--}}
+                        {{--</li>--}}
                         {{--@endforeach--}}
                     </ul>
                 </li>
@@ -142,26 +142,33 @@
                         <li><a href="{{route('faq.create')}}">{{__('Create FAQ')}}</a></li>
                     </ul>
                 </li>
-                 <!-- Menu access -->
+                <!-- Menu access -->
                 <li><a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
-                                    class="mdi mdi-gauge"></i><span
-                                    class="hide-menu">{{__('Menu')}}</span></a>
-                        <ul aria-expanded="false" class="collapse">
-                            <li><a href="{{route('menu.index')}}">{{__('Menu List')}}</a></li>
-                            <li><a href="{{route('menu.create')}}">{{__('Create Menu')}}</a></li>
-                        </ul>
+                                class="mdi mdi-gauge"></i><span
+                                class="hide-menu">{{__('Menu')}}</span></a>
+                    <ul aria-expanded="false" class="collapse">
+                        <li><a href="{{route('menu.index')}}">{{__('Menu List')}}</a></li>
+                        <li><a href="{{route('menu.create')}}">{{__('Create Menu')}}</a></li>
+                    </ul>
                 </li>
-                 <!-- Gallery access -->
+                <!-- Gallery access -->
                 <li><a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
-                                    class="mdi mdi-gauge"></i><span
-                                    class="hide-menu">{{__('Gallery')}}</span></a>
-                        <ul aria-expanded="false" class="collapse">
-                            <li><a href="{{route('gallery.index')}}">{{__('Gallery')}}</a></li>
-                        </ul>
+                                class="mdi mdi-gauge"></i><span
+                                class="hide-menu">{{__('Gallery')}}</span></a>
+                    <ul aria-expanded="false" class="collapse">
+                        <li><a href="{{route('gallery.index')}}">{{__('Gallery')}}</a></li>
+                    </ul>
                 </li>
-                {{--<li class="nav-devider"></li>--}}
-                {{--<li class="nav-small-cap">{{__('Slider')}}</li>--}}
-                <!-- Slider access -->
+                <li><a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
+                                class="mdi mdi-gauge"></i><span
+                                class="hide-menu">{{__('Video')}}</span></a>
+                    <ul aria-expanded="false" class="collapse">
+                        <li><a href="{{route('video.index')}}">{{__('Video')}}</a></li>
+                    </ul>
+                </li>
+            {{--<li class="nav-devider"></li>--}}
+            {{--<li class="nav-small-cap">{{__('Slider')}}</li>--}}
+            <!-- Slider access -->
                 <li><a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
                                 class="mdi mdi-gauge"></i><span
                                 class="hide-menu">{{__('Component')}}</span></a>
@@ -171,7 +178,7 @@
 
                     </ul>
                 </li>
-                 <li><a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
+                <li><a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
                                 class="mdi mdi-gauge"></i><span
                                 class="hide-menu">{{__('Contact Us')}}</span></a>
                     <ul aria-expanded="false" class="collapse">

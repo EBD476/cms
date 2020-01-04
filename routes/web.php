@@ -35,6 +35,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth', 'namespace' => 'admin
     Route::resource('gallery', 'GalleryController');
     Route::resource('contact_us','ContactUsController');
     Route::resource('publish', 'ArticleController');
+    Route::resource('video', 'VideoController');
 
 
 //    uploaded image route
@@ -56,6 +57,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth', 'namespace' => 'admin
     Route::post('/slider-status','SliderController@slider_status')->name('slider.slider-status');
     Route::post('article-status','ArticleController@update_status')->name('publish.article-status');
     Route::post('product-status','ProductController@product_status')->name('product.product-status');
+    Route::post('/video-status','VideoController@video_status')->name('video.video-status');
     Route::post('/news_update_status','NewsController@update_status')->name('news.update_status ');
 //deleted route
     Route::delete('/news-destroy/{id}','NewsController@destroy')->name('news.news-destroy');
@@ -69,6 +71,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth', 'namespace' => 'admin
     Route::delete('/project-destroy/{id}','ProjectsController@destroy')->name('project.project-destroy');
     Route::delete('/slider-destroy/{id}','SliderController@destroy')->name('slider.slider-destroy');
     Route::delete('/user-destroy/{id}','DataUserController@destroy')->name('user.user-destroy');
+    Route::delete('/video-destroy/{id}','VideoController@destroy')->name('video.video-destroy');
 
 
 
@@ -86,6 +89,7 @@ route::group(['prefix' => 'frontend', 'namespace' => 'frontend'], function () {
     Route::get('news', 'NewsController@index')->name('frontend.news.index');
     Route::get('article', 'ArticleController@index')->name('frontend.article.index');
     Route::get('project', 'ProjectController@index')->name('frontend.project.index');
+    Route::get('video', 'VideoController@show')->name('frontend.video.show');
 
 
 });

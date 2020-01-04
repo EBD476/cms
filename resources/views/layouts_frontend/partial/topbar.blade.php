@@ -4,7 +4,7 @@
     <div class="container">
         <div class="navbar-translate">
             <a class="navbar-brand" href="https://demos.creative-tim.com/now-ui-kit-pro/index.html" rel="tooltip"
-               title="Designed by Invision. Coded by Creative Tim" data-placement="bottom" target="_blank">
+               title="{{__('HANTA Smart Home')}}" data-placement="bottom" target="_blank">
                 {{__('HANTA IBMS')}}
             </a>
 
@@ -101,6 +101,20 @@
                                         <i class="now-ui-icons design_image"></i>
                                         {{__('Gallery')}}
                                     </a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" id="navbarDropdownMenuLink"
+                               data-toggle="dropdown">
+                                <i class="fab fa-youtube" aria-hidden="true"></i>
+                                <p>{{__('Video')}}</p>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+
+                                <a class="dropdown-item" href="{{(route('frontend.video.show'))}}">
+                                    <i class="fab fa-youtube"></i>
+                                    {{__('Video')}}
+                                </a>
                             </div>
                         </li>
 

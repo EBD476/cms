@@ -60,7 +60,6 @@
                     </div>
                 </div>
             </div>            <!-- Content Header (Page header) -->
-
             <section class="content-header">
                 <h1>
                     {{__('Edit News')}}
@@ -138,6 +137,11 @@
                                                         <label for="exampleInputFile">{{__('Image')}}</label>
                                                         <input type="file" class="form-control"
                                                                name="file">
+                                                    </div>
+                                                    <div class="dz-preview dz-processing dz-image-preview dz-complete">
+                                                        <div class="dz-image">
+                                                            <img  src={{asset('img/news/'.$news->hn_image)}}>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </form>

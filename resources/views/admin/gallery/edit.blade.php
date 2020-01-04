@@ -105,6 +105,12 @@
                                                                id="exampleInputPassword1" name="hg_name" value="{{$gallery->hg_name}}" >
                                                     </div>
                                                     <div class="form-group">
+                                                        <label for="exampleInputPassword1">{{__('Category')}}</label>
+                                                        <input type="text" class="form-control"
+                                                               id="exampleInputPassword1" name="hg_category_name" value="{{$gallery->hg_category_name}}" >
+                                                    </div>
+
+                                                    <div class="form-group">
                                                         <label for="exampleInputFile">{{__('Image Code')}}</label>
                                                         <input type="text" class="form-control" id="exampleInputFile"
                                                                name="hg_code" value="{{$gallery->hg_code}}">
@@ -121,25 +127,25 @@
                                                     </div>
                                                 </div>
                                                 <!-- /.box-body -->
-
-                                                <div class="box-footer">
-                                                    <button type="submit"
-                                                            class="btn btn-primary">{{__('Submit')}}</button>
-                                                </div>
                                             </form>
-                                            <form action="{{url('/admin/image-gallery-save')}}" class="dropzone"
-                                                  id="dropzone"
-                                                  enctype="multipart/form-data">
-                                                @csrf
-                                                @method('POST')
-                                                <div class="fallback">
-                                                    <div class="form-group">
-                                                        <label for="exampleInputFile">{{__('Image')}}</label>
-                                                        <input type="file" class="form-control"
-                                                               name="file">
-                                                    </div>
+                                        </div>
+                                        <form action="{{url('/admin/image-gallery-save')}}" class="dropzone"
+                                              id="dropzone"
+                                              enctype="multipart/form-data">
+                                            @csrf
+                                            @method('POST')
+                                            <div class="fallback">
+                                                <div class="form-group">
+                                                    <label for="exampleInputFile">{{__('Image')}}</label>
+                                                    <input type="file" class="form-control"
+                                                           name="file">
                                                 </div>
-                                            </form>
+                                            </div>
+                                        </form>
+                                        <br>
+                                        <div class="box-footer">
+                                            <button id="sub_form1" type="submit"
+                                                    class="btn btn-primary">{{__('Submit')}}</button>
                                         </div>
 
                                         @endsection
@@ -176,11 +182,9 @@
                                             <script src="{{asset('backend/js.pro/blockUI.js')}}" type="text/javascript"></script>
                                             <script>
                                                 $(document).ready(function () {
-                                                    $("#form1").submit(function (event) {
+                                                    $("#sub_form1").on('click',function (event) {
                                                         var data = $("#form1").serialize();
                                                         event.preventDefault();
-                                                        $.blockUI();
-
                                                         $.ajaxSetup({
                                                             headers: {
                                                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

@@ -68,8 +68,8 @@
                     {{__('Insert Image')}}
                 </h1>
                 <ol class="breadcrumb">
-                    <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{__('Home')}} > </a></li>
-                    <li><a href="{{route('gallery.index')}}">{{__('Gallery')}}</a></li>
+                    <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{__('Home')}}</a></li>
+                    <li>{{__('Gallery')}}</li>
                 </ol>
             </section>
 
@@ -86,7 +86,7 @@
                             <section class="content">
                                 <div class="row">
                                     <!-- left column -->
-                                    <div class="col-md-6">
+                                    <div class="col-md-12">
                                         <!-- general form elements -->
                                         <div class="box box-primary">
                                             <div class="box-header with-border">
@@ -97,62 +97,66 @@
                                             <form id="form1"
                                                   enctype="multipart/form-data">
                                                 <div class="box-body">
-                                                    <div class="form-group">
-                                                        <label for="exampleInputPassword1">{{__('Image Name')}}</label>
-                                                        <input type="text" class="form-control"
-                                                               id="exampleInputPassword1" name="hg_name">
+                                                    <div class="row">
+                                                        <div class="form-group col-md-6">
+                                                            <label for="exampleInputPassword1">{{__('Image Name')}}</label>
+                                                            <input type="text" class="form-control"
+                                                                   id="exampleInputPassword1" name="hg_name">
+                                                        </div>
+                                                        <div class="form-group col-md-6">
+                                                            <label for="exampleInputPassword1">{{__('Category')}}</label>
+                                                            <select name="hg_category_name" class="form-control">
+                                                                @foreach($category as $categories)
+                                                                    <option>
+                                                                        {{$categories->name}}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <label for="exampleInputPassword1">{{__('Category Name')}}</label>
-                                                        <select name="hg_category_name">
-                                                            @foreach($category as $category)
-                                                                <option>
-                                                                    {{$category->name}}
-                                                                </option>
-                                                            @endforeach
-                                                        </select>
-                                                        <input type="text" class="form-control"
-                                                               id="exampleInputPassword1" name="hg_category_name">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="exampleInputFile">{{__('Image Code')}}</label>
-                                                        <input type="text" class="form-control" id="exampleInputFile"
-                                                               name="hg_code">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="exampleInputFile">{{__('Image Description')}}</label>
-                                                        <input type="text" class="form-control" id="exampleInputFile"
-                                                               name="hg_description">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <input type="hidden" name="hn_image" id="hn_image">
+                                                    <div class="row">
+                                                        <div class="form-group col-md-6">
+                                                            <label for="exampleInputFile">{{__('Image Code')}}</label>
+                                                            <input type="text" class="form-control"
+                                                                   id="exampleInputFile"
+                                                                   name="hg_code">
+                                                        </div>
+                                                        <div class="form-group col-md-6">
+                                                            <label for="exampleInputFile">{{__('Image Description')}}</label>
+                                                            <textarea type="text" class="form-control"
+                                                                      id="exampleInputFile"
+                                                                      name="hg_description"></textarea>
+                                                        </div>
                                                     </div>
 
+                                                    <input type="hidden" name="hn_image" id="hn_image">
+
                                                     <div class="checkbox checkbox-info">
-                                                        <input type="checkbox" id="inputSchedule" name="hg_show" value="0">
-                                                        <label for="inputSchedule" class=""> <span>{{__('Show in Gallery')}}</span> </label>
+                                                        <input type="checkbox" id="inputSchedule" name="hg_show">
+                                                        <label for="inputSchedule" class="">
+                                                            <span>{{__('Show in Gallery')}}</span> </label>
                                                     </div>
                                                 </div>
                                                 <!-- /.box-body -->
-
-                                                <div class="box-footer">
-                                                    <button type="submit"
-                                                            class="btn btn-primary">{{__('Submit')}}</button>
-                                                </div>
                                             </form>
-                                            <form action="{{url('/admin/image-gallery-save')}}" class="dropzone"
-                                                  id="dropzone"
-                                                  enctype="multipart/form-data">
-                                                @csrf
-                                                @method('POST')
-                                                <div class="fallback">
-                                                    <div class="form-group">
-                                                        <label for="exampleInputFile">{{__('Image')}}</label>
-                                                        <input type="file" class="form-control"
-                                                               name="file">
-                                                    </div>
+                                        </div>
+                                        <form action="{{url('/admin/image-gallery-save')}}" class="dropzone"
+                                              id="dropzone"
+                                              enctype="multipart/form-data">
+                                            @csrf
+                                            @method('POST')
+                                            <div class="fallback">
+                                                <div class="form-group">
+                                                    <label for="exampleInputFile">{{__('Image')}}</label>
+                                                    <input type="file" class="form-control"
+                                                           name="file">
                                                 </div>
-                                            </form>
+                                            </div>
+                                        </form>
+                                        <br>
+                                        <div class="box-footer">
+                                            <button id="sub_form1" type="submit"
+                                                    class="btn btn-primary">{{__('Submit')}}</button>
                                         </div>
 
                                         @endsection
@@ -186,10 +190,11 @@
                                                         }
                                                     };
                                             </script>
-                                            <script src="{{asset('backend/js.pro/jquery.blockUI.js')}}" type="text/javascript"></script>
+                                            <script src="{{asset('backend/js.pro/jquery.blockUI.js')}}"
+                                                    type="text/javascript"></script>
                                             <script>
                                                 $(document).ready(function () {
-                                                    $("#form1").submit(function (event) {
+                                                    $("#sub_form1").on('click', function (event) {
                                                         var data = $("#form1").serialize();
                                                         event.preventDefault();
                                                         $.blockUI();
@@ -211,14 +216,14 @@
                                                             }
                                                         });
                                                         $.ajax({
-                                                            url: '/admin/level',
+                                                            url: '/admin/gallery',
                                                             type: 'POST',
                                                             data: data,
                                                             dataType: 'json',
                                                             async: false,
                                                             success: function (data) {
                                                                 setTimeout($.unblockUI, 2000);
-                                                                location.reload();
+                                                                location.redirect.back();
                                                             },
                                                             cache: false,
                                                         });

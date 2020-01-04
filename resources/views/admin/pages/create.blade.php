@@ -98,15 +98,26 @@
                                                   enctype="multipart/form-data">
                                                 <div class="box-body">
                                                     <div class="row">
-                                                        <div class="col-md-4">
+                                                        <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <label for="exampleInputFile">{{__('Title')}}</label>
                                                                 <input type="text" class="form-control"
                                                                        id="exampleInputFile" name="title">
                                                             </div>
-
                                                         </div>
-                                                        <div class="col-md-4">
+                                                        <div class="col-md-6">
+                                                            <div class="text-light" style="float: left">
+                                                                <a class="pointer" href="#" data-toggle="modal"
+                                                                   data-target="#modalRegisterForm">
+                                                                    {{__('Add New Menu')}}</a>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="exampleInputFile">{{__('Menu')}}</label>
+                                                                <input type="text" class="form-control"
+                                                                       id="menu_name" name="menu_name">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <label for="exampleInputFile">{{__('Page Slug')}}</label>
                                                                 <input type="text" class="form-control"
@@ -114,7 +125,7 @@
                                                             </div>
 
                                                         </div>
-                                                        <div class="col-md-4">
+                                                        <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <label for="exampleInputFile">{{__('Cannonical Link')}}</label>
                                                                 <input type="text" class="form-control"
@@ -188,6 +199,53 @@
                                                 <button id="sub_form1" type="submit"
                                                         class="btn btn-primary">{{__('Submit')}}</button>
                                             </div>
+
+                                            {{--//menu modal//--}}
+                                            <div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog"
+                                                 aria-labelledby="myModalLabel"
+                                                 aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header text-center">
+                                                            <h4 class="modal-title w-100 font-weight-bold">{{__('Add New Menu')}}</h4>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <form method="post" id="modal_form" enctype="multipart/form-data">
+                                                            <div class="modal-body mx-3">
+                                                                <div class="md-form mb-5">
+                                                                    {{--<i class="fas fa-user prefix grey-text"></i>--}}
+                                                                    <label class="bmd-label-floating" data-error="wrong"
+                                                                           data-success="right"
+                                                                           for="orangeForm-name">{{__('Name')}}</label>
+                                                                    <input type="text" id="orangeForm-name" class="form-control validate"
+                                                                           name="name">
+                                                                </div>
+                                                                <div class="md-form mb-5">
+                                                                    {{--<i class="fas fa-envelope prefix grey-text"></i>--}}
+                                                                    <label class="bmd-label-floating" data-error="wrong"
+                                                                           data-success="right">{{__('Type')}}</label>
+                                                                    <input required class="form-control validate"
+                                                                           name="type">
+                                                                </div>
+
+                                                                {{--<div class="md-form mb-4">--}}
+                                                                    {{--<i class="fas fa-lock prefix grey-text"></i>--}}
+                                                                    {{--<label class="bmd-label-floating" data-error="wrong"--}}
+                                                                           {{--data-success="right">{{__('Parent Name')}}</label>--}}
+                                                                    {{--<input type="text" class="form-control validate" name="parent_name">--}}
+                                                                {{--</div>--}}
+
+                                                            </div>
+                                                            <div class="modal-footer d-flex justify-content-center">
+                                                                <button type="submit" id="sub_form2" class="btn btn-deep-orange">{{__('Send')}}</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {{--//End menu modal//--}}
                                         </div>
                                     </div>
                                 </div>
@@ -244,6 +302,43 @@
                                         type="text/javascript"></script>
                                 <script>
                                     $(document).ready(function () {
+
+                                        $("#sub_form2").on('click',function (event) {
+                                            var data = $("#modal_form").serialize();
+                                            event.preventDefault();
+                                            $.ajaxSetup({
+                                                headers: {
+                                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                                }
+                                            });
+                                            $.blockUI({
+                                                message: '{{__('please wait...')}}', css: {
+                                                    border: 'none',
+                                                    padding: '15px',
+                                                    backgroundColor: '#000',
+                                                    '-webkit-border-radius': '10px',
+                                                    '-moz-border-radius': '10px',
+                                                    opacity: .5,
+                                                    color: '#fff'
+                                                }
+                                            });
+                                            $.ajax({
+                                                url: '/admin/menu',
+                                                type: 'POST',
+                                                data: data,
+                                                dataType: 'json',
+                                                async: false,
+                                                success: function (data) {
+                                                    setTimeout($.unblockUI);
+                                                    $("#modalRegisterForm").find("input").val("");
+                                                    $("#modalRegisterForm").modal('hide');
+                                                    $("#menu_name").append('<option selected>' + data.menu_name + '</option>');
+                                                },
+                                                cache: false,
+                                            });
+                                        });
+
+
                                         $("#sub_form1").on('click',function (event) {
                                             var data = $("#form1").serialize();
                                             event.preventDefault();
@@ -280,5 +375,6 @@
                                         });
                                     });
                                 </script>
+
 
     @endpush
