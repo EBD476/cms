@@ -156,14 +156,16 @@
                                 class="mdi mdi-gauge"></i><span
                                 class="hide-menu">{{__('Gallery')}}</span></a>
                     <ul aria-expanded="false" class="collapse">
-                        <li><a href="{{route('gallery.index')}}">{{__('Gallery')}}</a></li>
+                        <li ><a href="{{route('gallery.index')}}">{{__('Gallery List')}}</a></li>
+                        <li><a href="{{route('gallery.create')}}">{{__('Create Image')}}</a></li>
                     </ul>
                 </li>
                 <li><a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
                                 class="mdi mdi-gauge"></i><span
                                 class="hide-menu">{{__('Video')}}</span></a>
                     <ul aria-expanded="false" class="collapse">
-                        <li><a href="{{route('video.index')}}">{{__('Video')}}</a></li>
+                        <li><a href="{{route('video.index')}}">{{__('Video List')}}</a></li>
+                        <li><a href="{{route('video.create')}}">{{__('Create Video')}}</a></li>
                     </ul>
                 </li>
             {{--<li class="nav-devider"></li>--}}

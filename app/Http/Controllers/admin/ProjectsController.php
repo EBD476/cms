@@ -68,6 +68,7 @@ class ProjectsController extends Controller
         $projects->hp_project_city=$request->hp_project_city;
         $projects->hp_project_state=$request->hp_project_state;
         $projects->hp_project_description=$request->hp_project_description;
+        $projects->hp_project_location=$request->hp_project_location;
 //        $projects->hp_project_options=$request->hp_project_options;
         $projects->hp_project_complete_date=$request->hp_project_complete_date;
         if($request->status == 'on'){

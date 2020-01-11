@@ -13,8 +13,7 @@ class NewsController extends Controller
 {
     public function index()
     {
-        $news = News::all();
-        return view('admin.news.index', compact('news'));
+        return view('admin.news.index');
     }
 
     /**
@@ -41,14 +40,14 @@ class NewsController extends Controller
 //            'hn_description' => 'required',
 //            'hn_show' => 'required',
         ]);
+        dd($request->hn_image);
 
         $news = new News();
         $news->hn_title = $request->hn_title;
         $request->hn_description = str_replace('<p data-f-id="pbf" style="text-align: center; font-size: 14px; margin-top: 30px; opacity: 0.65; font-family: sans-serif;">Powered by <a href="https://www.froala.com/wysiwyg-editor?pb=1" title="Froala Editor">Froala Editor</a></p>', "", $request->hn_description);
         $news->hn_description = $request->hn_description;
         $news->hn_image = $request->hn_image;
-        if($request->hn_show == 'on')
-        {
+        if ($request->hn_show == 'on') {
             $news->hn_status = 1;
         }
         $news->save();
@@ -99,10 +98,9 @@ class NewsController extends Controller
         $request->froala = str_replace('<p data-f-id="pbf" style="text-align: center; font-size: 14px; margin-top: 30px; opacity: 0.65; font-family: sans-serif;">Powered by <a href="https://www.froala.com/wysiwyg-editor?pb=1" title="Froala Editor">Froala Editor</a></p>', "", $request->froala);
         $news->hn_description = $request->froala;
         $news->hn_image = $request->hn_image;
-        if($request->hn_show == 'on') {
+        if ($request->hn_show == 'on') {
             $news->hn_status = 1;
-        }
-        else{
+        } else {
             $news->hn_status = 0;
         }
         $news->save();
@@ -149,6 +147,37 @@ class NewsController extends Controller
         $sataus->hn_status = $request->status;
         $sataus->save();
         return json_encode(["response" => "Done"]);
+    }
+
+    public function restore()
+    {
+        $restore_news = News::withTrashed()
+            ->where('id', '60')
+            ->restore();
+        return view('news.index');
+    }
+
+    public function fill(Request $request)
+    {
+        $start = $request->start;
+        $length = $request->length;
+        $search = $request->search['value'];
+        if ($search == '') {
+            $news = News::skip($start)->take($length)->get();
+        } else {
+            $news = News::where('id', 'LIKE', "%$search%")
+                ->orwhere('hn_title', 'LIKE', "%$search%")
+                ->orwhere('hn_published_at', 'LIKE', "%$search%")
+                ->get();
+        }
+
+        $data = '';
+        foreach ($news as $newses) {
+            $data .= '["' . $newses->id . '",' . '"' . $newses->hn_title . '",' . '"' . $newses->hn_published_at . '",' . '"' . $newses->hn_status . '"],';
+        }
+        $data = substr($data, 0, -1);
+        $news_count = News::all()->count();
+        return response('{ "recordsTotal":' . $news_count . ',"recordsFiltered":' . $news_count . ',"data": [' . $data . ']}');
     }
 }
 

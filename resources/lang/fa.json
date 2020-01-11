@@ -86,7 +86,7 @@
   "Dealership City":"شهر ",
   "Dealership Agent":" نماینده",
   "Dealership Phone":"تلفن",
-  "Dealership State":"موقعیت",
+  "Dealership State":"استان",
   "Dealership Address":"آدرس",
   "Edit Dealership":"ویرایش اطلاعات نمایندگی",
   "advanced tables":"  ",
@@ -325,7 +325,12 @@
   "Video Page":"صفحه ویدیو ها",
   "Add New Video":"اضافه کردن ویدیو جدید",
   "Show in Video":"نمایش در ویدیو ها",
-  "Insert Video":"اضافه کردن ویدیو جدید"
+  "Insert Video":"اضافه کردن ویدیو جدید",
+  "Create Video":"ایجاد ویدیو جدید",
+  "Video List":"لیست ویدیو ها",
+  "Create Image":"ایجاد تصویر جدید",
+  "Gallery List":"لیست گالری",
+  "Image File":"فایل عکس"
 
 
 }

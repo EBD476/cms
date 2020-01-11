@@ -155,11 +155,11 @@ class ProductController extends Controller
     public function destroy($id)
     {
         $product = Product::find($id);
-//        if (file_exists('upload/product/' . $product->image)) {
-//
-//            unlink('upload/product/' . $product->image);
-//
-//        }
+        if (file_exists('upload/product/' . $product->image)) {
+
+            unlink('upload/product/' . $product->image);
+
+        }
         $product->delete();
         return json_encode(["response" => "Done"]);
     }

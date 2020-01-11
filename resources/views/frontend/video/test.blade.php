@@ -39,38 +39,38 @@
                                         @if($videos_filter->hv_category == $videos->hv_category)
                                             <div @if($key + 1 == 1) class="tab-pane active" @else class="tab-pane"
                                                  @endif id="{{$key + 1}}">
-                                                <div class="col-4">
-                                                    <div class="card-image">
-                                                        <div class="card-image">
-                                                            <img class="img-raised rounded"
-                                                                 src="{{asset('img/gallery/'.$videos_filter->hv_video)}}"/>
-                                                            <div class="card-body">
+                                                {{--<video src="{{asset('upload/video/'.$videos_filter->hv_video)}}" loop--}}
+                                                       {{--muted playsinline uk-video="autoplay: inview"></video>--}}
+                                                <video src="https://yootheme.com/site/images/media/yootheme-pro.mp4" loop muted playsinline uk-video="autoplay: inview"></video>
 
-                                                                <a href="https://www.creative-tim.com/product/light-bootstrap-dashboard-pro"
-                                                                   target="_blank">
-                                                                    <h4 class="card-title">{{$videos_filter->hv_title}}</h4>
-                                                                </a>
-                                                                <h6 class="category text-primary">{{$videos_filter->id}}</h6>
-                                                                {{--<p class="card-description">--}}
-                                                                {{--{{$videos_filter->hg_description}} </p>--}}
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                <a href="https://www.creative-tim.com/product/light-bootstrap-dashboard-pro"
+                                                   target="_blank">
+                                                    <h4 class="card-title">{{$videos_filter->hv_title}}</h4>
+                                                </a>
+                                                <h6 class="category text-primary">{{$videos_filter->id}}</h6>
+                                                {{--<p class="card-description">--}}
+                                                {{--{{$videos_filter->hg_description}} </p>--}}
                                             </div>
-                                        @endif
-                                    @endif
-                                @endforeach
                             </div>
-
                         </div>
                     </div>
-
-                    <!--     *********    END PROJECTS 1      *********      -->
-
+                    @endif
+                    @endif
+                    @endforeach
                 </div>
+
+            </div>
+        </div>
+
+        <!--     *********    END PROJECTS 1      *********      -->
+
+    </div>
 @endsection
 
 @push('scripts')
-
+    <script>
+        $(document).ready(function () {
+            UIkit.video(element, options);
+        });
+    </script>
 @endpush

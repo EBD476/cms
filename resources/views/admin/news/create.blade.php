@@ -124,7 +124,7 @@
                                                     <div class="form-group">
                                                         <label for="exampleInputFile">{{__('Image')}}</label>
                                                         <input type="file" class="form-control"
-                                                               name="file" >
+                                                               name="file" multiple >
                                                     </div>
                                                 </div>
                                             </form>
@@ -179,6 +179,7 @@
                                                             addRemoveLinks: true,
                                                             timeout: 5000,
                                                             success: function (file, response) {
+                                                                alert(file);
                                                                 // اسم اینپوت و مقداری که باید به آن ارسال شود
                                                                 $('#hn_image').val(file.upload.filename);
                                                             },

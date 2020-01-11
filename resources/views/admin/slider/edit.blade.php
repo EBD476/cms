@@ -102,15 +102,15 @@
                                                             <div class="form-group">
                                                                 <label for="exampleInputPassword1">{{__('Slider Title')}}</label>
                                                                 <input type="text" class="form-control"
-                                                                       id="exampleInputPassword1"
-                                                                       name="title" value="{{$slider->title}}">
+                                                                       id="title"
+                                                                       name="title" value="{{$slider->title}}" data-id="{{$slider->id}}">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <label for="exampleInputFile">{{__('Sub Title')}}</label>
                                                                 <input type="text" class="form-control"
-                                                                       id="exampleInputFile"
+                                                                       id="sub_title"
                                                                        name="sub_title" value="{{$slider->sub_title}}">
                                                             </div>
 
@@ -127,6 +127,15 @@
                                                 </div>
                                                 <!-- /.box-body -->
                                             </form>
+                                        </div>
+                                        <div class="col-6">
+                                            <label for="exampleInputFile">{{__('Image File')}}</label>
+                                            <div class="box-body">
+                                                <img class="img-responsive pad" id="img-remove"
+                                                     src="{{asset('img/slider/'.$slider->image)}}"/>
+                                            </div>
+                                        </div>
+                                        <br>
                                             <form action="{{url('/admin/image-slider-save')}}" class="dropzone"
                                                   id="dropzone"
                                                   enctype="multipart/form-data">
@@ -152,6 +161,7 @@
                                                 <script src="{{asset('backend/src/kamadatepicker.min.js')}}"></script>
                                                 <script src="{{asset('backend/js.pro/froala_editor.pkgd.min.js')}}"></script>
                                                 <script src="{{asset('backend/js.pro/dropzone.js')}}"></script>
+                                                <script src="{{asset('backend/js.pro/jquery.blockUI.js')}}"></script>
                                                 <script>
                                                     kamaDatepicker('test-date-id', {
                                                         buttonsColor: "blue",
@@ -180,20 +190,20 @@
                                                             error: function (file, response) {
                                                                 return false;
                                                             }
-                                                        };                                            </script>
-
-
-                                            @endpush
-
-                                            @push('scripts')
-                                                <script src="{{asset('backend/js.pro/jquery.blockUI.js')}}"
+                                                        };
+                                                </script>
                                                 <script>
                                                     $(document).ready(function () {
                                                         $("#sub_form1").on('click', function (event) {
-                                                            var data = $("#form1").serialize();
-                                                            event.preventDefault();
-                                                            $.blockUI();
+                                                            var data = {
+                                                                id:$('#title').data('id'),
+                                                                title:$('#title').val(),
+                                                                sub_title:$('#sub_title').val(),
+                                                                status:$('#inputSchedule')[0].checked == true ? 1 : 0,
+                                                                hn_image:$('#hn_image').val(),
 
+                                                            }
+                                                            event.preventDefault();
                                                             $.ajaxSetup({
                                                                 headers: {
                                                                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -213,6 +223,7 @@
                                                             $.ajax({
                                                                 url: '/admin/slider/' + data.id,
                                                                 type: 'POST',
+                                                                method:'put',
                                                                 data: data,
                                                                 dataType: 'json',
                                                                 async: false,
@@ -222,6 +233,9 @@
                                                                 },
                                                                 cache: false,
                                                             });
+                                                        });
+                                                        $("#img-remove").on('click', function () {
+                                                            $("#img-remove").remove();
                                                         });
                                                     });
                                                 </script>

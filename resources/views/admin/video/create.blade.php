@@ -114,22 +114,30 @@
                                                             </select>
                                                         </div>
                                                     </div>
-                                                    <div class="row">
-                                                        <div class="form-group col-md-6">
-                                                            <label for="exampleInputFile">{{__('Video File')}}</label>
-                                                            <input type="file" class="form-control"
-                                                                      name="hv_video">
-                                                        </div>
-                                                    </div>
                                                     <div class="checkbox checkbox-info">
                                                         <input type="checkbox" id="inputSchedule" name="hv_status">
                                                         <label for="inputSchedule" class="">
                                                             <span>{{__('Show in Video')}}</span> </label>
                                                     </div>
                                                 </div>
+                                                <input type="hidden" id="video" name="hv_video">
                                                 <!-- /.box-body -->
                                             </form>
                                         </div>
+                                                <label for="exampleInputFile">{{__('Video File')}}</label>
+                                                <form action="{{url('/admin/upload-video')}}" class="dropzone"
+                                                      id="dropzone"
+                                                      enctype="multipart/form-data">
+                                                    @csrf
+                                                    @method('POST')
+                                                    <div class="fallback">
+                                                        <div class="form-group">
+                                                            <label for="exampleInputFile">{{__('Image')}}</label>
+                                                            <input type="file" class="form-control"
+                                                                   name="file">
+                                                        </div>
+                                                    </div>
+                                                </form>
                                         <br>
                                         <div class="box-footer">
                                             <button id="sub_form1" type="submit"
@@ -141,6 +149,51 @@
                                         @push('scripts')
                                             <script src="{{asset('backend/js.pro/jquery.blockUI.js')}}"
                                                     type="text/javascript"></script>
+                                            <script src="{{asset('backend/js.pro/froala_editor.pkgd.min.js')}}"></script>
+                                            <script src="{{asset('backend/js.pro/dropzone.js')}}"></script>
+                                            <script>
+                                                var editor =new FroalaEditor('#froala', {
+
+                                                    // Set the image upload URL.
+                                                    imageUploadURL: '/admin/upload-video',
+
+                                                    // Additional upload params.
+                                                    imageUploadParams: {
+                                                        _token : $('input[name=_token]').val()
+                                                    },
+
+                                                    // Set request type.
+                                                    // imageUploadMethod: 'POST',
+
+                                                    // Set max image size to 5MB.
+                                                    imageMaxSize: 5 * 1024 * 1024,
+
+                                                    // Allow to upload PNG and JPG.
+                                                    imageAllowedTypes: ['mpeg','ogg','mp4','webm','3gp','mov','flv','avi','wmv'],
+
+                                                })
+
+                                                Dropzone.options.dropzone =
+                                                    {
+                                                        maxFilesize: 12,
+                                                        // فایل نوع آبجکت است
+                                                        renameFile: function (file) {
+                                                            var dt = new Date();
+                                                            var time = dt.getTime();
+                                                            return time + '-' + file.name;
+                                                        },
+                                                        acceptedFiles: ".mpeg,.ogg,.mp4,.webm,.3gp,.mov,.flv,.avi,.wmv",
+                                                        addRemoveLinks: true,
+                                                        timeout: 5000,
+                                                        success: function (file, response) {
+                                                            // اسم اینپوت و مقداری که باید به آن ارسال شود
+                                                            $('#video').val(file.upload.filename);
+                                                        },
+                                                        error: function (file, response) {
+                                                            return false;
+                                                        }
+                                                    };
+                                            </script>
                                             <script>
                                                 $(document).ready(function () {
                                                     $("#sub_form1").on('click', function (event) {

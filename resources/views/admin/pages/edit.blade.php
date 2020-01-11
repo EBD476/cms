@@ -103,7 +103,8 @@
                                                             <div class="form-group">
                                                                 <label for="exampleInputFile">{{__('Title')}}</label>
                                                                 <input type="text" class="form-control"
-                                                                       id="exampleInputFile" name="title" value="{{$pages->title}}">
+                                                                       id="exampleInputFile" name="title"
+                                                                       value="{{$pages->title}}">
                                                             </div>
 
                                                         </div>
@@ -111,7 +112,8 @@
                                                             <div class="form-group">
                                                                 <label for="exampleInputFile">{{__('Page Slug')}}</label>
                                                                 <input type="text" class="form-control"
-                                                                       id="exampleInputFile" name="page_slug" value="{{$pages->page_slug}}">
+                                                                       id="exampleInputFile" name="page_slug"
+                                                                       value="{{$pages->page_slug}}">
                                                             </div>
 
                                                         </div>
@@ -119,7 +121,8 @@
                                                             <div class="form-group">
                                                                 <label for="exampleInputFile">{{__('Cannonical Link')}}</label>
                                                                 <input type="text" class="form-control"
-                                                                       id="exampleInputFile" name="cannonical_link" value="{{$pages->cannonical_link}}">
+                                                                       id="exampleInputFile" name="cannonical_link"
+                                                                       value="{{$pages->cannonical_link}}">
                                                             </div>
 
                                                         </div>
@@ -145,7 +148,8 @@
                                                             <div class="form-group">
                                                                 <label for="exampleInputFile">{{__('Seo Description')}}</label>
                                                                 <textarea type="text" class="form-control"
-                                                                          name="seo_description">{{$pages->seo_description}}</textarea></div>
+                                                                          name="seo_description">{{$pages->seo_description}}</textarea>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -168,7 +172,40 @@
                                                 <input type="hidden" name="hn_image3" id="hn_image3">
 
                                                 <input type="hidden" name="hn_image4" id="hn_image4">
-                                            </form>                                            <form action="{{url('/admin/image-pages-save')}}" class="dropzone"
+                                            </form>
+                                        </div>
+                                        <div class="row">
+                                        <div class="col-3">
+                                            <label for="exampleInputFile">{{__('Image File 1')}}</label>
+                                            <div class="box-body">
+                                                <img class="img-responsive pad" id="img-remove"
+                                                     src="{{asset('img/pages/'.$pages->image)}}"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-3">
+                                            <label for="exampleInputFile">{{__('Image File 2')}}</label>
+                                            <div class="box-body">
+                                                <img class="img-responsive pad" id="img-remove"
+                                                     src="{{asset('img/pages/'.$pages->image2)}}"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-3">
+                                            <label for="exampleInputFile">{{__('Image File 3')}}</label>
+                                            <div class="box-body">
+                                                <img class="img-responsive pad" id="img-remove"
+                                                     src="{{asset('img/pages/'.$pages->image3)}}"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-3">
+                                            <label for="exampleInputFile">{{__('Image File 4')}}</label>
+                                            <div class="box-body">
+                                                <img class="img-responsive pad" id="img-remove"
+                                                     src="{{asset('img/pages/'.$pages->image4)}}"/>
+                                            </div>
+                                        </div>
+                                        </div>
+                                        <br>
+                                        <form action="{{url('/admin/image-pages-save')}}" class="dropzone"
                                                   id="dropzone"
                                                   enctype="multipart/form-data">
                                                 @csrf
@@ -186,7 +223,6 @@
                                                 <button id="sub_form1" type="submit"
                                                         class="btn btn-primary">{{__('Submit')}}</button>
                                             </div>
-                                        </div>
 
                                         @endsection
 
@@ -221,11 +257,9 @@
                                                     type="text/javascript"></script>
                                             <script>
                                                 $(document).ready(function () {
-                                                    $("#sub_form1").on('click',function (event) {
+                                                    $("#sub_form1").on('click', function (event) {
                                                         var data = $("#form1").serialize();
                                                         event.preventDefault();
-                                                        $.blockUI();
-
                                                         $.ajaxSetup({
                                                             headers: {
                                                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -254,6 +288,9 @@
                                                             },
                                                             cache: false,
                                                         });
+                                                    });
+                                                    $("#img-remove").on('click', function () {
+                                                        $("#img-remove").remove();
                                                     });
                                                 });
                                             </script>

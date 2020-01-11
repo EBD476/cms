@@ -109,22 +109,39 @@ class VideoController extends Controller
             unlink('upload/video/' . $video->hv_video);
 
         }
-        $video->delete();
+//        $video->delete();
+        $video->forceDelete();
         return json_encode(["response" => "Done"]);
     }
 
-    public function video_upload(Request $request)
+    public function upload_video(Request $request)
     {
+        $video = $request->file('file');
+        $filename = $_FILES['file']['name'];
 
-
-    }
-
-        public
-        function video_status(Request $request)
-        {
-            $video = Video::find($request->id);
-            $video->hv_status = $request->status;
-            $video->save();
-            return json_encode(["response" => "Done"]);
+        if (isset($video)) {
+            $current_date = Carbon::now()->todatestring();
+            $video_name = $current_date . '-' . uniqid() . '.' . $video->getClientOriginalExtension();
+            if (!file_exists('upload/video')) {
+                mkdir('upload/video', 0777, true);
+            }
+            $video->move('upload/video', $filename);
+        } else {
+            $video_name = 'default.png';
         }
+
+        return response()->json([
+            'link' => '/upload/video'. $filename
+        ]);
+
     }
+
+    public
+    function video_status(Request $request)
+    {
+        $video = Video::find($request->id);
+        $video->hv_status = $request->status;
+        $video->save();
+        return json_encode(["response" => "Done"]);
+    }
+}

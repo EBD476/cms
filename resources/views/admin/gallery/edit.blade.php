@@ -68,7 +68,7 @@
                     {{__('Edit Image')}}
                 </h1>
                 <ol class="breadcrumb">
-                    <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{__('Home')}} > </a></li>
+                    <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{__('Home')}}</a></li>
                     <li><a href="{{route('gallery.index')}}">{{__('Gallery')}}</a></li>
                 </ol>
             </section>
@@ -94,41 +94,51 @@
                                             </div>
                                             <!-- /.box-header -->
                                             <!-- form start -->
-                                            <form role="form" method="post" action="{{route('gallery.update',$gallery->id)}}"
+                                            <form id="form1" role="form" method="post"
                                                   enctype="multipart/form-data">
-                                                @csrf
-                                                @method('PUT')
                                                 <div class="box-body">
                                                     <div class="form-group">
                                                         <label for="exampleInputPassword1">{{__('Image Name')}}</label>
                                                         <input type="text" class="form-control"
-                                                               id="exampleInputPassword1" name="hg_name" value="{{$gallery->hg_name}}" >
+                                                               id="hg_name" name="hg_name"
+                                                               value="{{$gallery->hg_name}}" data-id="{{$gallery->id}}">
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="exampleInputPassword1">{{__('Category')}}</label>
                                                         <input type="text" class="form-control"
-                                                               id="exampleInputPassword1" name="hg_category_name" value="{{$gallery->hg_category_name}}" >
+                                                               id="hg_category_name" name="hg_category_name"
+                                                               value="{{$gallery->hg_category_name}}">
                                                     </div>
 
                                                     <div class="form-group">
                                                         <label for="exampleInputFile">{{__('Image Code')}}</label>
-                                                        <input type="text" class="form-control" id="exampleInputFile"
+                                                        <input type="text" class="form-control" id="hg_code"
                                                                name="hg_code" value="{{$gallery->hg_code}}">
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="exampleInputFile">{{__('Image Description')}}</label>
-                                                        <input type="text" class="form-control" id="exampleInputFile"
-                                                               name="hg_description" value="{{$gallery->hg_description}}">
+                                                        <input type="text" class="form-control" id="hg_description"
+                                                               name="hg_description"
+                                                               value="{{$gallery->hg_description}}">
                                                     </div>
-                                                        <input type="hidden" name="hn_image" id="hn_image">
+                                                    <input type="hidden" name="hn_image" id="hn_image">
                                                     <div class="checkbox checkbox-info">
-                                                        <input type="checkbox" id="inputSchedule" name="hg_show" value="0">
-                                                        <label for="inputSchedule" class=""> <span>{{__('Show in Gallery')}}</span> </label>
+                                                        <input type="checkbox" id="inputSchedule" name="hg_show" @if($gallery->hg_show) checked @endif>
+                                                        <label for="inputSchedule" class="">
+                                                            <span>{{__('Show in Gallery')}}</span> </label>
                                                     </div>
                                                 </div>
                                                 <!-- /.box-body -->
                                             </form>
                                         </div>
+                                        <div class="col-6">
+                                            <label for="exampleInputFile">{{__('Image File')}}</label>
+                                            <div class="box-body">
+                                                <img class="img-responsive pad" id="img-remove"
+                                                     src="{{asset('img/gallery/'.$gallery->hg_image)}}"/>
+                                            </div>
+                                        </div>
+                                        <br>
                                         <form action="{{url('/admin/image-gallery-save')}}" class="dropzone"
                                               id="dropzone"
                                               enctype="multipart/form-data">
@@ -179,11 +189,20 @@
                                                         }
                                                     };
                                             </script>
-                                            <script src="{{asset('backend/js.pro/blockUI.js')}}" type="text/javascript"></script>
+                                            <script src="{{asset('backend/js.pro/jquery.blockUI.js')}}"
+                                                    type="text/javascript"></script>
                                             <script>
                                                 $(document).ready(function () {
-                                                    $("#sub_form1").on('click',function (event) {
-                                                        var data = $("#form1").serialize();
+                                                    $("#sub_form1").on('click', function (event) {
+                                                        var data = {
+                                                            id: $("#hg_name").data('id'),
+                                                            hg_name: $("#hg_name").val(),
+                                                            hg_category_name: $("#hg_category_name").val(),
+                                                            hg_code: $("#hg_code").val(),
+                                                            hg_description: $("#hg_description").val(),
+                                                            hg_show: $("#inputSchedule")[0].checked == true ? 1 : 0,
+                                                            hg_image: $("#hn_image").val(),
+                                                        }
                                                         event.preventDefault();
                                                         $.ajaxSetup({
                                                             headers: {
@@ -202,11 +221,11 @@
                                                             }
                                                         });
                                                         $.ajax({
-                                                            url: '/admin/level',
+                                                            url: '/admin/gallery/' + data.id,
                                                             type: 'POST',
                                                             data: data,
                                                             dataType: 'json',
-                                                            method:'put',
+                                                            method: 'put',
                                                             async: false,
                                                             success: function (data) {
                                                                 setTimeout($.unblockUI, 2000);
@@ -214,6 +233,9 @@
                                                             },
                                                             cache: false,
                                                         });
+                                                    });
+                                                    $("#img-remove").on('click', function () {
+                                                        $("#img-remove").remove();
                                                     });
                                                 });
                                             </script>

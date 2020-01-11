@@ -110,7 +110,7 @@ class GalleryController extends Controller
         $gallery->hg_category_name= $request->hg_category_name;
         $gallery->hg_code= $request->hg_code;
         $gallery->hg_description= $request->hg_description;
-        $gallery->hg_image=$request->hn_image;
+        $gallery->hg_image=$request->hg_image;
         $gallery->hg_show=$request->hg_show;
         $gallery->save();
         return json_encode(["response" => "Done"]);
@@ -133,7 +133,9 @@ class GalleryController extends Controller
 
         }
         $gallery->delete();
-        return json_encode(["response" => "Done"]);    }
+        return json_encode(["response" => "Done"]);
+    }
+
     public function gallery_upload(Request $request)
     {
         $image = $request->file('file');

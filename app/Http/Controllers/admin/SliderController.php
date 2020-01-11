@@ -46,8 +46,9 @@ class SliderController extends Controller
         $slider->title = $request->title;
         $slider->sub_title = $request->sub_title;
         $slider->image = $request->image;
-        if($request->status == 'on')
-        { $slider->status = 1;}
+        if ($request->status == 'on') {
+            $slider->status = 1;
+        }
         $slider->save();
         return json_encode(["response" => "Done"]);
     }
@@ -94,11 +95,7 @@ class SliderController extends Controller
         $slider->title = $request->title;
         $slider->sub_title = $request->sub_title;
         $slider->image = $request->hn_image;
-        if($request->status == 'on')
-        { $slider->status = 1;}
-        else{
-            $slider->status = 0;
-        }
+        $slider->status =$request->status;
         $slider->save();
         return json_encode(["response" => "Done"]);
     }
@@ -118,7 +115,8 @@ class SliderController extends Controller
 
         }
         $slider->delete();
-        return json_encode(["response" => "Done"]);    }
+        return json_encode(["response" => "Done"]);
+    }
 
     public function slider_upload(Request $request)
     {
@@ -140,6 +138,7 @@ class SliderController extends Controller
 //        $news->save();
 //
     }
+
     public function slider_status(Request $request)
     {
         $sataus = slider::find($request->id);

@@ -116,24 +116,24 @@
 
                                                                 </div>
                                                             </div>
-                                                            <div class="row">
-                                                                <div class="col-md-4">
-                                                                    <div class="form-group">
-                                                                        <label for="exampleInputFile">{{__('Dealership Phone 2')}}</label>
-                                                                        <input type="text" class="form-control"
-                                                                               id="exampleInputText"
-                                                                               name="hds_dealership_phone_2">
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label for="exampleInputFile">{{__('Dealership Phone 2')}}</label>
+                                                                    <input type="text" class="form-control"
+                                                                           id="exampleInputText"
+                                                                           name="hds_dealership_phone_2">
 
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <div class="form-group">
-                                                                            <label for="exampleInputFile">{{__('Dealership Phone 3')}}</label>
-                                                                            <input type="text" class="form-control"
-                                                                                   id="exampleInputText"
-                                                                                   name="hds_dealership_phone_3">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label for="exampleInputFile">{{__('Dealership Phone 3')}}</label>
+                                                                    <input type="text" class="form-control"
+                                                                           id="exampleInputText"
+                                                                           name="hds_dealership_phone_3">
 
-                                                                        </div>
-                                                                    </div>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4">

@@ -66,10 +66,10 @@
                 <h1>
                     {{__('Edit Article')}}
                 </h1>
-                    <ol class="breadcrumb">
-                        <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{__('Home')}}</a></li>
-                        <li><a href="{{route('publish.index')}}">{{__('Article')}}</a></li>
-                    </ol>
+                <ol class="breadcrumb">
+                    <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{__('Home')}}</a></li>
+                    <li><a href="{{route('publish.index')}}">{{__('Article')}}</a></li>
+                </ol>
 
             </section>
 
@@ -106,43 +106,53 @@
                                                                name="hn_title" value="{{$article->ha_title}}">
                                                     </div>
                                                     {{--<div class="form-group">--}}
-                                                        {{--<label for="exampleInputPassword1">{{__('Auther')}}</label>--}}
-                                                        {{--<input type="text" class="form-control"--}}
-                                                               {{--id="ha_auther"--}}
-                                                               {{--name="ha_auther" value="{{$article->ha_auther}}">--}}
+                                                    {{--<label for="exampleInputPassword1">{{__('Auther')}}</label>--}}
+                                                    {{--<input type="text" class="form-control"--}}
+                                                    {{--id="ha_auther"--}}
+                                                    {{--name="ha_auther" value="{{$article->ha_auther}}">--}}
                                                     {{--</div>--}}
                                                     <div class="form-group">
                                                         <label for="exampleInputFile">{{__('Description')}}</label>
                                                         <textarea type="text" class="form-control"
                                                                   id="froala"
-                                                                  >{{$article->ha_editor}}</textarea>
+                                                        >{{$article->ha_editor}}</textarea>
                                                     </div>
                                                     <div class="checkbox checkbox-info">
-                                                        <input type="checkbox" id="inputSchedule" name="ha_show" @if($article->ha_status) checked @endif>
-                                                        <label for="inputSchedule" class=""> <span>{{__('Show in Article')}}</span> </label>
+                                                        <input type="checkbox" id="inputSchedule" name="ha_show"
+                                                               @if($article->ha_status) checked @endif>
+                                                        <label for="inputSchedule" class="">
+                                                            <span>{{__('Show in Article')}}</span> </label>
                                                     </div>
                                                 </div>
                                                 <input type="hidden" name="hn_image" id="hn_image">
                                                 <!-- /.box-body -->
-                                        </form>
-                                    </div>
-                                                <form action="{{url('/admin/image-save')}}" class="dropzone" id="dropzone"
-                                                      enctype="multipart/form-data">
-                                                    @csrf
-                                                    @method('POST')
-                                                    <div class="fallback">
-                                                        <div class="form-group">
-                                                            <label for="exampleInputFile">{{__('Image')}}</label>
-                                                            <input type="file" class="form-control"
-                                                                   name="file">
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                           <br>
-                                            <div class="box-footer">
-                                                <button id="sub_form1" type="submit"
-                                                        class="btn btn-primary">{{__('Submit')}}</button>
+                                            </form>
+                                        </div>
+                                        <div class="col-6">
+                                            <label for="exampleInputFile">{{__('Image File')}}</label>
+                                            <div class="box-body">
+                                                <img class="img-responsive pad" id="img-remove"
+                                                     src="{{asset('img/article/'. $article->ha_image)}}"/>
                                             </div>
+                                        </div>
+                                        <br>
+                                        <form action="{{url('/admin/image-article-save')}}" class="dropzone" id="dropzone"
+                                              enctype="multipart/form-data">
+                                            @csrf
+                                            @method('POST')
+                                            <div class="fallback">
+                                                <div class="form-group">
+                                                    <label for="exampleInputFile">{{__('Image')}}</label>
+                                                    <input type="file" class="form-control"
+                                                           name="file">
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <br>
+                                        <div class="box-footer">
+                                            <button id="sub_form1" type="submit"
+                                                    class="btn btn-primary">{{__('Submit')}}</button>
+                                        </div>
 
                                         @endsection
 
@@ -150,45 +160,62 @@
                                             <script src="{{asset('backend/js.pro/froala_editor.pkgd.min.js')}}"></script>
                                             <script src="{{asset('backend/js.pro/dropzone.js')}}"></script>
                                             <script>
-                                                var editor = new FroalaEditor('#froala');
+                                                var editor =new FroalaEditor('#froala', {
+
+                                                    // Set the image upload URL.
+                                                    imageUploadURL: '/admin/image-article-save',
+
+                                                    // Additional upload params.
+                                                    imageUploadParams: {
+                                                        _token : $('input[name=_token]').val()
+                                                    },
+
+                                                    // Set request type.
+                                                    // imageUploadMethod: 'POST',
+
+                                                    // Set max image size to 5MB.
+                                                    imageMaxSize: 5 * 1024 * 1024,
+
+                                                    // Allow to upload PNG and JPG.
+                                                    imageAllowedTypes: ['mpeg','ogg','mp4','webm','3gp','mov','flv','avi','wmv'],
+
+                                                })
 
                                                 Dropzone.options.dropzone =
                                                     {
                                                         maxFilesize: 12,
                                                         // فایل نوع آبجکت است
-                                                        renameFile: function(file) {
+                                                        renameFile: function (file) {
                                                             var dt = new Date();
                                                             var time = dt.getTime();
-                                                            return time + '-' +file.name;
+                                                            return time + '-' + file.name;
                                                         },
                                                         acceptedFiles: ".jpeg,.jpg,.png,.gif",
                                                         addRemoveLinks: true,
                                                         timeout: 5000,
-                                                        success: function(file, response)
-                                                        {
+                                                        success: function (file, response) {
                                                             // اسم اینپوت و مقداری که باید به آن ارسال شود
                                                             $('#hn_image').val(file.upload.filename);
                                                         },
-                                                        error: function(file, response)
-                                                        {
+                                                        error: function (file, response) {
                                                             return false;
                                                         }
                                                     };
                                             </script>
-                                            <script src="{{asset('backend/js.pro/jquery.blockUI.js')}}" type="text/javascript"></script>
+                                            <script src="{{asset('backend/js.pro/jquery.blockUI.js')}}"
+                                                    type="text/javascript"></script>
                                             <script>
                                                 $(document).ready(function () {
-                                                    $("#sub_form1").on('click',function (event) {
-                                                        var data ={
-                                                            ha_title : $("#ha_title").val(),
+                                                    $("#sub_form1").on('click', function (event) {
+                                                        var data = {
+                                                            ha_title: $("#ha_title").val(),
                                                             // ha_auther : $("#ha_auther").val(),
-                                                            froala : $("#froala").val(),
-                                                            ha_show : $("#inputSchedule")[0].checked == true ? 1 : 0,
-                                                            id:$("#ha_title").data('id'),
+                                                            hn_image : $("#hn_image").val(),
+                                                            froala: $("#froala").val(),
+                                                            ha_show: $("#inputSchedule")[0].checked == true ? 1 : 0,
+                                                            id: $("#ha_title").data('id'),
                                                         }
                                                         event.preventDefault();
-                                                        $.blockUI();
-
                                                         $.ajaxSetup({
                                                             headers: {
                                                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -206,11 +233,11 @@
                                                             }
                                                         });
                                                         $.ajax({
-                                                            url: '/admin/publish/'+data.id,
+                                                            url: '/admin/publish/' + data.id,
                                                             type: 'POST',
                                                             data: data,
                                                             dataType: 'json',
-                                                            method:'put',
+                                                            method: 'put',
                                                             async: false,
                                                             success: function (data) {
                                                                 setTimeout($.unblockUI, 2000);
@@ -218,6 +245,9 @@
                                                             },
                                                             cache: false,
                                                         });
+                                                    });
+                                                    $("#img-remove").on('click', function () {
+                                                        $("#img-remove").remove();
                                                     });
                                                 });
                                             </script>

@@ -199,57 +199,56 @@
                                                 <button id="sub_form1" type="submit"
                                                         class="btn btn-primary">{{__('Submit')}}</button>
                                             </div>
-
-                                            {{--//menu modal//--}}
-                                            <div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog"
-                                                 aria-labelledby="myModalLabel"
-                                                 aria-hidden="true">
-                                                <div class="modal-dialog" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header text-center">
-                                                            <h4 class="modal-title w-100 font-weight-bold">{{__('Add New Menu')}}</h4>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <form method="post" id="modal_form" enctype="multipart/form-data">
-                                                            <div class="modal-body mx-3">
-                                                                <div class="md-form mb-5">
-                                                                    {{--<i class="fas fa-user prefix grey-text"></i>--}}
-                                                                    <label class="bmd-label-floating" data-error="wrong"
-                                                                           data-success="right"
-                                                                           for="orangeForm-name">{{__('Name')}}</label>
-                                                                    <input type="text" id="orangeForm-name" class="form-control validate"
-                                                                           name="name">
-                                                                </div>
-                                                                <div class="md-form mb-5">
-                                                                    {{--<i class="fas fa-envelope prefix grey-text"></i>--}}
-                                                                    <label class="bmd-label-floating" data-error="wrong"
-                                                                           data-success="right">{{__('Type')}}</label>
-                                                                    <input required class="form-control validate"
-                                                                           name="type">
-                                                                </div>
-
-                                                                {{--<div class="md-form mb-4">--}}
-                                                                    {{--<i class="fas fa-lock prefix grey-text"></i>--}}
-                                                                    {{--<label class="bmd-label-floating" data-error="wrong"--}}
-                                                                           {{--data-success="right">{{__('Parent Name')}}</label>--}}
-                                                                    {{--<input type="text" class="form-control validate" name="parent_name">--}}
-                                                                {{--</div>--}}
-
-                                                            </div>
-                                                            <div class="modal-footer d-flex justify-content-center">
-                                                                <button type="submit" id="sub_form2" class="btn btn-deep-orange">{{__('Send')}}</button>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            {{--//End menu modal//--}}
                                         </div>
                                     </div>
                                 </div>
                             </section>
+                            {{--//menu modal//--}}
+                            <div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog"
+                                 aria-labelledby="myModalLabel"
+                                 aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header text-center">
+                                            <h4 class="modal-title w-100 font-weight-bold">{{__('Add New Menu')}}</h4>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <form method="post" id="modal_form" enctype="multipart/form-data">
+                                            <div class="modal-body mx-3">
+                                                <div class="md-form mb-5">
+                                                    {{--<i class="fas fa-user prefix grey-text"></i>--}}
+                                                    <label class="bmd-label-floating" data-error="wrong"
+                                                           data-success="right"
+                                                           for="orangeForm-name">{{__('Name')}}</label>
+                                                    <input type="text" id="orangeForm-name" class="form-control validate"
+                                                           name="name">
+                                                </div>
+                                                <div class="md-form mb-5">
+                                                    {{--<i class="fas fa-envelope prefix grey-text"></i>--}}
+                                                    <label class="bmd-label-floating" data-error="wrong"
+                                                           data-success="right">{{__('Type')}}</label>
+                                                    <input required class="form-control validate"
+                                                           name="type">
+                                                </div>
+
+                                                {{--<div class="md-form mb-4">--}}
+                                                {{--<i class="fas fa-lock prefix grey-text"></i>--}}
+                                                {{--<label class="bmd-label-floating" data-error="wrong"--}}
+                                                {{--data-success="right">{{__('Parent Name')}}</label>--}}
+                                                {{--<input type="text" class="form-control validate" name="parent_name">--}}
+                                                {{--</div>--}}
+
+                                            </div>
+                                            <div class="modal-footer d-flex justify-content-center">
+                                                <button type="submit" id="sub_form2" class="btn btn-deep-orange">{{__('Send')}}</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            {{--//End menu modal//--}}
                             @endsection
 
                             @push('scripts')
@@ -298,7 +297,7 @@
                                             }
                                         };
                                 </script>
-                                <script src="{{asset('backend/js.pro/blockUI.js')}}"
+                                <script src="{{asset('backend/js.pro/jquery.blockUI.js')}}"
                                         type="text/javascript"></script>
                                 <script>
                                     $(document).ready(function () {

@@ -107,6 +107,7 @@ class CategoryController extends Controller
     {
         $category = category::find($id);
         $category->delete();
+//        $category->softDeletes();
         return redirect()->back()->with('successMSG','category Successfully Delete');
     }
 }

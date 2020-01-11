@@ -33,17 +33,17 @@ class PagesController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'title' => 'required' ,
-            'page_slug' => 'required' ,
-            'image' =>'mimes:jpg,jpeg,png,bmp',
-            'image2' =>'mimes:jpg,jpeg,png,bmp',
-            'image3' =>'mimes:jpg,jpeg,png,bmp',
-            'image4' =>'mimes:jpg,jpeg,png,bmp',
-            'cannonical_link'=> 'required',
-            'seo_title'=> 'required',
-            'seo_keyword'=> 'required',
-            'seo_description'=> 'required',
-            'status'=> 'required',
+//            'title' => 'required' ,
+//            'page_slug' => 'required' ,
+//            'image' =>'mimes:jpg,jpeg,png,bmp',
+//            'image2' =>'mimes:jpg,jpeg,png,bmp',
+//            'image3' =>'mimes:jpg,jpeg,png,bmp',
+//            'image4' =>'mimes:jpg,jpeg,png,bmp',
+//            'cannonical_link'=> 'required',
+//            'seo_title'=> 'required',
+//            'seo_keyword'=> 'required',
+//            'seo_description'=> 'required',
+//            'status'=> 'required',
         ]);
         $image = $request -> file('image');
         $slug = str_slug($request->title);

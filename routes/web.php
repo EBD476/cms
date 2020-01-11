@@ -26,7 +26,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth', 'namespace' => 'admin
     Route::resource('category', 'CategoryController');
     Route::resource('project', 'ProjectsController');
     Route::resource('dealership', 'DealershipsController');
-    Route::resource('user', 'DataUserController');
+    Route::resource('user','UserController');
     Route::resource('faq', 'FaqController');
     Route::resource('pages', 'PagesController');
     Route::resource('setting', 'SettingController');
@@ -36,6 +36,11 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth', 'namespace' => 'admin
     Route::resource('contact_us','ContactUsController');
     Route::resource('publish', 'ArticleController');
     Route::resource('video', 'VideoController');
+    Route::resource('roles', 'RoleController');
+    Route::resource('permissions', 'PermissionController');
+
+//    uploaded video
+    Route::post('/upload-video','VideoController@upload_video')->name('video.upload-video');
 
 
 //    uploaded image route
@@ -47,6 +52,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth', 'namespace' => 'admin
     Route::post('/image-user-save','DataUserController@user_upload')->name('datauser.user_upload');
     Route::post('/image-gallery-save','GalleryController@gallery_upload')->name('gallery.gallery_upload');
     Route::post('/image-menu-save','MenuController@upload')->name('menu.upload');
+    Route::post('/image-article-save','ArticleController@upload')->name('publish.image-article-save');
 //    statuses route
     Route::post('/project-status','ProjectsController@project_status')->name('project.project-status');
     Route::post('/dealership-status','DealershipsController@dealership_status')->name('dealership.dealership-status');
@@ -74,6 +80,13 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth', 'namespace' => 'admin
     Route::delete('/video-destroy/{id}','VideoController@destroy')->name('video.video-destroy');
 
 
+//restore
+    Route::get('/news-restore','NewsController@restore')->name('news.news-restore');
+
+//    fill data table
+    Route::get('/json-data','NewsController@fill')->name('news.json-data');
+
+
 
 
 });
@@ -95,3 +108,7 @@ route::group(['prefix' => 'frontend', 'namespace' => 'frontend'], function () {
 });
 
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

@@ -127,6 +127,14 @@
                                                 <!-- /.box-body -->
                                             </form>
                                         </div>
+                                        <div class="col-6">
+                                            <label for="exampleInputFile">{{__('Image File')}}</label>
+                                            <div class="box-body">
+                                                <img class="img-responsive pad" id="img-remove"
+                                                     src="{{asset('img/news/'.$news->hn_image)}}"/>
+                                            </div>
+                                        </div>
+                                        <br>
                                         <form action="{{url('/admin/image-save')}}" class="dropzone"
                                                   id="dropzone"
                                                   enctype="multipart/form-data">
@@ -222,6 +230,9 @@
                                                             },
                                                             cache: false,
                                                         });
+                                                    });
+                                                    $("#img-remove").on('click', function () {
+                                                        $("#img-remove").remove();
                                                     });
                                                 });
                                             </script>

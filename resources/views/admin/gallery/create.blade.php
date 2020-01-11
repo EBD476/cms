@@ -197,8 +197,6 @@
                                                     $("#sub_form1").on('click', function (event) {
                                                         var data = $("#form1").serialize();
                                                         event.preventDefault();
-                                                        $.blockUI();
-
                                                         $.ajaxSetup({
                                                             headers: {
                                                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
