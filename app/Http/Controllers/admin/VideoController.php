@@ -17,8 +17,7 @@ class VideoController extends Controller
      */
     public function index()
     {
-        $video = Video:: all();
-        return view('admin.video.index', compact('video'));
+        return view('admin.video.index');
     }
 
     /**
@@ -49,7 +48,7 @@ class VideoController extends Controller
         $video = new Video();
         $video->hv_title = $request->hv_title;
         $video->hv_category = $request->hv_category;
-        $video->hv_video = $request->hv_video;
+        $video->hv_video = $request->video;
         if ($request->hv_status == 'on') {
             $video->hv_status = 1;
 
@@ -109,8 +108,8 @@ class VideoController extends Controller
             unlink('upload/video/' . $video->hv_video);
 
         }
-//        $video->delete();
-        $video->forceDelete();
+        $video->delete();
+//        $video->forceDelete();
         return json_encode(["response" => "Done"]);
     }
 
@@ -143,5 +142,29 @@ class VideoController extends Controller
         $video->hv_status = $request->status;
         $video->save();
         return json_encode(["response" => "Done"]);
+    }
+
+    public function fill(Request $request)
+    {
+        $start = $request->start;
+        $length = $request->length;
+        $search = $request->search['value'];
+        if ($search == '') {
+            $video = Video::skip($start)->take($length)->get();
+        } else {
+            $video = Video::where('id', 'LIKE', "%$search%")
+                ->orwhere('hv_title', 'LIKE', "%$search%")
+                ->orwhere('hv_category', 'LIKE', "%$search%")
+                ->orwhere('created_at', 'LIKE', "%$search%")
+                ->get();
+        }
+
+        $data = '';
+        foreach ($video as $videoes) {
+            $data .= '["' . $videoes->id . '",' . '"' . $videoes->hv_title . '",' . '"' . $videoes->hv_category . '",' . '"' . $videoes->created_at . '"],';
+        }
+        $data = substr($data, 0, -1);
+        $video_count = Video::all()->count();
+        return response('{ "recordsTotal":' . $video_count . ',"recordsFiltered":' . $video_count . ',"data": [' . $data . ']}');
     }
 }

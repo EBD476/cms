@@ -24,7 +24,6 @@
         <!-- Sidebar navigation-->
         <nav class="sidebar-nav">
             <ul id="sidebarnav">
-            {{--<li class="nav-small-cap">{{__('PERSONAL')}}</li>--}}
             <!-- dashboard access -->
                 <li><a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
                                 class="mdi mdi-gauge"></i><span
@@ -33,18 +32,7 @@
                         <li><a href="{{route('admin.dashboard')}}">{{__('Dashboard')}}</a></li>
                     </ul>
                 </li>
-                <!-- User access -->
-                <li><a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
-                                class="mdi mdi-gauge"></i><span
-                                class="hide-menu">{{__('User')}}</span></a>
-                    <ul aria-expanded="false" class="collapse">
-                        <li><a href="{{route('user.index')}}">{{__('User List')}}</a></li>
-                        <li><a href="{{route('user.create')}}">{{__('Create User')}}</a></li>
-                    </ul>
-                </li>
                 <!-- news access -->
-                {{--<li class="nav-devider"></li>--}}
-                {{--<li class="nav-small-cap">{{__('News')}}</li>--}}
                 <li><a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
                                 class="mdi mdi-gauge"></i><span
                                 class="hide-menu">{{__('News')}} </span></a>
@@ -54,8 +42,6 @@
                     </ul>
                 </li>
                 <!-- Article access -->
-                {{--<li class="nav-devider"></li>--}}
-                {{--<li class="nav-small-cap">{{__('Article')}}</li>--}}
                 <li><a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
                                 class="mdi mdi-gauge"></i><span
                                 class="hide-menu">{{__('Article')}} </span></a>
@@ -64,9 +50,7 @@
                         <li><a href="{{route('publish.create')}}">{{__('Create Article')}}</a></li>
                     </ul>
                 </li>
-            {{--<li class="nav-devider"></li>--}}
-            {{--<li class="nav-small-cap">{{__('Device')}}</li>--}}
-            <!-- product access -->
+                <!-- product access -->
                 <li><a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
                                 class="mdi mdi-gauge"></i><span
                                 class="hide-menu">{{__('Product')}} </span></a>
@@ -110,18 +94,7 @@
             {{--<li><a href="{{route('config.create')}}">{{__('Create Config')}}</a></li>--}}
             {{--</ul>--}}
             {{--</li>--}}
-            <!-- Menu access -->
-                <!-- Setting access -->
-                <li><a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
-                                class="mdi mdi-gauge"></i><span
-                                class="hide-menu">{{__('Setting')}}</span></a>
-                    <ul aria-expanded="false" class="collapse">
-                        <li><a href="{{route('setting.create')}}">{{__('Setting')}}</a></li>
-                        <li><a href="{{route('admin.up')}}">{{__('Up Web')}}</a></li>
-                        <li><a href="{{route('admin.down')}}">{{__('Down Web')}}</a></li>
-                    </ul>
-                </li>
-                <!-- page access -->
+            <!-- page access -->
                 <li><a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
                                 class="mdi mdi-gauge"></i><span
                                 class="hide-menu">{{__('Pages')}}</span></a>
@@ -131,15 +104,6 @@
                         {{--<li><a href="{{route('frontend.pages.test',$menu->items)}}">{{$menu->name}}</a></li>--}}
                         {{--</li>--}}
                         {{--@endforeach--}}
-                    </ul>
-                </li>
-                <!-- FAQ access -->
-                <li><a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
-                                class="mdi mdi-gauge"></i><span
-                                class="hide-menu">{{__('FAQ')}}</span></a>
-                    <ul aria-expanded="false" class="collapse">
-                        <li><a href="{{route('faq.index')}}">{{__('FAQ List')}}</a></li>
-                        <li><a href="{{route('faq.create')}}">{{__('Create FAQ')}}</a></li>
                     </ul>
                 </li>
                 <!-- Menu access -->
@@ -156,10 +120,11 @@
                                 class="mdi mdi-gauge"></i><span
                                 class="hide-menu">{{__('Gallery')}}</span></a>
                     <ul aria-expanded="false" class="collapse">
-                        <li ><a href="{{route('gallery.index')}}">{{__('Gallery List')}}</a></li>
+                        <li><a href="{{route('gallery.index')}}">{{__('Gallery List')}}</a></li>
                         <li><a href="{{route('gallery.create')}}">{{__('Create Image')}}</a></li>
                     </ul>
                 </li>
+                <!-- Video access -->
                 <li><a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
                                 class="mdi mdi-gauge"></i><span
                                 class="hide-menu">{{__('Video')}}</span></a>
@@ -168,8 +133,15 @@
                         <li><a href="{{route('video.create')}}">{{__('Create Video')}}</a></li>
                     </ul>
                 </li>
-            {{--<li class="nav-devider"></li>--}}
-            {{--<li class="nav-small-cap">{{__('Slider')}}</li>--}}
+                <!-- FAQ access -->
+                <li><a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
+                                class="mdi mdi-gauge"></i><span
+                                class="hide-menu">{{__('FAQ')}}</span></a>
+                    <ul aria-expanded="false" class="collapse">
+                        <li><a href="{{route('faq.index')}}">{{__('FAQ List')}}</a></li>
+                        <li><a href="{{route('faq.create')}}">{{__('Create FAQ')}}</a></li>
+                    </ul>
+                </li>
             <!-- Slider access -->
                 <li><a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
                                 class="mdi mdi-gauge"></i><span
@@ -180,6 +152,27 @@
 
                     </ul>
                 </li>
+                <!-- Setting access -->
+                <li><a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
+                                class="mdi mdi-gauge"></i><span
+                                class="hide-menu">{{__('Setting')}}</span></a>
+                    <ul aria-expanded="false" class="collapse">
+                        <li><a href="{{route('setting.create')}}">{{__('Setting')}}</a></li>
+                        <li><a href="{{route('restore.index')}}">{{__('Restore')}}</a></li>
+                        <li><a href="{{route('admin.up')}}">{{__('Up Web')}}</a></li>
+                        <li><a href="{{route('admin.down')}}">{{__('Down Web')}}</a></li>
+                    </ul>
+                </li>
+                <!-- User access -->
+                <li><a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
+                                class="mdi mdi-gauge"></i><span
+                                class="hide-menu">{{__('User')}}</span></a>
+                    <ul aria-expanded="false" class="collapse">
+                        <li><a href="{{route('user.index')}}">{{__('User List')}}</a></li>
+                        <li><a href="{{route('user.create')}}">{{__('Create User')}}</a></li>
+                    </ul>
+                </li>
+                <!--Contact US-->
                 <li><a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
                                 class="mdi mdi-gauge"></i><span
                                 class="hide-menu">{{__('Contact Us')}}</span></a>

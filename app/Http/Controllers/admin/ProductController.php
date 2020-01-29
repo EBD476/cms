@@ -17,8 +17,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $product = Product:: all();
-        return view('admin.product.index', compact('product'));
+        return view('admin.product.index');
     }
 
     /**
@@ -155,11 +154,11 @@ class ProductController extends Controller
     public function destroy($id)
     {
         $product = Product::find($id);
-        if (file_exists('upload/product/' . $product->image)) {
-
-            unlink('upload/product/' . $product->image);
-
-        }
+//        if (file_exists('upload/product/' . $product->image)) {
+//
+//            unlink('upload/product/' . $product->image);
+//
+//        }
         $product->delete();
         return json_encode(["response" => "Done"]);
     }
@@ -190,6 +189,28 @@ class ProductController extends Controller
         $sataus->save();
         return json_encode(["response" => "Done"]);
     }
-//
+
+    public function fill(Request $request)
+    {
+        $start = $request->start;
+        $length = $request->length;
+        $search = $request->search['value'];
+        if ($search == '') {
+            $product = Product::skip($start)->take($length)->get();
+        } else {
+            $news = Product::where('id', 'LIKE', "%$search%")
+                ->orwhere('hp_product_name', 'LIKE', "%$search%")
+                ->orwhere('hp_product_publish_date', 'LIKE', "%$search%")
+                ->get();
+        }
+
+        $data = '';
+        foreach ($product as $products) {
+            $data .= '["' . $products->id . '",' . '"' . $products->hp_product_name . '",' . '"' . $products->hp_product_publish_date . '",' . '"' . $products->hp_product_status . '"],';
+        }
+        $data = substr($data, 0, -1);
+        $product_count = Product::all()->count();
+        return response('{ "recordsTotal":' . $product_count . ',"recordsFiltered":' . $product_count . ',"data": [' . $data . ']}');
+    }
 
 }

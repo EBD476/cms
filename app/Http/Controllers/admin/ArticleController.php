@@ -11,8 +11,7 @@ class ArticleController extends Controller
 {
     public function index()
     {
-        $article = Article::all();
-        return view('admin.editor.index', compact('article'));
+        return view('admin.editor.index');
     }
 
     /**
@@ -140,5 +139,30 @@ class ArticleController extends Controller
         $article->ha_status = $request->status;
         $article->save();
         return json_encode(["response" => "Done"]);
+    }
+
+
+    public function fill(Request $request)
+    {
+        $start = $request->start;
+        $length = $request->length;
+        $search = $request->search['value'];
+        if ($search == '') {
+            $article = Article::skip($start)->take($length)->get();
+        } else {
+            $article = Article::where('id', 'LIKE', "%$search%")
+                ->orwhere('ha_title', 'LIKE', "%$search%")
+                ->orwhere('ha_editor', 'LIKE', "%$search%")
+                ->orwhere('created_at', 'LIKE', "%$search%")
+                ->get();
+        }
+
+        $data = '';
+        foreach ($article as $articles) {
+            $data .= '["' . $articles->id . '",' . '"' . $articles->ha_title . '",' . '"' . $articles->ha_status . '",' . '"' . $articles->created_at . '"],';
+        }
+        $data = substr($data, 0, -1);
+        $article_count = Article::all()->count();
+        return response('{ "recordsTotal":' . $article_count . ',"recordsFiltered":' . $article_count . ',"data": [' . $data . ']}');
     }
 }

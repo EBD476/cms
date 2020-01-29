@@ -128,7 +128,7 @@
   "Dealerships List":"لیست نمایندگی ها",
   "Insert Dealerships":"افزودن",
   "User List":"لیست کاربران",
-  "Insert User":"افزودن",
+  "Insert User":"اضافه کردن کاربر جدید",
   "Devices List":"لیست دستگاه ها",
   "Insert Devices":"افزودن",
   "Devices Config List":"لیست پیکربندی دستگاه ها",
@@ -175,12 +175,12 @@
   "Seo Keyword":"کلمه کلیدی SEO ",
   "Seo Description":"توضیحات SEO",
   "Edit Pages":"ویرایش صفحه",
-  "SEO Setting":"SEO",
-  "Company Details":"زیرمجموعه شرکت",
+  "SEO Setting":"سئو",
+  "Company Details":"اطلاعات  شرکت",
   "Mail Setting":" ایمیل",
-  "Footer Setting":" Footer",
+  "Footer Setting":"پانوشت",
   "Access Setting":" دسترسی",
-  "Terms Setting":" Terms",
+  "Terms Setting":" شرایط",
   "Google Setting":" گوگل",
   "Logo":"لوگو",
   "Favicon":"Favicon",
@@ -330,7 +330,14 @@
   "Video List":"لیست ویدیو ها",
   "Create Image":"ایجاد تصویر جدید",
   "Gallery List":"لیست گالری",
-  "Image File":"فایل عکس"
-
-
+  "Image File":"فایل عکس",
+  "Restore Page":"بازیابی اطلاعات",
+  "Table Name":"نام جدول",
+  "Restore":"بازیابی اطلاعات",
+  "User Administration":"مدیریت کاربران",
+  "Date/Time Added":"تاریخ ایجاد",
+  "User Roles":"نقش کاربر",
+  "Operations":"عملیات",
+  "Give Role":"اختصاص نقش",
+  "Confirm Password":"تایید رمز عبور"
 }

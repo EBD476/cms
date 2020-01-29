@@ -21,8 +21,7 @@ class ProjectsController extends Controller
     public function index()
     {
 
-        $projects = Project:: all();
-        return view('admin.projects.index',compact('projects' ,'type'));
+        return view('admin.projects.index');
     }
 
     /**
@@ -189,5 +188,26 @@ class ProjectsController extends Controller
         return json_encode(["response" => "Done"]);
     }
 
+    public function fill(Request $request)
+    {
+        $start = $request->start;
+        $length = $request->length;
+        $search = $request->search['value'];
+        if ($search == '') {
+            $projects = Project::skip($start)->take($length)->get();
+        } else {
+            $projects = Project::where('id', 'LIKE', "%$search%")
+                ->orwhere('hp_project_name', 'LIKE', "%$search%")
+                ->orwhere('hp_project_owner', 'LIKE', "%$search%")
+                ->get();
+        }
 
+        $data = '';
+        foreach ($projects as $project) {
+            $data .= '["' . $project->id . '",' . '"' . $project->hp_project_name . '",' . '"' . $project->hp_project_owner . '",' . '"' . $project->hp_status . '"],';
+        }
+        $data = substr($data, 0, -1);
+        $project_count = Project::all()->count();
+        return response('{ "recordsTotal":' . $project_count . ',"recordsFiltered":' . $project_count . ',"data": [' . $data . ']}');
+    }
 }

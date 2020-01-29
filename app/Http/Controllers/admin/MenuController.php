@@ -14,8 +14,7 @@ class MenuController extends Controller
 {
     public function index()
     {
-        $menu= Menu::all();
-        return view('admin.menu.index',compact('menu'));
+        return view('admin.menu.index');
 
     }
     /**
@@ -157,5 +156,28 @@ class MenuController extends Controller
         $sataus->status = $request->status;
         $sataus->save();
         return json_encode(["response" => "Done"]);
+    }
+
+    public function fill(Request $request)
+    {
+        $start = $request->start;
+        $length = $request->length;
+        $search = $request->search['value'];
+        if ($search == '') {
+            $menu = Menu::skip($start)->take($length)->get();
+        } else {
+            $menu = Menu::where('id', 'LIKE', "%$search%")
+                ->orwhere('type', 'LIKE', "%$search%")
+                ->orwhere('name', 'LIKE', "%$search%")
+                ->get();
+        }
+
+        $data = '';
+        foreach ($menu as $menus) {
+            $data .= '["' . $menus->id . '",' . '"' . $menus->type . '",' . '"' . $menus->name . '",' . '"' . $menus->status . '"],';
+        }
+        $data = substr($data, 0, -1);
+        $menus_count = Menu::all()->count();
+        return response('{ "recordsTotal":' . $menus_count . ',"recordsFiltered":' . $menus_count . ',"data": [' . $data . ']}');
     }
 }

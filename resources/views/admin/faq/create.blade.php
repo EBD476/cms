@@ -108,8 +108,7 @@
 
                                                         </div>
                                                         <div class="checkbox checkbox-info">
-                                                            <input type="checkbox" id="inputSchedule" name="status"
-                                                                   value="1">
+                                                            <input type="checkbox" id="inputSchedule" name="status">
                                                             <label for="inputSchedule" class="">
                                                                 <span>{{__('Status On')}}</span> </label>
                                                         </div>

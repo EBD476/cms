@@ -5,8 +5,6 @@
 @push('css')
     <link href="{{asset('backend/css.pro/switchery.min.css')}}" rel="stylesheet"/>
     <link href="{{asset('backend/css.pro/dataTables.bootstrap.min.css')}}" rel="stylesheet"/>
-    {{--    <link href="{{asset('backend/css.pro/bootstrap-table.min.css')}}" rel="stylesheet"/>--}}
-
 @endpush
 
 @section('content')
@@ -117,34 +115,6 @@
                                         </th>
                                     </tr>
                                     </thead>
-                                    <tbody>
-                                    {{--@foreach($news as $key => $news)--}}
-                                    {{--<tr>--}}
-                                    {{--<td>--}}
-                                    {{--{{$key + 1}}--}}
-                                    {{--</td>--}}
-                                    {{--<td>--}}
-                                    {{--{{$news ->hn_title}}--}}
-                                    {{--</td>--}}
-                                    {{--<td>--}}
-                                    {{--{{$news ->created_at}}--}}
-                                    {{--</td>--}}
-                                    {{--<td>--}}
-                                    {{--<input type="checkbox" @if ($news->hn_status) checked--}}
-                                    {{--@endif class="js-switch"--}}
-                                    {{--data-size="small" data-id="{{$news->id}}">--}}
-                                    {{--</td>--}}
-                                    <td>
-                                        {{--<a href=""--}}
-                                        {{--class="btn btn-info btn-sm"><i class="ti-pencil"></i></a>--}}
-                                        {{--<button data-id="" type="button"--}}
-                                        {{--class="btn btn-danger btn-sm -form-delete"--}}
-                                        {{--><i class="ti-close"></i>--}}
-                                        {{--</button>--}}
-                                    </td>
-                                    {{--</tr>--}}
-                                    {{--@endforeach--}}
-                                    </tbody>
                                 </table>
                             </div>
                         </dsiv>
@@ -164,10 +134,6 @@
     <script src="{{asset('backend/js.pro/sweetalert.min.js')}}"></script>
     <script>
         $(document).ready(function () {
-            // $('#table tbody').on( 'click', 'button', function () {
-            //     var data = table.row($(this).parents('tr')).data();
-            //     id = data[0];
-            // });
 
             var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
 
@@ -203,8 +169,7 @@
                                 },
                                 cache: false,
                             });
-
-                            // location.reload();
+                            location.reload();
                         } else {
                             swal(
                                 "{{__("Your imaginary file is safe!")}}",
@@ -275,11 +240,6 @@
                     "data": null,
                     "defaultContent": '<input type="checkbox" class="js-switch" data-size="small"  >'
                 }],
-// "columns":[
-//     {"data" : "id"} ,
-//     {"data":"hn_title"},
-//     {"data":"action"}
-// ],
                 "language": {
                     "sEmptyTable": "هیچ داده ای در جدول وجود ندارد",
                     "sInfo": "نمایش _START_ تا _END_ از _TOTAL_ رکورد",

@@ -18,8 +18,7 @@ class DealershipsController extends Controller
      */
     public function index()
     {
-        $dealerships = Dealerships:: all();
-        return view('admin.dealerships.index', compact('dealerships'));
+        return view('admin.dealerships.index');
     }
 
     /**
@@ -172,6 +171,29 @@ class DealershipsController extends Controller
         $sataus->hds_status = $request->status;
         $sataus->save();
         return json_encode(["response" => "Done"]);
+    }
+
+    public function fill(Request $request)
+    {
+        $start = $request->start;
+        $length = $request->length;
+        $search = $request->search['value'];
+        if ($search == '') {
+            $dealership = Dealerships::skip($start)->take($length)->get();
+        } else {
+            $dealership = Dealerships::where('id', 'LIKE', "%$search%")
+                ->orwhere('hds_dealership_agent', 'LIKE', "%$search%")
+                ->orwhere('created_at', 'LIKE', "%$search%")
+                ->get();
+        }
+
+        $data = '';
+        foreach ($dealership as $dealerships) {
+            $data .= '["' . $dealerships->id . '",' . '"' . $dealerships->hds_dealership_agent . '",' . '"' . $dealerships->created_at . '",' . '"' . $dealerships->hds_status . '"],';
+        }
+        $data = substr($data, 0, -1);
+        $dealership_count = Dealerships::all()->count();
+        return response('{ "recordsTotal":' . $dealership_count . ',"recordsFiltered":' . $dealership_count . ',"data": [' . $data . ']}');
     }
 
 }

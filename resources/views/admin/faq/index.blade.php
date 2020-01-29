@@ -3,7 +3,7 @@
 @section('title',__('FAQ'))
 
 @push('css')
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css">
+    <link href="{{asset('backend/css.pro/dataTables.bootstrap.min.css')}}" rel="stylesheet"/>
     <link href="{{asset('backend/css.pro/switchery.min.css')}}" rel="stylesheet"/>
 @endpush
 
@@ -107,32 +107,6 @@
                                                 </th>
                                             </tr>
                                             </thead>
-                                            <tbody>
-
-                                            @foreach($faq as $key => $faq)
-                                                <tr>
-                                                    <td>
-                                                        {{$key + 1}}
-                                                    </td>
-                                                    <td>
-                                                        {{$faq ->question}}
-                                                    </td>
-                                                    <td>
-                                                        <input type="checkbox" @if ($faq ->status) checked
-                                                               @endif class="js-switch"
-                                                               data-size="small" data-id="{{$faq->id}}">
-                                                    </td>
-                                                    <td>
-                                                        <a href="{{route('faq.edit',$faq->id)}}"
-                                                           class="btn btn-info btn-sm"><i class="ti-pencil"></i> </a>
-                                                        <button data-id="{{$faq->id}}" type="button"
-                                                                class="btn btn-danger btn-sm -form-delete"
-                                                        ><i class="ti-close"></i>
-                                                        </button>
-                                                    </td>
-                                                    @endforeach
-                                                </tr>
-                                            </tbody>
                                 </table>
                             </div>
                         </div>
@@ -151,7 +125,112 @@
             <script src="{{asset('backend/js.pro/sweetalert.min.js')}}"></script>
             <script>
                 $(document).ready(function () {
-                    $('#table').DataTable({
+
+                    var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+
+                    $('#table').on('click', 'button', function (event) {
+
+                        var data = table.row($(this).parents('tr')).data();
+                        $.ajaxSetup({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            }
+                        });
+                        swal({
+                            // title: "",
+                            text: "{{__('Are you sure?')}}",
+                            buttons: ["{{__('cancel')}}", "{{__('Done')}}"],
+                            icon: "warning",
+                            // buttons: true,
+                            dangerMode: true,
+                        })
+                            .then((willDelete) => {
+                                if (willDelete) {
+                                    $.ajax({
+                                        url: '/admin/faq-destroy/' + data[0],
+                                        type: 'delete',
+                                        data: data,
+                                        dataType: 'json',
+                                        async: false,
+                                        success: function (data) {
+                                            swal("{{__("Poof! Your imaginary file has been deleted!")}}", {
+                                                icon: "success",
+                                                button: "{{__('Done')}}",
+                                            });
+                                        },
+                                        cache: false,
+                                    });
+                                    location.reload();
+                                } else {
+                                    swal(
+                                        "{{__("Your imaginary file is safe!")}}",
+                                        {button: "{{__('Done')}}"}
+                                    );
+
+                                }
+                            });
+                    });
+                    var table = $('#table').on('draw.dt', function (e, settings, json, xhr) {
+
+                        $('.js-switch').each(function () {
+
+                            var data = table.row($(this).parents('tr')).data();
+                            var switchery = new Switchery($(this)[0], $(this).data());
+                            // alert(data[3]);
+                            data[3] == 1 ? $(this)[0].click() : 0;
+
+                            $(this)[0].onchange = function () {
+                                var cdata = table.row($(this).parents('tr')).data();
+//ارسال بخشی از دیتا ی فرم . زمانی که به کل اطلاعات فرم نیازی نیست یا فرمی وجود ندارد
+                                var data = {
+                                    id: cdata[0],
+                                    //اینپوت هایی که به کنترلر request داده می شود اینجا ساخته شده است.
+                                    status: $(this)[0].checked == true ? 1 : 0
+                                };
+                                //token
+                                $.ajaxSetup({
+                                    headers: {
+                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                    }
+                                });
+//پاس کردن دیتا به کنترلر
+                                $.ajax({
+                                    url: '/admin/faq-status',
+                                    type: 'POST',
+                                    data: data,
+                                    dataType: 'json',
+                                    async: false,
+                                    success: function (data) {
+                                        swal({
+                                            title: "",
+                                            text: "{{__('success')}}",
+                                            icon: "success",
+                                            button: "{{__('Done')}}"
+                                        })
+                                    },
+                                    cache: false,
+                                });
+                            }
+                        })
+
+                    }).DataTable({
+                        "processing": true,
+                        "serverSide": true,
+                        "ajax": '/admin/json-data-faq',
+                        "columnDefs": [{
+                            "targets": -1,
+                            "data": null,
+                            "defaultContent": "<a href=\"\"\n" +
+                                "                                                   class=\"btn btn-info btn-sm\"><i class=\"ti-pencil\"></i></a>\n" +
+                                "                                                <button data-id=\"\" type=\"button\"\n" +
+                                "                                                        class=\"btn btn-danger btn-sm -form-delete\"\n" +
+                                "                                                ><i class=\"ti-close\"></i>\n" +
+                                "                                                </button>"
+                        }, {
+                            "targets": -2,
+                            "data": null,
+                            "defaultContent": '<input type="checkbox" class="js-switch" data-size="small"  >'
+                        }],
                         "language": {
                             "sEmptyTable": "هیچ داده ای در جدول وجود ندارد",
                             "sInfo": "نمایش _START_ تا _END_ از _TOTAL_ رکورد",
@@ -177,100 +256,5 @@
                         }
                     });
                 });
-            </script>
-            <script>
-                $(document).ready(function () {
-
-                    var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
-                    $('.js-switch').each(function () {
-                        new Switchery($(this)[0], $(this).data());
-
-                        $(this)[0].onchange = function () {
-//ارسال بخشی از دیتا ی فرم . زمانی که به کل اطلاعات فرم نیازی نیست یا فرمی وجود ندارد
-                            var data = {
-                                id: $(this).data('id'),
-                                //اینپوت هایی که به کنترلر request داده می شود اینجا ساخته شده است.
-                                status: $(this)[0].checked == true ? 1 : 0
-                            };
-
-                            // $.blockUI();
-
-
-                            //token
-                            $.ajaxSetup({
-                                headers: {
-                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                                }
-                            });
-//پاس کردن دیتا به کنترلر
-                            $.ajax({
-                                url: '/admin/faq-status',
-                                type: 'POST',
-                                data: data,
-                                dataType: 'json',
-                                async: false,
-                                success: function (data) {
-                                    swal({
-                                        title: "",
-                                        text: "{{__('success')}}",
-                                        icon: "success",
-                                        button:"{{__('Done')}}"
-                                    })
-                                },
-                                cache: false,
-                            });
-                            //alert($(this)[0].checked);
-                        }
-                    });
-                    $('.-form-delete').on('click', function (event) {
-
-                        var data = {
-                            id: $(this).data('id'),
-                        };
-                        //token
-                        $.ajaxSetup({
-                            headers: {
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                            }
-                        });
-                        swal({
-                            // title: "",
-                            text: "{{__('Are you sure?')}}",
-                            Button: "{{__('Done')}}",
-                            icon: "warning",
-                            buttons: true,
-                            dangerMode: true,
-                        })
-                            .then((willDelete) => {
-                                if (willDelete) {
-                                    $.ajax({
-                                        url: '/admin/faq-destroy/' + data.id,
-                                        type: 'delete',
-                                        data: data,
-                                        dataType: 'json',
-                                        async: false,
-                                        success: function (data) {
-                                        },
-                                        cache: false,
-                                    });
-                                    swal("{{__("Poof! Your imaginary file has been deleted!")}}", {
-                                        icon: "success",
-                                        Button: "{{__('Done')}}",
-                                        Button: "{{__('cancel')}}",
-                                    });
-                                    location.reload();
-                                } else {
-                                    swal(
-                                        "{{__("Your imaginary file is safe!")}}",
-                                        {Button: "{{__('Done')}}"}
-                                    );
-
-                                }
-                            });
-                    });
-
-                });
-
-
             </script>
     @endpush

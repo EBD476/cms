@@ -11,8 +11,7 @@ class PagesController extends Controller
 {
     public function index()
     {
-        $pages = Pages:: all();
-        return view('admin.pages.index',compact('pages'));
+        return view('admin.pages.index');
     }
     /**
      * Show the form for creating a new resource.
@@ -269,5 +268,27 @@ class PagesController extends Controller
         $sataus->status = $request->status;
         $sataus->save();
         return json_encode(["response" => "Done"]);
+    }
+
+    public function fill(Request $request)
+    {
+        $start = $request->start;
+        $length = $request->length;
+        $search = $request->search['value'];
+        if ($search == '') {
+            $pages = Pages::skip($start)->take($length)->get();
+        } else {
+            $pages = Pages::where('id', 'LIKE', "%$search%")
+                ->orwhere('title', 'LIKE', "%$search%")
+                ->get();
+        }
+
+        $data = '';
+        foreach ($pages as $page) {
+            $data .= '["' . $page->id . '",' . '"' . $page->title . '",' . '"' . $page->status . '"],';
+        }
+        $data = substr($data, 0, -1);
+        $page_count = Pages::all()->count();
+        return response('{ "recordsTotal":' . $page_count . ',"recordsFiltered":' . $page_count . ',"data": [' . $data . ']}');
     }
 }

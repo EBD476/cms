@@ -10,8 +10,7 @@ class FaqController extends Controller
 {
     public function index()
     {
-        $faq= FAQ::all();
-        return view('admin.faq.index',compact('faq'));
+        return view('admin.faq.index');
 
     }
 
@@ -108,5 +107,28 @@ class FaqController extends Controller
         $sataus->status = $request->status;
         $sataus->save();
         return json_encode(["response" => "Done"]);
+    }
+
+    public function fill(Request $request)
+    {
+        $start = $request->start;
+        $length = $request->length;
+        $search = $request->search['value'];
+        if ($search == '') {
+            $faq = FAQ::skip($start)->take($length)->get();
+        } else {
+            $faq = FAQ::where('id', 'LIKE', "%$search%")
+                ->orwhere('created_at', 'LIKE', "%$search%")
+                ->orwhere('question', 'LIKE', "%$search%")
+                ->get();
+        }
+
+        $data = '';
+        foreach ($faq as $faqs) {
+            $data .= '["' . $faqs->id . '",' . '"' . $faqs->created_at . '",' . '"' . $faqs->question . '",' . '"' . $faqs->status . '"],';
+        }
+        $data = substr($data, 0, -1);
+        $faq_count = FAQ::all()->count();
+        return response('{ "recordsTotal":' . $faq_count . ',"recordsFiltered":' . $faq_count . ',"data": [' . $data . ']}');
     }
 }

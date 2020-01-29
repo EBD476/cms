@@ -16,8 +16,7 @@ class GalleryController extends Controller
      */
     public function index()
     {
-        $gallery = Gallery:: all();
-        return view('admin.gallery.index',compact('gallery'));
+        return view('admin.gallery.index');
     }
 
     /**
@@ -164,5 +163,26 @@ class GalleryController extends Controller
         return json_encode(["response" => "Done"]);
     }
 
+    public function fill(Request $request)
+    {
+        $start = $request->start;
+        $length = $request->length;
+        $search = $request->search['value'];
+        if ($search == '') {
+            $gallery = Gallery::skip($start)->take($length)->get();
+        } else {
+            $gallery = Gallery::where('id', 'LIKE', "%$search%")
+                ->orwhere('hg_name', 'LIKE', "%$search%")
+                ->orwhere('hg_category_name', 'LIKE', "%$search%")
+                ->get();
+        }
 
+        $data = '';
+        foreach ($gallery as $galleries) {
+            $data .= '["' . $galleries->id . '",' . '"' . $galleries->hg_name . '",' . '"' . $galleries->hg_category_name . '",' . '"' . $galleries->hg_show . '"],';
+        }
+        $data = substr($data, 0, -1);
+        $gallery_count = Gallery::all()->count();
+        return response('{ "recordsTotal":' . $gallery_count . ',"recordsFiltered":' . $gallery_count . ',"data": [' . $data . ']}');
+    }
 }

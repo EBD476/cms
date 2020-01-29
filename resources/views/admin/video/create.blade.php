@@ -120,7 +120,7 @@
                                                             <span>{{__('Show in Video')}}</span> </label>
                                                     </div>
                                                 </div>
-                                                <input type="hidden" id="video" name="hv_video">
+                                                <input type="hidden" id="video" name="video">
                                                 <!-- /.box-body -->
                                             </form>
                                         </div>

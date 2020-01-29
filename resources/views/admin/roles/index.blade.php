@@ -3,7 +3,7 @@
 @section('title',__('Roles'))
 
 @push('css')
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css">
+    <link href="{{asset('backend/css.pro/dataTables.bootstrap.min.css')}}" rel="stylesheet"/>
     <link href="{{asset('backend/css.pro/switchery.min.css')}}" rel="stylesheet"/>
 @endpush
 

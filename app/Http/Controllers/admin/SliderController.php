@@ -16,8 +16,7 @@ class SliderController extends Controller
      */
     public function index()
     {
-        $sliders = slider:: all();
-        return view('admin.slider.index', compact('sliders'));
+        return view('admin.slider.index');
     }
 
     /**
@@ -145,5 +144,28 @@ class SliderController extends Controller
         $sataus->status = $request->status;
         $sataus->save();
         return json_encode(["response" => "Done"]);
+    }
+
+    public function fill(Request $request)
+    {
+        $start = $request->start;
+        $length = $request->length;
+        $search = $request->search['value'];
+        if ($search == '') {
+            $slider = News::skip($start)->take($length)->get();
+        } else {
+            $slider = slider::where('id', 'LIKE', "%$search%")
+                ->orwhere('hn_title', 'LIKE', "%$search%")
+                ->orwhere('hn_published_at', 'LIKE', "%$search%")
+                ->get();
+        }
+
+        $data = '';
+        foreach ($slider as $sliders) {
+            $data .= '["' . $sliders->id . '",' . '"' . $sliders->hn_title . '",' . '"' . $sliders->hn_published_at . '",' . '"' . $sliders->hn_status . '"],';
+        }
+        $data = substr($data, 0, -1);
+        $slider_count = slider::all()->count();
+        return response('{ "recordsTotal":' . $slider_count . ',"recordsFiltered":' . $slider_count . ',"data": [' . $data . ']}');
     }
 }
