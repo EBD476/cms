@@ -114,35 +114,6 @@
                                                     </th>
                                                 </tr>
                                                 </thead>
-                                                <tbody>
-                                                @foreach($product as $key => $product)
-                                                    <tr>
-                                                        <td>
-                                                            {{$key + 1}}
-                                                        </td>
-                                                        <td>
-                                                            {{$product ->hp_product_name}}
-                                                        </td>
-                                                        <td>
-                                                            {{$product ->hp_product_model}}
-                                                        </td>
-                                                        <td>
-                                                            <input type="checkbox" @if ($product ->hp_product_status) checked
-                                                                   @endif class="js-switch"
-                                                                   data-size="small" data-id="{{$product->id}}">
-                                                        </td>
-                                                        <td>
-                                                            <a href="{{route('product.edit',$product->id)}}"
-                                                               class="btn btn-info btn-sm"><i class="ti-pencil"></i></a>
-                                                            </a>
-                                                            <button data-id="{{$product->id}}" type="button"
-                                                                    class="btn btn-danger btn-sm -form-delete"
-                                                            ><i class="ti-close"></i>
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-                                                </tbody>
                                             </table>
                                         </div>
                                     </div>
@@ -304,126 +275,6 @@
     <script src="{{asset('backend/js.pro/switchery.min.js')}}"></script>
     <script src="{{asset('backend/js.pro/sweetalert.min.js')}}"></script>
     <script>
-        $(document).ready(function() {
-            $('#table').DataTable({
-                "language": {
-                    "sEmptyTable":     "هیچ داده ای در جدول وجود ندارد",
-                    "sInfo":           "نمایش _START_ تا _END_ از _TOTAL_ رکورد",
-                    "sInfoEmpty":      "نمایش 0 تا 0 از 0 رکورد",
-                    "sInfoFiltered":   "(فیلتر شده از _MAX_ رکورد)",
-                    "sInfoPostFix":    "",
-                    "sInfoThousands":  ",",
-                    "sLengthMenu":     "نمایش _MENU_ رکورد",
-                    "sLoadingRecords": "در حال بارگزاری...",
-                    "sProcessing":     "در حال پردازش...",
-                    "sSearch":         "جستجو:",
-                    "sZeroRecords":    "رکوردی با این مشخصات پیدا نشد",
-                    "oPaginate": {
-                        "sFirst":    "ابتدا",
-                        "sLast":     "انتها",
-                        "sNext":     "بعدی",
-                        "sPrevious": "قبلی"
-                    },
-                    "oAria": {
-                        "sSortAscending":  ": فعال سازی نمایش به صورت صعودی",
-                        "sSortDescending": ": فعال سازی نمایش به صورت نزولی"
-                    }
-                }
-            } );
-            var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
-            $('.js-switch').each(function () {
-                // چون پکیج هستش بعضی اوقات نیاز میشه new بشن
-                new Switchery($(this)[0], $(this).data());
-
-                $(this)[0].onchange = function () {
-//ارسال بخشی از دیتا ی فرم . زمانی که به کل اطلاعات فرم نیازی نیست یا فرمی وجود ندارد
-                    var data = {
-                        id: $(this).data('id'),
-                        //اینپوت هایی که به کنترلر request داده می شود اینجا ساخته شده است.
-                        status: $(this)[0].checked  == true ? 1 : 0
-                    };
-
-                    // $.blockUI();
-
-
-                    //token
-                    $.ajaxSetup({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        }
-                    });
-//پاس کردن دیتا به کنترلر
-                    $.ajax({
-                        url: '/admin/product-status',
-                        type: 'POST',
-                        data: data,
-                        dataType: 'json',
-                        async: false,
-                        success: function (data) {
-                            swal({
-                                title: "",
-                                text: "{{__('success')}}",
-                                icon: "success",
-                                button:"{{__('Done')}}"
-                            })
-                        },
-                        cache: false,
-                    });
-                    //alert($(this)[0].checked);
-                }
-            });
-            $('.-form-delete').on('click', function (event) {
-
-                var data = {
-                    id: $(this).data('id'),
-                };
-                //token
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-                swal({
-                    // title: "",
-                    text: "{{__('Are you sure?')}}",
-                    Button: "{{__('Done')}}",
-                    icon: "warning",
-                    buttons: true,
-                    dangerMode: true,
-                })
-                    .then((willDelete) => {
-                        if (willDelete) {
-                            $.ajax({
-                                url: '/admin/product-destroy/'+ data.id,
-                                type: 'delete',
-                                data: data,
-                                dataType: 'json',
-                                async: false,
-                                success: function (data) {
-                                    swal("{{__("Poof! Your imaginary file has been deleted!")}}", {
-                                        icon: "success",
-                                        Button: "{{__('Done')}}",
-                                    });
-                                    location.reload();
-                                },
-                                cache: false,
-                            });
-
-                        } else {
-                            swal(
-                                "{{__("Your imaginary file is safe!")}}",
-                                {Button: "{{__('Done')}}"}
-                            );
-
-                        }
-                    });
-            });
-        });
-    </script>
-
-    //
-
-    <script>
         $(document).ready(function () {
 
             var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
@@ -447,7 +298,7 @@
                     .then((willDelete) => {
                         if (willDelete) {
                             $.ajax({
-                                url: '/admin/news-destroy/' + data[0],
+                                url: '/admin/product-destroy/' + data[0],
                                 type: 'delete',
                                 data: data,
                                 dataType: 'json',
@@ -495,7 +346,7 @@
                         });
 //پاس کردن دیتا به کنترلر
                         $.ajax({
-                            url: '/admin/news_update_status',
+                            url: '/admin/product_update_status',
                             type: 'POST',
                             data: data,
                             dataType: 'json',

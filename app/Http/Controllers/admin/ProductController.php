@@ -205,6 +205,7 @@ class ProductController extends Controller
         }
 
         $data = '';
+
         foreach ($product as $products) {
             $data .= '["' . $products->id . '",' . '"' . $products->hp_product_name . '",' . '"' . $products->hp_product_publish_date . '",' . '"' . $products->hp_product_status . '"],';
         }
