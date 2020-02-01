@@ -135,6 +135,7 @@
     <script>
         $(document).ready(function () {
 
+            var gData;
             var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
 
             $('#table').on('click', 'button', function (event) {
@@ -179,7 +180,11 @@
                         }
                     });
             });
+
+
             var table = $('#table').on('draw.dt', function (e, settings, json, xhr) {
+                gData =table.row($(this).parents('tr')).data();
+                alert(gData);
 
                 $('.js-switch').each(function () {
 
@@ -229,7 +234,7 @@
                 "columnDefs": [{
                     "targets": -1,
                     "data": null,
-                    "defaultContent": "<a href=\"\"\n" +
+                    "defaultContent": "<a href='\\news\\"  +"\\edit '" +
                         "                                                   class=\"btn btn-info btn-sm\"><i class=\"ti-pencil\"></i></a>\n" +
                         "                                                <button data-id=\"\" type=\"button\"\n" +
                         "                                                        class=\"btn btn-danger btn-sm -form-delete\"\n" +

@@ -258,7 +258,10 @@
                                             <script>
                                                 $(document).ready(function () {
                                                     $("#sub_form1").on('click', function (event) {
-                                                        var data = $("#form1").serialize();
+                                                        var data = {
+                                                         id:$('#name').data('id'),
+                                                         id:$('#name').val(),
+                                                        }
                                                         event.preventDefault();
                                                         $.ajaxSetup({
                                                             headers: {
